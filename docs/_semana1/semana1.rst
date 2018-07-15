@@ -1,66 +1,6 @@
-SEMANA 1
+Semana 1
 ===========
 
-cap11
-^^^^^^
+`Clase 1.1 <https://drive.google.com/open?id=1XjLNnS7xOPWDV3Vvcv3qjFz4wo9Q3tJIXv6eu22fTlE>`__
 
 
-.. code:: cpp
-
-    #include <ESP8266WiFi.h>
-
-    void setup()
-    {
-    Serial.begin(115200);
-    Serial.println();
-
-    WiFi.begin("network-name", "pass-to-network");
-
-    Serial.print("Connecting");
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println();
-
-    Serial.print("Connected, IP address: ");
-    Serial.println(WiFi.localIP());
-    }
-
-    void loop() {}
-
-Test
-
-cap12
-^^^^^^
-
-.. code:: cpp
-
-    #include <ESP8266WiFi.h>
-
-    void setup()
-    {
-    Serial.begin(115200);
-    Serial.println();
-
-    WiFi.begin("network-name", "pass-to-network");
-
-    Serial.print("Connecting");
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println();
-
-    Serial.print("Connected, IP address: ");
-    Serial.println(WiFi.localIP());
-    }
-
-    void loop() {}
-
-More Code
-
-cap13
-^^^^^^
