@@ -95,7 +95,7 @@ Algunos asuntos a tener en cuenta a la hora de realizar el proyecto:
         * Ajustar el código binario correspondiete a una instrucción de 16 bits.
         * Escribir la instrucción de 16 bits en el archivo de salida correspondiente.
     
-    * Cuando el código ensamblador tiene símbolos, antes de comenzar las pasadas se inicializa la tabla de símbolos.
+    * Cuando el código tiene símbolos, el primer paso es iniciar la tabla de símbolos.
 
     .. image:: ../_static/simbols.jpeg  
        :scale: 70 %  
