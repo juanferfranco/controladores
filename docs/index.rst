@@ -65,6 +65,7 @@ SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
    Semana14 <_semana14/semana14>
    Semana15 <_semana15/semana15>
    Semana16 <_semana16/semana16>
+   Semana18 <_semana18/semana18>
 
 
 
