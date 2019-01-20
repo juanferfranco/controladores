@@ -34,8 +34,8 @@ Cronograma
 
 Evaluación
 -----------
-* Prácticas:  80%. La evaluación de la prácticas se realiza durante una sesión. La evaluación es a libro cerrado, solo se
-  sacar impreso el código fuente de los proyectos. El código no debe tener comentarios.
+* Prácticas:  80%. La evaluación de las prácticas se realizará durante una sesión. La evaluación es a libro cerrado. 
+  Solo se permite sacar la solución a los proyectos. El código no debe tener comentarios.
 * Examen Final 20%. Evaluación teórica tipo Saber PRO.
 
 Dedicación
