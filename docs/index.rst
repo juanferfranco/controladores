@@ -1,4 +1,4 @@
-Curso Controladore 2018-20
+Curso Controladore 2019-10
 ========================================
 
 ¿Para qué sirve este curso?
@@ -12,13 +12,12 @@ Brian Will.
 
 Descripción del curso
 ----------------------
-El objetivo del curso es aprender a seleccionar y a programar controladores basados en sistemas de 
-cómputo para la producción de experiencias interactivas.
+El objetivo del curso es comprender los fundamentos de los sistemas de cómputo para poder seleccionar y programar 
+dichos sistemas con el fin de implementar experiencias interactivas u otro tipo de sistemas.
 
 Propósito del curso
 ---------------------
-El entendimiento y la creación de aplicaciones para controladores basados en sistemas de cómputo para 
-prototipar y producir experiencias interactivas.
+El entendimiento de los fundamentos de los sistemas de cómputo para la implementación de sistemas interactivos
 
 Competencia
 -----------
@@ -31,14 +30,13 @@ los profesores Shimon Schocken y Noam Nisan en IDC `Herzliya <https://www.idc.ac
 
 Cronograma
 ----------
-`Tabla de actividades <https://drive.google.com/open?id=1MeMICFMalxWfGz7aPIbQ85WJGxXFdfYYNzTcxm7BOEA>`__.
+`Tabla de actividades <https://drive.google.com/open?id=1WZRYinpWt83RHLQwaKt4GzD3UHADIaM63kBvc2l7Hlg>`__.
 
 Evaluación
 -----------
-Parcial teórico: 20% - Semana 8
-Parcial práctico: 20% - Semana 8
-Final teórico: 20% - Semana 16
-Trabajo Final: 40% - Semana 16
+* Prácticas:  80%. La evaluación de la prácticas se realiza durante una sesión. La evaluación es a libro cerrado, solo se
+  sacar impreso el código fuente de los proyectos. El código no debe tener comentarios.
+* Examen Final 20%. Evaluación teórica tipo Saber PRO.
 
 Dedicación
 ----------
@@ -52,21 +50,6 @@ SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
    Semana1 <_semana1/semana1>
    Semana2 <_semana2/semana2>
    Semana3 <_semana3/semana3>
-   Semana4 <_semana4/semana4>
-   Semana5 <_semana5/semana5>
-   Semana6 <_semana6/semana6>
-   Semana7 <_semana7/semana7>
-   Semana8 <_semana8/semana8>
-   Semana9 <_semana9/semana9>
-   Semana10 <_semana10/semana10>
-   Semana11 <_semana11/semana11>
-   Semana12 <_semana12/semana12>
-   Semana13 <_semana13/semana13>
-   Semana14 <_semana14/semana14>
-   Semana15 <_semana15/semana15>
-   Semana16 <_semana16/semana16>
-   Semana18 <_semana18/semana18>
-
 
 
 
