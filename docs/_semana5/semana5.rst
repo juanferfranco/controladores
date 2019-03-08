@@ -1,6 +1,6 @@
 Semana 5
 ===========
-Esta semana vamos a introducir el conjunto de instrucciones de la CPU que implementaremos la semana 6.
+Esta semana vamos a introducir el conjunto de instrucciones de la CPU que implementaremos la semana 7.
 
 Objetivos
 ----------
