@@ -8,5 +8,4 @@ Material
 * `Proyecto <https://www.nand2tetris.org/project08>`__
 * El capítulo 8 no está disponible de manera gratuita. No olvides a tus hermanos rusos.
 
-En esta `otra <https://drive.google.com/open?id=1-mIaRN6tX7bdGxf8dpBgsLz3zi7R3M0lCVSpf0Ugulg>`__ se pegan algunos apartes del 
-capítulo 8.
+`Presentación complementaria <https://drive.google.com/open?id=1-mIaRN6tX7bdGxf8dpBgsLz3zi7R3M0lCVSpf0Ugulg>`__.
