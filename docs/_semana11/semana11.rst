@@ -18,3 +18,8 @@ Material
 * `Presentación <https://drive.google.com/file/d/1rbHGZV8AK4UalmdJyivgt0fpPiD1Q6Vk/view>`__.
 * `Proyecto <https://www.nand2tetris.org/project09>`__
 * El capítulo 9 no está disponible de manera gratuita. No olvides a tus hermanos rusos.
+
+Ideas para el juego
+--------------------
+`Nintendo Game & Watch <https://www.youtube.com/watch?v=lW20zMhKMJY>`__ (los primeros minutos)
+`nand2tetris cool stuff <https://www.nand2tetris.org/copy-of-talks>`__
