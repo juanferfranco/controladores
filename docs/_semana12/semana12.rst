@@ -14,5 +14,6 @@ una comportamiento no esperado.
 
 Material
 ---------
-* `Aquí <https://drive.google.com/open?id=1BRRxjeC3Qy2mwIWZCZ-PTm3V0hcPfdMPVjfR88aNBF8>`__ está  
-   el programa que vamos a analizar en la sesión 2.
+
+* En este `enlace <https://drive.google.com/open?id=1BRRxjeC3Qy2mwIWZCZ-PTm3V0hcPfdMPVjfR88aNBF8>`__ está 
+  el programa que vamos a analizar en la sesión 2.
