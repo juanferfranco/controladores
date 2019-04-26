@@ -36,7 +36,14 @@ Evaluación
 -----------
 * Prácticas:  80%. La evaluación de las prácticas se realizará durante una sesión. La evaluación es a libro cerrado. 
   Solo se permite sacar la solución a los proyectos. El código no debe tener comentarios.
-* Examen Final 20%. Evaluación teórica tipo Saber PRO.
+* Examen Final 20%. (Evaluación teórica tipo Saber PRO) se modificó según acuedo grupal por el portafolio de proyectos.
+
+Cronograma Final de entregas
+-----------------------------
+
+`Aquí <https://drive.google.com/open?id=1rmTiF1RnGF2Lk7j6yeLp7vyihOXknEng-5U1JzzWp84>`__ el cronograma final de entregas 
+del curso.
+
 
 Dedicación
 ----------
