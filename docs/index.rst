@@ -1,4 +1,4 @@
-Curso Controladore 2020-10
+Curso Controladores 2020-10
 ========================================
 
 ¿Para qué sirve este curso?
@@ -6,36 +6,43 @@ Curso Controladore 2020-10
 
 Este curso sirve para ejercitar esta poderosa idea:
 
-"You need to understand your code.
+**You need to understand your code.
 You need to understand your tools.
 You need to understand your platform.
-When we give up on understanding what we are actually doing when you write code, it just leads to bad software." 
+When we give up on understanding what we are actually doing when you write
+code, it just leads to bad software.**
 Brian Will.
 
 Descripción del curso
 ----------------------
 
-El objetivo del curso es comprender los fundamentos de los sistemas de cómputo para poder seleccionar y programar 
-dichos sistemas con el fin de implementar experiencias interactivas u otro tipo de aplicaciones.
+El objetivo del curso es comprender los fundamentos de los sistemas de
+cómputo para poder seleccionar y programar dichos sistemas con el fin de
+implementar experiencias interactivas u otro tipo de aplicaciones.
 
 Propósito del curso
 ---------------------
 
-El entendimiento de los fundamentos de los sistemas de cómputo que constituyen la base de los sistemas interactivos.
+El entendimiento de los fundamentos de los sistemas de cómputo que
+constituyen la base de los sistemas interactivos.
 
 Competencia
 ------------
 
-Analiza, diseña, evalúa e implementa soluciones interactivas de  acuerdo a requerimientos condicionados por el contexto.
+Analiza, diseña, evalúa e implementa soluciones interactivas de
+acuerdo a requerimientos condicionados por el contexto.
 
 Estructura y metodología del curso
 -----------------------------------
 
-La primera parte del curso se enfoca en el hardware del sistema de cómputo y está basada en el curso from 
-`Nand to Tetris <https://www.nand2tetris.org/>`__ diseñado e implementado por los profesores Shimon Schocken y Noam Nisan 
+La primera parte del curso se enfoca en el hardware del sistema de
+cómputo y está basada en el curso from
+`Nand to Tetris <https://www.nand2tetris.org/>`__ diseñado e
+implementado por los profesores Shimon Schocken y Noam Nisan
 en IDC `Herzliya <https://www.idc.ac.il/en/pages/home.aspx>`__.
 
-La segunda parte del curso aborda temas de software y al final temas de actualidad.
+La segunda parte del curso aborda temas de software y al final
+temas de actualidad.
 
 Cronograma
 ------------
@@ -51,7 +58,8 @@ Evaluación
 Dedicación
 -----------
 
-Este curso es de 4 créditos repartidos en 4 horas de trabajo en el aula y 8 horas de trabajo autónomo.
+Este curso es de 4 créditos repartidos en 4 horas de trabajo en
+el aula y 8 horas de trabajo autónomo.
 SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
 
 .. toctree::
