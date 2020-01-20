@@ -33,6 +33,14 @@ fotolitografía:
         <iframe width="560" height="315" src="https://www.youtube.com/embed/vK-geBYygXo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
+Y ¿Cómo funciona un transistor?
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/tz62t-q_KEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
 En este curso vamos a implementar un computador usando un lenguaje
 de descripción de hardware. Nuestro bloque de construcción básico será la
 compuerta NAND y a partir de esta construiremos otros circuitos, que
