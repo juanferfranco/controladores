@@ -1,12 +1,14 @@
 Semana 2
 ===========
-Esta semana vamamos a combinar las compuertas para conseguir circuitos lógicos combinacionales. Adicionalmente, estudiaremos 
+Esta semana vamos a combinar las compuertas para conseguir
+circuitos lógicos combinacionales. Adicionalmente, estudiaremos
 cómo representar números positivos y negativos en un computador.
 
 Objetivos
 ----------
 1. Desarrollar habilidades para la detección de errores.
-2. Construir circuitos combinacionales para hace operaciones lógicas y aritméticas.
+2. Construir circuitos combinacionales para hace operaciones lógicas
+   y aritméticas.
 3. Comprender la representación de los números negativos.
 
 Material

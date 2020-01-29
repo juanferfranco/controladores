@@ -67,6 +67,7 @@ SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
    :caption: Contenidos semanales:
 
    Semana1 <_semana1/semana1>
+   Semana2 <_semana2/semana2>
 
 
 
