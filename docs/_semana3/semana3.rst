@@ -1,6 +1,7 @@
 Semana 3
 ===========
-Esta semana vamos a introducir los circuitos que permiten la construcción de dispotivos de almancenamiento de datos en un 
+Esta semana vamos a introducir los circuitos que permiten la construcción
+de dispositivos de almacenamiento de datos en un
 computador: los circuitos lógicos secuenciales.
 
 Objetivos
