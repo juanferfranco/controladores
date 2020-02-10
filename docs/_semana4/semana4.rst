@@ -1,9 +1,32 @@
 Semana 4
 ===========
-Esta semana vamos a realizar la evaluación número 1 sobre circuitos lógicos combinacionales y secuenciales. La sesión del 
-viernes no se dictará debido al cierre en la UPB por motivos del tour Colombia.
+
+Esta semana vamos a realizar en la sesión 1 la primera evaluación sumativa. En
+la sesión número 2 presentaremos el set de instrucciones del procesador
+que se construirá la próxima semana.
 
 Material
 ---------
-En este `enlace <https://drive.google.com/open?id=14UgCUrfsKTMy0Gw4xV1kN4qFUfmwcPb4BCAPofIFPVQ>`__ se encuentra la evaluación. 
-A este `enlace <https://www.dropbox.com/request/BssMFete9KFCMbOEGdxb>`__ debe subirse la evaluación.
+Para la sesión 1:
+
+La evaluación se encuentra en este `enlace <https://docs.google.com/document/d/1wcVZuk1266lxIm6lT0cYfs8JDXzwaW-dDsGzLtJ1DkQ/edit?usp=sharing>`__.
+
+Para la sesión 2:
+
+Vamos a introducir el conjunto de instrucciones de la CPU que implementaremos
+en la semana 5.
+
+Objetivos
+----------
+1. Comprender el funcionamiento a nivel de de set de instrucciones de una CPU.
+2. Adquirir habilidades básicas de programación en lenguaje ensamblador
+   e identificar su relación con el lenguaje C.
+
+Material
+---------
+
+* `Presentación con Ejercicios y tareas <https://drive.google.com/open?id=1z0bQMiwobVZOGovkFABp4iw7QWXQpb6fgvEKmkm0bak>`__.
+* `Presentación <https://docs.wixstatic.com/ugd/56440f_12f488fe481344328506857e6a799f79.pdf>`__.
+* `Proyecto <https://www.nand2tetris.org/project04>`__
+* `Capítulo del libro <https://docs.wixstatic.com/ugd/44046b_7ef1c00a714c46768f08c459a6cab45a.pdf>`__
+
