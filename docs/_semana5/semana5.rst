@@ -1,16 +1,20 @@
 Semana 5
 ===========
-Esta semana vamos a introducir el conjunto de instrucciones de la CPU que implementaremos la semana 7.
 
-Objetivos
-----------
-1. Comprender el funcionamiento a nivel de de set de instrucciones de una CPU.
-2. Adquirir habilidades básicas de programación en lenguaje ensamblador e identificar su relación con el lenguaje C.
-
-Material
+Sesión 1
 ---------
 
-* `Presentación con Ejercicios y tareas <https://drive.google.com/open?id=1z0bQMiwobVZOGovkFABp4iw7QWXQpb6fgvEKmkm0bak>`__.
-* `Presentación <https://docs.wixstatic.com/ugd/56440f_12f488fe481344328506857e6a799f79.pdf>`__.
-* `Proyecto <https://www.nand2tetris.org/project04>`__
-* `Capítulo del libro <https://docs.wixstatic.com/ugd/44046b_7ef1c00a714c46768f08c459a6cab45a.pdf>`__
+Vamos a realizar una retroalimentación grupal de la evaluación y
+a resolver dudas.Se hace una reflexión sobre el desempeño en el curso
+y la necesidad de aumentar el nivel de estudio y compromiso.
+
+Sesión 2
+---------
+
+En esta sesión, luego del ejercicio de reflexión de la clase
+anterior vamos a realizar de nuevo la evaluación sumativa número 1, como
+una acción de mejora.
+
+En el `siguiente enlace <https://docs.google.com/document/d/1YwLMViOKXOqOVXJeTOmUXISpfLHB8v3qRGnZXVXTHIc/edit?usp=sharing>`__
+se encuentra el enunciado de la evaluación.
+
