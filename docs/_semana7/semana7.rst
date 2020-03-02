@@ -1,11 +1,18 @@
 Semana 7
 ===========
-En la primera sesión analizaremos una posible implementación de la CPU.
+Esta semana realizaremos la evaluación sumativa relativa
+al lenguaje ensamblador y la implementación de este con
+el proyecto del computador.
 
-En la segunda sesión realizaremos la evaluación de las semanas 4 a 7.
 
-Enlace a a la evaluación
--------------------------
+Sesión 1
+---------
+Solución de dudas de los proyectos 4 y 5.
 
-* `Enlace a la evaluación <https://drive.google.com/open?id=1C82vbHtQGyAeBZoNsNX9n3IytxXeXr7J3QPeVSf50II>`__.
+Sesión 2
+---------
+En este enlace `enlace <https://docs.google.com/document/d/1PN1YqEEbdSuH4m4A3E16H4DDwv9qARAB-LwZtFKE33w/edit?usp=sharing>`__
+se puede consultar la evaluación sumativa número 2.
+
+
 
