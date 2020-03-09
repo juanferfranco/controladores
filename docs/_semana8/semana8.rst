@@ -55,3 +55,22 @@ Para resolver el problema utilice como referencia las siguientes clases:
 Utilice visual studio para crear una aplicación de tipo Windows Desktop,
 Windows Forms App (.NET Framework).
 
+Reto 2
+--------
+Repita el proyecto anterior, solo que esta vez escriba la clase estática
+Conversion usando `Extension Methods <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods>`__.
+
+Reto 3
+--------
+Realice un programa que permita:
+
+* Leer el contenido de un programa .asm.
+* Convertir el programa a lenguaje de máquina .hack.
+* Visualizar el programa .hack.
+* Salvar el archivo .hack.
+* Si no es posible hacer la conversión de una línea
+  del archivo asm, deben marcar la línea de color rojo e
+  indicar cuál es el posible error.
+
+Para este reto puede utilizar la información contenida en el capítulo 6
+del texto guía correspondiente al `proyecto 6 <https://www.nand2tetris.org/project06>`__
