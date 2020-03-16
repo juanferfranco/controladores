@@ -1,12 +1,25 @@
 Semana 9
 ===========
-Esta semana vamos a construir una herramienta para generar ensamblador desde código de la virtual machine. 
 
-Material
+Esta semana continuaremos con el repaso de C# mediante la elaboración de
+los retos propuestos la semana pasada.
+
+Sesión 1
 ---------
-* `Presentación <https://drive.google.com/file/d/19fe1PeGnggDHymu4LlVY08KmDdhMVRpm/view>`__.
-* `Proyecto <https://www.nand2tetris.org/project07>`__
-* De los capítulos 7 en adelante no está disponible, de manera gratuita, el libro.
+Trabajo individual de cada estudiante. 
 
-En esta `otra <https://drive.google.com/open?id=1yBdCaRHgc2jk-3Se37IeBRZP1NiMo59uduRNZt28jVQ>`__ presentación se pueden 
-encontrar, al final, ejemplos de instrucciones para la VM transformadas a ensamblador.
+Sesión 2
+---------
+
+¿Cómo funciona C#? ¿Qué es una virtual machine? En esta sesión la dedicaremos
+a elaborar estas preguntas. Para ello vamos a utilizar este material:
+
+* `¿Qué es el .NET? <https://dotnettutorials.net/lesson/dotnet-framework/>`__
+* `¿Qué es el CLR? <https://dotnettutorials.net/lesson/common-language-runtime-dotnet/>`__
+* `¿Cómo se ejecuta un programa .NET? <https://dotnettutorials.net/lesson/dotnet-program-execution-process/>`__
+
+Y de estos otros, que muestran la relación con Unity:
+
+* `IL2CPP <https://docs.unity3d.com/Manual/IL2CPP.html>`__
+* `¿Cómo funciona IL2CPP <https://docs.unity3d.com/Manual/IL2CPP.html>`__
+
