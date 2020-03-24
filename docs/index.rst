@@ -52,8 +52,7 @@ Cronograma
 Evaluación
 -----------
 
-* Evaluaciones parciales acumulativas (70%): 10%, 15%, 15%, 15%, 15%.
-* Evaluación final acumulativa 30%.
+* Evaluaciones parciales acumulativas (70%): 10%, 15%, 20%, 20%, 25%, 10%.
 
 Dedicación
 -----------
@@ -75,6 +74,7 @@ SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
    Semana7 <_semana7/semana7>
    Semana8 <_semana8/semana8>
    Semana9 <_semana9/semana9>
+   Semana10 <_semana10/semana10>
 
 
 
