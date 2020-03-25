@@ -67,3 +67,5 @@ operativos. Los sistemas operativos ofrecerán servicios a los programas que per
 
 Esta semana vamos a discutir dos conceptos: Procesos y Memoria Virtual.
 
+En este `enlace <https://docs.google.com/presentation/d/1dKsG3U08mZZBb-ZGejno1-X6fZaYVKuiGSnIc5X7NBA/edit?usp=sharing>`__
+está el material que vamos a discutir.

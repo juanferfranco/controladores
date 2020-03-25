@@ -52,7 +52,7 @@ Cronograma
 Evaluación
 -----------
 
-* Evaluaciones parciales acumulativas (70%): 10%, 15%, 20%, 20%, 25%, 10%.
+* Evaluaciones parciales acumulativas: 10%, 15%, 20%, 20%, 25%, 10%.
 
 Dedicación
 -----------
