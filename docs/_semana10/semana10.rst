@@ -47,7 +47,7 @@ Para la sustentación:
 Trabajo para esta semana
 -------------------------
 
-La semana pasada introducimos dos conceptos importantes: compiladores y máquinas virtuales.
+La semana pasada introdujimos dos conceptos importantes: compiladores y máquinas virtuales.
 
 Los compiladores permiten transformar código en alto nivel a lenguaje ensamblador que luego
 será transformado a lenguaje de máquina. Dichas instrucciones en lenguaje de máquina serán
