@@ -319,7 +319,7 @@ Explicar qué sucede con el siguiente código:
 .. code-block:: csharp
    :lineno-start: 1
 
-using System;
+    using System;
     using System.Threading;
     
     class Example
@@ -570,25 +570,36 @@ Ejercicio 13: RETO
 --------------------
 Se tiene un archivo de entrada que posee por línea las siguientes cadenas de caracteres separadas por espacios:
 
-nombre ocupación edad
+.. code-block:: csharp
+   :lineno-start: 1
+
+    nombre ocupación edad
 
 
 Nombre y ocupación son cadenas de caracteres que representan texto mientras que edad representa valores numéricos.
 Se tendrán máximo 100 líneas y 20 caracteres máximo por cadena.
-Cree un programa llamado prog que lea el archivo de entrada, organice la información en una estructura de datos (usted decide cómo),
-IMPRIMA en pantalla el contenido de la estructura de datos. Luego cree 2 hilos para procesar de diferente manera la información
+
+Cree un programa llamado prog que lea el archivo de entrada, organice la información en una estructura
+de datos (usted decide cuál y cómo), IMPRIMA en pantalla el contenido de la estructura de datos. 
+
+Luego cree 2 hilos para procesar de diferente manera la información
 y finalmente imprima el contenido de los archivos de salida.
 
-El Hilo 1 escribe en el archivo de salida 1 los registros del archivo de entrada, pero en orden inverso, es decir, primero el último y de último el primero.
+El Hilo 1 escribe en el archivo de salida 1 los registros del archivo de entrada, pero en orden inverso, es decir,
+primero el último y de último el primero.
+
 El Hilo 2 escribe en el archivo de salida 2 los registros ordenados por ocupación en orden alfabético.
 
 Hilo 1 e Hilo 2 deben lanzarse a la vez. Es decir, queremos ejecución concurrente.
 Una vez hilo 1 e hilo 2 finalicen, el hilo principal debe mostrar en pantalla el resultado de los archivos de salida.
 
-Para ejecutar el programa
+Para ejecutar el programa:
 
-prog In Out1 Out2
+.. code-block:: csharp
+   :lineno-start: 1
 
-prog es el nombre del ejecutable
-In especifica el nombre del archivo de entrada
-Out1 y Out2 especifican el nombre de los los archivos de salida 1 y 2 respectivamente
+    prog In Out1 Out2
+
+* prog es el nombre del ejecutable
+* In especifica el nombre del archivo de entrada
+* Out1 y Out2 especifican el nombre de los los archivos de salida 1 y 2 respectivamente
