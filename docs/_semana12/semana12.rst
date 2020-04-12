@@ -9,8 +9,9 @@ SOLO EN VERSIÓN CONSOLA ojo!
 Tenga presente las siguientes consideraciones
 
 * Plazo de entrega, viernes 17 de abril a las 12 del MEDIO DÍA.
-* Cree una carpeta. Incluya en esa carpeta otra CARPETA con el proyecto y un archivo .pdf con:
-
+* Cree una carpeta. Incluya en esa carpeta otras CARPETAS, una para cada reto
+  y un archivo .pdf con:
+  
     * EL ENLACE, solo el ENLACE a un video que tenga las siguientes secciones:
         * Sección 1: mostrar cómo se compila el proyecto.
         * Sección 2: mostrar el proyecto corriendo.
