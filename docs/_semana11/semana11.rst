@@ -8,7 +8,7 @@ Un proceso puede tener solo un flujo de instrcciones; sin embargo, es usual que 
 más de un flujo de instrucciones, es decir, que pueda realizar varias tareas a la vez y
 por tanto ejecutar concurrentemente varios flujos de instrucciones o hilos.
 
-En `este <https://docs.google.com/presentation/d/1x5Ff276oalMTOKGvMBanpTV2Iw73SIzTYDdUgk74PRA/edit?usp=sharing>`__
+En `esta <https://docs.google.com/presentation/d/1x5Ff276oalMTOKGvMBanpTV2Iw73SIzTYDdUgk74PRA/edit?usp=sharing>`__
 presentación vamos a introducir algunos conceptos básicos.
 
 Ejercicio 1
@@ -544,7 +544,7 @@ Ejercicio 12: RETO
 --------------------
 
 Se requiere realizar una aplicación que permita contar el número de líneas que poseen varios archivos de texto. 
-El nombre de los archivos se pasará como argumentos a la aplicación (apliación por consola). Además de mostrar en pantalla 
+El nombre de los archivos se pasará como argumentos a la aplicación (aplicación por consola). Además de mostrar en pantalla 
 el número de líneas de cada archivo, la aplicación debe presentar el número de líneas totales (suma de todas las líneas de los archivos pasados). 
 Por ejemplo: 
 
