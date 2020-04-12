@@ -13,6 +13,7 @@ Tenga presente las siguientes consideraciones
   y un archivo .pdf con:
 
     * EL ENLACE, solo el ENLACE a un video que tenga las siguientes secciones:
+    
         * Sección 1: mostrar cómo se compila el proyecto.
         * Sección 2: mostrar el proyecto corriendo. Mostrar claramente cómo se
           lanza el ejecutable y cómo está pasando los archivos
@@ -21,6 +22,7 @@ Tenga presente las siguientes consideraciones
         * Sección 4: explicación detallada de cómo funciona el código. OJO NO QUE PARTES
           TIENE, se trata de explicar cómo funciona el código y mostrar que efectivamente
           domina el código escrito.
+
 * Comprima la carpeta anterior con SOLO usando .ZIP, no RAR, no 7Z, SOLO .ZIP. NO
   CUMPLIR CON ESTO REBAJARÁ EN UNA UNIDAD AUTOMÁTICAMENTE LA NOTA FINAL.
 * El video debe tener buena calidad de audio para poder escuchar claramente su
