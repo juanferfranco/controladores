@@ -14,8 +14,10 @@ Tenga presente las siguientes consideraciones
 
     * EL ENLACE, solo el ENLACE a un video que tenga las siguientes secciones:
         * Sección 1: mostrar cómo se compila el proyecto.
-        * Sección 2: mostrar el proyecto corriendo.
-        * Sección 3: mostrar cómo probó cada programa, los archivos y los archivos
+        * Sección 2: mostrar el proyecto corriendo. Mostrar claramente cómo se
+          lanza el ejecutable y cómo está pasando los archivos
+        * Sección 3: mostrar cómo probó cada programa,
+          mostrar claramente el contenido de los archivos de entrada y salida.
         * Sección 4: explicación detallada de cómo funciona el código. OJO NO QUE PARTES
           TIENE, se trata de explicar cómo funciona el código y mostrar que efectivamente
           domina el código escrito.
