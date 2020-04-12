@@ -11,7 +11,7 @@ Tenga presente las siguientes consideraciones
 * Plazo de entrega, viernes 17 de abril a las 12 del MEDIO DÍA.
 * Cree una carpeta. Incluya en esa carpeta otras CARPETAS, una para cada reto
   y un archivo .pdf con:
-  
+
     * EL ENLACE, solo el ENLACE a un video que tenga las siguientes secciones:
         * Sección 1: mostrar cómo se compila el proyecto.
         * Sección 2: mostrar el proyecto corriendo.
@@ -23,7 +23,7 @@ Tenga presente las siguientes consideraciones
   CUMPLIR CON ESTO REBAJARÁ EN UNA UNIDAD AUTOMÁTICAMENTE LA NOTA FINAL.
 * El video debe tener buena calidad de audio para poder escuchar claramente su
   sustentación.
-* Suba la sustentación `aquí<https://www.dropbox.com/request/Z1wEOWlfUjjEOeLx4CbY>`__
+* Suba la sustentación `aquí <https://www.dropbox.com/request/Z1wEOWlfUjjEOeLx4CbY>`__
 
 Criterios de evaluación
 ^^^^^^^^^^^^^^^^^^^^^^^^
