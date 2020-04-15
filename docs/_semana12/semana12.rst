@@ -467,7 +467,9 @@ actualización del contador:
         {
             Debug.Log("Start IO");
             Thread.Sleep(1000);
-            myQueue.Enqueue("create new color");
+            lock (lockObj){
+                myQueue.Enqueue("create new color");
+            }
             Debug.Log("End IO");
         }
     }
