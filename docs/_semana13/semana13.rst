@@ -53,6 +53,8 @@ Para la entraga de la evaluación suba un archivo .pdf a
   se encuentra.
 * Un enlace al video.
 
+El PLAZO MÁXIMO es el VIERNES 24 de abril a las 6 P.M.
+
 Sesión 1: Persistencia
 ------------------------
 En esta sesión vamos a trabajar cómo es posible que un computador almacene información
