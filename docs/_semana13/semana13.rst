@@ -46,7 +46,8 @@ cada sesión.
 Entrega
 ^^^^^^^^^^
 Para la entraga de la evaluación suba un archivo .pdf a
-`este <https://www.dropbox.com/request/YrV7kp35WzSsvLTBp5du>`__ que tenga:
+`este <https://www.dropbox.com/request/YrV7kp35WzSsvLTBp5du>`__ enlace.
+El archivo debe tener:
 
 * Su nombre.
 * Un índice que muestre cada sesión pedida en qué minuto y qué segundo del video
