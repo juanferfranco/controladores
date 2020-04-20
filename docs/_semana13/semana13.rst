@@ -74,7 +74,7 @@ deberá abrir el archivo e imprimir en la pantalla su contenido.
 
 Considere los siguiente:
 
-* Pase el archivo con un path realtivo.
+* Pase el archivo con un path relativo.
 * Pase el archivo con un path absoluto.
 
 .. code-block:: csharp
