@@ -209,8 +209,8 @@ Analicemos el siguiente código
 
 Ejercicio 4:RETO
 ^^^^^^^^^^^^^^^^^^^
-Usando la palabra reservada using, escriba de nuevo el código del ejercicio 3
-
+Usando la palabra reservada using, escriba de nuevo el código del ejercicio 2 sin necesidad
+de cerrerar el archivo, es decir, sin tener que hacer el close().
 
 Sesión 2
 ---------
