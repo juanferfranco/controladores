@@ -215,3 +215,48 @@ de cerrerar el archivo, es decir, sin tener que hacer el close().
 Sesión 2
 ---------
 Vamos a realizar algunos ejercicios relacionados con la persistencia.
+
+Ejercicio 5:RETO
+^^^^^^^^^^^^^^^^^^
+En un sistema de archivos (recuerda que era eso? mire de nuevo en los slides de la clase
+anterior) los directorio tiene metadatos, es decir, información acerca de los datos o dicho
+de otra manera, datos de los datos.
+
+El reto consiste en esto:
+
+* Realizar un programa por consola que se ejecute desde la línea de comandos.
+* Se pasará como argumento la ruta absoluta o relativa de un directorio.
+* Su programa deberá imprimir el nombre de los subdirectorios y de los archivos
+  que contiene el directorio y los subdirectorios.
+* Tenga presente que un subdirectorio internamente tiene subdirectorios y archivos.
+* La idea es recorrer toda la jerarquía imrpimiendo los nombres de subdirectorios
+  y archivos.
+* USE INTENSIVAMENTE la estructura try catch. Muchas cosas pueden salir mal
+  cuando haga la búsqueda.
+
+Ayudas:
+
+* Puede usar la estructura de datos Stack<string> para ir colocando allí los
+  subdirectorios que se encuentre en el directorio y subdirectorios.
+* Analice la clase Directory de C#
+* Analice la clase FileInfo de C#
+
+RECUERDE: se trata de un ejercicio PARA PENSAR NO PARA BUSCAR. No busque la solución
+en internet, trate de pensar cómo puede resolver el problema. Claro, toma más tiempo
+pensar, pero deja más conocimiento y experiencia.
+
+¿A qué me refiero con pensar?
+
+La idea es observar las clases que coloqué en la ayuda. Lea la documentación, mire
+qué métodos tiene la clase, qué hacen, cuáles están relacionados con el problema.
+Luego con esa información trate de idear una estrategia de solución y posteriormente
+implemente. Finalmente haga pruebas con el debugger, exprimente, modifique el código.
+
+Ejercicio 6:RETO
+^^^^^^^^^^^^^^^^^^
+
+* Realizar un programa por consola que se ejecute desde la línea de comandos.
+* Se pasará como argumento la ruta absoluta o relativa de un directorio.
+* El programa debe imprimir el tamaño en bytes de todos los subdirectorios y archivos.
+
+NO OLVIDEN: se trata de un ejercicio PARA PENSAR NO PARA BUSCAR...
