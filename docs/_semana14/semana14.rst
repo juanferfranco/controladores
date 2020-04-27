@@ -26,16 +26,32 @@ La aplicación que vamos a controlar la podemos descargar de
 El reto consisten entonces en realizar una aplicación en Unity que permita hacer
 el control remoto mediante el intercambio de mensajes OSC.
 
-La siguiente figura muestra la imagen de la aplicación a controlar
+Las siguientes figuras muestran la aplicación a controlar:
 
 .. image:: ../_static/drumMachine.jpg
    :scale: 80%
    :align: center
 
-Y esta otra figura muestra la interfaz de usuario de una aplicación ejemplo que hará el control
-remoto de la anterior:
+.. image:: ../_static/udpIn.jpg
+   :scale: 80%
+   :align: center
 
-.. image:: ../_static/drumoUdpController.jpg
+.. image:: ../_static/udpOut.jpg
+   :scale: 80%
+   :align: center
+
+.. image:: ../_static/speed.jpg
+   :scale: 80%
+   :align: center
+
+.. image:: ../_static/instrument.jpg
+   :scale: 80%
+   :align: center
+
+Y esta otra figura muestra la interfaz de usuario de una aplicación ejemplo que hará el control
+remoto de la anterior (ESTA es la que ustedes deben hacer):
+
+.. image:: ../_static/drumUdpController.jpg
    :scale: 80%
    :align: center
 
@@ -44,6 +60,7 @@ Material de estudio
 --------------------
 * Clase UDP de C#: `aquí <https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.udpclient?view=netframework-4.7.2>`__.
 * Protocolo de comunicación OSC: `aquí <http://opensoundcontrol.org/spec-1_0>`__.
+* Ejemplos de mensajes OSC: `aquí <http://opensoundcontrol.org/spec-1_0-examples>`__.
 
 Ejemplos de tramas OSC
 -----------------------
@@ -53,42 +70,42 @@ Ejemplos de tramas OSC
     .. code-block:: csharp
        :lineno-start: 1
 
-       "play\x00\x00\x00\x00,i\x00\x00\x00\x00\x00\x01"
+       "/play\x00\x00\x00,i\x00\x00\x00\x00\x00\x01"
 
 * stop:
 
     .. code-block:: csharp
        :lineno-start: 1
 
-       "play\x00\x00\x00\x00,i\x00\x00\x00\x00\x00\x00"
+       "/play\x00\x00\x00,i\x00\x00\x00\x00\x00\x00"
 
 * Activar el beat 5 del instrumento 2:
 
     .. code-block:: csharp
        :lineno-start: 1
 
-       "c\x02\x00\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x01"
+       "/c\x02\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x01"
 
 * Desactivar el beat 5 del instrumento 2:
 
     .. code-block:: csharp
        :lineno-start: 1
 
-       "c\x02\x00\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x00"
+       "/c\x02\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x00"
 
 * Desactivar todos los beats del instrumento 1
 
     .. code-block:: csharp
        :lineno-start: 1
 
-       "c\x01\x00\x00,ii\x00\x00\x00\x00\x11\x00\x00\x00\x00"
+       "/c\x01\x00,ii\x00\x00\x00\x00\x11\x00\x00\x00\x00"
 
 * Cambiar la velocidad del beat a 100. El rango está de 100 a 300.
 
     .. code-block:: csharp
        :lineno-start: 1
 
-       "speed\x00\x00\x00,i\x00\x00\x00\x00\x00\x64"
+       "/speed\x00\x00,i\x00\x00\x00\x00\x00\x64"
 
 * Trama enviada para la aplicación remota indicando que está
   reproduciendo el beat 16:
@@ -96,7 +113,7 @@ Ejemplos de tramas OSC
     .. code-block:: csharp
        :lineno-start: 1
        
-       63 6f 75 6e 74 65 72 00 2c 69 00 00 00 00 00 10
+       2F 63 6f 75 6e 74 65 72 00 00 00 00 2c 69 00 00 00 00 00 10
 
 Programas para realizar pruebas:
 ---------------------------------
@@ -109,11 +126,13 @@ Tramas de prueba para Hercules:
 .. code-block:: csharp
    :lineno-start: 1
 
-   Activar el beat 1 del instrumento 1: c1$00$00,ii$00$00$00$00$01$00$00$00$01
+   //Activar el beat 1 del instrumento 1: /c1$00,ii$00$00$00$00$01$00$00$00$01
 
-   Stop: play$00$00$00$00,i$00$00$00$00$00$00
+   //Stop: /play$00$00$00,i$00$00$00$00$00$00
 
-   Play: play$00$00$00$00,i$00$00$00$00$00$01
+   //Play: /play$00$00$00,i$00$00$00$00$00$01
+
+En la siguiente imagen se observa cómo se ingresan estos comandos en el simulador:
 
 .. image:: ../_static/herculesTest.jpg
    :scale: 80%
