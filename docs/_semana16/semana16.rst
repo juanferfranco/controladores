@@ -1,10 +1,26 @@
 Semana 16
 ===========
+Esta semana terminaremos el reto de la semana 14 y realizaremos
+la presentación del resultado final así:
 
-Esta semana vamos a contruir el parser
+miércoles 13 de mayo:
 
-Material
----------
+Isa 10:00 a.m.
 
-* En este `enlace <https://drive.google.com/open?id=1Rmkq7kl67NyLvg81bJO_38gGJE8Ab_3QYr0zvRig2K4>`__ se puede 
-  encontrar el material para esta semana.
+Luisa 10:10 a.m.
+
+Ana 10:20 a.m.
+
+Jose 10:30 a.m.
+ 
+Iván 10:40 a.m.
+
+Sergio 10:50 a.m.
+
+Daniel 11:00 a.m.
+
+La presentación consiste en demostrar con pantalla compartida
+el funcionamiento de su propuesta de aplicación.
+
+Subir a `este <https://www.dropbox.com/request/UM1HaDOzPFMVz5W2EJwz>`__
+enlace la carpeta de su proyecto en formato .ZIP.

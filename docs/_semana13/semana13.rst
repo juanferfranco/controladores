@@ -154,7 +154,7 @@ Ahora repita el ejercicio pero esta vez descomente la línea:
 .. code-block:: csharp
    :lineno-start: 1
 
-  //Outfile.Close();
+   //Outfile.Close();
 
 * ¿Cómo se explica este comportamiento?
 
