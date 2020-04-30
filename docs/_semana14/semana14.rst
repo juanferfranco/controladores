@@ -169,21 +169,21 @@ Ejemplos de paquetes OSC para nuestra aplicación
     .. code-block:: csharp
        :lineno-start: 1
 
-       "/c\x02\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x01"
+       "/c\x32\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x01"
 
 * Desactivar el beat 5 del instrumento 2:
 
     .. code-block:: csharp
        :lineno-start: 1
 
-       "/c\x02\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x00"
+       "/c\x32\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x00"
 
 * Desactivar todos los beats del instrumento 1
 
     .. code-block:: csharp
        :lineno-start: 1
 
-       "/c\x01\x00,ii\x00\x00\x00\x00\x11\x00\x00\x00\x00"
+       "/c\x31\x00,ii\x00\x00\x00\x00\x11\x00\x00\x00\x00"
 
 * Cambiar la velocidad del beat a 100. El rango está de 100 a 300.
 
