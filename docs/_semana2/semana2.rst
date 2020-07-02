@@ -72,7 +72,7 @@ Actividad 4
 * Duración de la actividad: 1:40 minutos sincrónicos.
 * Forma de trabajo: grupal
 
-Actividad 4
+Actividad 5
 ^^^^^^^^^^^^
 * Fecha: julio 16 a julio 21 de 2020.
 * Descripción: terminación del proyecto y sustentación
@@ -84,7 +84,7 @@ Actividad 4
         #. Software para capturar `OBS Studio <https://obsproject.com/>`__
         #. Observa `este <https://www.youtube.com/watch?time_continue=3&v=1tuJjI7dhw0>`__
            tutorial para el manejo de OBS Studio.
-           
+
 * Duración de la actividad: 4 horas.
 * Forma de trabajo: individual.
 
