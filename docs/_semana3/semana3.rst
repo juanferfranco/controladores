@@ -1,5 +1,5 @@
-Semana 3
-===========
+Semana 3: Unidad 1/Reto 3
+==========================
 
 Esta semana vamos a introducir los circuitos que permiten la construcción
 de dispositivos de almacenamiento de datos en un computador: los circuitos
