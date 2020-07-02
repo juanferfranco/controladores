@@ -1,6 +1,12 @@
 Curso Controladores 2020-10
 ========================================
 
+Docente diseñador del curso: Juan Fernando Franco Higuita
+
+Nombre del docente moderador: Juan Fernando Franco Higuita
+
+Créditos y horas totales del curso: 4 créditos - 192 horas totales
+
 ¿Para qué sirve este curso?
 -----------------------------
 
@@ -34,31 +40,40 @@ acuerdo a requerimientos condicionados por el contexto.
 
 Estructura y metodología del curso
 -----------------------------------
+El curso está divido en 5 unidades:
 
-La primera parte del curso se enfoca en el hardware del sistema de
-cómputo y está basada en el curso from
-`Nand to Tetris <https://www.nand2tetris.org/>`__ diseñado e
-implementado por los profesores Shimon Schocken y Noam Nisan
-en IDC `Herzliya <https://www.idc.ac.il/en/pages/home.aspx>`__.
+#. Unidad 1: Lógica combinacional y secuencial
+#. Unidad 2: Arquitectura del computador
+#. Unidad 3: Del código fuente al ejecutable: compiladores, máquinas virtuales, C, C++, C#
+#. Unidad 4: Virtualización: procesos, hilos, memoria virtual, sincronización y comunicación.
+#. Unidad 5: Entrada-Salida: archivos, comunicación en red.
 
-La segunda parte del curso aborda temas de software y al final
-temas de actualidad.
+Cada unidad tiene una duración de 3 semanas. Durante cada semana se deben realizar y entregar
+proyectos. La suma de los 3 proyectos dará un 20% en la evaluación sumativa final.
+
+Cada unidad estará constituida por tres fases:
+
+#. Fase 1: fundamentación. En esta fase se estudiarán los conceptos teóricos más relevantes de
+   cada unidad. Así mismo se complementarán con lecturas del texto guía. En esta fase, el estudiante
+   debe repasar los conceptos olvidados de los semestres anteriores.
+#. Fase 2: proyecto. En esta fase se realiza el proyecto que servirá como evidencia de aprendizaje.
+   cada proyecto debe ser sustentado.
+#. Fase 3: retroalimentación. En esta fase se discute el resultado del proyecto.
 
 Cronograma
 ------------
 
-`Tabla de actividades <https://docs.google.com/spreadsheets/d/1BnCg0dOc__vjCx2T5gRMq5yoUm3PpcN6DtVL_IqJ_r0/edit?usp=sharing>`__.
+`Tabla de actividades <https://docs.google.com/spreadsheets/d/1BYFAXTwaB5_ta3HcyYa7AM1tgSD60Dg6o3UL3Rxcm70/edit?usp=sharing>`__.
 
 Evaluación
 -----------
-
-* Evaluaciones parciales acumulativas: 10%, 15%, 20%, 20%, 25%, 10%.
+Serán 5 evaluaciones del 20%, una por unidad. Cada evaluación estará compuesta por 3 proyectos, uno semanal.
 
 Dedicación
 -----------
 
-Este curso es de 4 créditos repartidos en 4 horas de trabajo en
-el aula y 8 horas de trabajo autónomo.
+Este curso es de 4 créditos repartidos en 4 horas de trabajo sincrónico mediado por TIC y 8 horas de trabajo autónomo.
+
 SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
 
 .. toctree::
@@ -68,16 +83,3 @@ SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
    Semana1 <_semana1/semana1>
    Semana2 <_semana2/semana2>
    Semana3 <_semana3/semana3>
-   Semana4 <_semana4/semana4>
-   Semana5 <_semana5/semana5>
-   Semana6 <_semana6/semana6>
-   Semana7 <_semana7/semana7>
-   Semana8 <_semana8/semana8>
-   Semana9 <_semana9/semana9>
-   Semana10 <_semana10/semana10>
-   Semana11 <_semana11/semana11>
-   Semana12 <_semana12/semana12>
-   Semana13 <_semana13/semana13>
-   Semana14 <_semana14/semana14>
-   Semana15 <_semana15/semana15>
-   Semana16 <_semana16/semana16>
