@@ -1,4 +1,4 @@
-Curso Controladores 2020-10
+Curso Controladores 2020-20
 ========================================
 
 Docente diseñador del curso: Juan Fernando Franco Higuita
@@ -74,7 +74,7 @@ Dedicación
 
 Este curso es de 4 créditos repartidos en 4 horas de trabajo sincrónico mediado por TIC y 8 horas de trabajo autónomo.
 
-SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO INDEPENDIENTE SEMANAL.
+SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO AUTÓNOMO SEMANAL.
 
 .. toctree::
    :maxdepth: 3
