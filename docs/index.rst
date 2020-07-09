@@ -62,8 +62,11 @@ Cada unidad estará constituida por tres fases:
 
 Cronograma
 ------------
-
-`Tabla de actividades <https://docs.google.com/spreadsheets/d/1BYFAXTwaB5_ta3HcyYa7AM1tgSD60Dg6o3UL3Rxcm70/edit?usp=sharing>`__.
+* Semanas 1 a 3: unidad 1
+* Semanas 4 a 6: unidad 2
+* Semanas 7 a 9: unidad 3
+* Semanas 10 a 12: unidad 4
+* Semanas 13 a 15: unidad 5
 
 Evaluación
 -----------
@@ -75,6 +78,12 @@ Dedicación
 Este curso es de 4 créditos repartidos en 4 horas de trabajo sincrónico mediado por TIC y 8 horas de trabajo autónomo.
 
 SÓLO ESTE CURSO REQUIERE 8 HORAS DE TRABAJO AUTÓNOMO SEMANAL.
+
+Bibliografía
+-------------
+Noam Nisan y Shimon Schocken. The Elements of Computing Systems: Building a Modern
+Computer from First Principles. The MIT Press (1 de junio de 2005)	
+
 
 .. toctree::
    :maxdepth: 3
