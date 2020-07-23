@@ -48,8 +48,8 @@ Actividad 3
 * Descripción: trabajo autónomo
 * Recursos: 
 
-    #. Lee el `capítulo 3 del libro guía <https://docs.wixstatic.com/ugd/44046b_862828b3a3464a809cda6f44d9ad2ec9.pdf>`__.
-    #. También tienes disponible esta `presentación <https://docs.wixstatic.com/ugd/56440f_3b9f5721e3e149fba8687847da395c43.pdf>`__
+    #. Lee el `capítulo 3 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_862828b3a3464a809cda6f44d9ad2ec9.pdf>`__.
+    #. También tienes disponible esta `presentación <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/56440f_e458602dcb0c4af9aaeb7fdaa34bb2b4.pdf>`__
        para que complementes.
     #. Lee la definición del proyecto y la información que encuentras `aquí <https://www.nand2tetris.org/project03>`__
     #. Comienza a trabajar en el proyecto. Avanza todo lo que puedas.
