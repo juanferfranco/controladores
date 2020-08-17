@@ -6,7 +6,7 @@ Actividades
 
 Actividad 6
 ^^^^^^^^^^^^
-* Fecha: agosto 18 de 2020 - 10 a.m.
+* Fecha: agosto 18 de 2020 - 8 a.m.
 * Descripción: asiste al encuentro sincrónico para trabajar y resolver 
   dudas en tiempo real con el docente.
 * Recursos: ingresar al grupo de Teams
