@@ -1,4 +1,4 @@
-Semana 7: Unidad 3
+Semana 8: Unidad 3
 ==========================
 
 En este punto del curso ya conocemos cómo funciona un computador,
@@ -35,173 +35,99 @@ Actividades
 
 Actividad 1
 ^^^^^^^^^^^^
-* Fecha: agosto 18 de 2020 - 8 a.m.
-* Descripción: encuentro sincrónico para compartir y discutir 
-  los resultados del reto 2 de la Unidad 2.
+* Fecha: agosto 25 de 2020 - 8 a.m.
+* Descripción: introducción a la Unidad 3
 * Recursos: ingresa al grupo de Teams
-* Duración de la actividad: 50 minutos de discusión
+* Duración de la actividad: 1 hora 40 minutos de discusión
 * Forma de trabajo: colaborativo con solución de dudas en tiempo real.
+
+Vamos a comenzar nuestro viaje explorando una herramienta conocida como
+la línea de comandos, disponible en casi todos los sistemas operativos. Para
+ello te propongo realizar la siguiente
+`guía <https://drive.google.com/open?id=11tTtbCuVjYcBBYPrULbCeb0PABJLyhGEtzRGKMRG5u0>`__.
 
 Actividad 2
 ^^^^^^^^^^^^
-* Fecha: agosto 11 de 2020 - 9 a.m.
-* Descripción: encuentro sincrónico para presentar el reto 3
-  de la Unidad 2.
-* Recursos: ingresa al grupo de Teams.
-* Duración de la actividad: 50 minutos 
-* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
+* Fecha: agosto 25 a agosto 27 de 2020 
+* Descripción: introducción al lenguaje C
+* Recursos: actividad de trabajo autónomo
+* Duración de la actividad: 4 horas
+* Forma de trabajo: individual, trabajo autónomo.
 
-Actividad 3
-^^^^^^^^^^^^
-* Fecha: agosto 11 al 13 de 2020
-* Descripción: trabajo autónomo
-* Recursos: 
+Para realizar la siguiente guía vas a necesitar un entorno de
+prueba. En la sección :ref:`ejercicios_sem1` te he dejado información para
+que tengas ese entorno en tu computador local; sin embargo, para que
+puedas comenzar de una vez te voy a recomendar dos sitios donde puedes
+compilar y ejecutar programas online. Usa el que más te guste.
 
-    #. Lee el `capítulo 6 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_89a8e226476741a3b7c5204575b8a0b2.pdf>`__.
-    #. También tienes disponible esta `presentación <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/56440f_65a2d8eef0ed4e0ea2471030206269b5.pdf>`__
-       para que complementes.
-    #. Lee la definición del proyecto y la información que encuentras `aquí <https://www.nand2tetris.org/project06>`__
-    #. Comienza a trabajar en el proyecto. Avanza todo lo que puedas.
+#. `Online GDB <https://www.onlinegdb.com/>`__
+#. `repl.it <https://repl.it/>`__
 
-* Duración de la actividad: 4 horas de trabajo autónomo
-* Forma de trabajo: individual
+En este `enlace <https://drive.google.com/file/d/1wiyBZL0kf1cQekHPfa7URcOxSpnfKE7-/view?usp=sharing>`__
+encontrarás una guía básica del lenguaje C.
 
-Actividad 4
-^^^^^^^^^^^^
-* Fecha: agosto 13 de 2020 - 10 a.m.
-* Descripción: asiste al encuentro sincrónico para resolver dudas en tiempo real con el docente.
-* Recursos: 
+.. note::
+    ¡Alerta de Spoiler!
 
-    #. Ingresar al grupo de Teams
-    #. Continua trabajando en el `proyecto <https://www.nand2tetris.org/project06>`__
+    En este `enlace <https://drive.google.com/file/d/174GYcz_in94R_z6NklA02yzmsj3OuD5f/view?usp=sharing>`__
+    , se encuentra la solución a algunos puntos de la guía introductoria a C (ojo, no todos). 
+    Te recomiendo hacer los ejercicios sin recurrir a la solución.
 
-* Duración de la actividad: 1 hora y 40 minutos sincrónicos.
-* Forma de trabajo: grupal
+.. _ejercicios_sem1:
 
-Actividad 5
-^^^^^^^^^^^^
-* Fecha: agosto 13 a agosto 18 de 2020.
-* Descripción: terminación del proyecto y sustentación
-* Recursos: 
+Ejercicios
+************
 
-    #. Termina el proyecto.
-    #. Realiza el video de sustentación para lo cual te recomiendo los siguientes recursos:
+Ejercicio 1: entorno de trabajo
+##################################
+Para poder trabajar en los ejercicios que te propondré vas
+a necesitar un ambiente de trabajo. Te propongo que instales en una USB o en una
+partición de tu computador el sistema operativo Linux. Te 
+preguntarás si puedes instalarlo en una máquina virtual.
+Lo puedes hacer pero usualmente no lo recomiendo porque la
+experiencia de uso no resulta agradable si tu sistema es muy lento.
 
-        #. Software para capturar `OBS Studio <https://obsproject.com/>`__
-        #. Observa `este <https://www.youtube.com/watch?time_continue=3&v=1tuJjI7dhw0>`__
-           tutorial para el manejo de OBS Studio.
+Vas a necesitar dos memorias USB. Una grande (> 16GB), donde instalarás tu sistema operativo
+y otra más pequeña (8GB) donde grabaras el instalador. Trata de utilizar la USB más rápida y
+más grande para instalar tu sistema operativo.
 
-* Duración de la actividad: 4 horas.
-* Forma de trabajo: individual.
+Te voy a dejar unos videos de ayuda:
 
-¿Qué debes entregar?
-^^^^^^^^^^^^^^^^^^^^^
-* Crea una carpeta que llamarás reto6.
-* Guarda todos los archivos del project6 en esa carpeta.
-* Realiza un diagrama de flujo para tu programa.
-* Guarda en la carpeta una copia de la `rúbrica <https://docs.google.com/spreadsheets/d/19zDlSTTqiKPo7j3mNgtbLkziCCjVkB-fNbfLBODwhOM/edit?usp=sharing>`__
-  con tu autoevaluación diligenciada
-* En la carpeta guarda un archivo .pdf con el enlace al video de sustentación y una tabla de contenidos que 
-  indique el instante de tiempo en el cual se pueden encontrar cada una de las secciones solicitadas en el video.
-* Comprime la carpeta principal en formato .ZIP, ojo, solo .ZIP no uses otros
-  formatos por favor.
-* Entrega el archivo .ZIP `aquí <https://auladigital.upb.edu.co/mod/assign/view.php?id=615876>`__.
+* Este `video <https://www.youtube.com/watch?v=zSGZe8NSEAc>`__ 
+  te muestra como grabar en la USB pequeña el instalador. En este caso la distribución es PopOS,
+  es la misma que yo uso; sin embargo, puedes grabar la que más te guste, por ejemplo Ubuntu.
+  Ten presente que la versión del video no será la última. También, debes investigar
+  cómo entrar al menú de configuración de tu BIOS para que ajustes el orden de boot. 
+  Nota que debes darle prioridad a la USB para que al tenerle conectada arranques el 
+  instalador del sistema operativo.
 
-¿Qué deberá tener el video de sustentación?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Ahora, este video `video <https://www.youtube.com/watch?v=RR9Vgytjj24>`__ te mostrará
+  cómo instalar, usando la USB pequeña con el instalador, tu sistema operativo en la USB grande.
+  Te recomiendo iniciar a ver el video en el minuto 6:29, donde comienza en si el proceso
+  de instalación. Una vez termines de instalar Linux en la USB grande, NO OLVIDES desconectar la USB
+  pequeña para que tu computador inicie con la versión instalada de Linux en la USB grande.
 
-* Máximo 20 minutos: debes planear el video muy bien tal como aprendiste en segundo semestre.
-* Cuida la calidad del audio y del video.
-* Sección 1: introducción. Di tu nombre y si realizaste el RETO
-  completo. Si no terminaste indica claramente qué te faltó y por qué. NO OLVIDES
-  diligenciar la rúbrica con tu autoevaluación.
-* Sección 2: modelado. Explica detalladamente cómo resolviste el problema, qué utilizaste,
-  que alternativas de solución viste, justifica las razones para usar
-  una alternativa sobre otras. Usa una aplicación de whiteboard para explicar
-  el diagrama de flujo de tu programa.
-* Sección 3: implementación. Explica el código fuente tu programa.
-* Sección 4: pruebas. Muestra claramente que tu programa pasa todos los vectores
-  de prueba definidos.
-* Tus explicaciones deben ser claras, precisas y completas. No olvides planear 
-  bien tu video de sustentación.
+Ejercicio 2: instala las herramientas 
+#######################################
+Abren la terminal y ejecuta los comandos:
 
+.. code-block:: c
+   :linenos:
 
+    $ sudo apt update
+    $ sudo apt upgrade
+    $ sudo apt install build-essential
+    $ sudo apt install gdb
 
+Ejercicio 3: instala un par de entornos de desarrollo
+#########################################################
 
+Para el curso te recomiendo que instales dos entornos de desarrollo:
 
-Semana 8
-===========
+#. Eclipse
+#. Visual Studio Code
 
-La semana pasada terminamos la primera parte del curso
-que aborda los aspecto básicos de hardware de un computador.
-Construimos una CPU funcional incluyendo en su mapa de memoria
-RAM y periféricos. Adicionalmente, programamos en lenguaje
-en ensamblador dicho computador.
-
-En la segunda parte parte del curso, la cual comenzaremos,
-desde esta semana, abordaremos los conceptos de software
-que habilitan el funcionamiento de los lenguajes de alto
-nivel para realización de aplicaciones.
-
-Esta semana comenzaremos con un repaso de C#. Utilizaremos
-este lenguaje para explorar los conceptos que vienen y para
-realizar los ejercicios propuestos.
-
-La metodología que utilizaremos en esta segunda parte del
-curso se basa en retos.
-
-Reto 1:
----------
-Este reto consiste en construir un programa similar al que se
-muestra en la siguiente figura:
-
-.. image:: ../_static/reto1.jpg
-   :scale: 100%
-   :align: center
-
-El primer botón convierte el texto de la caja de texto izquierda
-en datos Unicode visualizados en hexadecimal.
-
-El segundo botón lee la representación en hexadecimal y la
-convierte de nuevo a texto.
-
-Cree una clase estática llama Conversiones. En esta clase construya
-métodos que permitan:
-
-* Convertir cadenas de caracteres a arreglos de bytes en formato Unicode.
-* Convertir arreglos de bytes con datos Unicode a cadenas de caracteres.
-* Convertir un arreglo de bytes a cadenas de caracteres que muestren
-  el contenido de cada byte en hexadecimal.
-* Convertir cadenas hexadecimales de caracteres a arreglos de bytes.
-
-Por último, utilice la clase anterior para construir la aplicación
-propuesta.
-
-Para resolver el problema utilice como referencia las siguientes clases:
-
-* UnicodeEncoding
-* BitConverter
-* Convert
-
-Utilice visual studio para crear una aplicación de tipo Windows Desktop,
-Windows Forms App (.NET Framework).
-
-Reto 2
---------
-Repita el proyecto anterior, solo que esta vez escriba la clase estática
-Conversion usando `Extension Methods <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods>`__.
-
-Reto 3
---------
-Realice un programa que permita:
-
-* Leer el contenido de un programa .asm.
-* Convertir el programa a lenguaje de máquina .hack.
-* Visualizar el programa .hack.
-* Salvar el archivo .hack.
-* Si no es posible hacer la conversión de una línea
-  del archivo asm, deben marcar la línea de color rojo e
-  indicar cuál es el posible error.
-
-Para este reto puede utilizar la información contenida en el capítulo 6
-del texto guía correspondiente al `proyecto 6 <https://www.nand2tetris.org/project06>`__
+Eclipse te permitirá tener un depurador visual de código, pero la verdad
+es un poco lento. Visual Studio, no tiene un depurador visual tan rico, pero es
+muy liviano. Yo uso ambos. Normalmente trabajo con Visual Studio Code y cuando
+algo no me funciona lo pruebo con Eclipse.
