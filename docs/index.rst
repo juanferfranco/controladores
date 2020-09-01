@@ -97,3 +97,4 @@ Computer from First Principles. The MIT Press (1 de junio de 2005)
    Semana6 <_semana6/semana6>
    Semana7 <_semana7/semana7>
    Semana8 <_semana8/semana8>
+   Semana9 <_semana9/semana9>
