@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Python38\\python.exe",
+    "python.pythonPath": "/bin/python",
     "cSpell.language": "en,es",
     "restructuredtext.confPath": "${workspaceFolder}",
     "cSpell.words": [
