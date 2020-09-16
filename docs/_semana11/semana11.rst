@@ -387,4 +387,80 @@ Actividad 16
 Ejercicio 6
 ##############
 
+Ahora que ya sabemos cómo se transforma un programa del código fuente al lenguaje de máquina,
+podemos indagar un poco más en las fases. ¿Cómo funciona un compilador?
+
+Un compilador también funciona por fases. Así:
+
+* La primera fase es el TOKENIZER o el análisis léxico. Su propósito es obtener una representación
+  intermedia del programa conocida como stream of tokens. Por ejemplo, supongamos la siguiente
+  expresión en un lenguaje de programación arbitrario: ``print hola``. Un token es una unidad
+  indivisible que consiste de un tipo y un valor. En la expresión anterior el primer token es de
+  tipo Identificador y el valor es print. El segundo token es de tipo CADENA y el valor es hola.
+
+* La segunda fase es el PARSER. Su propósito es validar si la sintaxis de el programa es válida o no.
+  Por tanto, a esta fase se le conoce como análisis sintáctico. El PARSER toma la gramática formal
+  del lenguaje y trata de hacer un match con el texto del programa. En términos simples, la gramática
+  formal del lenguaje es el conjunto de reglas que se deben seguir para usar correctamente las
+  'palabras' definidas por el lenguaje. El PARSER valida si el programa que escribiste cumple las
+  reglas definidas en la gramática y si todo está bien produce una representación intermedia 
+  del programa conocida como AST o Abstract Syntax Tree.
+
+  No olvides que un programa en lenguaje C se puede compilar a múltiples lenguajes ensambladores
+  o set de instrucciones. Cada set de instrucciones es específico para cada CPU;
+  sin embargo, sin importar el set de instrucciones final, la representación AST será la misma. 
+  A esta parte del compilador se le conoce como frontend y luego, a la parte del compilador que
+  toma el AST y lo convierte a un set de instrucciones específico, se le conoce como backend.
+
+* La tercera fase es el generador de código ensamblador. Es precisamente el backend del que te hablé
+  hace un momento. El generador toma el AST, lo optimiza y genera instrucciones en lenguaje ensamblador
+  para la CPU específica que estemos compilando.
+
+Observa el siguiente código:
+
+.. code-block:: c
+   :linenos:
+
+    int main(){
+        int a = 1;
+        int b = 2;
+        int c = a + b;
+        return 0;
+    }
+
+Vamos a utilizar otro compilador, clang. Compila así:
+
+``clang -Xclang -ast-dump -fsyntax-only main.c``
+
+observa el resultado. Esa será el AST generado. ¿Por qué te hablo de clang en este ejercicio? porque
+cuando estés estudiando el nuevo framework de Unity conocido como ``DOTs`` te darás cuanta que ellos
+están utilizando clang como frontend. Estudiar en detalle estos asuntos desborda las posibilidades
+de este curso; sin embargo, al menos tendrás los conceptos básicos para no estar perdido.
+
+Ejercicio 7
+##############
+En cuanto a la fase de ensamblado, ya te comenté que el archivo de salida contiene lenguaje de máquina
+de la CPU específica. Cada sistema operativo maneja su propio formato de archivo de salida del ensamblador
+o código objeto (object file), es por ello que aunque el computador sea el mismo, si instalas diferentes
+sistemas operativos, cada uno tendrá su propio ensamblador y su propio formato de object file. Por tanto,
+un archivo de salida del ensamblador no solo contiene instrucciones específicas de la CPU, sino que también
+estará organizado según la conveniencia de cada sistema operativo. Y es por esto que Windows no podrá
+ejecutar tal cual los programas compilados para Linux, así estés corriendo los sistemas operativos en
+el mismo computador.
+
+Ejercicio 8
+#############
+No te lo dije, pero cuando compilas un programa en C la única salida del programa no tiene que ser
+un ejecutable. Te cuento que tienes más posibilidades:
+
+* Puedes generar un ejecutable, usualmente con extensión ``.out`` equivalente al ``.exe`` de Windows.
+* Puedes generar una biblioteca estática con extensión ``.a`` equivalente a los archivos ``.lib``
+  de Windows.
+* Puedes generar una biblioteca dinámica con extensión ``.so`` equivalente a los ``.dll`` en Windows.
+
+Los object file de los que hablamos en el ejercicio anterior son el producto de la fase de ensamblado.
+Para poder tener un ejecutable, recuerda que necesitas una fase más: el enlazado. La fase de enlazado
+te permite combinar varios object files y bibliotecas para generar ejecutables o bibliotecas.
+
 TODO...
+
