@@ -1562,7 +1562,7 @@ Ten presente los siguientes puntos:
 
 * ``int (*func_ptr)() = NULL;`` en esta expresión ``func_ptr`` es una variable que almacena
   direcciones de funciones que no reciben nada y devuelven un entero.
-* ``void* handle = dlopen ("./libstatic.so", RTLD_LAZY);``carga la biblioteca dinámica.
+* ``void* handle = dlopen ("./libstatic.so", RTLD_LAZY);`` carga la biblioteca dinámica.
 * ``func_ptr = dlsym(handle, "uno");`` carga nu símbolo en particular.
 * En ``gcc -Wall main.o -ldl -o exe`` pasamos la opción ``-ldl``. Esta opción indica que
   vamos a realizar una carga perezosa (lazy loading) de la biblioteca dinámica.
