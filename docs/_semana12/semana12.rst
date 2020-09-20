@@ -1,509 +1,450 @@
-Semana 12
-===========
+Semana 12: Unidad 3
+=====================
 
-Evaluación 4
+Esta semana vamos a terminar la unidad 3. Ya sabemos qué debe
+pasar para poder ejecutar código de máquina desde lenguajes como
+C y C++; sin embargo, nos falta una última estación en este recorrido.
+¿Qué pasa con lenguajes como C#?
+
+Para resolver esta pregunta vamos a tener que analizar un poco más
+qué es un compilador y qué es un intérprete.
+
+
+
+Actividades
 -------------
-La evaluación consiste en entregar los RETOS 12 y 13 de la semana 11.
-SOLO EN VERSIÓN CONSOLA ojo!
 
-Tenga presente las siguientes consideraciones
 
-* Plazo de entrega, viernes 17 de abril a las 12 del MEDIO DÍA.
-* Cree una carpeta. Incluya en esa carpeta otras CARPETAS, una para cada reto
-  y un archivo .pdf con:
 
-    * EL ENLACE, solo el ENLACE a un video que tenga las siguientes secciones:
-    
-        * Sección 1: mostrar cómo se compila el proyecto.
-        * Sección 2: mostrar el proyecto corriendo. Mostrar claramente cómo se
-          lanza el ejecutable y cómo está pasando los archivos
-        * Sección 3: mostrar cómo probó cada programa,
-          mostrar claramente el contenido de los archivos de entrada y salida.
-        * Sección 4: explicación detallada de cómo funciona el código. OJO NO QUE PARTES
-          TIENE, se trata de explicar cómo funciona el código y mostrar que efectivamente
-          domina el código escrito.
+Actividad 13
+^^^^^^^^^^^^
+* Fecha: septiembre 15 de 2020
+* Descripción: sustentación
+* Recursos: ingresa a Teams
+* Duración de la actividad: 1:40 minutos
+* Forma de trabajo: individual
 
-* Comprima la carpeta anterior con SOLO usando .ZIP, no RAR, no 7Z, SOLO .ZIP. NO
-  CUMPLIR CON ESTO REBAJARÁ EN UNA UNIDAD AUTOMÁTICAMENTE LA NOTA FINAL.
-* El video debe tener buena calidad de audio para poder escuchar claramente su
-  sustentación.
-* Suba la sustentación `aquí <https://www.dropbox.com/request/Z1wEOWlfUjjEOeLx4CbY>`__
-
-Criterios de evaluación
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Nota_Final = Funcionamiento*sustentación
-
-Donde funcionamiento será una nota de 0 a 5 y sustentación un factor de 0 a 1. ESTO
-quiere decir que el funcionamiento puede ser 5, pero si la sustentación es 0, la nota
-final final 0.
-
-Para la sustentación:
-
-* 1: incluye todas las sesiones del video.
-* 0.6: Las sesiones 3 o 4 presentan algunos errores conceptuales leves.
-* 0.4: Las sesiones 3 o 4 presentan errores conceptuales o las explicaciones son muy pobres.
-* 0: las sesiones 3 o 4 presentan errores conceptuales graves o no hay explicación.
-
-Sesión 1
----------
-En esta sesión vamos a introducir los conceptos de sincronización y comunicación entre hilos.
+Actividad 14
+^^^^^^^^^^^^^^^^
+* Fecha: septiembre 15 a septiembre 17 de 2020 
+* Descripción: realizar los ejercicios propuestos
+* Recursos: actividad de trabajo autónomo
+* Duración de la actividad: 4 horas
+* Forma de trabajo: individual, trabajo autónomo.
 
 Ejercicio 1
-^^^^^^^^^^^^
-Considere el siguiente código:
+############
+Con este ejercicio vamos a responder una pregunta
+¿Qué son las directivas del preprocesador?
 
-.. code-block:: csharp
-   :lineno-start: 1
+El preprocesamiento es una característica muy propia de
+C que no es común a otros lenguajes de programación. Esta
+característica permite MODIFICAR el programa ANTES de pasárselo
+a compilador para que lo convierta en lenguaje ensamblador.
 
-    using System;
-    using System.Threading;
-    
-    class HelloWorld {
-    
-      static int counter = 0;
-      const int ITERATIONS = 100;
-    
-      static void Main() {
-          
-          Thread t = new Thread(Code);
-          t.Start();
-          
-          Code();
-          t.Join();
-          
-          Console.WriteLine("Counter: {0}",counter);
-          
-          
-      }
-      
-      static void Code(){
-          
-          int temporal = 0;
-          
-          for(int i= 0; i < ITERATIONS; i++){
-            temporal = counter;
-            temporal++;
-            counter = temporal;
-          }
-      }
-    }
+Lo que debes hacer para usar el preprocesador es introducir en
+el código DIRECTIVAS, es decir, instrucciones que le das al
+preprocesador. Una vez el preprocesador lee tu programa, su tarea
+será remover las directivas y sustituirlas por código C que él
+mismo generará usando las instrucciones que tu le has dado con
+la directiva específica. Luego de este paso, tu programa estará
+listo para ser leído por el compilador.
 
-
-* Explique el funcionamiento detallado.
-* Corra el programa varias veces. ¿El resultado es el esperado?
-* Aumente gradualmente el valor de ITERATIONS en pasos de un órden
-  de magnitud. Corra varias veces el programa. El resultado es el esperado?
-* Explique qué puede estar pasando.
+Ten en cuenta que las directivas comenzarán por el símbolo #.
 
 Ejercicio 2
-^^^^^^^^^^^^
-¿Cómo podemos solucionar el problema que se nos presenta en el ejercicio 1?
+#############
+Ahora te voy a mostrar algunos ejemplos de directiva que puedes
+usar o que probablemente ya has utilizado en este punto del curso:
 
-Podemos recurrir al ejercicio 5 de la semana 11. A esto se le conoce como
-un semáforo de exclusión mutua (?)
+.. code-block:: c
+    :linenos:
 
-Considere el siguiente código:
+    #define M 5
+    #define C 5
 
-.. code-block:: csharp
-   :lineno-start: 1
-
-    using System;
-    using System.Threading;
-    
-    class HelloWorld {
-    
-      static int counter = 0;
-      const int ITERATIONS = 1000000;
-      static readonly object locker = new object();
-    
-      static void Main() {
-          
-          Thread t = new Thread(Code);
-          t.Start();
-          
-          Code();
-          t.Join();
-          
-          Console.WriteLine("Counter: {0}",counter);
-          
-          
-      }
-      
-      static void Code(){
-          
-          int temporal = 0;
-          
-          for(int i= 0; i < ITERATIONS; i++){
-           
-            lock(locker){
-                temporal = counter;
-                temporal++;
-                counter = temporal;
-            }
-          }
-      }
+    int main(int argc, char* argv[]) {
+        int x = 2;
+        int y = x*M + C;
+        return 0;
     }
 
-* ¿Cómo funciona el código anterior?
-* ¿Qué pasa si el semáforo se coloca aquí?
+¿Cuál será el resultado en la variable ``y`` luego de ejecutar este programa?
 
-.. code-block:: csharp
-   :lineno-start: 1
+Para responder esta pregunta recuerda que antes de compilador
+el programa, el archivo se pasa al preprocesador. El resultado del preprocesador
+será algo similar a esto:
 
-      static void Code(){
-          
-          int temporal = 0;
-          lock(locker){   
-            for(int i= 0; i < ITERATIONS; i++){
-              temporal = counter;
-              temporal++;
-              counter = temporal;
-            }
-          }
-      }
+.. code-block:: c
+    :linenos:
 
-* ¿El código funciona?
-* Explique cómo funciona
+    int main(int argc, char* argv[]) {
+        int x = 2;
+        int y = x*5 + 5;
+        return 0;
+    }
+
+Ahora si, este archivo, será pasado al compilador para que
+lo convierta en código ensamblador. La respuesta a la pregunta
+será 15.
+
+
+Mira este otro ejemplo:
+
+
+.. code-block:: c
+   :linenos:
+
+	#define M 5
+	#define C 5
+	#define MAP(val,m,c) x*m+c
+
+    int main(int argc, char* argv[]) {
+        int x = 2;
+        int y = MAP(x,M,C);
+        return 0;
+    }
+
+¿Qué crees que genere el preprocesador luego de procesar este
+archivo? 
+
+.. note::
+    ¡Alerta de Spoiler!
+
+    .. code-block:: c
+        :linenos:
+
+        int main(int argc, char* argv[]) {
+            int x = 2;
+            int y = x*5+5;
+            return 0;
+        }
+
+Otra forma de saber, ANTES de compilar, la salida del preprocesador es así:
+
+``gcc -E codigo.c``
+
+Por último prueba el comando anterior con este programa:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdio.h>
+    
+    #define M 5
+	#define C 5
+	#define MAP(val,m,c) x*m+c
+
+    int main(int argc, char* argv[]) {
+        int x = 2;
+        int y = MAP(x,M,C);
+        printf("y: %d", y);
+        return 0;
+    }
+
+¿Qué puedes concluir de la directiva ``#include`` 
 
 Ejercicio 3
-^^^^^^^^^^^^
-En la literatura técnica de las bibliotecas de diferentes
-lenguajes de programación se observa este término: Thread Safety.
-El término indica si la biblioteca o el procedimiento en cuestión
-es o no Thread Safe. Pero, ¿Qué quiere decir?
+#############
+Otro uso interesante del preprocesador es para las DIRECTIVAS
+de compilación condicional. 
 
+Esta directivas te permiten incluir un código u otro, dependiendo
+de una condición:
 
-Se dice que un programa o un método es Thead-safe si al ejecutarse
-no se presentan comportamientos indeterminados (ejercicio 1) en
-un escenario con múltiples hilos. En otras palabras, si nos dicen
-que un método es Thread-Safe quiere decir que lo podemos usar sin
-problema en varios hilos.
+.. code-block:: c
+   :linenos:
 
-* El método Code() del ejercicio 1 es Thread-safe?
-* el método Code() del ejercicio 2 es Thread-safe?
+    #include <stdio.h>
 
-Ejercicio 4:
-^^^^^^^^^^^^^
-Uno de los programas que más usamos en IDED es Unity. En Unity podemos
-construir programas con varios hilos, además del hilo principal (?);
-sin embargo, es usual que en el proceso encontremos errores. Al
-buscar la causa de esos errores veremos que en la documentación oficial
-de Unity encontraremos cosas como estas:
-
-* El API de Unity no es thread-safe
-* El API de Unity, en su mayoría solo puede ser usada en el hilos principal.
-
-¿Entonces qué hacemos si queremos usar hilos?
-
-PERO ANTES:
-
-* ¿Para qué podríamos necesitar hilos en Unity?
-
-Ejercicio 5: RETO
-^^^^^^^^^^^^^^^^^^
-Este ejercicio es muy importante: por favor repita los ejercicios 1 al 4.
-Verifique sus notas, analice el código, experimente.
-
-Sesión 2
-----------
-En esta sesión vamos a comenzar aplicando nuestros nuevos conocimientos
-al uso del motor Unity.
-
-Ejercicio 1: una razón para usar hilos
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Vamos a crear un proyecto en Unity. Luego creamos el siguiente script:
-
-.. code-block:: csharp
-   :lineno-start: 1
-
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using System.Threading;
-    using UnityEngine.UI;
-
-    public class ioSim : MonoBehaviour
-    {
-        public Text myText;
-        int counter = 0;
-
-        private void OnEnable()
-        {
-            myText.fontSize = 100;
-            myText.horizontalOverflow = HorizontalWrapMode.Overflow;
-            myText.verticalOverflow = VerticalWrapMode.Overflow;
-            myText.text = counter.ToString();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-                counter++;
-                myText.text = counter.ToString();
-        }
+    #define CONDITION
+    
+    int main(int argc, char* argv[]) {
+    
+        #ifdef CONDITION
+        printf("CODIGO IF\n");
+        #else
+        printf("CODIGO ELSE\n");
+        #endif
+        return 0;
     }
 
-* Añanada el script a la cámara principal.
-* Añada un GameObject tipo Text (es un UI).
-* Luego arrastre el GameObject Text al campo My Text del script añadido a la cámara .
-* ¿Qué pasa cuando se ejecuta el proyecto?
+¿Cómo crees que quede el programa luego de ser preprocesado?
 
-Ahora vamos a simular una operación de entrada salida:
+.. note::
+    ¡Alerta de Spoiler!
 
-.. code-block:: csharp
-   :lineno-start: 1
 
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using System.Threading;
-    using UnityEngine.UI;
+    Al definir ``CONDITION`` con la directiva ``#define CONDITION``
+    y con el comando ``gcc -E codigo.c`` el resultado es:
 
-    public class ioSim : MonoBehaviour
-    {
-        public Text myText;
-        int counter = 0;
+    .. code-block:: c
+        :linenos:
 
-        private void OnEnable()
-        {
-            myText.fontSize = 100;
-            myText.horizontalOverflow = HorizontalWrapMode.Overflow;
-            myText.verticalOverflow = VerticalWrapMode.Overflow;
-            myText.text = counter.ToString();
+        int main(int argc, char* argv[]) {
+           printf("CODIGO IF\n");
+            return 0;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-                counter++;
-                myText.text = counter.ToString();
-                if( Input.GetKeyUp(KeyCode.Space))
-                {
-                    simIoOp();
-                }
-        }
-
-        static void simIoOp()
-        {
-            Debug.Log("Start IO");
-            Thread.Sleep(1000);
-            Debug.Log("End IO");
-        }
-    }
-
-  * Seleccione la ventana Game haciendo click en cualquier parte de la ventana.
-  * Presione la tecla barra espaciadora. ¿Qué ocurre? ¿Por qué?
-
-Ejercicio 2
-^^^^^^^^^^^^^^^  
-Ahora vamos a arreglar el problema anterior introduciendo hilos para simular
-la operación de entrada salida.
-
-.. code-block:: csharp
-   :lineno-start: 1
-
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using System.Threading;
-    using UnityEngine.UI;
-
-    public class ioSim : MonoBehaviour
-    {
-        public Text myText;
-        int counter = 0;
-        Thread myThread;
-
-        private void OnEnable()
-        {
-            myText.fontSize = 100;
-            myText.horizontalOverflow = HorizontalWrapMode.Overflow;
-            myText.verticalOverflow = VerticalWrapMode.Overflow;
-            myText.text = counter.ToString();
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-                counter++;
-                myText.text = counter.ToString();
-                if( Input.GetKeyUp(KeyCode.Space))
-                {
-                    myThread = new Thread(simIoOp);
-                    myThread.Start();
-                }
-        }
-
-        static void simIoOp()
-        {
-            Debug.Log("Start IO");
-            Thread.Sleep(1000);
-            Debug.Log("End IO");
-        }
-    }   
-
-* Abra la consola.
-* Corra el proyecto.
-* Haga click en cualquier zona de la ventana Game.
-* Presione la barra espaciadora.
-* ¿Qué concluye con respecto al ejercicio 1?
-
-Ejercicio 3
-^^^^^^^^^^^^^^^
-Ahora vamos a intentar utilizar el API de Unity desde
-el nuevo hilo creado en el ejercicio 2.
-
-.. code-block:: csharp
-   :lineno-start: 1
-
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using System.Threading;
-    using UnityEngine.UI;
-
-    public class ioSim : MonoBehaviour
-    {
-        public Text myText;
-        int counter = 0;
-        Thread myThread;
-
-        private void OnEnable()
-        {
-            myText.fontSize = 100;
-            myText.horizontalOverflow = HorizontalWrapMode.Overflow;
-            myText.verticalOverflow = VerticalWrapMode.Overflow;
-            myText.text = counter.ToString();
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-            counter++;
-            myText.text = counter.ToString();
-
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                myThread = new Thread(simIoOp);
-                myThread.Start();
-            }
-        }
-
-        void simIoOp()
-        {
-            Debug.Log("Start IO");
-            Thread.Sleep(1000);
-            myText.color = new Color(Random.Range(0F, 1F), Random.Range(0, 1F), Random.Range(0, 1F));
-            Debug.Log("End IO");
-        }
-    }
-
-* ¿Qué ocurre al ejecutar el proyecto y presionar la barra espaciadora?
-  No olvide observar la consola.
 
 Ejercicio 4
-^^^^^^^^^^^^
-Para poder solucionar el problema anterior debemos utilizar una cola de mensajes.
-Esta cola permitirá que el hilo que estamos creando para realizar la operación
-de entrada-salida, le solicite, por medio de un mensaje, al hilo principal la
-actualización del contador:
+#############
+¿Será posible definir una directiva para el preprocesador
+desde la línea de comandos?
 
-.. code-block:: csharp
-   :lineno-start: 1
+Volvamos al ejemplo anterior pero esta vez sin el ``#define CONDITION``
 
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using System.Threading;
-    using UnityEngine.UI;
+.. code-block:: c
+   :linenos:
 
-    public class ioSim : MonoBehaviour
-    {
-        public Text myText;
-        int counter = 0;
-        Thread myThread;
-        Queue myQueue;
-        static readonly object lockObj = new object();
+    #include <stdio.h>
 
-        private void OnEnable()
-        {
-            myText.fontSize = 100;
-            myText.horizontalOverflow = HorizontalWrapMode.Overflow;
-            myText.verticalOverflow = VerticalWrapMode.Overflow;
-            myText.text = counter.ToString();
-            myQueue = new Queue();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-            counter++;
-            myText.text = counter.ToString();
-
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                myThread = new Thread(simIoOp);
-                myThread.Start();
-            }
-
-            lock (lockObj)
-            {
-                if (myQueue.Count > 0)
-                {
-                    if((string)myQueue.Dequeue() == "create new color")
-                    {
-                        myText.color = new Color(Random.Range(0F, 1F), Random.Range(0, 1F), Random.Range(0, 1F));
-                    }
-                }
-            }
-        }
-
-        void simIoOp()
-        {
-            Debug.Log("Start IO");
-            Thread.Sleep(1000);
-            lock (lockObj){
-                myQueue.Enqueue("create new color");
-            }
-            Debug.Log("End IO");
-        }
+    int main(int argc, char* argv[]) {
+    
+        #ifdef CONDITION
+        printf("CODIGO IF\n");
+        #else
+        printf("CODIGO ELSE\n");
+        #endif
+        return 0;
     }
- 
+
+¿Cuál será el resultado de compilar y ejecutar este programa?
+
+Compara el resultado obtenido con la salida del comando ``gcc -E codigo.c``.
+
+Ahora prueba este comando:
+
+``gcc -DCONDITION -E codigo.c``
+
+¿Cuál es el resultado?
+
+Y si compilas así:
+
+``gcc -DCONDITION -Wall codigo.c -o codigo``
+
+¿Qué conclusiones puedes sacar?
 
 Ejercicio 5
-^^^^^^^^^^^^^^
-Vamos a recordar el concepto de jerarquía de memoria... vamos para el tablero.
+#############
+Ahora si vamos a responder la pregunta de la semana:
+¿Cómo llegamos del código fuente al binario (el ejecutable)?
 
-¿Qué pasaría si escribo software de tal manera que aproveche la arquitectura
-de memoria cache que proveen los sistemas de cómputo?
+En el caso del lenguaje C se siguen unos pasos conocidos como el
+pipeline de compilación compuesto por 4 pasos: preprocesamiento,
+compilación, ensamblado y enlazado.
+
+IMPORTANTE: para poder conseguir un ejecutable desde el código fuente,
+es necesario que nuestro código pase por todas las etapas del pipeline
+de manera exitosa.
+
+Para ilustrar el proceso vamos a crear un programa compuesto por 3 archivos:
+dos archivos .c y un archivo .h. Todos los archivos estarán almacenados
+en el mismo directorio.
+
+min.h
+
+.. code-block:: c
+   :linenos:
+
+    #ifndef MIN_H
+    #define MIN_H
+    int min(int, int);
+    #endif
+
+min.c
+
+.. code-block:: c
+   :linenos:
+
+    #include "min.h"
+
+    int min(int a, int b){
+        if(a < b) return a;
+        else return b;
+    }
+
+
+
+main.c
+
+.. code-block:: c
+   :linenos:
+
+    #include "min.h"
+    #include <stdio.h>
+
+    int main(int argc, char* argv[]){
+        printf("the min value is: %d\n",min(1,2));
+        return 0;
+    }
+
+La idea será crear un ejecutable partiendo de estos tres archivos.
+Ten presente que los archivos ``.h`` se usan para informarle al compilador
+qué tipo de datos recibe la función min y qué tipo de dato devuelve. Los
+archivos .h no se compilan, solo los archivos ``.c``.
+
+Compilamos primero ``min.c``:
+
+* Preprocesamiento:  ``gcc -E min.c``. Al ejecutar este comando nota como
+   el preprocesador incluye la información de min.h a min.c
+* Compilación: ejecuta el comando ``gcc -S min.c``. La opción ``-S`` le indica 
+  al comando ``gcc`` que debe hacer el proceso anterior (preprocesador) y con la
+  salida de este paso alimentar al compilador y detenerse en ese punto. El archivo
+  de salida generado será ``min.s`` que contendrá el código ensamblador.
+
+.. code-block:: c
+   :linenos:
+
+
+        .file	"min.c"
+        .text
+        .globl	min
+        .type	min, @function
+    min:
+    .LFB0:
+        .cfi_startproc
+        endbr64
+        pushq	%rbp
+        .cfi_def_cfa_offset 16
+        .cfi_offset 6, -16
+        movq	%rsp, %rbp
+        .cfi_def_cfa_register 6
+        movl	%edi, -4(%rbp)
+        movl	%esi, -8(%rbp)
+        movl	-4(%rbp), %eax
+        cmpl	-8(%rbp), %eax
+        jge	.L2
+        movl	-4(%rbp), %eax
+        jmp	.L3
+    .L2:
+        movl	-8(%rbp), %eax
+    .L3:
+        popq	%rbp
+        .cfi_def_cfa 7, 8
+        ret
+        .cfi_endproc
+    .LFE0:
+        .size	min, .-min
+        .ident	"GCC: (Ubuntu 9.3.0-10ubuntu2) 9.3.0"
+        .section	.note.GNU-stack,"",@progbits
+        .section	.note.gnu.property,"a"
+        .align 8
+        .long	 1f - 0f
+        .long	 4f - 1f
+        .long	 5
+    0:
+        .string	 "GNU"
+    1:
+        .align 8
+        .long	 0xc0000002
+        .long	 3f - 2f
+    2:
+        .long	 0x3
+    3:
+        .align 8
+    4:
+
+* Ensamblado: en esta fase se gera el código máquina.
+  ``as min.s -o min.o``. También es posible generar el código de
+  máquina con el comando ``gcc -c min.c``
+
+* Debemos repetir este proceso con todos los archivos ``.c`` de nuestro
+  proyecto: ``gcc -c main.c``. Ten presente que el comando anterior
+  ejecutará automáticamente todos los pasos previos, es decir, el preprocesado,
+  la compilación y el proceso de ensamblado.
+
+* Enlazado: una vez tengas todos los archivos ``.o`` lo último que debes hacer
+  es enlazar todos los archivos para generar un archivo ejecutable. Este archivo
+  contiene el código de máquina de todos los ``.o`` pero organizado en un formato
+  específico. En el caso de Linux el formato típico es ``.ELF``. Ejecuta el siguiente
+  comando para enlazar: ``ld min.o main.o``. Verás el siguiente resultado:
+
+.. code-block:: c
+   :linenos:
+
+    ld: warning: cannot find entry symbol _start; defaulting to 0000000000401000
+    ld: main.o: in function main:
+    main.c:(.text+0x31): undefined reference to printf
+
+Este resultado indica que no fue posible generar el ejecutable 
+(`` main.c:(.text+0x31): undefined reference to printf``). Pero ¿Por qué?
+la razón es que nos falta el archivo con el código de máquina de la función ``printf``.
+Esta función está prototipada en el archivo de cabecera (``stdio.h``), pero el archivo
+no contiene el código fuente de ``printf``. ¿Y dónde está el código entonces? este
+código hace parte de la biblioteca `glibc <https://www.gnu.org/software/libc/>`__ 
+que debes tener en tu sistema operativo y que contiene el código de máquina de varias
+funciones, entre ellas, ``printf``.
+
+Una forma fácil de generar el ejecutable es utilizar de nuevo ``gcc``. Este comando
+se encargará de suministrarle a ``ld`` todo los archivos con código máquina necesarios para
+generar nuestro ejecutable: ``gcc min.o main.o -o main``.
+
+Actividad 15
+^^^^^^^^^^^^^^^^
+* Fecha: septiembre 17 de 2020
+* Descripción: análisis de los ejercicios
+* Recursos: ingresa a Teams
+* Duración de la actividad: 1:40 minutos
+* Forma de trabajo: individual y grupal con solución de dudas en tiempo real
+
+Actividad 16
+^^^^^^^^^^^^^^
+* Fecha: septiembre 17 a septiembre 22 de 2020 
+* Descripción: leer el material sugerido y realizar los ejercicios propuestos
+* Recursos: actividad de trabajo autónomo
+* Duración de la actividad: 4 horas
+* Forma de trabajo: individual, trabajo autónomo.
 
 Ejercicio 6
-^^^^^^^^^^^^^^
-Para ilustrar el punto anterior, vamos a leer entre todos un
-`artículo <https://jacksondunstan.com/articles/3860>`__ muy interesante que
-ilustra el punto anterior.
+##############
 
+Ahora que ya sabemos cómo se transforma un programa del código fuente al lenguaje de máquina,
+podemos indagar un poco más en las fases. ¿Cómo funciona un compilador?
 
-Ejercicio 7: RETO
-^^^^^^^^^^^^^^^^^^^^^
-Unity lleva años tranbajando en una nueva manera de construir juegos utilizando
-una estrategia denominada por ellos DOTs. En realidad DOTs es la suma de varias
-ideas, entre ellas, utilizar una estrategia de programación que busca optimizar
-el manejo de los datos de manera que se use mejor la jerarquía de memoria de la
-plataforma de cómputo. Dicha estrategia se denomina ECS: entity, component, system.
+Un compilador también funciona por fases. Así:
 
-Veamos un `DEMO <https://www.youtube.com/watch?v=0969LalB7vw>`__ del año 2017
-donde Unity comienza a mostrar las posibilidades de la tecnología.
+* La primera fase es el TOKENIZER o el análisis léxico. Su propósito es obtener una representación
+  intermedia del programa conocida como stream of tokens. Por ejemplo, supongamos la siguiente
+  expresión en un lenguaje de programación arbitrario: ``print hola``. Un token es una unidad
+  indivisible que consiste de un tipo y un valor. En la expresión anterior el primer token es de
+  tipo Identificador y el valor es print. El segundo token es de tipo CADENA y el valor es hola.
 
-* En el demo, ¿Qué pasa con el frame rate al aumentar la cantidad de minions?
+* La segunda fase es el PARSER. Su propósito es validar si la sintaxis de el programa es válida o no.
+  Por tanto, a esta fase se le conoce como análisis sintáctico. El PARSER toma la gramática formal
+  del lenguaje y trata de hacer un match con el texto del programa. En términos simples, la gramática
+  formal del lenguaje es el conjunto de reglas que se deben seguir para usar correctamente las
+  'palabras' definidas por el lenguaje. El PARSER valida si el programa que escribiste cumple las
+  reglas definidas en la gramática y si todo está bien produce una representación intermedia 
+  del programa conocida como AST o Abstract Syntax Tree.
 
-Ejercicio 8: RETO
-^^^^^^^^^^^^^^^^^^^^^
-El reto consiste en ver `este video <https://www.youtube.com/watch?v=fp1D45hhVEM>`__
-del Unite Los Angeles 2018. En el video un ingeniero de Intel explica la razón por
-la cual la idea del ECS funciona para mejorar el desempeño de una aplicación.
+  No olvides que un programa en lenguaje C se puede compilar a múltiples lenguajes ensambladores
+  o set de instrucciones. Cada set de instrucciones es específico para cada CPU;
+  sin embargo, sin importar el set de instrucciones final, la representación AST será la misma. 
+  A esta parte del compilador se le conoce como frontend y luego, a la parte del compilador que
+  toma el AST y lo convierte a un set de instrucciones específico, se le conoce como backend.
+
+* La tercera fase es el generador de código ensamblador. Es precisamente el backend del que te hablé
+  hace un momento. El generador toma el AST, lo optimiza y genera instrucciones en lenguaje ensamblador
+  para la CPU específica que estemos compilando.
+
+Observa el siguiente código:
+
+.. code-block:: c
+   :linenos:
+
+    int main(){
+        int a = 1;
+        int b = 2;
+        int c = a + b;
+        return 0;
+    }
+
+Vamos a utilizar otro compilador, clang. Compila así:
+
+``clang -Xclang -ast-dump -fsyntax-only main.c``
+
+observa el resultado. Esa será el AST generado. ¿Por qué te hablo de clang en este ejercicio? porque
+cuando estés estudiando el nuevo framework de Unity conocido como ``DOTs`` te darás cuanta que ellos
+están utilizando clang como frontend. Estudiar en detalle estos asuntos desborda las posibilidades
+de este curso; sin embargo, al menos tendrás los conceptos básicos para no estar perdido.
