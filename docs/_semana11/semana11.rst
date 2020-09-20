@@ -1360,7 +1360,7 @@ los que ya están resueltos y los que vienen de las bibliotecas dinámicas.
 
 Ejercicio 17
 #############
-Ahora si vamos a probar enlazar un programa con una bilioteca estática
+Ahora si vamos a probar como enlazar un programa con una bilioteca estática
 
 Crea los siguientes archivos:
 
@@ -1443,4 +1443,129 @@ ejecuta el programa. En este caso:
 
 Ejercicio 18
 #############
-Ahora si vamos a probar enlazar un programa con una bilioteca estática
+Finalmente, vamos a probar como enlazar un programa con una bilioteca dinámica.
+Recuerda que la biblioteca dinámica no hace parte del ejecutable, por tanto
+para poder ejecutar el programa es necesario que le des a conocer al sistema
+operativo el ejecutable mismo y las dependencias a bibliotecas dinámicas.
+
+Cuando enlazas un programa con una biblioteca dinámica, en el ejecutable te
+quedarán símbolos sin definir. Estos símbolos tendrán que definirse al momento
+de ejecutar el programa. En este caso, cuando se ejecute el programa, será necesario
+que el sistema operativo cargue de manera dinámica (dynamic linker) los símbolos
+pendientes que estarán en la biblioteca dinámica. El dynamic linker se encargará
+entonces de cargar a memoria la biblitoca y mapear esta a una región de memoria
+del proceso (recuerda, un proceso es la abstracción que usa el sistema operativo
+para poder correr y controlar la ejecución de un programa).
+
+Es importante señalar que las biblotecas dinámicas tienen un formato ELF similar
+al de los ejecutables; sin embargo, la direcciones de los símbolos no son absolutas,
+sino relativas a un punto (position independent code). Eso permite entonces que
+dos instrucciones separadas por 100 bytes, por ejemplo, puedan ser ubicadas en un
+proceso en las direcciones 100 y 200 y en otro en la 512 y 612. Adicionalmente, las
+bibliotecas dinámicas no puede ejecutarse.
+
+Ahora considera los mismo programas del ejercicio anterior. Construye la biblioteca
+dinámica así:
+
+``gcc -c uno.c -fPIC -o uno.o``
+
+``gcc -c dos.c -fPIC -o dos.o``
+
+``gcc -c tres.c -fPIC -o tres.o``
+
+La opción ``-fPIC`` quiere decir position independent code. FInalmente mezclamos
+los código:
+
+``gcc -shared uno.o dos.o tres.o -o libstatic.so``
+
+Antes de generar el ejecutable borra la bilioteca estática con ``rm -fv ./libstatic.a``.
+Ejecuta el comando ``gcc main.o -L./ -lstatic -o exe`` y luego ejecuta el programa. El
+resultado debería ser algo similar a esto:
+
+.. code-block:: c
+
+    ./exe: error while loading shared libraries: libstatic.so: 
+    cannot open shared object file: No such file or directory
+
+¿Por qué ocurre esto? como te dije antes, debes decirle al sistema operativo en dónde está
+la bilioteca dinámica. Esto se hace actualizando la variable de ambiente (environment variable)
+``LD_LIBRARY_PATH`` con ``export LD_LIBRARY_PATH=./``. Ejecuta de nuevo el programa.
+¿Funcionó?
+
+¿Será posible que el propio programa ejecutable le indique al sistema operativo cuándo cargar
+la biblioteca y dónde está ubicada? SI!!! Y esto es genial porque te permite cargar en ejecución
+diferentes versiones de biblioteca, es decir, tienes más flexibilidad.
+
+Considera el siguiente programa:
+
+.. code-block:: c
+    :linenos:
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <dlfcn.h>
+    #include "api.h"
+    
+    int main(int argc, char* argv[]) {
+
+        int (*func_ptr)() = NULL;
+
+        // Cargo la biblioteca dinámica
+        void* handle = dlopen ("./libstatic.so", RTLD_LAZY);
+
+        if (!handle) {
+            fprintf(stderr, "%s\n", dlerror());
+            exit(1);
+        }
+        
+        // Busco el símbolo que necesito
+        func_ptr = dlsym(handle, "uno");
+        if (!func_ptr) {
+            fprintf(stderr, "%s\n", dlerror());
+            exit(1);
+        }
+        printf("uno(): %d\n", func_ptr());
+
+        func_ptr = dlsym(handle, "dos");
+        if (!func_ptr) {
+            fprintf(stderr, "%s\n", dlerror());
+            exit(1);
+        }
+        printf("dos(): %d\n", func_ptr());
+
+
+        func_ptr = dlsym(handle, "tres");
+        if (!func_ptr) {
+            fprintf(stderr, "%s\n", dlerror());
+            exit(1);
+        }
+        printf("tres(): %d\n", func_ptr());
+
+
+        return 0;
+    }
+
+
+Compila con ``gcc -Wall -c main.c -o main.o``
+
+En el ejemplo anterior al generar el ejecutable hicimos esto ``gcc main.o -L./ -lstatic -o exe``.
+Si nuestro programa dependiera de más biliotecas haríamos ``gcc main.o -L./ -lstatic -lXXX -lXXX -o exe``
+Recuerda que la bilioteca se generó con el comando ``gcc -shared uno.o dos.o tres.o -o libstatic.so``;
+sin embargo, para este ejemplo como vamos a cargar de manera `manual` la biblioteca, es necesario
+generar nuestra biblioteca dinámica indicando todas las dependencias que esta tendrá a otras
+bibliotecas, así: ``gcc -shared uno.o dos.o tres.o -lXXX -lXXX -o libstatic.so``. En este
+caso no tenemos más dependencias, por tanto podemos conservar la biblioteca del ejemplo anterior.
+
+Para generar el ejecutable escribe ``gcc -Wall main.o -ldl -o exe``. Ejecuta el programa. ¿Funciona?
+
+Ten presente los siguientes puntos:
+
+* ``int (*func_ptr)() = NULL;`` en esta expresión ``func_ptr`` es una variable que almacena
+  direcciones de funciones que no reciben nada y devuelven un entero.
+* ``void* handle = dlopen ("./libstatic.so", RTLD_LAZY);``carga la biblioteca dinámica.
+* ``func_ptr = dlsym(handle, "uno");`` carga nu símbolo en particular.
+* En ``gcc -Wall main.o -ldl -o exe`` pasamos la opción ``-ldl``. Esta opción indica que
+  vamos a realizar una carga perezosa (lazy loading) de la biblioteca dinámica.
+
+
+
