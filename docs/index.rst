@@ -42,35 +42,36 @@ Estructura y metodología del curso
 -----------------------------------
 El curso está divido en 5 unidades:
 
-#. Unidad 1: Lógica combinacional y secuencial
-#. Unidad 2: Arquitectura del computador
-#. Unidad 3: Del código fuente al ejecutable: compiladores, máquinas virtuales, C, C++, C#
-#. Unidad 4: Virtualización: procesos, hilos, memoria virtual, sincronización y comunicación.
-#. Unidad 5: Entrada-Salida: archivos, comunicación en red.
+#. Unidad 1: Lógica combinacional y secuencial.
+#. Unidad 2: Arquitectura del computador.
+#. Unidad 3: Del código fuente al ejecutable: compiladores, máquinas virtuales, C, C++, C#.
+#. Unidad 4: Programación orientada a objetos.
+#. Unidad 5: Sistema operativo: procesos, hilos, memoria virtual, sincronización, comunicación,
+   entrada salida.
 
-Cada unidad tiene una duración de 3 semanas. Durante cada semana se deben realizar y entregar
-proyectos. La suma de los 3 proyectos dará un 20% en la evaluación sumativa final.
+Cada unidad tiene una duración de 2 o 3 semanas. Durante este tiempo se realizarán 
+retos que aportarán un 20% a la evaluación sumativa final.
 
 Cada unidad estará constituida por tres fases:
 
 #. Fase 1: fundamentación. En esta fase se estudiarán los conceptos teóricos más relevantes de
-   cada unidad. Así mismo se complementarán con lecturas del texto guía. En esta fase, el estudiante
+   cada unidad. Así mismo se complementarán con lecturas. En esta fase, el estudiante
    debe repasar los conceptos olvidados de los semestres anteriores.
 #. Fase 2: proyecto. En esta fase se realiza el proyecto que servirá como evidencia de aprendizaje.
-   cada proyecto debe ser sustentado.
+   Cada proyecto debe ser sustentado.
 #. Fase 3: retroalimentación. En esta fase se discute el resultado del proyecto.
 
 Cronograma
 ------------
 * Semanas 1 a 3: unidad 1
 * Semanas 4 a 6: unidad 2
-* Semanas 7 a 9: unidad 3
-* Semanas 10 a 12: unidad 4
-* Semanas 13 a 15: unidad 5
+* Semanas 8 a 12: unidad 3
+* Semanas 13 a 14: unidad 4
+* Semanas 15 a 16: unidad 5
 
 Evaluación
 -----------
-Serán 5 evaluaciones del 20%, una por unidad. Cada evaluación estará compuesta por 3 proyectos, uno semanal.
+Serán 5 evaluaciones del 20%, una por unidad.
 
 Dedicación
 -----------
