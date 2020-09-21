@@ -1,32 +1,29 @@
 Semana 12: Unidad 3
 =====================
 
-Esta semana vamos a terminar la unidad 3. Ya sabemos qué debe
-pasar para poder ejecutar código de máquina desde lenguajes como
-C y C++; sin embargo, nos falta una última estación en este recorrido.
-¿Qué pasa con lenguajes como C#?
+Esta semana vamos a terminar la unidad 3. 
+
+Ya sabemos cuáles son los pasos necesarios para ir desde
+un lenguaje como C y C++ a código de máquina; sin embargo, nos falta
+una última estación en este recorrido. ¿Qué pasa con lenguajes como C#?
 
 Para resolver esta pregunta vamos a tener que analizar un poco más
 qué es un compilador y qué es un intérprete.
 
-
-
 Actividades
 -------------
 
-
-
-Actividad 13
-^^^^^^^^^^^^
-* Fecha: septiembre 15 de 2020
-* Descripción: sustentación
+Actividad 17
+^^^^^^^^^^^^^^
+* Fecha: septiembre 22 de 2020
+* Descripción: unidad 3, análisis de los ejercicios
 * Recursos: ingresa a Teams
 * Duración de la actividad: 1:40 minutos
 * Forma de trabajo: individual
 
-Actividad 14
+Actividad 18
 ^^^^^^^^^^^^^^^^
-* Fecha: septiembre 15 a septiembre 17 de 2020 
+* Fecha: septiembre 22 a septiembre 24 de 2020 
 * Descripción: realizar los ejercicios propuestos
 * Recursos: actividad de trabajo autónomo
 * Duración de la actividad: 4 horas
@@ -34,417 +31,539 @@ Actividad 14
 
 Ejercicio 1
 ############
-Con este ejercicio vamos a responder una pregunta
-¿Qué son las directivas del preprocesador?
+En este ejercicio vamos a investigar un poco más sobre algunos conceptos
+de los lenguajes de programación. En particular analizaremos qué son
+las implementaciones interpretadas y qué son las implementaciones compiladas.
+Nota por favor que no te dije lenguajes interpretados o compilados. Al final
+de los ejercicios que te propongo tu mismo podrás explicar la diferencia.
 
-El preprocesamiento es una característica muy propia de
-C que no es común a otros lenguajes de programación. Esta
-característica permite MODIFICAR el programa ANTES de pasárselo
-a compilador para que lo convierta en lenguaje ensamblador.
+En ejercicios pasados discutimos las fases para transformar un
+programa del código fuente a lenguaje de máquina.¿ Lo recuerdas?
 
-Lo que debes hacer para usar el preprocesador es introducir en
-el código DIRECTIVAS, es decir, instrucciones que le das al
-preprocesador. Una vez el preprocesador lee tu programa, su tarea
-será remover las directivas y sustituirlas por código C que él
-mismo generará usando las instrucciones que tu le has dado con
-la directiva específica. Luego de este paso, tu programa estará
-listo para ser leído por el compilador.
+* Iniciamos con el programa.
+* Luego hacemos un análisis léxico, con el Tokenizer, para generar los tokens.
+* Los tokens son unidades indivisibles compuestas por un tipo y un valor.
+  Los tokens nos permiten identificar las palabras que componen nuestro programa.
+* Ahora hacemos un análisis semántico, utilizando un Parser. Esto nos permiten
+  reconocer si estamos combinando correctamente las palabras en el programa
+  realizado.
+* El Parser genera, si el programa es válido, una representación del programa
+  conocida como AST.
 
-Ten en cuenta que las directivas comenzarán por el símbolo #.
+Es precisamente este AST el que pasamos a un intérprete o a un compilador. El
+intérprete ejecutará el código. El compilador convertirá el AST a otro lenguaje,
+que posiblemente será transformado de nuevo o interpretado.
+
+Por ejemplo, en el caso de C, luego de generar el AST, utilizamos un generador
+de código y producimos lenguaje ensamblador. Luego este lenguaje ensamblador
+lo convertimos en lenguaje de máquina. Finalmente, el lenguaje de máquina es
+INTERPRETADO por la CPU.
+
+Hay dos tipos de intérpretes que se diferencian en el formato del programa
+que interpretan. En ese sentido el programa puede estar representado como un AST
+o como Bytecodes. Los intérpretes que utilizan el primer formato se conocen
+como intérpretes recursivos y los segundos como Máquinas Virtuales (VM). En el
+caso de los segundos, la representación será muy parecida a un programa en lenguaje
+ensamblador, como el de una CPU real, y por tanto el nombre de máquinas virtuales.
+
+En el caso de los compiladores tenemos tres tipos: 
+
+* Ahead-of-time (AOT): todo el código se traduce a un nuevo lenguaje antes de ser
+  ejecutado. Como en el caso de C y C++. Sin embargo, es interesante anotar, 
+  por ejemplo, que C++ se comparta como un interprete a la hora de optimizar el código.
+* Just-in-time (JIT): el código se genera durante la ejecución del programa.
+* AST-transformer o también conocidos como transpilers. Aquí la idea es realizar
+  una transformación de un tipo de AST a otro, para generar, por ejemplo, de un
+  lenguaje de programación a otro.
+
 
 Ejercicio 2
-#############
-Ahora te voy a mostrar algunos ejemplos de directiva que puedes
-usar o que probablemente ya has utilizado en este punto del curso:
+############
+Profundicemos un poco más en los intérpretes.
 
-.. code-block:: c
-    :linenos:
+Los AST interpreters: ejecutan el programa directamente desde la representación AST,
+es decir, producen el resultado modelado con el lenguaje de programación directamente,
+en tiempo de ejecución.
 
-    #define M 5
-    #define C 5
+Realiza el siguiente ejercicio utilizando la herramienta `AST-explorer <https://astexplorer.net/>`__:
 
-    int main(int argc, char* argv[]) {
-        int x = 2;
-        int y = x*M + C;
-        return 0;
-    }
+* Selecciona javacript.
+* Escribe el siguiente código
+  
+  .. code-block:: javascript
+     :linenos:
 
-¿Cuál será el resultado en la variable ``y`` luego de ejecutar este programa?
+     a = 5;
+     b = a*2 + 10;
 
-Para responder esta pregunta recuerda que antes de compilador
-el programa, el archivo se pasa al preprocesador. El resultado del preprocesador
-será algo similar a esto:
+* Analiza el AST generado. Verás que la herramienta te identifica expresiones y cada expresión la
+  organiza como un árbol identificando el lado izquierdo y el lado derecho.
 
-.. code-block:: c
-    :linenos:
+¿Puedes pintar árboles para los dos expresiones anteriores?
 
-    int main(int argc, char* argv[]) {
-        int x = 2;
-        int y = x*5 + 5;
-        return 0;
-    }
-
-Ahora si, este archivo, será pasado al compilador para que
-lo convierta en código ensamblador. La respuesta a la pregunta
-será 15.
-
-
-Mira este otro ejemplo:
-
-
-.. code-block:: c
-   :linenos:
-
-	#define M 5
-	#define C 5
-	#define MAP(val,m,c) x*m+c
-
-    int main(int argc, char* argv[]) {
-        int x = 2;
-        int y = MAP(x,M,C);
-        return 0;
-    }
-
-¿Qué crees que genere el preprocesador luego de procesar este
-archivo? 
-
-.. note::
-    ¡Alerta de Spoiler!
-
-    .. code-block:: c
-        :linenos:
-
-        int main(int argc, char* argv[]) {
-            int x = 2;
-            int y = x*5+5;
-            return 0;
-        }
-
-Otra forma de saber, ANTES de compilar, la salida del preprocesador es así:
-
-``gcc -E codigo.c``
-
-Por último prueba el comando anterior con este programa:
-
-.. code-block:: c
-   :linenos:
-
-	#include <stdio.h>
-    
-    #define M 5
-	#define C 5
-	#define MAP(val,m,c) x*m+c
-
-    int main(int argc, char* argv[]) {
-        int x = 2;
-        int y = MAP(x,M,C);
-        printf("y: %d", y);
-        return 0;
-    }
-
-¿Qué puedes concluir de la directiva ``#include`` 
 
 Ejercicio 3
-#############
-Otro uso interesante del preprocesador es para las DIRECTIVAS
-de compilación condicional. 
+############
+Profundicemos un poco más en los intérpretes.
 
-Esta directivas te permiten incluir un código u otro, dependiendo
-de una condición:
+Los Bytecodes interpreters no parten de una representación AST en forma de árbol, sino
+que parten de un arreglo de bytecodes. Por tanto, necesitarán un paso más en tiempo
+de compilación:
 
-.. code-block:: c
-   :linenos:
+* Iniciamos con el programa.
+* Análisis léxico --> genera tokens
+* Análisis semántico --> genera el AST.
+* Bytecode emitter --> Generar bytecode
 
-    #include <stdio.h>
+Ahora si, en tiempo de ejecución se ejecutará el programa representado como un
+arreglo de bytecodes.
 
-    #define CONDITION
-    
-    int main(int argc, char* argv[]) {
-    
-        #ifdef CONDITION
-        printf("CODIGO IF\n");
-        #else
-        printf("CODIGO ELSE\n");
-        #endif
-        return 0;
-    }
+¿Para qué hacemos este paso extra? Se hace para optimizar el almacenamiento del
+programa en comparación con la representación AST. También será más fácil
+de recorrer el programa y se tendrá un control más granular de la ejecución.
 
-¿Cómo crees que quede el programa luego de ser preprocesado?
+Recuerda que a este tipo de intérprete lo llamamos también virtual machine. Usualmente,
+estas virtual machines son de dos tipos: stack-based y register-based.
 
-.. note::
-    ¡Alerta de Spoiler!
+¿Recuerdas el computador Hack? si consideramos la CPU implementada como un intérprete
+de las instrucciones Hack, podríamos decir que la CPU es una virtual machine register-based.
 
+¿Cómo serán las VM stack-based? Imagina el stack, como un pila de platos.
+Estas VM apilan (stack) los operandos y luego aplican las operaciones. Por tanto, 
+los resultados siempre quedan en el tope de la pila. Entonces, para realizar la operación
+``5+6`` la VM colocará en la pila el 5, luego el 6, y finalmente realizará la operación suma.
+Como resultado, los operandos 5 y 6 serán retirados de la pila y quedará el resultado 11
+en la parte superior de esta.
 
-    Al definir ``CONDITION`` con la directiva ``#define CONDITION``
-    y con el comando ``gcc -E codigo.c`` el resultado es:
+Realiza el siguiente ejercicio:
 
-    .. code-block:: c
-        :linenos:
+* Crea un programa Test.java:
 
-        int main(int argc, char* argv[]) {
-           printf("CODIGO IF\n");
-            return 0;
+  .. code-block:: java
+     :linenos:
+
+        class Test{
+
+            public static void main(String[] args){
+                int x = 5;
+                System.out.println(x+2-1);
+            }
         }
 
+* Compila el programa así: ``javac Test.java``. Verás que se genera en el directorio un
+  archivo Test.class
+
+* Ahora ejecuta ``hexdump -C Test.class``. El resultado será el bytecode
+  
+  .. code-block:: java  
+
+        00000000  ca fe ba be 00 00 00 34  00 1b 0a 00 05 00 0e 09  |.......4........|
+        00000010  00 0f 00 10 0a 00 11 00  12 07 00 13 07 00 14 01  |................|
+        00000020  00 06 3c 69 6e 69 74 3e  01 00 03 28 29 56 01 00  |..<init>...()V..|
+        00000030  04 43 6f 64 65 01 00 0f  4c 69 6e 65 4e 75 6d 62  |.Code...LineNumb|
+        00000040  65 72 54 61 62 6c 65 01  00 04 6d 61 69 6e 01 00  |erTable...main..|
+        00000050  16 28 5b 4c 6a 61 76 61  2f 6c 61 6e 67 2f 53 74  |.([Ljava/lang/St|
+        00000060  72 69 6e 67 3b 29 56 01  00 0a 53 6f 75 72 63 65  |ring;)V...Source|
+        00000070  46 69 6c 65 01 00 09 54  65 73 74 2e 6a 61 76 61  |File...Test.java|
+        00000080  0c 00 06 00 07 07 00 15  0c 00 16 00 17 07 00 18  |................|
+        00000090  0c 00 19 00 1a 01 00 04  54 65 73 74 01 00 10 6a  |........Test...j|
+        000000a0  61 76 61 2f 6c 61 6e 67  2f 4f 62 6a 65 63 74 01  |ava/lang/Object.|
+        000000b0  00 10 6a 61 76 61 2f 6c  61 6e 67 2f 53 79 73 74  |..java/lang/Syst|
+        000000c0  65 6d 01 00 03 6f 75 74  01 00 15 4c 6a 61 76 61  |em...out...Ljava|
+        000000d0  2f 69 6f 2f 50 72 69 6e  74 53 74 72 65 61 6d 3b  |/io/PrintStream;|
+        000000e0  01 00 13 6a 61 76 61 2f  69 6f 2f 50 72 69 6e 74  |...java/io/Print|
+        000000f0  53 74 72 65 61 6d 01 00  07 70 72 69 6e 74 6c 6e  |Stream...println|
+        00000100  01 00 04 28 49 29 56 00  20 00 04 00 05 00 00 00  |...(I)V. .......|
+        00000110  00 00 02 00 00 00 06 00  07 00 01 00 08 00 00 00  |................|
+        00000120  1d 00 01 00 01 00 00 00  05 2a b7 00 01 b1 00 00  |.........*......|
+        00000130  00 01 00 09 00 00 00 06  00 01 00 00 00 01 00 09  |................|
+        00000140  00 0a 00 0b 00 01 00 08  00 00 00 2e 00 03 00 02  |................|
+        00000150  00 00 00 0e 08 3c b2 00  02 1b 05 60 04 64 b6 00  |.....<.....`.d..|
+        00000160  03 b1 00 00 00 01 00 09  00 00 00 0e 00 03 00 00  |................|
+        00000170  00 04 00 02 00 05 00 0d  00 06 00 01 00 0c 00 00  |................|
+        00000180  00 02 00 0d                                       |....|
+        00000184
+
+* Para ver una representación simbólica de este bytecode escribe ``javap -c Test.class``:
+
+  .. code-block:: java 
+
+        Compiled from "Test.java"
+        class Test {
+        Test();
+            Code:
+            0: aload_0
+            1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+            4: return
+
+        public static void main(java.lang.String[]);
+            Code:
+            0: iconst_5
+            1: istore_1
+            2: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+            5: iload_1
+            6: iconst_2
+            7: iadd
+            8: iconst_1
+            9: isub
+            10: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V
+            13: return
+        }
+
+* Observa el código en el método main: ``iconst_5`` coloca un 5 en el stack, ``istore_1`` almacena el valor
+  en x. Esto corresponde a la operación ``x = 5``. Ahora mira cómo se resulte ``x+2-1``. Primero
+  se coloca en el stack el valor de x con ``iload_1``, luego se coloca el 2 ``iconst_2``, se hace
+  la suma ``iadd`` dejando el resultado en el stack. Luego se coloca en el stack el 1 con ``iconst_1``
+  y finalmente se realiza la resta ``isub``.
 
 Ejercicio 4
-#############
-¿Será posible definir una directiva para el preprocesador
-desde la línea de comandos?
+############
+Continuado con el tema del ejercicio anterior.
 
-Volvamos al ejemplo anterior pero esta vez sin el ``#define CONDITION``
+* Abre la aplicación `compiler explorer <https://godbolt.org/>`__.
+* Selecciona python
+* Ingresa el programa:
 
-.. code-block:: c
-   :linenos:
+  .. code-block:: python
+     :linenos:
 
-    #include <stdio.h>
+     def main():
+        x = 5;
+        print(x+2-1)
 
-    int main(int argc, char* argv[]) {
-    
-        #ifdef CONDITION
-        printf("CODIGO IF\n");
-        #else
-        printf("CODIGO ELSE\n");
-        #endif
-        return 0;
-    }
+* Observa la salida al lado derecho:
 
-¿Cuál será el resultado de compilar y ejecutar este programa?
+    .. code-block:: python
+       :linenos:
 
-Compara el resultado obtenido con la salida del comando ``gcc -E codigo.c``.
+            1           0 LOAD_CONST               0 (<code object main at 0x5653b7cb2980, file "example.py", line 1>)
+                        2 LOAD_CONST               1 ('main')
+                        4 MAKE_FUNCTION            0
+                        6 STORE_NAME               0 (main)
+                        8 LOAD_CONST               2 (None)
+                        10 RETURN_VALUE
 
-Ahora prueba este comando:
+            Disassembly of <code object main at 0x5653b7cb2980, file "example.py", line 1>:
+            2           0 LOAD_CONST               1 (5)
+                        2 STORE_FAST               0 (x)
 
-``gcc -DCONDITION -E codigo.c``
+            3           4 LOAD_GLOBAL              0 (print)
+                        6 LOAD_FAST                0 (x)
+                        8 LOAD_CONST               2 (2)
+                        10 BINARY_ADD
+                        12 LOAD_CONST               3 (1)
+                        14 BINARY_SUBTRACT
+                        16 CALL_FUNCTION            1
+                        18 POP_TOP
+                        20 LOAD_CONST               0 (None)
+                        22 RETURN_VALUE
 
-¿Cuál es el resultado?
+* ¿Qué tipo de VM será el intérprete de python?
 
-Y si compilas así:
-
-``gcc -DCONDITION -Wall codigo.c -o codigo``
-
-¿Qué conclusiones puedes sacar?
 
 Ejercicio 5
-#############
-Ahora si vamos a responder la pregunta de la semana:
-¿Cómo llegamos del código fuente al binario (el ejecutable)?
+############
+Ahora profundicemos un poco más en los compiladores.
 
-En el caso del lenguaje C se siguen unos pasos conocidos como el
-pipeline de compilación compuesto por 4 pasos: preprocesamiento,
-compilación, ensamblado y enlazado.
+Los AOT (Ahead-of-time) compilers. Ahead-of-time quiere decir, antes de la
+ejecución, es decir, estos compiladores traducen completamente el código
+fuente antes de ser ejecutados. Recuerda, por ejemplo, C o C++. Una vez el código
+de máquina es generado, este es interpretado por la CPU. 
 
-IMPORTANTE: para poder conseguir un ejecutable desde el código fuente,
-es necesario que nuestro código pase por todas las etapas del pipeline
-de manera exitosa.
+Los siguientes pasos permiten generar, en tiempo de compilación,
+código de máquina:
 
-Para ilustrar el proceso vamos a crear un programa compuesto por 3 archivos:
-dos archivos .c y un archivo .h. Todos los archivos estarán almacenados
-en el mismo directorio.
+* Iniciamos con el programa.
+* Análisis léxico --> genera tokens
+* Análisis semántico --> genera el AST.
+* Code generator --> produce representaciones intermedias que luego
+  se traducen a código de máquina especifico para cada CPU.
 
-min.h
+Los pasos desde el programa hasta la generación del AST se conocen como FRONTEND. 
+Los pasos desde el generador de código, pasando por las representaciones
+intermedias y el código de máquina se conocen como BACKEND.
 
-.. code-block:: c
-   :linenos:
+Actualmente, motores de videojuegos como Unity trabajan intensamente para lograr
+optimizar todos los pasos anteriores. Para ello usan las ideas desarrolladas
+en el proyecto LLVM (low level virtual machine). Si quieres profundizar más
+en el asunto te recomiendo  `esta conferencia <https://youtu.be/LKpyaVrby04>`__. 
+Te dejo también la presentación de la misma `aquí <https://drive.google.com/file/d/1w6A02OlnDS1ILXB56l4DlZ_ntFUrlirX/view?usp=sharing>`__.
+Te he hablado un par de veces del nuevo stack de Unity llamado DOTs. Pues bien,
+una de las tecnologías en DOTs es el burst compiler. La idea de del burst
+compiler es permitir que un subconjunto de C# pueda producir ejecutables,
+con un desempeño incluso superior al que se podría lograr con C++. ¿Te suena
+interesante no? A mi también :)
 
-    #ifndef MIN_H
-    #define MIN_H
-    int min(int, int);
-    #endif
+¿Quieres dar un vistazo rápido de las posibilidades que vienen con DOTS?
+Te recomiendo que hagas `este tutorial <https://youtu.be/C56bbgtPr_w>`__ 
+corto para que lo ves con tus propios ojos.
 
-min.c
+¿Qué es el proyecto LLVM? Es una infraestructura de compilación compuesta
+por un conjunto de compiladores y herramientas que permiten desarrollar
+un fronted para cualquier lenguaje de programación y un backend para cualquier
+set de instrucciones.
 
-.. code-block:: c
-   :linenos:
+Los pasos que se siguen al usar LLVM, todos en tiempo de compilación, son:
 
-    #include "min.h"
+* Iniciamos con el programa.
+* Análisis léxico --> genera tokens
+* Análisis semántico --> genera el AST.
+* LLVM IR generator --> genera LLVM bytecode o LLVM IR
+* El LLVM IR lo recibe el generador de código LLVM encargado
+  de generar código de máquina para múltiples plataformas.
 
-    int min(int a, int b){
-        if(a < b) return a;
-        else return b;
+ Considera el siguiente ejemplo llamado main.cpp:
+
+ .. code-block:: c 
+    :linenos:
+
+    int main(void){
+        int x = 10;
+        return x+5-2;
     }
 
+Compila usando ``clang++ main.cpp`` el resultado será el archivo 
+``a.out``. Ejecuta el archivo con ``./a.out`` y lee el resultado generado
+por el programa con ``echo $?``
 
+Ahora ejecuta ``clang++ main.cpp -S`` para producir el archivo ``main.s``
+que tendrá el código ensamblador:
 
-main.c
+.. code-block:: c 
+    :linenos:
 
-.. code-block:: c
-   :linenos:
-
-    #include "min.h"
-    #include <stdio.h>
-
-    int main(int argc, char* argv[]){
-        printf("the min value is: %d\n",min(1,2));
-        return 0;
+    int main(void){
+        int x = 10;
+        return x+5-2;
     }
 
-La idea será crear un ejecutable partiendo de estos tres archivos.
-Ten presente que los archivos ``.h`` se usan para informarle al compilador
-qué tipo de datos recibe la función min y qué tipo de dato devuelve. Los
-archivos .h no se compilan, solo los archivos ``.c``.
+.. code-block:: c 
+    :linenos:
 
-Compilamos primero ``min.c``:
+		.text
+		.file	"main.cpp"
+		.globl	main                    # -- Begin function main
+		.p2align	4, 0x90
+		.type	main,@function
+	main:                                   # @main
+		.cfi_startproc
+	# %bb.0:
+		pushq	%rbp
+		.cfi_def_cfa_offset 16
+		.cfi_offset %rbp, -16
+		movq	%rsp, %rbp
+		.cfi_def_cfa_register %rbp
+		movl	$0, -4(%rbp)
+		movl	$10, -8(%rbp)
+		movl	-8(%rbp), %eax
+		addl	$5, %eax
+		subl	$2, %eax
+		popq	%rbp
+		.cfi_def_cfa %rsp, 8
+		retq
+	.Lfunc_end0:
+		.size	main, .Lfunc_end0-main
+		.cfi_endproc
+											# -- End function
+		.ident	"clang version 10.0.0-4ubuntu1 "
+		.section	".note.GNU-stack","",@progbits
+		.addrsig
 
-* Preprocesamiento:  ``gcc -E min.c``. Al ejecutar este comando nota como
-   el preprocesador incluye la información de min.h a min.c
-* Compilación: ejecuta el comando ``gcc -S min.c``. La opción ``-S`` le indica 
-  al comando ``gcc`` que debe hacer el proceso anterior (preprocesador) y con la
-  salida de este paso alimentar al compilador y detenerse en ese punto. El archivo
-  de salida generado será ``min.s`` que contendrá el código ensamblador.
+Observa las línas 17 y 18 donde hace el cálculo correspondiente
+a la expresión ``return x+5-2``. 
 
-.. code-block:: c
-   :linenos:
+Compila de nuevo el código, pero esta vez con 
+
+Ahora ejecuta ``clang++ main.cpp -S -O3`` y lee de nuevo main.s:
 
 
-        .file	"min.c"
-        .text
-        .globl	min
-        .type	min, @function
-    min:
-    .LFB0:
-        .cfi_startproc
-        endbr64
-        pushq	%rbp
-        .cfi_def_cfa_offset 16
-        .cfi_offset 6, -16
-        movq	%rsp, %rbp
-        .cfi_def_cfa_register 6
-        movl	%edi, -4(%rbp)
-        movl	%esi, -8(%rbp)
-        movl	-4(%rbp), %eax
-        cmpl	-8(%rbp), %eax
-        jge	.L2
-        movl	-4(%rbp), %eax
-        jmp	.L3
-    .L2:
-        movl	-8(%rbp), %eax
-    .L3:
-        popq	%rbp
-        .cfi_def_cfa 7, 8
-        ret
-        .cfi_endproc
-    .LFE0:
-        .size	min, .-min
-        .ident	"GCC: (Ubuntu 9.3.0-10ubuntu2) 9.3.0"
-        .section	.note.GNU-stack,"",@progbits
-        .section	.note.gnu.property,"a"
-        .align 8
-        .long	 1f - 0f
-        .long	 4f - 1f
-        .long	 5
-    0:
-        .string	 "GNU"
-    1:
-        .align 8
-        .long	 0xc0000002
-        .long	 3f - 2f
-    2:
-        .long	 0x3
-    3:
-        .align 8
-    4:
+.. code-block:: c 
+    :linenos:
 
-* Ensamblado: en esta fase se gera el código máquina.
-  ``as min.s -o min.o``. También es posible generar el código de
-  máquina con el comando ``gcc -c min.c``
+		.text
+		.file	"main.cpp"
+		.globl	main                    # -- Begin function main
+		.p2align	4, 0x90
+		.type	main,@function
+	main:                                   # @main
+		.cfi_startproc
+	# %bb.0:
+		movl	$13, %eax
+		retq
+	.Lfunc_end0:
+		.size	main, .Lfunc_end0-main
+		.cfi_endproc
+											# -- End function
+		.ident	"clang version 10.0.0-4ubuntu1 "
+		.section	".note.GNU-stack","",@progbits
+		.addrsig
 
-* Debemos repetir este proceso con todos los archivos ``.c`` de nuestro
-  proyecto: ``gcc -c main.c``. Ten presente que el comando anterior
-  ejecutará automáticamente todos los pasos previos, es decir, el preprocesado,
-  la compilación y el proceso de ensamblado.
 
-* Enlazado: una vez tengas todos los archivos ``.o`` lo último que debes hacer
-  es enlazar todos los archivos para generar un archivo ejecutable. Este archivo
-  contiene el código de máquina de todos los ``.o`` pero organizado en un formato
-  específico. En el caso de Linux el formato típico es ``.ELF``. Ejecuta el siguiente
-  comando para enlazar: ``ld min.o main.o``. Verás el siguiente resultado:
+Observa la línea 9. ¿Qué notas? ¿Recuerdas el resultado obtenido al ejecutar
+el programa? Mira de nuevo la línea 9. 
+
+Estrictamente hablando, se supone que estamos compilando el código, pero
+podrás notar que clang++ con la opción -O3 está interpretando, en tiempo,
+de compilación, el código, para optimizarlo. Interesante, ¿Cierto? :)
+
+Ahora ejecuta el comando ``clang++ main.cpp -S -emit-llvm`` observa
+el archivo main.ll:
 
 .. code-block:: c
    :linenos:
 
-    ld: warning: cannot find entry symbol _start; defaulting to 0000000000401000
-    ld: main.o: in function main:
-    main.c:(.text+0x31): undefined reference to printf
+    ; ModuleID = 'main.cpp'
+    source_filename = "main.cpp"
+    target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+    target triple = "x86_64-pc-linux-gnu"
 
-Este resultado indica que no fue posible generar el ejecutable 
-(`` main.c:(.text+0x31): undefined reference to printf``). Pero ¿Por qué?
-la razón es que nos falta el archivo con el código de máquina de la función ``printf``.
-Esta función está prototipada en el archivo de cabecera (``stdio.h``), pero el archivo
-no contiene el código fuente de ``printf``. ¿Y dónde está el código entonces? este
-código hace parte de la biblioteca `glibc <https://www.gnu.org/software/libc/>`__ 
-que debes tener en tu sistema operativo y que contiene el código de máquina de varias
-funciones, entre ellas, ``printf``.
+    ; Function Attrs: noinline norecurse nounwind optnone uwtable
+    define dso_local i32 @main() #0 {
+      %1 = alloca i32, align 4
+      %2 = alloca i32, align 4
+      store i32 0, i32* %1, align 4
+      store i32 10, i32* %2, align 4
+      %3 = load i32, i32* %2, align 4
+      %4 = add nsw i32 %3, 5
+      %5 = sub nsw i32 %4, 2
+      ret i32 %5
+    }
 
-Una forma fácil de generar el ejecutable es utilizar de nuevo ``gcc``. Este comando
-se encargará de suministrarle a ``ld`` todo los archivos con código máquina necesarios para
-generar nuestro ejecutable: ``gcc min.o main.o -o main``.
+    attributes #0 = { noinline norecurse nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 
-Actividad 15
+    !llvm.module.flags = !{!0}
+    !llvm.ident = !{!1}
+
+    !0 = !{i32 1, !"wchar_size", i32 4}
+    !1 = !{!"clang version 10.0.0-4ubuntu1 "}
+
+¿Sabes qué es eso? Es código LLVM IR. Observa las líneas 13 y 14. De nuevo corresponde al
+cálculo de la expresión ``return x+5-2``. Desde esta representación se puede generar
+código para múltiples set de instrucciones como te comenté antes.
+
+
+Ejercicio 6
+############
+Ahora hablemos un poco más de los Just-In-Time (JIT) compilers. Los AOT traducen
+el programa a código de máquina en tiempo de compilación. Los JIT lo hacen en
+tiempo de ejecución.
+
+Los pasos que sigue un JIT compiler en tiempo de compilación son:
+
+* Iniciamos con el programa.
+* Análisis léxico --> genera tokens.
+* Análisis semántico --> genera el AST.
+* Bytecode emitter --> Generar bytecode.
+
+En tiempo de ejecución un intérprete (lo que llamamos virtual machine) interpreta
+el bytecode, pero algunos bytecode son compilados a código de máquina. La primera
+vez que se compilan dichos bytecodes y se ejecuta el código de máquina producido
+toma un tiempo; sin embargo, la interpretación posterior de estos bytecodes compilados
+será muy rápido puesto que la ejecución no será efectuada por el intérprete sino
+directamente por la CPU.
+
+Ejercicio 7
+############
+Finalmente, analicemos un poco más los transpilers o AST transformers.
+
+Los pasos que sigue el transpiler, en tiempo de compilación, son:
+
+* Iniciamos con el programa.
+* Análisis léxico --> genera tokens
+* Análisis semántico --> genera el AST.
+* El transpiler o AST transformer --> genera otro AST para el mismo lenguaje
+  o para otro lenguaje de programación. Por ejemplo, traducir una versión vieja
+  de javascript a una versión nueva o de python a javascript.
+* El nuevo AST se pasa a un generador de código --> genera el programa en otro lenguaje
+  de programación (claramente conservando la semántica del programa inicial).
+
+La salida de todo este proceso puede pasarse ahora a un AOT o un JIT compiler.
+
+Ejercicio 8
+############
+
+¿Los lenguajes javascript, python, C, C#, c++ son lenguajes interpretados o compilados?
+
+:)
+
+La verdad es que esta pregunta es incorrecta. Lo que es interpretado o compilado
+es la implementación específica. ¿Cómo así? Creo que con lo que aprendiste tu mismo
+puedes explicar que significa esto. ¿Te animas?
+
+Actividad 19
 ^^^^^^^^^^^^^^^^
-* Fecha: septiembre 17 de 2020
+* Fecha: septiembre 24 de 2020
 * Descripción: análisis de los ejercicios
 * Recursos: ingresa a Teams
 * Duración de la actividad: 1:40 minutos
 * Forma de trabajo: individual y grupal con solución de dudas en tiempo real
 
-Actividad 16
+Actividad 20
 ^^^^^^^^^^^^^^
-* Fecha: septiembre 17 a septiembre 22 de 2020 
-* Descripción: leer el material sugerido y realizar los ejercicios propuestos
+* Fecha: septiembre 24 a septiembre 29 de 2020 
+* Descripción: realizar los ejercicios propuestos
 * Recursos: actividad de trabajo autónomo
 * Duración de la actividad: 4 horas
 * Forma de trabajo: individual, trabajo autónomo.
 
-Ejercicio 6
-##############
+Pongamos todo el `armamento` de conocimiento que tienes hasta ahora
+a prueba con esta pregunta:
 
-Ahora que ya sabemos cómo se transforma un programa del código fuente al lenguaje de máquina,
-podemos indagar un poco más en las fases. ¿Cómo funciona un compilador?
 
-Un compilador también funciona por fases. Así:
+¿Cómo es la implementación de C#?
 
-* La primera fase es el TOKENIZER o el análisis léxico. Su propósito es obtener una representación
-  intermedia del programa conocida como stream of tokens. Por ejemplo, supongamos la siguiente
-  expresión en un lenguaje de programación arbitrario: ``print hola``. Un token es una unidad
-  indivisible que consiste de un tipo y un valor. En la expresión anterior el primer token es de
-  tipo Identificador y el valor es print. El segundo token es de tipo CADENA y el valor es hola.
+Ejercicio 1
+#############
+Te voy a dejar `aquí <https://codeasy.net/lesson/c_sharp_compilation_process>`__
+un enlace para que leas.
 
-* La segunda fase es el PARSER. Su propósito es validar si la sintaxis de el programa es válida o no.
-  Por tanto, a esta fase se le conoce como análisis sintáctico. El PARSER toma la gramática formal
-  del lenguaje y trata de hacer un match con el texto del programa. En términos simples, la gramática
-  formal del lenguaje es el conjunto de reglas que se deben seguir para usar correctamente las
-  'palabras' definidas por el lenguaje. El PARSER valida si el programa que escribiste cumple las
-  reglas definidas en la gramática y si todo está bien produce una representación intermedia 
-  del programa conocida como AST o Abstract Syntax Tree.
+Ahora si, escribe ¿Cómo es la implementación de C#?
 
-  No olvides que un programa en lenguaje C se puede compilar a múltiples lenguajes ensambladores
-  o set de instrucciones. Cada set de instrucciones es específico para cada CPU;
-  sin embargo, sin importar el set de instrucciones final, la representación AST será la misma. 
-  A esta parte del compilador se le conoce como frontend y luego, a la parte del compilador que
-  toma el AST y lo convierte a un set de instrucciones específico, se le conoce como backend.
+Te dejo algunas preguntas adicionales:
 
-* La tercera fase es el generador de código ensamblador. Es precisamente el backend del que te hablé
-  hace un momento. El generador toma el AST, lo optimiza y genera instrucciones en lenguaje ensamblador
-  para la CPU específica que estemos compilando.
+* ¿Es posible generar código de máquina partiendo de C# en tiempo de compilación?
+* ¿Qué ventaja tiene entonces generar código Just-In-Time en tiempo de ejecución?
+* ¿Pudiste identificar en la lectura cómo se llama la máquina virtual utilizada
+  para interpretar código IL?
+* ¿Qué es el .NET framework?
 
-Observa el siguiente código:
+Ejercicio 2
+#############
+¿En qué consiste el proyecto MONO?
 
-.. code-block:: c
-   :linenos:
+Ejercicio 3
+#############
+Busca en la documentación de Unity ¿Qué es IL2CPP? Con lo que aprendiste esta semana
+explica ¿Cuáles serían los pasos, en la implementación de Unity, para pasar de
+C# a lenguaje de máquina utilizado IL2CPP?
 
-    int main(){
-        int a = 1;
-        int b = 2;
-        int c = a + b;
-        return 0;
-    }
+Ejercicio 4
+#############
+¿Cómo funciona IL2CPP en Unity?
 
-Vamos a utilizar otro compilador, clang. Compila así:
+Te dejo `este <https://blogs.unity3d.com/2015/05/06/an-introduction-to-ilcpp-internals/?_ga=2.192364842.1406496065.1600645306-1565999710.1600371943>`__
+enlace para que leas al respecto.
 
-``clang -Xclang -ast-dump -fsyntax-only main.c``
+Ya estudiaste los tipos de compiladores, qué opinas de IL2CPP.exe, ¿Estás de acuerdo con
+Unity en el tipo de compilador que ellos proponen para IL2CPP.exe? 
 
-observa el resultado. Esa será el AST generado. ¿Por qué te hablo de clang en este ejercicio? porque
-cuando estés estudiando el nuevo framework de Unity conocido como ``DOTs`` te darás cuanta que ellos
-están utilizando clang como frontend. Estudiar en detalle estos asuntos desborda las posibilidades
-de este curso; sin embargo, al menos tendrás los conceptos básicos para no estar perdido.
+Ejercicio 5
+#############
+
+* Crea un proyecto en Unity.
+* Abre los project settings .
+* En el menú Player busca Configuration.
+* ¿Qué es el `Scripting Backend <https://docs.unity3d.com/Manual/scripting-backends.html>`__?
+* ¿A qué se refiere el `API Compatibility level <https://docs.unity3d.com/Manual/dotnetProfileSupport.html>`__?
+
+
+
+
+
+
+
+
+
+
+
+
