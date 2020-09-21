@@ -512,7 +512,7 @@ a prueba con esta pregunta:
 
 ¿Cómo es la implementación de C#?
 
-Ejercicio 1
+Ejercicio 9
 #############
 Te voy a dejar `aquí <https://codeasy.net/lesson/c_sharp_compilation_process>`__
 un enlace para que leas.
@@ -527,24 +527,24 @@ Te dejo algunas preguntas adicionales:
   para interpretar código IL?
 * ¿Qué es el .NET framework?
 
-Ejercicio 2
+Ejercicio 10
 #############
 ¿En qué consiste el proyecto MONO?
 
-Ejercicio 3
+Ejercicio 11
 #############
 Busca en la documentación de Unity ¿Qué es IL2CPP? Con lo que aprendiste esta semana
 explica ¿Cuáles serían los pasos, en la implementación de Unity, para pasar de
 C# a lenguaje de máquina utilizado IL2CPP?
 
-Ejercicio 4
+Ejercicio 12
 #############
 ¿Cómo funciona IL2CPP en Unity?
 
 Te dejo `este <hhttps://docs.unity3d.com/Manual/IL2CPP-HowItWorks.html>`__
 enlace para que leas al respecto.
 
-Ejercicio 5
+Ejercicio 13
 #############
 
 * Crea un proyecto en Unity.
