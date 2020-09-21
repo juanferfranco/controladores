@@ -541,11 +541,8 @@ Ejercicio 4
 #############
 ¿Cómo funciona IL2CPP en Unity?
 
-Te dejo `este <https://blogs.unity3d.com/2015/05/06/an-introduction-to-ilcpp-internals/?_ga=2.192364842.1406496065.1600645306-1565999710.1600371943>`__
+Te dejo `este <hhttps://docs.unity3d.com/Manual/IL2CPP-HowItWorks.html>`__
 enlace para que leas al respecto.
-
-Ya estudiaste los tipos de compiladores, qué opinas de IL2CPP.exe, ¿Estás de acuerdo con
-Unity en el tipo de compilador que ellos proponen para IL2CPP.exe? 
 
 Ejercicio 5
 #############
