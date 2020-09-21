@@ -106,14 +106,14 @@ Ejercicio 3
 ############
 Profundicemos un poco más en los intérpretes.
 
-Los Bytecodes interpreters no parten de una representación AST en forma de árbol, sino
+Los bytecodes interpreters no parten de una representación AST en forma de árbol, sino
 que parten de un arreglo de bytecodes. Por tanto, necesitarán un paso más en tiempo
 de compilación:
 
 * Iniciamos con el programa.
 * Análisis léxico --> genera tokens
 * Análisis semántico --> genera el AST.
-* Bytecode emitter --> Generar bytecode
+* Bytecode emitter --> Generar bytecodes
 
 Ahora si, en tiempo de ejecución se ejecutará el programa representado como un
 arreglo de bytecodes.

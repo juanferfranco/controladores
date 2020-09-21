@@ -4,13 +4,22 @@
     "restructuredtext.confPath": "${workspaceFolder}",
     "cSpell.words": [
         "Higuita",
+        "NOTYPE",
         "Virtualizaci",
         "Virtualización",
         "autoevaluación",
+        "bytecodes",
+        "glibc",
+        "javacript",
+        "operandos",
+        "preprocesador",
+        "preprocesamiento",
+        "prototipada",
         "relocalizable",
         "sincronizaci",
         "sincronización",
         "sumativa",
-        "sumatoria"
+        "sumatoria",
+        "transpilers"
     ]
 }
