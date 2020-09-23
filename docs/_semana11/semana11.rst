@@ -85,7 +85,7 @@ Mira este otro ejemplo:
 
 	#define M 5
 	#define C 5
-	#define MAP(val,m,c) x*m+c
+	#define MAP(val,m,c) val*m+c
 
     int main(int argc, char* argv[]) {
         int x = 2;
@@ -641,7 +641,7 @@ file1.h:
 
     #endif
 
-file2.h:
+file2.c:
 
 .. code-block:: c
    :linenos:
@@ -650,7 +650,7 @@ file2.h:
         return (a+b);
     }
 
-file3.h:
+file3.c:
 
 .. code-block:: c
    :linenos:
@@ -1424,9 +1424,17 @@ main.c:
 .. code-block:: c
    :linenos:
 
-    int uno();
-    int dos();
-    int tres();
+    #include <stdio.h>
+    #include "api.h"
+
+    int main(int argc, char* argv[]){
+
+        printf("uno: %d\n",uno());
+        printf("dos: %d\n",dos());
+        printf("tres: %d\n",tres());
+
+        return 0;
+    }
 
 Finalmente genera el ejecutable con ``gcc main.o -L./ -lstatic -o exe`` y
 ejecuta el programa. En este caso:
