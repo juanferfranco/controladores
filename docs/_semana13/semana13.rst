@@ -3,14 +3,16 @@ Semana 13 Unidad 4
 
 Ya sabes cómo se genera el código de máquina desde varios
 lenguajes de programación de alto nivel. También aprendiste sobre el lenguaje de
-programación C. Ahora vamos a explorar cómo funciona un modelo de programación
-conocido como la programación orientada a objetos.
+programación C y C++ y cómo funciona la implementación de C#. Ahora vamos a
+explorar cómo funciona un modelo de programación conocido como la programación orientada a objetos.
+
+Antes de comenzar en si el propósito de esta unidad, tenemos que comprender mejor cómo
+es la memoria de un proceso.
 
 Propósito de aprendizaje
 --------------------------
 
-Reconocer e implementar los conceptos de la programación orientada a objetos utilizando
-el lenguaje C.
+Reconocer e implementar los conceptos de la programación orientada a objetos.
 
 Código de honor
 ----------------
@@ -263,7 +265,7 @@ identificador del proceso en el sistema operativo:
     juanfranco@pop-os:/tmp/linker$ ./main &
     [1] 295236
 
-NO LO HAGAS AHORA, pero si después quieres matar el proceso escribes en la terminal 
+NO LO HAGAS AHORA, pero si después quieres matar el proceso escribe en la terminal 
 ``kill -9 295236``.
 
 En Linux puedes consultar información del proceso en el directorio ``/proc`` allí tendrás
@@ -797,8 +799,8 @@ Ejecuta el código y verifica con valgrind el manejo de la memoria
 valgrind ./exe
 
 ¿Qué resultado obtienes?
-¿En dónde está almacenada la variable q?
-¿Qué memoria se está creando con la función create(10)?
+¿En qué parte de la memoria está almacenada la variable q?
+¿Explica cuánta memoria y dónde se está creando con la función create(10)?
 
 Actividad 3
 ^^^^^^^^^^^^
@@ -820,15 +822,489 @@ Ahora que conocemos más detalles de la memoria de un proceso y luego
 del ejercicio anterior, ya tenemos buenas herramientas para hablar del
 modelo de programación orientado a objetos.
 
-Como te has dado cuenta hasta ahora C no es un lenguaje de programación
-orientado a objetos; sin embargo, es posible escribir programas orientados
-a objetos con C? La respuesta es si. El punto es que en su sintaxis C
-no soporta los conceptos de clases, herencia, y funciones virtuales. Aún así,
-es posible implementar estos conceptos de manera indirecta.
+Como te has dado cuenta hasta ahora, C no es un lenguaje de programación
+orientado a objetos; sin embargo, te preguntarás ¿Es posible escribir 
+programas orientados a objetos con C? La respuesta es si. El punto es que
+en su sintaxis C no soporta los conceptos de clases, herencia, y funciones
+virtuales. Aún así, es posible implementar estos conceptos de manera indirecta.
 
 Ejercicio 15
 #############
+¿Y en últimas qué son los objetos?
+
+Mira, no le demos vueltas conceptuales al asunto. Un objeto no es más que
+un conjunto de datos en la memoria de un proceso. OJO: SON DATOS y están en la
+MEMORIA DE UN PROCESO. Esto último es clave. Los objetos solo viven en tiempo
+de ejecución.
+
+Entonces cuando estoy escribiendo el programa hay objetos? NO, ese es el punto
+precisamente que intento aclararte de entrada. Cuando escribes un programa orientado
+a objetos, NO TIENES OBJETOS aún. Lo que defines es cómo serán esos objetos,
+cómo se crearán, cuándo se crearán, cómo y cuándo se usarán y cómo y cuándo
+se destruirán (en algunos lenguajes de programación). Es decir, tu programa
+describe lo que pasará con los OBJETOS cuando lo ejecutes.
+
+Te lo repito de nuevo: cuando programas orientado a objetos NO estás creando objetos.
+Estás más bien indicando qué se debe hacer para crearlos cuando el programa se EJECUTE.
+
+¿Claro lo anterior? Pregunta si no es claro.
+
+Por lo anterior, es que existe el término DISEÑO ORIENTADO A OBJECTOS. Porque
+cuando DISEÑAS un programa orientado a objetos te tienes qué imaginar cómo serán esos
+OBJETOS, cuándo se crearán y cuáles serán las relaciones entre ellos cuando 
+ejecutes el programa.
+
+Ejercicio 16
+#############
+Profe, si yo pudiera ir a ver un objeto en memoria ¿Cómo se vería?
+
+No lo olvides, en últimas, un objeto es una colección de bytes en la memoria. A esas 
+posiciones de memoria que componen el objeto las denominamos ATRIBUTOS y al contenido
+de esos atributos los llamamos EL ESTADO DEL OBJETO. 
+
+Cuando puedes modificar los valor de los atributos de un objeto mientras el programa
+corre se dice que el objeto es MUTABLE. Pero también el objeto puede ser INMUTABLE,
+es decir, que una vez creado el objeto e inicializados sus atributos, no podrás cambiar
+sus valores o su estado.
+
+Ejercicio 17
+#############
+Ya te comenté que los objetos (colecciones de bytes) pueden estar relacionados entre
+ellos. ¿Qué significa eso?
+
+En términos muy generales, si dos objetos están relacionados, es posible que al modificar
+el estado de uno de ellos se afecte el estado del otro. Ya en términos más concretos podemos
+decir que un objeto está relacionado con otro cuando uno de sus atributos contiene la dirección
+de memoria del otro objeto.
+
+Ejercicio 18
+#############
+No lo olvides, un objeto son bytes en memoria. Pero entonces, ¿Qué pasa con el código?
+
+Parte de tus tareas al diseñar o PLANEAR un programa orientado a objetos es decir qué
+OPERACIONES vas a realizar para crear los objetos (asignarles memoria), iniciar su estado
+(¿Qué es eso?) (construirlos), destruirlos, leer y modificar su ESTADO. PERO, POR FAVOR,
+no lo olvides, cuando estás escribiendo el programa estás MODELANDO tu solución,
+tu programa es un PLAN que DESCRIBE lo que ocurrirá cuando sea ejecutado.
+
+Ejercicio 19
+#############
+¿Cómo puedes definir la construcción de un objeto?
+
+Lo puedes hacer de dos formas:
+
+* Construyes un objeto vacío o con un conjuntos mínimo de atributos. A medida que el programa
+  se ejecuta, se van añadiendo más atributos. A esta
+  técnica se le conoce como prototype-based OOP, por ejemplo en python y javascript.
+* El objeto ya tiene unos atributos predeterminados. A esta
+  técnica se le conoce como class-based OOP, por ejemplo en C++, C#, java y python.
+
+Para utilizar la segunda forma, debes crear una plantilla predeterminada o CLASE que indique
+los atributos que tendrá un objeto al ejecutar el programa.
+
+Te preguntarás, pero en un clase también hay código, entonces ¿Los objetos tienen código? 
+Nop. Por lo que hemos venido discutiendo ya sabes que los objetos son solo datos. 
+También ya sabes que cuando escribes una clase estás PLANEANDO qué atributos tendrá cada
+objeto en memoria. Entonces cuando escribes código en una clase está indicando que ese código
+y los atributos están relacionados, es decir, estás indicando de manera explícita 
+las posibles OPERACIONES que puedes realizar sobre los DATOS. De esta manera ENCAPSULAS
+en el conceptos de CLASE los DATOS y el CÓDIGO. Ten en cuenta que al código también
+se le conoce cómo el COMPORTAMIENTO de los objetos, es decir, las acciones que se realizarán
+sobre los datos.  
+
+Ejercicio 20
+################
+¿Cómo hacemos para implementar las ideas anteriores en C? Ya sabes que C no soporta 
+de manera explícita el concepto de clase, pero podemos implementar dicho concepto de manera
+implícita:
+
+* Usa un estructura para encapsular los atributos del objeto.
+* Utiliza funciones para definir el comportamiento de los objetos. Las funciones
+  que definen el comportamiento del objeto recibirán como argumento la dirección
+  en memoria de la estructura que encapsula los atributos del objeto.
+
+Analiza de nuevo este código:
+
+queue.h:
+
+.. code-block:: c 
+   :linenos:
+
+    #ifndef _QUEUE_H
+    #define _QUEUE_H
+
+    typedef struct {
+        int front;
+        int rear;
+        double* arr;
+    } queue_t;
+
+    queue_t* create(int size);
+    void destroy(queue_t* this);
+    int size(queue_t* this);
+    void enqueue(queue_t* this, double item);
+    double dequeue(queue_t* q);
+
+    #endif
+
+queue.c:
+
+.. code-block:: c 
+   :linenos:
+
+    #include "queue.h"
+    #include <stdlib.h> 
+
+    static void init(queue_t* this, int size) {
+        this->front = 0;
+        this->rear = 0;
+        this->arr = (double*)malloc(size * sizeof(double));
+    }
+
+    queue_t* create(int size){
+        queue_t* q = malloc(sizeof(queue_t));
+        init(q,size);
+        return(q);
+    }
+
+    void destroy(queue_t* this){
+        free(this->arr);
+        free(this);
+    }
+
+    int size(queue_t* this){
+        return this->rear - this->front;
+    }
+
+    void enqueue(queue_t* this, double item) {
+        this->arr[this->rear] = item;
+        this->rear++;
+    }
+    
+    double dequeue(queue_t* this) {
+        double item = this->arr[this->front];
+        this->front++;
+        return item;
+    }
+
+Nota que en queue.h declaras qué atributos tendrá el objeto:
+
+.. code-block:: c 
+   :linenos:
+
+    #ifndef _QUEUE_H
+    #define _QUEUE_H
+
+    typedef struct {
+        int front;
+        int rear;
+        double* arr;
+    } queue_t;
+
+Y qué funciones podrás invocar para leer o escribir dichos atributos, es decir, el comportamiento
+del objeto:
+
+.. code-block:: c 
+   :linenos:
+
+    queue_t* create(int size);
+    void destroy(queue_t* this);
+    int size(queue_t* this);
+    void enqueue(queue_t* this, double item);
+    double dequeue(queue_t* q);
+
+Estas cuatro funciones te permiten crear una cola, destruirla, conocer su tamaño,
+almacenar en la cola y leer información de ella. Nota que casi todas las funciones
+definen un parámetro llamado this. Este parámetro contendrá la dirección del objeto
+sobre el cual actuará el código definido en la función.
+
+Por último, observa de nuevo la función main.c:
+
+.. code-block:: c 
+   :linenos:
+
+    #include <stdio.h> 
+    #include "queue.h"
+
+    int main(int argc, char** argv) {
+
+        queue_t* q = create(10);
+        enqueue(q, 6.5);
+        enqueue(q, 1.3);
+        enqueue(q, 2.4);
+        printf("%f\n", dequeue(q));
+        printf("%f\n", dequeue(q));
+        printf("%f\n", dequeue(q));
+        destroy(q);
+        return 0;
+    }
+
+Nota que debemos incluir queue.h para poder utilizar las funciones y el nuevo
+tipo de dato ``queue_t``. Observa que la función ``create(10)`` nos permite
+crear un cola (un objeto) de 10 enteros en el heap. La dirección de la cola la almacenamos
+en la variable ``q`` que estará en el stack.
+
+Si analizas un poco más el archivo ``queue.c`` varás que create reserva el espacio
+en heap para el objeto y adicionalmente inicializa sus atributos:
+
+.. code-block:: c 
+   :linenos:
+
+    static void init(queue_t* this, int size) {
+        this->front = 0;
+        this->rear = 0;
+        this->arr = (double*)malloc(size * sizeof(double));
+    }
+
+    queue_t* create(int size){
+        queue_t* q = malloc(sizeof(queue_t));
+        init(q,size);
+        return(q);
+    }
+
+Ejercicio 21
+################
+Ahora compara el programa anterior con una implementación en C#:
+
+.. code-block:: csharp
+   :linenos:
+
+    using System;
+
+    public class Queue{
+        
+        private int front;
+        private int rear;
+        private double[] arr;
+        
+        public Queue(int size){
+            
+            front = 0;
+            rear = 0;
+            arr = new double[size];
+        }    
+        
+        public int size(){
+            return (rear - front);
+        }
+        
+        public void enqueue(double item) {
+            arr[rear] = item;
+            rear++;
+        }
+        
+        public double dequeue() {
+            double item = arr[front];
+            front++;
+            return item;
+        }
+    }
+
+    class Program {
+        static void Main() {
+            Queue q = new Queue(10);
+            q.enqueue(6.5);
+            q.enqueue(1.3);
+            q.enqueue(2.4);
+            Console.WriteLine(q.dequeue());
+            Console.WriteLine(q.dequeue());
+            Console.WriteLine(q.dequeue());
+        }
+    }
+
+Mira los atributos:
+
+En C:
+
+.. code-block:: c 
+   :linenos:
+
+    #ifndef _QUEUE_H
+    #define _QUEUE_H
+
+    typedef struct {
+        int front;
+        int rear;
+        double* arr;
+    } queue_t;
+
+En C#:
+
+.. code-block:: csharp
+   :linenos:
+
+    using System;
+
+    public class Queue{
+        
+        private int front;
+        private int rear;
+        private double[] arr;
+
+Mira cómo se crea el objeto y se llaman los métodos:
+
+En C:using System;
 
 
+public class Queue{
+    
+    private int front;
+    private int rear;
+    private double[] arr;
+    
+    public Queue(int size){
+        
+        this.front = 0;
+        this.rear = 0;
+        this.arr = new double[size];
+    }    
+    
+    public int size(){
+        return (this.rear - this.front);
+    }
+    
+    public void enqueue(double item) {
+        this.arr[rear] = item;
+        this.rear++;using System;
 
-Comencemos con el principio de encapsulamiento.
+
+public class Queue{
+    
+    private int front;
+    private int rear;
+    private double[] arr;
+    
+    public Queue(int size){
+        
+        this.front = 0;
+        this.rear = 0;
+        this.arr = new double[size];
+    }    
+    
+    public int size(){
+        return (this.rear - this.front);
+    }
+    
+    public void enqueue(double item) {
+        this.arr[rear] = item;
+        this.rear++;
+    }
+    
+    public double dequeue() {
+        double item = this.arr[front];
+        this.front++;
+        return item;
+    }
+}
+
+
+class Program {
+    
+  static void Main() {
+    Queue q = new Queue(10);
+    q.enqueue(6.5);
+    q.enqueue(1.3);
+    q.enqueue(2.4);
+    Console.WriteLine(q.dequeue());
+    Console.WriteLine(q.dequeue());
+    Console.WriteLine(q.dequeue());
+  }
+  
+}
+    }
+    
+    public double dequeue() {
+        double item = this.arr[front];
+        this.front++;
+        return item;
+    }
+}
+
+
+class Program {
+    
+  static void Main() {
+    Queue q = new Queue(10);
+    q.enqueue(6.5);
+    q.enqueue(1.3);
+    q.enqueue(2.4);
+    Console.WriteLine(q.dequeue());
+    Console.WriteLine(q.dequeue());
+    Console.WriteLine(q.dequeue());
+  }
+  
+}
+    enqueue(q, 6.5);
+
+.. code-block:: csharp
+   :linenos:
+
+   Queue q = new Queue(10);
+   q.enqueue(6.5);
+
+En la comparación anterior, notas que la implementación en C# no tiene
+código para ``destroy``. ¿Recuerdas por qué es esto?
+
+El programa en C# también podríamos escribirlo así:
+
+
+.. code-block:: csharp
+   :linenos:
+
+    using System;
+    
+    
+    public class Queue{
+        
+        private int front;
+        private int rear;
+        private double[] arr;
+        
+        public Queue(int size){
+            
+            this.front = 0;
+            this.rear = 0;
+            this.arr = new double[size];
+        }    
+        
+        public int size(){
+            return (this.rear - this.front);
+        }
+        
+        public void enqueue(double item) {
+            this.arr[rear] = item;
+            this.rear++;
+        }
+        
+        public double dequeue() {
+            double item = this.arr[front];
+            this.front++;
+            return item;
+        }
+    }
+    
+    
+    class Program {
+        
+      static void Main() {
+        Queue q = new Queue(10);
+        q.enqueue(6.5);
+        q.enqueue(1.3);
+        q.enqueue(2.4);
+        Console.WriteLine(q.dequeue());
+        Console.WriteLine(q.dequeue());
+        Console.WriteLine(q.dequeue());
+      }
+    }
+
+Nota qué cambió con respecto a la primera implementación que te mostré.
+¿Lo notaste? En esta segunda implementación estoy utilizando la palabra
+reservada ``this``. Esta variable contiene la dirección en memoria del
+objecto a través del cual llamamos el método. Observa de nuevo el código
+en C. Notas ¿Cómo están relacionados los conceptos?
+
+Ejercicio 22
+################
+En el tiempo de trabajo autónomo que te queda esta semana te pide que
+analices de nuevo todo lo que hicimos esta semana, es decir, dale
+una segunda lectura.
