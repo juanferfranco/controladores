@@ -1143,97 +1143,12 @@ En C#:
 
 Mira cómo se crea el objeto y se llaman los métodos:
 
-En C:using System;
+En C:
 
+.. code-block:: c
+   :linenos:
 
-public class Queue{
-    
-    private int front;
-    private int rear;
-    private double[] arr;
-    
-    public Queue(int size){
-        
-        this.front = 0;
-        this.rear = 0;
-        this.arr = new double[size];
-    }    
-    
-    public int size(){
-        return (this.rear - this.front);
-    }
-    
-    public void enqueue(double item) {
-        this.arr[rear] = item;
-        this.rear++;using System;
-
-
-public class Queue{
-    
-    private int front;
-    private int rear;
-    private double[] arr;
-    
-    public Queue(int size){
-        
-        this.front = 0;
-        this.rear = 0;
-        this.arr = new double[size];
-    }    
-    
-    public int size(){
-        return (this.rear - this.front);
-    }
-    
-    public void enqueue(double item) {
-        this.arr[rear] = item;
-        this.rear++;
-    }
-    
-    public double dequeue() {
-        double item = this.arr[front];
-        this.front++;
-        return item;
-    }
-}
-
-
-class Program {
-    
-  static void Main() {
-    Queue q = new Queue(10);
-    q.enqueue(6.5);
-    q.enqueue(1.3);
-    q.enqueue(2.4);
-    Console.WriteLine(q.dequeue());
-    Console.WriteLine(q.dequeue());
-    Console.WriteLine(q.dequeue());
-  }
-  
-}
-    }
-    
-    public double dequeue() {
-        double item = this.arr[front];
-        this.front++;
-        return item;
-    }
-}
-
-
-class Program {
-    
-  static void Main() {
-    Queue q = new Queue(10);
-    q.enqueue(6.5);
-    q.enqueue(1.3);
-    q.enqueue(2.4);
-    Console.WriteLine(q.dequeue());
-    Console.WriteLine(q.dequeue());
-    Console.WriteLine(q.dequeue());
-  }
-  
-}
+    queue_t* q = create(10);
     enqueue(q, 6.5);
 
 .. code-block:: csharp
