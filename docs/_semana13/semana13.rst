@@ -1167,8 +1167,7 @@ El programa en C# también podríamos escribirlo así:
    :linenos:
 
     using System;
-    
-    
+
     public class Queue{
         
         private int front;
