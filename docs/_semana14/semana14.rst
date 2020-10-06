@@ -1062,6 +1062,8 @@ Crea una carpeta y luego comprímela SOLO en formato .ZIP. Incluye en la carpeta
 * El modelo UML de tu aplicación y un texto que explique el modelo.
 * Los archivos .c y .h con tu solución.
 * Un archivo donde muestres cómo se compila tu aplicación.
+* El plazo máximo de entrega es el 13 de octubre antes de la clase.
+* Sube tu carpeta .zip `aquí <https://auladigital.upb.edu.co/mod/assign/view.php?id=653336>`__
 
 Actividad 8
 ^^^^^^^^^^^^
