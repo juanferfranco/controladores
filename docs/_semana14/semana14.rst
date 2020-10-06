@@ -1,225 +1,1072 @@
-Semana 14
-===========
-Desde la semana pasada comenzamos a estudiar los servicios de entrada/salida
-que ofrece el sistema operativo. En particular, vimos como almacenar permanentemente
-información en un disco duro mediante el uso de archivos, así mismo, vimos
-como es posible organizar múltiples archivos por medio de un sistema de archivos.
+Semana 14: Unidad 4
+=====================
 
-La metodología para abordar lo anterior se ha basado en retos de programación. En 
-`este enlace <https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/file-system/>`__
-puede observar algunas soluciones a los retos de la semana pasada.
+Actividades
+-------------
 
-Para esta semana, vamos a proponer un nuevo reto de operaciones de entrada/salida, pero esta
-vez usando las capacidades de comunicación en red que le permiten a múltiples procesos comunicarse.
-Dichos procesos, pueden o no estar en el mismo computador o sistema operativo.
+Actividad 5
+^^^^^^^^^^^^
+* Fecha: octubre 6 de 2020 - 8 a.m.
+* Descripción: ejercicios de la unidad 4
+* Recursos: ingresa al grupo de Teams
+* Duración de la actividad: 1 hora 40 minutos de discusión
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
 
-RETO
-----------
-El reto se trata de controlar una aplicación de manera remota usando las capacidades de
-comunicación en red que ofrece el sistema operativo. Vamos a utilizar el protocolo
-de transporte UDP (User Datagram Protocol) y el protocolo de aplicación
-OSC (Open Sound Control).
+La semana pasada te comenté que cuando DISEÑAS un programa orientado a objetos
+también debes considerar las relaciones entre esos objetos. Pues bien, en general
+hay dos tipos:
 
-La aplicación que vamos a controlar la podemos descargar de
-`aquí <https://drive.google.com/file/d/1LLJfyRqEqSUJTiyDfAaJ70BJUM64Gdbn/view?usp=sharing>`__
+* Relaciones TO-HAVE o HAS-TO (TIENE UN)
 
-El reto consisten entonces en realizar una aplicación en Unity que permita hacer
-el control remoto mediante el intercambio de mensajes OSC.
+* Relaciones TO-BE o IS-A (ES UN) (¿recuerdas la herencia?)
 
-Las siguientes figuras muestran la aplicación a controlar:
+Vamos a concentrarnos primero en las TO-HAVE: la composición y la agregación.
 
-.. image:: ../_static/drumMachine.jpg
-   :scale: 80%
-   :align: center
+Ejercicio 1
+##############
+¿Qué es una relación de composición? 
 
-.. image:: ../_static/udpIn.jpg
-   :scale: 80%
-   :align: center
+Dos objetos tienen una relación de composición cuando uno de ellos contiene a
+otro objeto. Debes tener en cuenta que en una relación de composición la VIDA del objeto
+contenido depende de la vida del objeto contenedor, es decir, 
+si el objeto contenedor muere, el objeto contenido también. Cuando el objeto
+contenedor se va destruir, primero tendrá que hacerse con el objeto contenido.
 
-.. image:: ../_static/udpOut.jpg
-   :scale: 80%
-   :align: center
+Mira de nuevo este código:
 
-.. image:: ../_static/speed.jpg
-   :scale: 80%
-   :align: center
+.. code-block:: c 
+   :linenos:
 
-.. image:: ../_static/instrument.jpg
-   :scale: 80%
-   :align: center
+    #include "queue.h"
+    #include <stdlib.h> 
 
-Y esta otra figura muestra la interfaz de usuario de una aplicación ejemplo que hará el control
-remoto de la anterior (ESTA es la que ustedes deben hacer):
+    static void init(queue_t* this, int size) {
+        this->front = 0;
+        this->rear = 0;
+        this->arr = (double*)malloc(size * sizeof(double));
+    }
 
-.. image:: ../_static/drumUdpController.jpg
-   :scale: 80%
-   :align: center
+    queue_t* create(int size){
+        queue_t* q = malloc(sizeof(queue_t));
+        init(q,size);
+        return(q);
+    }
 
 
-Material de estudio
---------------------
-* Clase UDP de C#: `aquí <https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.udpclient?view=netframework-4.7.2>`__.
-* Protocolo de comunicación OSC: `aquí <http://opensoundcontrol.org/spec-1_0>`__.
 
-Ejemplos de paquetes OSC
-------------------------
-En `este <http://opensoundcontrol.org/spec-1_0-examples>`__
-enlace se pueden ver algunos ejemplos de paquetes OSC.
+Observa la función ``create``. Dicha función crear una ``queue``.
+¿Qué datos componen la cola?
 
-Para entender la estructura de los paquetes OSC tenga en cuenta las siguientes consideraciones
-de la especificación OSC 1.0:
+.. code-block:: c 
+   :linenos:
 
-* La comunicación en OSC se da por intercambio de paquetes.
-* La aplicación que recibe paquetes se denomina servidor o SERVER
-  y quien envía los paquetes cliente o CLIENT.
-* Todos los paquetes en OSC deben ser múltiplos de 4 bytes.
-* Los paquetes en OSC pueden ser MENSAJES o BUNDLES. Para el reto
-  usaremos solo MENSAJES.
-* Los OSC-MESSAGES tienen la siguiente estructura: OSC ADDRESS PATTERN + OSC TYPE TAG STRING + 0 o MÁS OSC ARGUMENTS
-* OSC ADDRESS PATTERN: son OSC-STRINGS que comienzan por este carácter: /
-* OSC TYPE TAG STRING: son OSC-STRINGS que comienzan por el carácter: ,
-  y luego por tags que pueden ser: i f s b. Donde i indica que el mensaje
-  tendrá un argumento entero, f un argumento en punto flotante, s una
-  cadena y b un blob.
-* Los tipos de argumentos o ATOMIC DATA TYPES son:
+    typedef struct {
+        int front;
+        int rear;
+        double* arr;
+    } queue_t;
 
-  int32: entero de 32 bits signado y en big-endian
+    #endif
 
-  float32: número en punto flotante de 32 bits en formato 
-  `IEEE 754 <https://www.h-schmidt.net/FloatConverter/IEEE754.html>`__
-  en big-endian
+A su vez se en ``init`` estamos creando un nuevo objeto que no es más
+que un arreglo de ``size`` ``doubles``. La relación entre estos dos objetos
+es de composición.  
 
-  osc-string: cadena de caracteres ascii terminada con el carácter NULL 
-  y 0 o 3 carácter NULL adicionales para lograr que la cadena sea múltiplo
-  de 4 bytes o 32 bits.
- 
-  osc-blob y osc-time-tag, no los trabajeremos en este reto.
+Ahora nota que al momento de destruir el objeto contenedor, primero se
+destruye el objeto contenido:
 
-* Semántica de OSC: cada mensaje recibido por un servidor es potencialmente
-  un llamado a un procedimiento cuyos argumentos serán los argumentos del
-  mensaje.
+.. code-block:: c 
+   :linenos:
 
-Supanga que queremos enviar un mensaje con el siguiente OSC ADDRESS PATTERN:
-\\"/oscillator/4/frequency\\" y como argumento un número en punto flotante dado
-por 440.0. El paquete será así (entre paréntesis el carácter ascii
-correspondiente)
+    void destroy(queue_t* this){
+        free(this->arr);
+        free(this);
+    }
 
-2f (/)  6f (o)  73 (s)  63 (c)
+Ejercicio 2
+##############
+¿Qué es la agregación?
 
-69 (i)  6c (l)  6c (l)  61 (a)
- 
-74 (t)  6f (o)  72 (r)  2f (/)
- 
-34 (4)  2f (/)  66 (f)  72 (r)
- 
-65 (e)  71 (q)  75 (u)  65 (e)
- 
-6e (n)  63 (c)  79 (y)  0 ()
- 
-2c (,)  66 (f)  0 ()    0 ()
- 
-43 (C)  dc (Ü)  0 ()    0 ()
+En esta relación tenemos también un objeto contenedor y un objeto contenido, la
+gran diferencia con la composición es que la vida del objeto contenido no depende
+de la vida del objeto contenedor. El objeto contenido puede ser construido incluso
+antes de que el objeto contenedor sea construido.
 
-OSC ADDRESS PATTERN: \\"/oscillator/4/frequency\\"
-Será una secuencia de caracteres ASCII terminados con NULL más 0 bytes NULL
-porque la cantidad de bytes sería múltiplo de 4:
+MINI-RETO
+##############
+Con todo lo anterior en mente y esta nueva definición, te tengo un mini RETO:
 
-2f (/)  6f (o)  73 (s)  63 (c)
+Implementa un programa en C modelado con objetos que implemente una relación de
+agregación para esta situación: " ...el jugador recoge un arma, la usa varias veces 
+y luego la tira..."
 
-69 (i)  6c (l)  6c (l)  61 (a)
- 
-74 (t)  6f (o)  72 (r)  2f (/)
- 
-34 (4)  2f (/)  66 (f)  72 (r)
- 
-65 (e)  71 (q)  75 (u)  65 (e)
- 
-6e (n)  63 (c)  79 (y)  0 ()
+.. note::
+    ¡Alerta de Spoiler!
 
-OSC TYPE TAG STRING: \\",f\\":
-2c (,)  66 (f)  0 ()    0 ()
+    Una posible implementación a este mini-reto la puedes ver en el siguiente código
+    tomado de `este <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__ 
+    . Le hice unas pequeñas modificaciones al código para que puedas ver el resultado
+    en la terminal.
 
-Como tenemos solo un argumento, tendremos solo un TAG de
-tipo f. La cadena termina con un carácter NULL y solo debemos adicionar
-un carácter NULL para hacer OSC TYPE TAG STRING múltiplo de 4.
+gun.h:
 
-Finalmente el número 440.0 en formato IEEE 754 en big-endian será:
+.. code-block:: c 
+   :linenos:
 
-43 (C)  dc (Ü)  0 ()    0 ()
+	#ifndef GUN_H_
+	#define GUN_H_
+	
+	typedef int bool_t;
+	
+	// Type forward declarations
+	struct gun_t;
+	
+	// Memory allocator
+	struct gun_t* gun_new();
+	
+	// Constructor
+	void gun_ctor(struct gun_t*, int);
+	
+	// Destructor
+	void gun_dtor(struct gun_t*);
+	
+	// Behavior functions
+	bool_t gun_has_bullets(struct gun_t*);
+	void gun_trigger(struct gun_t*);
+	void gun_refill(struct gun_t*);
+	
+	
+	#endif /* GUN_H_ */
 
-Ejemplos de paquetes OSC para nuestra aplicación
--------------------------------------------------
+gun.c:
 
-* play:
+.. code-block:: c 
+   :linenos:
 
-    .. code-block:: csharp
-       :lineno-start: 1
+	#include <stdlib.h>
+	#include <stdio.h>
+	
+	typedef int bool_t;
+	
+	// Attribute structure
+	typedef struct {
+	  int bullets;
+	} gun_t;
+	
+	// Memory allocator
+	gun_t* gun_new() {
+	  return (gun_t*)malloc(sizeof(gun_t));
+	}
+	
+	// Constructor
+	void gun_ctor(gun_t* gun, int initial_bullets) {
+	  gun->bullets = 0;
+	  if (initial_bullets > 0) {
+		gun->bullets = initial_bullets;
+	  }
+	}
+	
+	// Destructor
+	void gun_dtor(gun_t* gun) {
+	  // Nothing to do
+	}
+	
+	// Behavior functions
+	bool_t gun_has_bullets(gun_t* gun) {
+	  return (gun->bullets > 0);
+	}
+	
+	void gun_trigger(gun_t* gun) {
+	  gun->bullets--;
+	  printf("gun triggered\n");
+	}
+	
+	void gun_refill(gun_t* gun) {
+	  gun->bullets = 7;
+	}
+	
+player.h:
 
-       "/play\x00\x00\x00,i\x00\x00\x00\x00\x00\x01"
+.. code-block:: c 
+   :linenos:
 
-* stop:
+	#ifndef PLAYER_H_
+	#define PLAYER_H_
+	
+	// Type forward declarations
+	struct player_t;
+	struct gun_t;
+	
+	// Memory allocator
+	struct player_t* player_new();
+	
+	// Constructor
+	void player_ctor(struct player_t*, const char*);
+	
+	// Destructor
+	void player_dtor(struct player_t*);
+	
+	// Behavior functions
+	void player_pickup_gun(struct player_t*, struct gun_t*);
+	void player_shoot(struct player_t*);
+	void player_drop_gun(struct player_t*);
+	
+	#endif /* PLAYER_H_ */
 
-    .. code-block:: csharp
-       :lineno-start: 1
+player.c:
 
-       "/play\x00\x00\x00,i\x00\x00\x00\x00\x00\x00"
+.. code-block:: c 
+   :linenos:
 
-* Activar el beat 5 del instrumento 2:
+	#include <stdlib.h>
+	#include <string.h>
+	#include <stdio.h>
+	
+	#include "gun.h"
+	
+	// Attribute structure
+	typedef struct {
+	  char* name;
+	  struct gun_t* gun;
+	} player_t;
+	
+	// Memory allocator
+	player_t* player_new() {
+	  return (player_t*)malloc(sizeof(player_t));
+	}
+	
+	// Constructor
+	void player_ctor(player_t* player, const char* name) {
+	  player->name = (char*)malloc((strlen(name) + 1) * sizeof(char));
+	  strcpy(player->name, name);
+	  // This is important. We need to nullify aggregation pointers
+	  // if they are not meant to be set in constructor.
+	  player->gun = NULL;
+	}
+	
+	// Destructor
+	void player_dtor(player_t* player) {
+	  free(player->name);
+	}
+	
+	// Behavior functions
+	void player_pickup_gun(player_t* player, struct gun_t* gun) {
+	  // After the following line the aggregation relation begins.
+	  player->gun = gun;
+	}
+	
+	void player_shoot(player_t* player) {
+	  // We need to check if the player has picked up th gun
+	  // otherwise, shooting is meaningless
+	  if (player->gun) {
+		gun_trigger(player->gun);
+	  } else {
+		printf("Player wants to shoot but he doesn't have a gun!\n");
+		exit(1);
+	  }
+	}
+	
+	void player_drop_gun(player_t* player) {
+	  // After the following line the aggregation relation
+	  // ends between two objects. Note that the object gun
+	  // should not be freed since this object is not its
+	  // owner like composition.
+	  player->gun = NULL;
+	}
 
-    .. code-block:: csharp
-       :lineno-start: 1
+main.c:
 
-       "/c2\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x01"
+.. code-block:: c 
+   :linenos:
 
-* Desactivar el beat 5 del instrumento 2:
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include "gun.h"
+	#include "player.h"
+	
+	int main(int argc, char* argv[]) {
+	
+		  // Create and constructor the gun object
+		  struct gun_t* gun = gun_new();
+		  gun_ctor(gun, 3);
+	
+		  // Create and construct the player object
+		  struct player_t* player = player_new();
+		  player_ctor(player, "Billy");
+	
+		  // Begin the aggregation relation.
+		  player_pickup_gun(player, gun);
+	
+		  // Shoot until no bullet is left.
+		  while (gun_has_bullets(gun)) {
+			player_shoot(player);
+		  }
+	
+		  // Refill the gun
+		  gun_refill(gun);
+	
+		  // Shoot until no bullet is left.
+		  while (gun_has_bullets(gun)) {
+			player_shoot(player);
+		  }
+	
+		  // End the aggregation relation.
+		  player_drop_gun(player);
+	
+		  // Destruct and free the player object
+		  player_dtor(player);
+		  free(player);
+	
+		  // Destruct and free the gun object
+		  gun_dtor(gun);
+		  free(gun);
+	
+		  return 0;
+	
+	}
 
-    .. code-block:: csharp
-       :lineno-start: 1
+Ejercicio 3
+##############
+¿Recuerdas que en tu curso de programación y diseño orientado a objetos
+vistes las relaciones anteriores?
 
-       "/c2\x00,ii\x00\x00\x00\x00\x05\x00\x00\x00\x00"
+En ese curso a los dos relaciones anteriores: agregación y composición
+se les denomina en general asociaciones, es decir, dos objetos pueden estar
+asociados mediante una relación de agregación o composición.
 
-* Desactivar todos los beats del instrumento 1
+Estas relaciones pueden mostrarse de manera gráfica utilizando un
+lenguaje de modelado conocido como `UML <http://uml.org/>`__. Te dejo aquí
+una imagen:
 
-    .. code-block:: csharp
-       :lineno-start: 1
+.. image:: ../_static/UMLasoc.png
 
-       "/c1\x00,ii\x00\x00\x00\x00\x11\x00\x00\x00\x00"
+Ejercicio 4
+##############
+¿Te animas a realizar un modelo UML para nuestros dos ejemplos de composición
+y agregación?
 
-* Cambiar la velocidad del beat a 100. El rango está de 100 a 300.
+Actividad 6
+^^^^^^^^^^^^
+* Fecha: octubre 6 a octubre 8 de 2020 
+* Descripción: trabajo autónomo en los ejercicios
+* Recursos: ejercicios de la unidad 4
+* Duración de la actividad: 4 horas
+* Forma de trabajo: individual, trabajo autónomo.
 
-    .. code-block:: csharp
-       :lineno-start: 1
+Para estas cuatro horas de trabajo autónomo te propondré revisar el otro
+tipo de relación que nos falta: TO-BE, mejor conocida como herencia. También 
+visitaremos de nuevo (lo estudiante en tu curso de POO) el concepto de polimorfismo.
 
-       "/speed\x00\x00,i\x00\x00\x00\x00\x00\x64"
+Ejercicio 5
+##############
+¿Cómo funciona la herencia?
 
-* Trama enviada para la aplicación remota indicando que está
-  reproduciendo el beat 16:
+En términos simples, la herencia permite añadirle a un objeto atributos de otro
+objeto. 
 
-    .. code-block:: csharp
-       :lineno-start: 1
-       
-       2F 63 6f 75 6e 74 65 72 00 00 00 00 2c 69 00 00 00 00 00 10
+.. code-block:: c
+   :linenos:
 
-Programas para realizar pruebas
----------------------------------
+	typedef struct {
+		char first_name[32];
+		char last_name[32];
+		unsigned int birth_year;
+	} person_t;
 
-* `Hercules <https://www.hw-group.com/software/hercules-setup-utility>`__.
-* `Scriptcommunicator <https://sourceforge.net/projects/scriptcommunicator/>`__.
+	typedef struct {
+		char first_name[32];
+		char last_name[32];
+		unsigned int birth_year;
+		char student_number[16]; // Extra attribute
+		unsigned int passed_credits; // Extra attribute
+	} student_t;
 
-Tramas de prueba para Hercules:
+En el ejemplo anterior (tomado del de `aquí <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__
+nota los atributos de la estructura person_t y student_t. ¿Ves alguna relación entre ellos?
 
-.. code-block:: csharp
-   :lineno-start: 1
+student_t ``extiende`` los atributos de person_t. Por tanto, podemos decir que student_t también
+ES UN (IS-A) person_t.
 
-   //Activar el beat 1 del instrumento 1: /c1$00,ii$00$00$00$00$01$00$00$00$01
+Observa entonces que podemos escribir de nuevo el código anterior así:
 
-   //Stop: /play$00$00$00,i$00$00$00$00$00$00
+.. code-block:: c
+   :linenos:
 
-   //Play: /play$00$00$00,i$00$00$00$00$00$01
+	typedef struct {
+		char first_name[32];
+		char last_name[32];
+		unsigned int birth_year;
+	} person_t;
+	
+	typedef struct {
+		person_t person;
+		char student_number[16]; // Extra attribute
+		unsigned int passed_credits; // Extra attribute
+	}student_t;
 
-En la siguiente imagen se observa cómo se ingresan estos comandos en el simulador:
+¿Ves lo que pasó? estamos anidando una estructura en otra estructura. Por tanto student_t hereda
+de person_t. Observa que un puntero a student_t estará apuntando al primer atributo que es
+un person_t. ¿Lo ves? Por eso decimos que un student_t también ES UN person_t. Míralo en acción
+aquí:
 
-.. image:: ../_static/herculesTest.jpg
-   :scale: 80%
-   :align: center
+.. code-block:: c
+   :linenos:
 
+    #include <stdio.h>
+
+    typedef struct {
+        char first_name[32];
+        char last_name[32];
+        unsigned int birth_year;
+    }person_t;
+
+    typedef struct {
+        person_t person;
+        char student_number[16]; // Extra attribute
+        unsigned int passed_credits; // Extra attribute
+    } student_t;
+
+    int main(int argc, char* argv[]) {
+        student_t s;
+        student_t* s_ptr = &s;
+        person_t* p_ptr = (person_t*)&s;
+        printf("Student pointer points to %p\n", (void*)s_ptr);
+        printf("Person pointer points to %p\n", (void*)p_ptr);
+        return 0;
+    }
+
+Ejercicio 6
+#############
+En este punto te pido que te pongas cómodo. Lo que viene será alucinante...
+
+Del ejercicio anterior concluimos que student_t está heredando de person_t.
+Por tanto, a las funciones que definas para manipular un objeto de tipo
+person_t también le puedes pasar un puntero a un student_t (para manipular
+sus atributos correspondiente a person_t). SEÑORES y SEÑORAS, estamos
+reutilizando código.
+
+Ejercicio 7
+##############
+Ahora te voy a mostrar una técnica para implementar herencia simple en C.
+Analiza con detenimiento este código por favor 
+(`tomado de aquí <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__):
+
+person.h:
+
+.. code-block:: c
+   :linenos:
+
+	#ifndef PERSON_H_
+	#define PERSON_H_
+	
+	// Forward declaration
+	struct person_t;
+	
+	// Memory allocator
+	struct person_t* person_new();
+	
+	// Constructor
+	void person_ctor(struct person_t*,
+	const char* /* first name */,
+	const char* /* last name */,
+	unsigned int /* birth year */);
+	
+	// Destructor
+	void person_dtor(struct person_t*);
+	
+	// Behavior functions
+	void person_get_first_name(struct person_t*, char*);
+	void person_get_last_name(struct person_t*, char*);
+	unsigned int person_get_birth_year(struct person_t*);
+	
+	#endif /* PERSON_H_ */
+
+person.c:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdlib.h>
+	#include <string.h>
+	#include <stdlib.h>
+	#include "personPrivate.h"
+	
+	// Memory allocator
+	person_t* person_new() {
+		return malloc(sizeof(person_t));
+	}
+	
+	// Constructor
+	void person_ctor(person_t* person,
+			const char* first_name,
+			const char* last_name,
+			unsigned int birth_year) {
+	
+				strcpy(person->first_name, first_name);
+				strcpy(person->last_name, last_name);
+				person->birth_year = birth_year;
+	}
+	
+	// Destructor
+	void person_dtor(person_t* person) {
+		// Nothing to do
+	}
+	
+	// Behavior functions
+	void person_get_first_name(person_t* person, char* buffer) {
+		strcpy(buffer, person->first_name);
+	}
+	
+	void person_get_last_name(person_t* person, char* buffer) {
+		strcpy(buffer, person->last_name);
+	}
+	
+	unsigned int person_get_birth_year(person_t* person) {
+		return person->birth_year;
+	}
+
+personPrivate.h:
+
+.. code-block:: c
+   :linenos:
+
+	#ifndef PERSONPRIVATE_H_
+	#define PERSONPRIVATE_H_
+	
+	// Private definition
+	typedef struct {
+		char first_name[32];
+		char last_name[32];
+		unsigned int birth_year;
+	} person_t;
+	
+	
+	#endif /* PERSONPRIVATE_H_ */
+
+student.h:
+
+.. code-block:: c
+   :linenos:
+
+	#ifndef STUDENT_H_
+	#define STUDENT_H_
+	
+	//Forward declaration
+	struct student_t;
+	
+	// Memory allocator
+	struct student_t* student_new();
+	
+	// Constructor
+	void student_ctor(struct student_t*,
+					const char* /* first name */,
+					const char* /* last name */,
+					unsigned int /* birth year */,
+					const char* /* student number */,
+					unsigned int /* passed credits */);
+	
+	// Destructor
+	void student_dtor(struct student_t*);
+	
+	// Behavior functions
+	void student_get_student_number(struct student_t*, char*);
+	unsigned int student_get_passed_credits(struct student_t*);
+	
+	#endif /* STUDENT_H_ */
+
+student.c:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdlib.h>
+	#include <stdio.h>
+	#include <string.h>
+	
+	
+	#include "person.h"
+	#include "personPrivate.h"
+	
+	
+	//Forward declaration
+	typedef struct {
+	// Here, we inherit all attributes from the person class and
+	// also we can use all of its behavior functions because of
+	// this nesting.
+		person_t person;
+		char* student_number;
+		unsigned int passed_credits;
+	} student_t;
+	
+	// Memory allocator
+	student_t* student_new() {
+		return (student_t*)malloc(sizeof(student_t));
+	}
+	
+	// Constructor
+	void student_ctor(student_t* student,
+					const char* first_name,
+					const char* last_name,
+					unsigned int birth_year,
+					const char* student_number,
+					unsigned int passed_credits) {
+	
+		// Call the constructor of the parent class
+		person_ctor((struct person_t*)student,
+		first_name, last_name, birth_year);
+		student->student_number = (char*)malloc(16 * sizeof(char));
+		strcpy(student->student_number, student_number);
+		student->passed_credits = passed_credits;
+	}
+	
+	// Destructor
+	void student_dtor(student_t* student) {
+		// We need to destruct the child object first.
+		free(student->student_number);
+		// Then, we need to call the destructor function
+		// of the parent class
+		person_dtor((struct person_t*)student);
+	}
+	
+	// Behavior functions
+	void student_get_student_number(student_t* student,
+			char* buffer) {
+			strcpy(buffer, student->student_number);
+	}
+	
+	unsigned int student_get_passed_credits(student_t* student) {
+		return student->passed_credits;
+	}
+
+main.c:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include "person.h"
+	#include "student.h"
+	
+	int main(int argc, char* argv[]) {
+		// Create and construct the student object
+		struct student_t* student = student_new();
+		student_ctor(student, "John", "Doe", 1987, "TA5667", 134);
+	
+		// Now, we use person's behavior functions to
+		// read person's attributes from the student object
+		char buffer[32];
+	
+		// Upcasting to a pointer of parent type
+		struct person_t* person_ptr = (struct person_t*)student;
+		person_get_first_name(person_ptr, buffer);
+		printf("First name: %s\n", buffer);
+		person_get_last_name(person_ptr, buffer);
+		printf("Last name: %s\n", buffer);
+		printf("Birth year: %d\n", person_get_birth_year(person_ptr));
+	
+		// Now, we read the attributes specific to the student object.
+		student_get_student_number(student, buffer);
+		printf("Student number: %s\n", buffer);
+		printf("Passed credits: %d\n",
+		student_get_passed_credits(student));
+	
+		// Destruct and free the student object
+		student_dtor(student);
+		free(student);
+		return 0;
+	}
+
+Ejercicio 8
+##############
+Ahora te voy a mostrar una técnica para implementar polimorfismo en tiempo de 
+ejecución en C (`tomado de aquí <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__).
+
+Pero antes ¿Qué es el polimorfismo en tiempo de ejecución? Antes mira qué te permite hacer
+el polimorfismo. Considera que tienes estos tres objetos:
+
+.. code-block:: c
+   :linenos:
+
+	struct animal_t* animal = animal_new();
+	animal_ctor(animal);
+
+	struct cat_t* cat = cat_new();
+	cat_ctor(cat);
+
+	struct duck_t* duck = duck_new();
+	duck_ctor(duck);
+
+cat y duck heredan de animal. Por tanto, como cat y duck son animal también,
+entonces al hacer esto:
+
+.. code-block:: c
+   :linenos:
+
+	// This is a polymorphism
+	animal_sound(animal);
+	animal_sound((struct animal_t*)cat);
+	animal_sound((struct animal_t*)duck);
+
+Consigues esta salida:
+
+.. code-block:: c
+   :linenos:
+
+	Animal: Beeeep
+	Cat: Meow
+	Duck: Quack
+
+Entonces puedes ver que la función animal_sound exhibe un comportamiento polimórfico
+dependiendo del tipo de referencia que le pasemos.
+
+¿Para qué sirve esto? Supón que tienes un código base al cual quieres adicionarle
+funcionalidades nuevas. El polimorfismo te permite mantener el código base lo más intacto
+posible a medida que añades más comportamientos por medio de la herencia.
+
+Ahora, si. Mira cómo se puede implementar:
+
+animal.h:
+
+.. code-block:: c
+   :linenos:
+
+	#ifndef ANIMAL_H_
+	#define ANIMAL_H_
+	
+	// Forward declaration
+	struct animal_t;
+	
+	// Memory allocator
+	struct animal_t* animal_new();
+	
+	// Constructor
+	void animal_ctor(struct animal_t*);
+	
+	// Destructor
+	void animal_dtor(struct animal_t*);
+	
+	// Behavior functions
+	void animal_get_name(struct animal_t*, char*);
+	void animal_sound(struct animal_t*);
+	
+	
+	#endif /* ANIMAL_H_ */
+
+animal.c:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdlib.h>
+	#include <string.h>
+	#include <stdio.h>
+	
+	#include "animalPrivate.h"
+	
+	// Default definition of the animal_sound at the parent level
+	void __animal_sound(void* this_ptr) {
+		animal_t* animal = (animal_t*)this_ptr;
+		printf("%s: Beeeep\n", animal->name);
+	}
+	
+	// Memory allocator
+	animal_t* animal_new() {
+		return (animal_t*)malloc(sizeof(animal_t));
+	}
+	
+	// Constructor
+	void animal_ctor(animal_t* animal) {
+		animal->name = (char*)malloc(10 * sizeof(char));
+		strcpy(animal->name, "Animal");
+		// Set the function pointer to point to the default definition
+		animal->sound_func = __animal_sound;
+	}
+	
+	// Destructor
+	void animal_dtor(animal_t* animal) {
+		free(animal->name);
+	}
+	// Behavior functions
+	void animal_get_name(animal_t* animal, char* buffer) {
+		strcpy(buffer, animal->name);
+	}
+	
+	void animal_sound(animal_t* animal) {
+		// Call the function which is pointed by the function pointer.
+		animal->sound_func(animal);
+	}
+
+
+animalPrivate.h:
+
+.. code-block:: c
+   :linenos:
+
+	#ifndef ANIMALPRIVATE_H_
+	#define ANIMALPRIVATE_H_
+	
+	// The function pointer type needed to point to
+	// different morphs of animal_sound
+	typedef void (*sound_func_t)(void*);
+	
+	// Forward declaration
+	typedef struct {
+		char* name;
+		// This member is a pointer to the function which
+		// performs the actual sound behavior
+		sound_func_t sound_func;
+	} animal_t;
+	
+	#endif /* ANIMALPRIVATE_H_ */
+
+
+cat.h:
+
+.. code-block:: c
+   :linenos:
+
+	#ifndef CAT_H_
+	#define CAT_H_
+	
+	// Forward declaration
+	struct cat_t;
+	
+	// Memory allocator
+	struct cat_t* cat_new();
+	
+	// Constructor
+	void cat_ctor(struct cat_t*);
+	
+	// Destructor
+	void cat_dtor(struct cat_t*);
+	// All behavior functions are inherited from the animal class.
+	
+	#endif /* CAT_H_ */
+
+cat.c:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	
+	#include "animal.h"
+	#include "animalPrivate.h"
+	
+	typedef struct {
+		animal_t animal;
+	} cat_t;
+	
+	// Define a new behavior for the cat's sound
+	void __cat_sound(void* ptr) {
+		animal_t* animal = (animal_t*)ptr;
+		printf("%s: Meow\n", animal->name);
+	}
+	
+	// Memory allocator
+	cat_t* cat_new() {
+		return (cat_t*)malloc(sizeof(cat_t));
+	}
+	// Constructor
+	void cat_ctor(cat_t* cat) {
+		animal_ctor((struct animal_t*)cat);
+		strcpy(cat->animal.name, "Cat");
+		// Point to the new behavior function. Overriding
+		// is actually happening here.
+		cat->animal.sound_func = __cat_sound;
+	}
+	
+	// Destructor
+	void cat_dtor(cat_t* cat) {
+		animal_dtor((struct animal_t*)cat);
+	}
+
+duck.h:
+
+.. code-block:: c
+   :linenos:
+
+	
+	#ifndef DUCK_H_
+	#define DUCK_H_
+	
+	// Forward declaration
+	struct duck_t;
+	
+	// Memory allocator
+	struct duck_t* duck_new();
+	
+	// Constructor
+	void duck_ctor(struct duck_t*);
+	
+	// Destructor
+	void duck_dtor(struct duck_t*);
+	
+	// All behavior functions are inherited from the animal class.
+	
+	
+	#endif /* DUCK_H_ */
+
+duck.c:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	
+	#include "animal.h"
+	#include "animalPrivate.h"
+	
+	typedef struct {
+		animal_t animal;
+	} duck_t;
+	
+	// Define a new behavior for the duck's sound
+	void __duck_sound(void* ptr) {
+		animal_t* animal = (animal_t*)ptr;
+		printf("%s: Quacks\n", animal->name);
+	}
+	
+	// Memory allocator
+	duck_t* duck_new() {
+		return (duck_t*)malloc(sizeof(duck_t));
+	}
+	
+	// Constructor
+	void duck_ctor(duck_t* duck) {
+		animal_ctor((struct animal_t*)duck);
+		strcpy(duck->animal.name, "Duck");
+		// Point to the new behavior function. Overriding
+		// is actually happening here.
+		duck->animal.sound_func = __duck_sound;
+	}
+	
+	// Destructor
+	void duck_dtor(duck_t* duck) {
+		animal_dtor((struct animal_t*)duck);
+	}
+
+
+main.c:
+
+.. code-block:: c
+   :linenos:
+
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	
+	// Only public interfaces
+	#include "animal.h"
+	#include "cat.h"
+	#include "duck.h"
+	
+	
+	int main(int argc, char** argv) {
+		struct animal_t* animal = animal_new();
+		struct cat_t* cat = cat_new();
+		struct duck_t* duck = duck_new();
+	
+		animal_ctor(animal);
+		cat_ctor(cat);
+		duck_ctor(duck);
+	
+		animal_sound(animal);
+		animal_sound((struct animal_t*)cat);
+		animal_sound((struct animal_t*)duck);
+	
+		animal_dtor(animal);
+		cat_dtor(cat);
+		duck_dtor(duck);
+	
+		free(duck);
+		free(cat);
+		free(animal);
+		return 0;
+	}
+
+
+Actividad 7
+^^^^^^^^^^^^
+* Fecha: octubre 8 de 2020 - 8 a.m.
+* Descripción: trabaja en el reto y resuelve dudas en tiempo real con el docente
+  sobre los ejercicios y el enunciado del RETO.
+* Recursos: ingresa al grupo de Teams
+* Duración de la actividad: 1 hora 40 minutos de discusión
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
+
+
+Enunciado del RETO
+#####################
+
+Realiza un programa y su modelo de clases UML. Para una aplicación
+que permita crear bases de datos de estudiantes.
+
+Cada registro de la base de datos estará dado por:
+número de cédula, nombre y semestre. Cada registro corresponde a un 
+estudiante.
+
+Implementa los siguientes comandos:
+
+**exit** : salir del programa. Antes de terminar debe mostrar el nombre
+de la base de datos activa y solicitar si desea guardarla.
+
+**mdb nombre tamaño** : crea EN MEMORIA una base de datos especificando el nombre
+y la cantidad de registros.
+
+**ldb nombre** : carga TODA la base de datos en MEMORIA desde el archivo
+especificado. El comando debe indicar si la base de datos se cargó
+correctamente o no existe.
+
+Una vez la base de datos esté cargada en memoria desde el archivo o con ``mkdb``
+puedes aplicar los siguientes comandos:
+
+**lsdbs** : este comando mostrará todas las bases de datos que tengas cargadas
+en la memoria indicando su nombre, tamaño y cantidad de registros almacenados.
+
+**gdb**: muestra el nombre de la base de datos activa, qué tamaño tiene
+y cuántos registros le quedan disponibles.
+
+**sdb nombre**: este comando selecciona la base de datos activa para aplicar
+los siguientes comandos:
+
+**svdb** : este comando salva la base de datos activa en un archivo
+con el mismo nombre de la base de datos.
+
+**radb** : lee todos los registros de la base de datos.
+
+**rsdb** : lee la cantidad de registros de la base datos.
+
+**mreg cedula nombre semestre** : crea un nuevo registro en la base
+de datos.
+
+**rr cédula** : busca en la base de datos por número de cédula.
+En caso de encontrar la cédula imprime el registro completo.
+
+No olvides:
+
+* Cada comando deberá implementarse como una función.
+* En un momento dado puedes tener ``varias`` bases de datos en memoria.
+
+Entrega
+###########
+Crea una carpeta y luego comprímela SOLO en formato .ZIP. Incluye en la carpeta:
+
+* La `rúbrica <https://docs.google.com/spreadsheets/d/1G_gO7_aInx3h_gtzaLWK-LOfMQv97oc5zm7bRKRa5GA/edit?usp=sharing>`__
+  diligenciada con tu autoevaluación.
+* El modelo UML de tu aplicación y un texto que explique el modelo.
+* Los archivos .c y .h con tu solución.
+* Un archivo donde muestres cómo se compila tu aplicación.
+
+Actividad 8
+^^^^^^^^^^^^
+* Fecha: octubre 8 a octubre 13 de 2020 
+* Descripción: soluciona el RETO
+* Recursos: material de la unidad.
+* Duración de la actividad: 4 horas
+* Forma de trabajo: individual, trabajo autónomo.
