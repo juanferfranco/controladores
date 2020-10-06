@@ -1072,3 +1072,48 @@ Actividad 8
 * Recursos: material de la unidad.
 * Duración de la actividad: 4 horas
 * Forma de trabajo: individual, trabajo autónomo.
+
+Anexo
+^^^^^^^^^
+
+.. note::
+    ¡ESTA SECCIÓN ES SOLO PARA PERSONAS MUY CURIOSAS!
+
+	En esta sección continuaremos explorando las ideas presentadas en 
+	`este <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__
+    texto tan interesante.
+
+Clases abstractas
+###################
+¿Qué son las clases abstractas? Son un tipo de clases de las cuales no puedes
+crear OBJETOS. Entonces ¿Para qué sirven? Sirven para crear programas
+orientados a objetos que puedan extenderse al máximo y con la menor cantidad
+de dependencias entre sus componentes. ¿Te suena que vale la pena?
+
+Mira este problema: tienes que construir una biblioteca que te permita comunicar,
+por un puerto serial, a Unity con un sensor. Las responsabilidades del código
+son: gestionar el puerto serial, gestionar la comunicación con el hilo
+principal o hilo del motor y enviar-recibir datos siguiendo un protocolo específico.
+En este escenario podrías escribir una biblioteca que resuelva este problema solo
+para el sensor particular o escribirla de tal manera que puedas reutilizar
+casi todo el código y solo cambiar el protocolo de comunicación si a futuro
+cambias de sensor.
+
+¿Cuál de las dos opciones de suena más?
+
+Si te suena más la segunda, entonces todas las partes comunes del código irán
+en la clase abstracta y las partes que varían, en este caso el protocolo de comunicación,
+irán en otra clase que herede de la clase abstracta. Aquí entra en juego el otro concepto
+que estudiamos, el POLIMORFISMO, ¿Cómo? En el código de la clase
+abstracta se llamará el código que varía o métodos VIRTUALES, pero este código no estará 
+implementado. Por tanto, los métodos virtuales tendrás que implementarlo en la clase que
+hereda, de la cual, si PUEDES crear OBJETOS. Hermoso, ¿No?.
+
+En lenguajes de programación como C# se hace
+`así <https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/abstract> `__.
+En C++ sería `así <https://www.geeksforgeeks.org/virtual-function-cpp/> `__.
+
+Ten presente que en la medida que llevas al extremo este concepto de abstracción podrás
+llegar a clases que no tengan atributos sino SOLO métodos virtuales. En este punto habrás
+llegado a las INTERFACES, de las cuales tampoco podrás crear objetos.
+
