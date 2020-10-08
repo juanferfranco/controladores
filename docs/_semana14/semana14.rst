@@ -1079,7 +1079,7 @@ Anexo
 .. note::
     ¡ESTA SECCIÓN ES SOLO PARA PERSONAS MUY CURIOSAS!
 
-	En esta sección continuaremos explorando las ideas presentadas en `este <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__ texto tan interesante.
+	 En esta sección continuaremos explorando las ideas presentadas en `este <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__ texto tan interesante.
 
 Clases abstractas
 ###################
