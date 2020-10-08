@@ -1023,7 +1023,7 @@ y la cantidad de registros.
 especificado. El comando debe indicar si la base de datos se cargó
 correctamente o no existe.
 
-Una vez la base de datos esté cargada en memoria desde el archivo o con ``mkdb``
+Una vez la base de datos esté cargada en memoria desde el archivo o con ``mdb``
 puedes aplicar los siguientes comandos:
 
 **lsdbs** : este comando mostrará todas las bases de datos que tengas cargadas
