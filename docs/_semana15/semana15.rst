@@ -54,10 +54,6 @@ operativos. En particular te recomiendo un par:
 
 `Operating System Concepts <https://codex.cs.yale.edu/avi/os-book/OS10/index.html>`__:
 
-.. image:: ./_static/osbook.jpeg
-    :scale: 100 %
-
-
 `Operating Systems: Three Easy Pieces <http://pages.cs.wisc.edu/~remzi/OSTEP/>`__
 
 De todos los posibles servicios que ofrece el sistema operativo, Linux en nuestro
