@@ -1,26 +1,28 @@
-Semana 16
-===========
-Esta semana terminaremos el reto de la semana 14 y realizaremos
-la presentación del resultado final así:
+Semana 16 Unidad 5: sistemas operativo
+========================================
 
-miércoles 13 de mayo:
+Actividad 1
+^^^^^^^^^^^^
+* Fecha: octubre 20 de 2020 - 8 a.m.
+* Descripción: solución de dudas en tiempo real de los ejercicios
+  y el enunciado del RETO.
+* Recursos: ingresa al grupo de Teams
+* Duración de la actividad: 1 hora 20 minutos
+* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
 
-Isa 10:00 a.m.
+Actividad 2
+^^^^^^^^^^^^
+* Fecha: octubre 20 a octubre 22 de 2020.
+* Descripción: soluciona el RETO, prepara los entregables y la
+  sustentación.
+* Recursos: material de la semana.
+* Duración de la actividad: 8 horas
+* Forma de trabajo: individual.
 
-Luisa 10:10 a.m.
-
-Ana 10:20 a.m.
-
-Jose 10:30 a.m.
- 
-Iván 10:40 a.m.
-
-Sergio 10:50 a.m.
-
-Daniel 11:00 a.m.
-
-La presentación consiste en demostrar con pantalla compartida
-el funcionamiento de su propuesta de aplicación.
-
-Subir a `este <https://www.dropbox.com/request/UM1HaDOzPFMVz5W2EJwz>`__
-enlace la carpeta de su proyecto en formato .ZIP.
+Actividad 3
+^^^^^^^^^^^^
+* Fecha: octubre 22 de 2020 - 10 a.m.
+* Descripción: sustentación individual.
+* Recursos: ingresa al grupo de Teams
+* Duración de la actividad: 1 hora 20 minutos
+* Forma de trabajo: individual.

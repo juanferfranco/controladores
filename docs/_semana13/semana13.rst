@@ -16,7 +16,7 @@ Reconocer e implementar los conceptos de la programación orientada a objetos.
 
 Código de honor
 ----------------
-Al realizar los ejercicios esta unidad se espera que hagas lo siguiente:
+Al realizar los ejercicios de esta unidad se espera que hagas lo siguiente:
 
 * Colabora con tus compañeros cuando así se indique.
 * Trabaja de manera individual cuando la actividad así te lo proponga.
