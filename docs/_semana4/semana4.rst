@@ -1,57 +1,5 @@
-Semana 4: Unidad 2/Reto 1
-==========================
 
-Esta semana vamos a introducir el concepto de programa almacenado y
-la programación a nivel de lenguaje de máquina.
-
-Objetivos
-----------
-1. Comprender el funcionamiento a nivel de de set de instrucciones
-   de una CPU.
-2. Adquirir habilidades básicas de programación en lenguaje 
-   ensamblador e identificar su relación con el lenguaje C.
-
-Código de honor
-----------------
-Al realizar el proyecto de esta semana se espera que hagas lo siguiente:
-
-* Colabora con tus compañeros cuando así se indique.
-* Trabaja de manera individual cuando la actividad así te lo proponga.
-* NO DEBES utilizar sitios en Internet con soluciones o ideas para atacar el proyecto.
-* NO DEBES hacer uso de foros para buscar soluciones al proyecto.
-* ¿Entonces qué hacer si no me funciona algo? Te propongo que experimentes, crea hipótesis,
-  experimenta de nuevo, observa y concluye.
-* NO OLVIDES, este curso se trata de pensar y experimentar NO de BUSCAR soluciones
-  en Internet.
-
-Actividades
--------------
-
-Actividad 1
-^^^^^^^^^^^^
-* Fecha: julio 28 de 2020 - 8 a.m.
-* Descripción: encuentro sincrónico para compartir y discutir 
-  los resultados del reto 3 de la Unidad 1.
-* Recursos: ingresa al grupo de Teams
-* Duración de la actividad: 50 minutos de discusión
-* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
-
-Actividad 2
-^^^^^^^^^^^^
-* Fecha: julio 28 de 2020 - 9 a.m.
-* Descripción: encuentro sincrónico para presentar el reto 1
-  de la Unidad 2.
-* Recursos: ingresa al grupo de Teams.
-* Duración de la actividad: 50 minutos 
-* Forma de trabajo: colaborativo con solución de dudas en tiempo real.
-
-Actividad 3
-^^^^^^^^^^^^
-* Fecha: julio 28 a julio 30 de 2020
-* Descripción: trabajo autónomo
-* Recursos: 
-
-    #. Lee el `capítulo 4 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_7ef1c00a714c46768f08c459a6cab45a.pdf>`__.
+    #. Lee el 
     #. También tienes disponible esta `presentación <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/56440f_12f488fe481344328506857e6a799f79.pdf>`__
        para que complementes.
     #. Lee la definición del proyecto y la información que encuentras `aquí <https://www.nand2tetris.org/project04>`__

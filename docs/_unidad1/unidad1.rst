@@ -4,11 +4,9 @@ Unidad 1. Lógica combinacional y secuencial
 Introducción
 --------------
 
-En esta unidad vamos a introducir los bloques de construcción
+En esta unidad vas a aprender los bloques de construcción
 básicos del hardware de un sistema de cómputo moderno.
 
-Adicionalmente, en esta unidad vamos a introducir herramientas
-de trabajo en equipo bajo control de versión y de productividad.
 
 Propósito de aprendizaje
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
