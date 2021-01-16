@@ -241,7 +241,7 @@ del segmento text es leído por parte de la CPU.
 
 Veamos un ejemplo:
 
-.. code-clock:: c
+.. code-block:: c
    :linenos:
 
     #include <unistd.h> 

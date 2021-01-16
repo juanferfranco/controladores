@@ -16,4 +16,4 @@ Créditos y horas totales del curso: 4 créditos - 192 horas totales
    Unidad 2: Arquitectura del computador <_unidad2/unidad2>
    Unidad 3: Del código fuente al ejecutable <_unidad3/unidad3>
    Unidad 4: Programación orientada a objetos <_unidad4/unidad4>
-   Unidad 5: Sistema operativo <_unidad4/unidad5>
+   Unidad 5: Sistema operativo <_unidad5/unidad5>

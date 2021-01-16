@@ -561,7 +561,6 @@ Obtendrás esto:
       9: 0000000000000000    24 FUNC    GLOBAL DEFAULT    1 suma
      10: 0000000000000018    73 FUNC    GLOBAL DEFAULT    1 sumatoria
 
-
 Nota varias cosas interesantes:
 
 * La dirección asociada a los símbolos suma y sumatoria es relativa a 0. Esto ocurrirá

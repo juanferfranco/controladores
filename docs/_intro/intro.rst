@@ -32,6 +32,7 @@ acuerdo a requerimientos condicionados por el contexto.
 
 Estructura y metodología del curso
 -----------------------------------
+
 El curso está divido en 5 unidades:
 
 #. Unidad 1: Lógica combinacional y secuencial.
@@ -46,9 +47,8 @@ Cada unidad estará constituida por tres fases:
 #. Fase 1: fundamentación. En esta fase se estudiarán los conceptos teóricos más relevantes de
    cada unidad. Así mismo se complementarán con lecturas. En esta fase, el estudiante
    debe repasar los conceptos olvidados de los semestres anteriores.
-#. Fase 2: proyecto. En esta fase se realiza el proyecto que servirá como evidencia de aprendizaje.
-   Cada proyecto debe ser sustentado.
-#. Fase 3: evaluación. En esta fase se discute el resultado del proyecto.
+#. Fase 2: proyecto. En esta fase se realizarán uno o más proyecto.
+#. Fase 3: evaluación. En esta fase se discute el resultado de los proyectos de la unidad.
 
 Cronograma
 ------------
@@ -64,15 +64,26 @@ Te sugiero completar cada unidad en los siguientes tiempos:
 Evaluación
 -----------
 
-Durante el curso se realizarán cinco proyectos
-cada uno del 20%.
+Cada unidad tiene un peso del 20% en la nota final. Notarás que algunas
+unidades tienen un proyecto, pero otras tiene más de uno.
 
-El proyecto solo se considera presentado cuando esté completo al 100%.
-Puedes entregar tu proyecto cuando quieras, pero considera lo siguiente:
+La Unidad solo se considera terminada cuando termines todos los proyectos
+que están en ella al 100%. Por tanto, la nota de cada unidad, una vez la termines, 
+será 5.
+
+Puedes entregar cada unidad cuando quieras, pero considera lo siguiente:
 
 En la semana 8 se hará un primer corte del 50% y se reportarán al sistema
-los proyectos que estén completos y entregados a esa fecha. 
-¿Puedes entregar el proyecto luego? Si, en ese momento tu nota será actualizada.
+las unidades terminadas y evaluadas. Ten presente que la evaluación se realiza
+mediante una entrevista con el profesor en la cual discutirán los resultados
+de tu trabajo y recibirás retroalimentación personalizada. Para la semana 8
+deberías tener terminadas las unidades 1 y 2. Si no alcanzas, cuando las termines
+se actualizará tu nota.
+
+En la semana 17 se reportarán al sistema todas las unidades terminadas. ES MUY
+IMPORTANTE que tengas en cuenta que una unidad se considera terminada SI y SOLO
+si la completaste al 100% con todos los proyectos funcionando al 100% y realizaste
+el proceso de evaluación con el docente.
 
 Dedicación
 -----------
