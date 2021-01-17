@@ -70,8 +70,9 @@ Evaluación
 Cada unidad tiene un peso del 20% en la nota final. Notarás que algunas
 unidades tienen un proyecto, pero otras tiene más de uno.
 
-La Unidad solo se considera terminada cuando termines todos los proyectos
-que están en ella al 100%. Por tanto, la nota de cada unidad, una vez la termines, 
+La Unidad solo se considera terminada cuando termines todos 
+los ejercicio y todos los proyectos que están en ella al 100%. 
+Por tanto, la nota de cada unidad, una vez la termines, 
 será 5.
 
 Puedes entregar cada unidad cuando quieras, pero considera lo siguiente:
@@ -85,7 +86,7 @@ se actualizará tu nota.
 
 En la semana 17 se reportarán al sistema todas las unidades terminadas. ES MUY
 IMPORTANTE que tengas en cuenta que una unidad se considera terminada SI y SOLO
-si la completaste al 100% con todos los proyectos funcionando al 100% y realizaste
+si todos los ejercicios y proyectos están al 100% y realizaste
 el proceso de evaluación con el docente.
 
 Dedicación
@@ -176,3 +177,19 @@ al menos lo siguiente:
 
 ¿Cómo inicio con Notion? Te dejo `aquí <https://www.youtube.com/watch?v=0iS_E9tN8nk>`__
 un enlace.
+
+Control de versión
+--------------------
+
+* Crea una cuenta en GitHub con tu correo institucional de la UPB. Si
+  tienes la cuenta, tanto mejor.
+* Explora `este <https://www.gitkraken.com/student-resources>`__ sitio y 
+  solicita, por medio de tu cuenta de GitHub, el paquete de herramientas
+  para estudiantes. Este proceso requiere aprobación, así que te recomiendo
+  que lo hagas YA.
+* Ingresa a `este <https://www.youtube.com/c/Gitkraken/playlists>`__ canal
+  de youtube y observa la lista de reproducción Learn Git with GitKraken.
+* Finalmente, observa el siguiente `video <https://www.youtube.com/watch?v=lYAHmthUO1M>`__
+  para que analices un posible flujo de trabajo típico con una herramienta de
+  control de versión y de productividad (puedes emplear notion para la creación
+  de tus boards de tareas)
