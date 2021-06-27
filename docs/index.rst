@@ -10,6 +10,6 @@ Créditos y horas totales del curso: 4 créditos - 192 horas totales
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contenidos semanales:
+   :caption: Unidades:
 
    Introducción al curso <_intro/intro>
