@@ -19,7 +19,7 @@ Descripción del curso
 
 El objetivo del curso es comprender los fundamentos de los sistemas de
 cómputo para poder seleccionar y programar dichos sistemas con el fin de
-implementar experiencias interactivas u otro tipo de aplicaciones.
+implementar aplicaciones interactivas.
 
 Propósito del curso
 ---------------------
@@ -84,7 +84,7 @@ de tu trabajo y recibirás retroalimentación personalizada. Para la semana 8
 deberías tener terminadas las unidades 1 y 2. Si no alcanzas, cuando las termines
 se actualizará tu nota.
 
-En la semana 17 se reportarán al sistema todas las unidades terminadas. ES MUY
+En la semana 16 se reportarán al sistema todas las unidades terminadas. ES MUY
 IMPORTANTE que tengas en cuenta que una unidad se considera terminada SI y SOLO
 si todos los ejercicios y proyectos están al 100% y realizaste
 el proceso de evaluación con el docente.
@@ -107,9 +107,9 @@ Actividades de cada unidad
 Actividad 1: encuentros sincrónicos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Fechas: martes a las 2 p.m..
+* Fechas: todos los jueves de 10 a.m. a 11:40 a.m.
 * Descripción: asesorías en tiempo real y evaluación.
-* Recursos: ingresa a `Discord <https://discord.gg/vC5RaagNcE>`__
+* Recursos: ingresa a `Teams <https://teams.microsoft.com/l/team/19%3a2120a8ab2394491a8b8a9bfe4d209156%40thread.tacv2/conversations?groupId=790121bd-4b34-49b3-b4f2-a29c7a9eee9d&tenantId=618bab0f-20a4-4de3-a10c-e20cee96bb35>`__
 * Duración de la actividad: sesiones de 1:40. 
 * Forma de trabajo: individual-colaborativo/sincrónico
 
@@ -119,7 +119,8 @@ Actividad 2: fundamentación
 * Descripción: realiza los ejercicios, retos y preguntas
   propuestas.
 * Recursos: trayecto de actividades en cada unidad.
-* Duración de la actividad: depende de ti.
+* Duración de la actividad: depende de ti, pero deberás dedicar 
+  semanalmente 10 horas.
 * Forma de trabajo: individual-colaborativo
 
 Actividad 3: proyecto y sustentación
@@ -164,32 +165,11 @@ debe reflejar un flujo de trabajo. Debes evidenciar el flujo
 de trabajo.
 
 En Notion vas a presentar la documentación de la fundamentación y del proyecto 
-de cada unidad. El formato de tu portafolio es libre, pero deberás incluir 
-al menos lo siguiente:
-
-* ¿De qué se trataba el proyecto? ¿Cuál era el problema a resolver?
-
-* Presenta tus resultados: muestra un video del proyecto funcionando.
-
-* Explica cómo resolviste el problema.
-
-* No olvides dejar un enlace a tu repositorio público en GitHub.
-
-¿Cómo inicio con Notion? Te dejo `aquí <https://www.youtube.com/watch?v=0iS_E9tN8nk>`__
-un enlace.
+de cada unidad. El formato de tu portafolio es libre.
 
 Control de versión
 --------------------
 
 * Crea una cuenta en GitHub con tu correo institucional de la UPB. Si
   tienes la cuenta, tanto mejor.
-* Explora `este <https://www.gitkraken.com/student-resources>`__ sitio y 
-  solicita, por medio de tu cuenta de GitHub, el paquete de herramientas
-  para estudiantes. Este proceso requiere aprobación, así que te recomiendo
-  que lo hagas YA.
-* Ingresa a `este <https://www.gitkraken.com/learn/git/tutorials>`__ sitio
-  y realiza el curso corto sobre Git.
-* Finalmente, observa el siguiente `video <https://www.youtube.com/watch?v=lYAHmthUO1M>`__
-  para que analices un posible flujo de trabajo típico con una herramienta de
-  control de versión y de productividad (puedes emplear notion para la creación
-  de tus boards de tareas)
+* Explora los tutoriales de `este <https://www.gitkraken.com/learn/git/tutorials>`__.

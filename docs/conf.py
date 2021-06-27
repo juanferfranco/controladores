@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Controladores'
-copyright = '2021-10, Juan Franco'
+copyright = '2021-20, Juan Franco'
 author = 'Juan Franco'
 
 # The short X.Y version
