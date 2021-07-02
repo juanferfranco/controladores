@@ -150,53 +150,136 @@ En tu bitácora de trabajo responde las siguientes preguntas:
 #. ¿Cuántas filas tiene la tabla de verdad de una función booleana?
 #. Muestra un ejemplo de una función booleana deducida a partir de una tabla de verdad
 #. Dibuja cómo sería una compuerta OR de 4 entradas usando solo compuertas OR de 2 entradas
-#. 
 
-
-
-Ejercicio 3
+Ejercicio 2
 ^^^^^^^^^^^^
+Para implementar los chips del computador vas a utilizar un programa que te permitirá
+verificar la implementación y simular su comportamiento.
 
 Ingresa a `este <https://www.nand2tetris.org/software>`__ sitio. Sigue las instrucciones
-y descarga el software y las plantillas de proyectos.
+de descarga. Ten presente que vas a necesitar preparar tu computador para poder ejecutar 
+el simulador. Todos los requisitos están en la página anterior.
 
-Ejercicio 4
+Si has seguido las instrucciones correctamente, debes tener la máquina virtual de java 
+instalada en tu computador. Lo puedes verificar ejecutando en una terminal o símbolo del sistema 
+el comando
+
+.. code-block:: bash
+
+    java --version
+
+Si el sistema reconoce el comando vas por buen camino.
+
+Una vez descargues el archivo nand2tetris.zip, lo DEBES descomprimir. Verás dos carpetas, 
+una que dice projects y la otra dirá tools.
+
+Ingresa a la carpeta tools u ejecuta el archivo HardwareSimulator.bat. Si todo está bien 
+deberías ver una ventana similar a esta:
+
+.. image:: ../_static/hardwareSimulator.png
+
+lectura 6
 ^^^^^^^^^^^^
 
 Lee las `instrucciones <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_bfd91435260748439493a60a8044ade6.pdf>`__ 
 de uso del software.
 
-Ejercicio 5
+PROYECTO 1
+^^^^^^^^^^^^
+Realiza el primer proyecto de esta unidad que puedes encontrar `aquí <https://www.nand2tetris.org/project01>`__
+
+
+Lectura 7
 ^^^^^^^^^^^^
 
-Lee todos los requisitos y realiza el primer proyecto 
-que encuentras `aquí <https://www.nand2tetris.org/project01>`__
+Con esta lectura vas a responder una preguntas fundamentales. ¿Cómo se almacenan los número 
+enteros en un computador? ¿Y si son negativos? ¿Cómo hace un computador para realizar 
+operaciones aritméticas?
 
-Ejercicio 6
-^^^^^^^^^^^^
 
 Lee el `capítulo 2 del libro guía <https://docs.wixstatic.com/ugd/44046b_b0b50efb68ac4f0da19383ec064977b1.pdf>`__.
 
-Ejercicio 7
+Ejercicio 3
+^^^^^^^^^^^^
+En tu bitácora de trabajo responde las siguientes preguntas:
+
+#. ¿Cómo se llama el componente de una CPU encargado de realizar las operaciones aritméticos y lógicos?
+#. Realiza una tabla con la representación en base dos de los números del 0 al 15.
+#. ¿Cuáles son los tamaños típicos en bits con los cuales se representan en un computador números enteros?
+#. ¿Cuántos números enteros positivos se pueden representar con 8 bits?
+#. ¿Cuántos número enteros positivos se pueden representar con n bits? 
+
+
+PROYECTO 2
 ^^^^^^^^^^^^
 
-Lee todos los requisitos y realiza el proyecto 2 
-que encuentras `aquí <https://www.nand2tetris.org/project02>`__.
+Realiza el proyecto 2 que encuentras `aquí <https://www.nand2tetris.org/project02>`__.
 
-Ejercicio 8
+
+Lectura 8
 ^^^^^^^^^^^^
 
 Lee el `capítulo 3 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_862828b3a3464a809cda6f44d9ad2ec9.pdf>`__.
 
-Ejercicio 9
+Ejercicio 4
+^^^^^^^^^^^^
+En tu bitácora de trabajo responde las siguientes preguntas:
+
+
+
+PROYECTO 3
 ^^^^^^^^^^^^
 
-Lee todos los requisitos y realiza el proyecto 3 
-que encuentras `aquí <https://www.nand2tetris.org/project03>`__
+Realiza el proyecto 3 que encuentras `aquí <https://www.nand2tetris.org/project03>`__
 
-Ejercicio 10
-^^^^^^^^^^^^^
+Lectura 9
+^^^^^^^^^^^^
 
-Termina a documentación de la Unidad 1 y programa la reunión 
-de evaluación y sustentación con el docente.
+Lee el `capítulo 4 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_7ef1c00a714c46768f08c459a6cab45a.pdf>`__.
 
+
+Ejercicio 5
+^^^^^^^^^^^^
+En tu bitácora de trabajo responde las siguientes preguntas:
+
+Lectura 10
+^^^^^^^^^^^^
+Par el siguiente proyecto vas a necesitar un programa diferente. En este caso, un 
+emulador de CPU. Lee las `instrucciones <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_f63aba2611944e82974c9c5d5a3821fe.pdf>`__ 
+de uso del software.
+
+PROYECTO 4
+^^^^^^^^^^^^
+
+Realiza el proyecto 4 que encuentras `aquí <https://www.nand2tetris.org/project04>`__
+
+Lectura 11
+^^^^^^^^^^^^
+
+Lee el `capítulo 5 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_b2cad2eea33847869b86c541683551a7.pdf>`__.
+
+Ejercicio 6
+^^^^^^^^^^^^
+En tu bitácora de trabajo responde las siguientes preguntas:
+
+
+PROYECTO 5
+^^^^^^^^^^^^
+
+Realiza el proyecto 5 que encuentras `aquí <https://www.nand2tetris.org/project05>`__
+
+
+Lectura 12
+^^^^^^^^^^^^
+
+Lee el `capítulo 6 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_89a8e226476741a3b7c5204575b8a0b2.pdf>`__.
+
+Ejercicio 7
+^^^^^^^^^^^^
+En tu bitácora de trabajo responde las siguientes preguntas:
+
+PROYECTO 6
+^^^^^^^^^^^^
+Para realizar este proyecto puedes utilizar el lenguaje de programación que quieras.
+
+Realiza el proyecto 6 que encuentras `aquí <https://www.nand2tetris.org/project06>`__
