@@ -1,21 +1,23 @@
-Unidad 1. Lógica combinacional y secuencial
-==============================================
+Unidad 1. Arquitectura del computador
+=======================================
 
 Introducción
 --------------
 
 En esta unidad vas a aprender los bloques de construcción
-básicos del hardware de un sistema de cómputo moderno.
-
+básicos del hardware de un sistema de cómputo moderno y cómo 
+esos bloques pueden combinarse para construir computadores.
 
 Propósito de aprendizaje
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Construir compuertas lógicas.
+Comprender cómo funciona el hardware de un computador moderno 
+desde una perspectiva sistémica, es decir, estudiando las partes 
+que lo componen y cómo conectarlas entre ellas para conseguir funciones 
+cada vez más complejas.
 
-Construir circuitos lógicas combinacionales simples.
-
-Construir circuitos lógicos secuenciales simples.
+¿Cómo lo haremos? Emprendiendo una de las aventuras más interesantes: construyendo 
+un computador.
 
 Temas
 ^^^^^^
@@ -23,23 +25,69 @@ Temas
 * Compuertas lógicas
 * Circuito lógicos y aritméticos: ALU
 * Memorias y registros.
+* Lenguaje de máquina
+* Arquitectura del computador
+* Lenguaje ensamblador
 
-Trayecto de actividades
+
+Actividades
 ------------------------
 
-Ejercicio 1
+Lectura 1
 ^^^^^^^^^^^^
 
-En este curso vamos a construir un computador completo en las unidades 1 y 2
+Todos tenemos una imagen clara de lo que es un computador. De hecho somos usuarios 
+de ellos en nuestro día a día. En últimas un computador es una máquina 
+que lee datos, los procesa y los almacena y/o los presenta de alguna manera. 
+La manera cómo serán procesados los datos es codificada como un conjunto de instrucciones 
+que denominamos programas. 
 
-¿Cómo se construye un computador? 
+Una de la partes fundamentales de un computador es la unidad de procesamiento central 
+o Central Processing Unit (CPU). Este componente se encarga de leer, entender y ejecutar 
+las instrucciones que componen los programas. Otra de las partes esenciales es la memoria. 
+En ella se almacenan las instrucciones, así como los datos que estas manipulan. En 
+este curso vamos a concentrarnos particularmente en la construcción de estas dos partes; 
+sin embargo, el resultado final será un computador como el que se muestra en la siguiente 
+imagen:
 
-Se parte de un diseño que se describe mediante algún lenguaje de descripción de hardware:
+.. image:: ../_static/finalComputer.png
+
+Por facilidad, toda la construcción la vamos a realizar de manera virtual, es decir,
+vamos a simular cada una de las partes que componen el sistema de cómputo; no obstante, 
+las herramientas y procesos que usaremos son muy similares a los que se usan 
+en la industria y con un poco más de esfuerzo incluso podríamos llegar a una implementación 
+física.
+
+Lectura 2
+^^^^^^^^^^^^
+Para realizar la construcción de la CPU y la memoria vamos a necesitar un LENGUAJE 
+especial que nos permita describir las partes de un componente y cómo esas 
+partes se conectan entre ellas para lograr la funcionalidad deseada. El lenguaje 
+que vamos a utilizar será HDL o lenguaje de descripción de hardware, el cual es una 
+versión MUY simplificada de los lenguajes que se usan en la industria.
+
+.. warning:: 
+    Material complementario 1
+
+    Si te gusta un poco la historia te voy a recomendar que veas 
+    `este <https://youtube.com/playlist?list=PL1331A4548513EA81>`__ documental 
+    de la BBC donde podrás observar una historia de los computadores.
+
+Lectura 3
+^^^^^^^^^^^^
+La CPU y la memoria están construidas de `circuitos integrados <https://en.wikipedia.org/wiki/Integrated_circuit>`__ 
+que llamaremos chips. Por tanto, lo que realmente haremos en este curso es implementar 
+algunos chips y luego los conectaremos con otros para obtener el PREMIO: la computadora.
+
+Alguna vez te has preguntado ¿Cómo se implementa y construye un chip?
+
+Pues se parte de un diseño que se describe mediante algún lenguaje de descripción 
+de hardware, como por ejemplo, el que puedes observar en la imagen:
 
 .. image:: ../_static/gateHDL.png
 
-Luego el diseño se debe traducir a transistores y conexiones entre
-estos:
+Luego este diseño debe descomponerse en partes más simples. Esas partes se denominan 
+`transistores <https://en.wikipedia.org/wiki/Transistor>`__:
 
 .. image:: ../_static/transistor.png
 
@@ -53,24 +101,52 @@ fotolitografía:
         <iframe width="560" height="315" src="https://www.youtube.com/embed/vK-geBYygXo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-Y ¿Cómo funciona un transistor?
 
-.. raw:: html
+.. warning:: 
+    Material complementario 2
 
-    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/tz62t-q_KEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+    ¿Cómo funciona un transistor? 
+    .. raw:: html
+        <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/tz62t-q_KEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
 
-En este curso vamos a implementar un computador usando un lenguaje
-de descripción de hardware. Nuestro bloque de construcción básico será la
-compuerta NAND y a partir de esta construiremos otros circuitos, que
-a su vez utilizaremos para construir otros circuitos más complejos.
-El proceso se irá repitiendo hasta llegar a un computador completo.
 
-Ejercicio 2
+Lectura 4
 ^^^^^^^^^^^^
+En resumen, en este curso vamos a construir un computador conectando 
+múltiples chips. Algunos chips los vamos a construir nosotros, mientras que 
+otros simplemente los tomaremos ya listos.
 
+Para implementar un chip emplearemos un lenguaje de descripción de hardware 
+que indique qué partes tendrá el chip y cómo estas se conectan.
+
+La implementación será simulada.
+
+En este viaje no vamos a partir de cero. Vamos a iniciar con un chip ya listo 
+para ser usado que se denomina compuerta NAND. A partir de este chip vamos 
+a implementar otros, inicialmente simples, pero que luego iremos conectando 
+entre ellos para lograr funcionalidades cada vez más complejas hasta llegar 
+a un computador.
+
+Lectura 5
+^^^^^^^^^^^^
 Lee el `capítulo 1 del libro guía <https://docs.wixstatic.com/ugd/44046b_f2c9e41f0b204a34ab78be0ae4953128.pdf>`__
+
+
+Ejercicio 1
+^^^^^^^^^^^^
+En tu bitácora de trabajo responde las siguientes preguntas:
+
+#. ¿Qué es una compuerta lógica (logic gate)?
+#. Dibuja los símbolos de las compuertas NAND, NOT, OR, AND, XOR
+#. ¿Qué es una función booleana?
+#. Escribe la tabla de verdad de las funciones booleanas NOT, AND, OR, NAND y XOR.
+#. ¿Qué relación hay entre una compuerta lógica y una función booleana?
+#. ¿Cómo podrías conseguir una compuerta NAND a partir de una compuerta NOT y una compuerta AND?
+#. 
+
+
 
 Ejercicio 3
 ^^^^^^^^^^^^
