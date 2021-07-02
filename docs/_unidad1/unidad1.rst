@@ -106,11 +106,12 @@ fotolitografía:
     Material complementario 2
 
     ¿Cómo funciona un transistor? 
-    .. raw:: html
-        <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/tz62t-q_KEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
 
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/tz62t-q_KEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
 Lectura 4
 ^^^^^^^^^^^^
@@ -144,6 +145,11 @@ En tu bitácora de trabajo responde las siguientes preguntas:
 #. Escribe la tabla de verdad de las funciones booleanas NOT, AND, OR, NAND y XOR.
 #. ¿Qué relación hay entre una compuerta lógica y una función booleana?
 #. ¿Cómo podrías conseguir una compuerta NAND a partir de una compuerta NOT y una compuerta AND?
+#. ¿Qué tiene de especial el conjunto de compuertas {AND,NOT,OR}?
+#. ¿Qué tiene de especial la compuerta NAND?
+#. ¿Cuántas filas tiene la tabla de verdad de una función booleana?
+#. Muestra un ejemplo de una función booleana deducida a partir de una tabla de verdad
+#. Dibuja cómo sería una compuerta OR de 4 entradas usando solo compuertas OR de 2 entradas
 #. 
 
 
