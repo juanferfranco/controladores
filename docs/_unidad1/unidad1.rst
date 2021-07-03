@@ -188,6 +188,16 @@ PROYECTO 1
 ^^^^^^^^^^^^
 Realiza el primer proyecto de esta unidad que puedes encontrar `aquí <https://www.nand2tetris.org/project01>`__
 
+Tu bitácora debe tener lo siguiente:
+
+#. Un video que muestre el proyecto pasando todos los vectores de prueba.
+#. El diagrama de compuertas de cada circuito.
+
+.. warning::
+    CONTROL DE VERSIÓN
+
+    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
+    debe mostrar el proceso de trabajo.
 
 Lectura 7
 ^^^^^^^^^^^^
@@ -208,13 +218,26 @@ En tu bitácora de trabajo responde las siguientes preguntas:
 #. ¿Cuáles son los tamaños típicos en bits con los cuales se representan en un computador números enteros?
 #. ¿Cuántos números enteros positivos se pueden representar con 8 bits?
 #. ¿Cuántos número enteros positivos se pueden representar con n bits? 
-
+#. Realiza una tabla donde muestres los números positivos y negativos que puedes representar en complemento a 2 con 4 bits.
+#. ¿Cómo es el -1 en complemento a dos con 4,8,16,32 bits? ¿Qué puedes concluir?
+#. Con n bits ¿Cuál es el rango de número positivos y negativos que puedes representar?
+#. Si tienes 4 bits que representan números en complemento a dos. ¿Qué pasa si sumas 7 + 1?  
 
 PROYECTO 2
 ^^^^^^^^^^^^
 
 Realiza el proyecto 2 que encuentras `aquí <https://www.nand2tetris.org/project02>`__.
 
+Tu bitácora debe tener lo siguiente:
+
+#. Un video que muestre el proyecto pasando todos los vectores de prueba.
+#. El diagrama de compuertas de cada circuito.
+
+.. warning::
+    CONTROL DE VERSIÓN
+
+    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
+    debe mostrar el proceso de trabajo.
 
 Lectura 8
 ^^^^^^^^^^^^
@@ -225,12 +248,24 @@ Ejercicio 4
 ^^^^^^^^^^^^
 En tu bitácora de trabajo responde las siguientes preguntas:
 
-
+#. ¿Cómo funciona un flip-flop tipo D o data?
+#. Dibuja el diagrama general de un circuito lógica secuencial. Explica cómo funciona.
 
 PROYECTO 3
 ^^^^^^^^^^^^
 
 Realiza el proyecto 3 que encuentras `aquí <https://www.nand2tetris.org/project03>`__
+
+Tu bitácora debe tener lo siguiente:
+
+#. Un video que muestre el proyecto pasando todos los vectores de prueba.
+#. El diagrama de compuertas de cada circuito.
+
+.. warning::
+    CONTROL DE VERSIÓN
+
+    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
+    debe mostrar el proceso de trabajo.
 
 Lectura 9
 ^^^^^^^^^^^^
@@ -242,16 +277,34 @@ Ejercicio 5
 ^^^^^^^^^^^^
 En tu bitácora de trabajo responde las siguientes preguntas:
 
-Lectura 10
-^^^^^^^^^^^^
+#. Muestra una instrucción tipo A en representación simbólica y en lenguaje de máquina. Explica qué hace esta instrucción.
+#. Muestra una instrucción tipo C en representación simbólica y en lenguaje de máquina. Explica qué hace esta instrucción.
+#. En el lenguaje hack ¿Qué son los símbolos? muestra varios ejemplos de estos.
+#. ¿Qué son los labels? ¿Para qué sirven? ¿En que se diferencian de los símbolos?
+
+Lectura 10 (con ejercicio)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Par el siguiente proyecto vas a necesitar un programa diferente. En este caso, un 
 emulador de CPU. Lee las `instrucciones <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_f63aba2611944e82974c9c5d5a3821fe.pdf>`__ 
 de uso del software.
+
+Analiza los 3 ejemplos de programación de hack (sección 4.3 edición 2, habla con el profe). Simula cada programa.
 
 PROYECTO 4
 ^^^^^^^^^^^^
 
 Realiza el proyecto 4 que encuentras `aquí <https://www.nand2tetris.org/project04>`__
+
+Tu bitácora debe tener lo siguiente:
+
+#. Un video que muestre el proyecto pasando todos los vectores de prueba.
+#. Realiza diagramas de flujo para cada programa.
+
+.. warning::
+    CONTROL DE VERSIÓN
+
+    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
+    debe mostrar el proceso de trabajo.
 
 Lectura 11
 ^^^^^^^^^^^^
@@ -262,12 +315,28 @@ Ejercicio 6
 ^^^^^^^^^^^^
 En tu bitácora de trabajo responde las siguientes preguntas:
 
+#. Explica con tus propias palabras en qué consiste el concepto de programa almacenado.
+#. ¿Por qué es importante el concepto de programa almacenado? ¿Qué ventaja tiene frente a las primeras computadoras?
+#. Explica en qué cosiste la arquitectura con Neumann.
+#. ¿Cuál es la diferencia entre la memoria de datos y la memoria de instrucciones?
+#. ¿Cuáles son los elementos básicos de una CPU? ¿Qué función cumple cada uno?
+#. Explica con tus propias palabras en qué cosiste el concepto de dispositivos de entrada salida mapeados a memoria.
 
 PROYECTO 5
 ^^^^^^^^^^^^
 
 Realiza el proyecto 5 que encuentras `aquí <https://www.nand2tetris.org/project05>`__
 
+Tu bitácora debe tener lo siguiente:
+
+#. Un video que muestre el proyecto pasando todos los vectores de prueba.
+#. El diagrama de compuertas de cada circuito.
+
+.. warning::
+    CONTROL DE VERSIÓN
+
+    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
+    debe mostrar el proceso de trabajo.
 
 Lectura 12
 ^^^^^^^^^^^^
@@ -278,8 +347,22 @@ Ejercicio 7
 ^^^^^^^^^^^^
 En tu bitácora de trabajo responde las siguientes preguntas:
 
+#. Explica por qué es necesario realizar dos pasadas a un programa con símbolos al ensamblarlo (de ensamblador a código de máquina)
+#. Escribe PASO a PASO el algoritmo necesario para ensamblar un programa con símbolos y sin símbolos.
+
 PROYECTO 6
 ^^^^^^^^^^^^
 Para realizar este proyecto puedes utilizar el lenguaje de programación que quieras.
 
 Realiza el proyecto 6 que encuentras `aquí <https://www.nand2tetris.org/project06>`__
+
+Tu bitácora debe tener lo siguiente:
+
+#. Un video que muestre el proyecto pasando todos los vectores de prueba.
+#. Realiza diagramas de flujo para cada programa.
+
+.. warning::
+    CONTROL DE VERSIÓN
+
+    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
+    debe mostrar el proceso de trabajo.
