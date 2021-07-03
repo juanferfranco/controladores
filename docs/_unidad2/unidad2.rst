@@ -34,6 +34,10 @@ Ejercicio 1: entorno de trabajo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Para poder trabajar en los ejercicios vas a necesitar un ambiente de trabajo basado en Linux.
+
+Te voy a pedir que le des una mirada a  `este video <https://youtu.be/ZPpo-uViT_o>`__ para 
+que te hagas una idea de qué es Linux.
+
 Hay varias opciones para tener Linux funcionando en tu computador: lo puedes instalar en una 
 memoria, en una partición de tu computador, en una máquina virtual o incluso en 
 `WSL2 <https://docs.microsoft.com/en-us/windows/wsl/install-win10>`__.
@@ -63,12 +67,13 @@ Te voy a dejar unos videos de ayuda:
 * Si tu computador no arranca en Linux debes reiniciarlo y entrar el menu de boot (debes indagar 
   cómo hacerlo en tu computador) y seleccionar Linux.
 
-Si lo anterior no te funciona, prueba con una máquina virtual o con WSL2.
+Si lo anterior no te funciona, prueba con una `máquina virtual <https://youtu.be/tNUgLsXD7xg>`__ o con WSL2.
+Ten presente que las versiones de los videos pueden no coincidir con las versiones actuales.
 
 Ejercicio 2: instala las herramientas 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Una vez tengas Linux instalado instala unas cuentas herramientas:
+Una vez tengas Linux funcionando debes instalar una cuentas herramientas:
 
 Abren la terminal y ejecuta los comandos:
 
@@ -99,6 +104,14 @@ de tu sistema operativo.
 
 Para ello te propongo realizar la siguiente
 `guía <https://drive.google.com/open?id=11tTtbCuVjYcBBYPrULbCeb0PABJLyhGEtzRGKMRG5u0>`__.
+
+
+
+
+
+
+
+
 
 Ejercicio 5: lenguaje de programación C
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
