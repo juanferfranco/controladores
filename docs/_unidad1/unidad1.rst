@@ -337,32 +337,3 @@ Tu bitácora debe tener lo siguiente:
 
     Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
     debe mostrar el proceso de trabajo.
-
-Lectura 12
-^^^^^^^^^^^^
-
-Lee el `capítulo 6 del libro guía <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_89a8e226476741a3b7c5204575b8a0b2.pdf>`__.
-
-Ejercicio 7
-^^^^^^^^^^^^
-En tu bitácora de trabajo responde las siguientes preguntas:
-
-#. Explica por qué es necesario realizar dos pasadas a un programa con símbolos al ensamblarlo (de ensamblador a código de máquina)
-#. Escribe PASO a PASO el algoritmo necesario para ensamblar un programa con símbolos y sin símbolos.
-
-PROYECTO 6
-^^^^^^^^^^^^
-Para realizar este proyecto puedes utilizar el lenguaje de programación que quieras.
-
-Realiza el proyecto 6 que encuentras `aquí <https://www.nand2tetris.org/project06>`__
-
-Tu bitácora debe tener lo siguiente:
-
-#. Un video que muestre el proyecto pasando todos los vectores de prueba.
-#. Realiza diagramas de flujo para cada programa.
-
-.. warning::
-    CONTROL DE VERSIÓN
-
-    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
-    debe mostrar el proceso de trabajo.

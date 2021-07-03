@@ -56,13 +56,10 @@ Cada unidad estará constituida por tres fases:
 Cronograma
 ------------
 
-Te sugiero completar cada unidad en los siguientes tiempos:
-
-* Unidad 1: semanas 1 a 3
-* Unidad 2: semanas 4 a 6
-* Unidad 3: semanas 7 a 10
-* Unidad 4: semanas 11 a 13
-* Unidad 5: semanas 14 a 16 
+* Unidad 1: semanas 1 a 6
+* Unidad 2: semanas 7 a 12
+* Unidad 3: semanas 13 a 14
+* Unidad 4: semanas 15 a 16
 
 Evaluación
 -----------
