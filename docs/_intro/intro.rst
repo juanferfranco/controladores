@@ -36,13 +36,12 @@ acuerdo a requerimientos condicionados por el contexto.
 Estructura y metodología del curso
 -----------------------------------
 
-El curso está divido en 5 unidades:
+El curso está divido en 4 unidades:
 
-#. Unidad 1: Lógica combinacional y secuencial.
-#. Unidad 2: Arquitectura del computador.
-#. Unidad 3: Del código fuente al ejecutable: compiladores, máquinas virtuales, C, C++, C#.
-#. Unidad 4: Programación orientada a objetos.
-#. Unidad 5: Sistema operativo: procesos, hilos, memoria virtual, sincronización, comunicación,
+#. Unidad 1: Arquitectura del computador.
+#. Unidad 2: Del código fuente al ejecutable: compiladores, máquinas virtuales, C, C++, C#.
+#. Unidad 3: Programación orientada a objetos.
+#. Unidad 4: Sistema operativo: procesos, hilos, memoria virtual, sincronización, comunicación,
    entrada salida.
 
 Cada unidad estará constituida por tres fases:
@@ -56,15 +55,15 @@ Cada unidad estará constituida por tres fases:
 Cronograma
 ------------
 
-* Unidad 1: semanas 1 a 6
-* Unidad 2: semanas 7 a 12
-* Unidad 3: semanas 13 a 14
+* Unidad 1: semanas 1 a 5
+* Unidad 2: semanas 6 a 11
+* Unidad 3: semanas 12 a 14
 * Unidad 4: semanas 15 a 16
 
 Evaluación
 -----------
 
-Cada unidad tiene un peso del 20% en la nota final. Notarás que algunas
+Cada unidad tiene un peso del 25% en la nota final. Notarás que algunas
 unidades tienen un proyecto, pero otras tiene más de uno.
 
 La Unidad solo se considera terminada cuando termines todos 
@@ -74,12 +73,9 @@ será 5.
 
 Puedes entregar cada unidad cuando quieras, pero considera lo siguiente:
 
-En la semana 8 se hará un primer corte del 50% y se reportarán al sistema
-las unidades terminadas y evaluadas. Ten presente que la evaluación se realiza
-mediante una entrevista con el profesor en la cual discutirán los resultados
-de tu trabajo y recibirás retroalimentación personalizada. Para la semana 8
-deberías tener terminadas las unidades 1 y 2. Si no alcanzas, cuando las termines
-se actualizará tu nota.
+En el cronograma se han establecido las fechas sugeridas para la entrega de cada unidad.
+En esas fechas se realizarán cortes, es decir, si no has entregado para esa fecha, 
+en el sistema se reportará un 0. Una vez realices la entrega la nota se cambiará.
 
 En la semana 16 se reportarán al sistema todas las unidades terminadas. ES MUY
 IMPORTANTE que tengas en cuenta que una unidad se considera terminada SI y SOLO
