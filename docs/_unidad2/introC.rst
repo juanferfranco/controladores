@@ -26,12 +26,13 @@ Temas
 #. Instrucciones de control de flujo
 #. Punteros
 #. Arreglos y su relación con los punteros
+#. Cadenas de caracteres
 #. Memoria dinámica 
 #. Estructuras de datos
 #. Entrada-Salida
 
-Ejercicios y retos
-------------------------
+Lecturas, ejercicios y retos
+---------------------------------
 
 Lectura 1: ¿Qué es C y sus características?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -91,14 +92,14 @@ Lectura 2: Estructura básica de un programa en c
             <iframe frameborder="0" width="100%" height="500px" src="https://replit.com/@juanferfranco/helloWorld?lite=true"></iframe>
         </div>
 
-Ejercicio 1
-^^^^^^^^^^^^^
+Ejercicio 1: estructura de un programa en C
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Realiza un diagrama de flujo para el programa de la lectura anterior. Te voy a recomendar una herramienta 
 muy buena para hacer lo anterior, se llama `draw.io <https://app.diagrams.net/>`__. 
 
-Ejercicio 2
-^^^^^^^^^^^^^
+Ejercicio 2: compilación de un programa en C
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Compila el programa anterior así:
 
@@ -352,8 +353,8 @@ Lectura 6: Ámbito y accesibilidad de las variables
     :scale: 50%
     :alt: ámbito de una variable
 
-Ejercicio 3
-^^^^^^^^^^^^^
+Ejercicio 3: ámbito y accesibilidad de variables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Escribe, compila y ejecuta el programa anterior. Analiza detenidamente el resultado.
 
@@ -361,11 +362,7 @@ Ejercicio 4: Operadores
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Para que puedas practicar con este ejercicio te voy a recomendar que uses el depurar de C.
-En el siguiente `video <https://youtu.be/ArJWgY680bo>`__ te muestro cómo puedes iniciar a usarlo.
-
-El código del ejemplo es este:
-
-
+En el siguiente video te muestro cómo puedes iniciar a usarlo.
 
 .. raw:: html
     
@@ -373,23 +370,512 @@ El código del ejemplo es este:
         <iframe width="560" height="315" src="https://www.youtube.com/embed/ArJWgY680bo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
+El código del ejemplo que está en el video es este:
 
-Los ejemplos que viste en este ejercicios los puedes encontrar `aquí <https://www.tutorialspoint.com/cprogramming/c_operators.htm>`__
+.. code-block:: c 
+        :linenos:
+    
+        #include <stdio.h>
+        #include <stdint.h>
+        
+        int main(void)
+        {
+            int32_t a = 10;
+            int32_t b = 20;
+            int32_t c = 0;
+        
+            c = a + b;
+            c = a - b;
+            c = a * b;
+            c = a / b;
+            c = a % b;
+            c = a++;
+            c = a--;
+            return 0;
+        }
+    
+Ahora, usa el depurador para depurar el siguiente programa y ver cómo funcionan 
+los distintos operadores. En la siguiente imagen podrás ver los controles básicos para el depurador.
 
-Ejercicio 4
-^^^^^^^^^^^^^
+.. image:: ../_static/debugIcons.png
+    :alt: debugger controls
 
-Inventa ejemplos que muestren la diferencia entre los operadores lógicos y a nivel de bits.
+Los controles 2,3 y 4 de izqueirda a derecha te permitirán ejecutar respectivamente, una función completa, sin 
+entrar en ella; ingreasar a una función y salir de la función una vez ingreses en ella. Prueba estos 
+controles.
 
-Lectura 8: Instrucciones de control de flujo
+Usa el siguiente código, tomado de `aquí <https://www.tutorialspoint.com/cprogramming/c_operators.htm>`__
+
+.. code-block:: c 
+    :linenos:
+
+    #include <stdio.h>
+    #include <stdint.h>
+    
+    void opArithmetic(void);
+    void opRelational(void);
+    void opLogical(void);
+    void opBitWise(void);
+    void opAssignment(void);
+    void opMisc(void);
+    void opPrecedence(void);
+    
+    int main(void)
+    {
+        opArithmetic();
+        opRelational();
+        opLogical();
+        opBitWise();
+        opAssignment();
+        opMisc();
+        opPrecedence();
+        return 0;
+    }
+    
+    void opArithmetic(void)
+    {
+        int a = 21;
+        int b = 10;
+        int c;
+    
+        c = a + b;
+        printf("Line 1 - Value of c is %d\n", c);
+    
+        c = a - b;
+        printf("Line 2 - Value of c is %d\n", c);
+    
+        c = a * b;
+        printf("Line 3 - Value of c is %d\n", c);
+    
+        c = a / b;
+        printf("Line 4 - Value of c is %d\n", c);
+    
+        c = a % b;
+        printf("Line 5 - Value of c is %d\n", c);
+    
+        c = a++;
+        printf("Line 6 - Value of c is %d\n", c);
+    
+        c = a--;
+        printf("Line 7 - Value of c is %d\n", c);
+    
+        return;
+    }
+    void opRelational(void)
+    {
+    
+        int a = 21;
+        int b = 10;
+    
+        if (a == b)
+        {
+            printf("Line 1 - a is equal to b\n");
+        }
+        else
+        {
+            printf("Line 1 - a is not equal to b\n");
+        }
+    
+        if (a < b)
+        {
+            printf("Line 2 - a is less than b\n");
+        }
+        else
+        {
+            printf("Line 2 - a is not less than b\n");
+        }
+    
+        if (a > b)
+        {
+            printf("Line 3 - a is greater than b\n");
+        }
+        else
+        {
+            printf("Line 3 - a is not greater than b\n");
+        }
+    
+        /* Lets change value of a and b */
+        a = 5;
+        b = 20;
+    
+        if (a <= b)
+        {
+            printf("Line 4 - a is either less than or equal to  b\n");
+        }
+    
+        if (b >= a)
+        {
+            printf("Line 5 - b is either greater than  or equal to b\n");
+        }
+    
+        return;
+    }
+    
+    void opLogical(void)
+    {
+    
+        int a = 5;
+        int b = 20;
+    
+        if (a && b)
+        {
+            printf("Line 1 - Condition is true\n");
+        }
+    
+        if (a || b)
+        {
+            printf("Line 2 - Condition is true\n");
+        }
+    
+        /* lets change the value of  a and b */
+        a = 0;
+        b = 10;
+    
+        if (a && b)
+        {
+            printf("Line 3 - Condition is true\n");
+        }
+        else
+        {
+            printf("Line 3 - Condition is not true\n");
+        }
+    
+        if (!(a && b))
+        {
+            printf("Line 4 - Condition is true\n");
+        }
+    
+        return;
+    }
+    
+    void opBitWise(void)
+    {
+        unsigned int a = 60; /* 60 = 0011 1100 */
+        unsigned int b = 13; /* 13 = 0000 1101 */
+        int c = 0;
+    
+        c = a & b; /* 12 = 0000 1100 */
+        printf("Line 1 - Value of c is %d\n", c);
+    
+        c = a | b; /* 61 = 0011 1101 */
+        printf("Line 2 - Value of c is %d\n", c);
+    
+        c = a ^ b; /* 49 = 0011 0001 */
+        printf("Line 3 - Value of c is %d\n", c);
+    
+        c = ~a; /*-61 = 1100 0011 */
+        printf("Line 4 - Value of c is %d\n", c);
+    
+        c = a << 2; /* 240 = 1111 0000 */
+        printf("Line 5 - Value of c is %d\n", c);
+    
+        c = a >> 2; /* 15 = 0000 1111 */
+        printf("Line 6 - Value of c is %d\n", c);
+        return;
+    }
+    
+    void opAssignment(void)
+    {
+        int a = 21;
+        int c;
+    
+        c = a;
+        printf("Line 1 - =  Operator Example, Value of c = %d\n", c);
+    
+        c += a;
+        printf("Line 2 - += Operator Example, Value of c = %d\n", c);
+    
+        c -= a;
+        printf("Line 3 - -= Operator Example, Value of c = %d\n", c);
+    
+        c *= a;
+        printf("Line 4 - *= Operator Example, Value of c = %d\n", c);
+    
+        c /= a;
+        printf("Line 5 - /= Operator Example, Value of c = %d\n", c);
+    
+        c = 200;
+        c %= a;
+        printf("Line 6 - %%= Operator Example, Value of c = %d\n", c);
+    
+        c <<= 2;
+        printf("Line 7 - <<= Operator Example, Value of c = %d\n", c);
+    
+        c >>= 2;
+        printf("Line 8 - >>= Operator Example, Value of c = %d\n", c);
+    
+        c &= 2;
+        printf("Line 9 - &= Operator Example, Value of c = %d\n", c);
+    
+        c ^= 2;
+        printf("Line 10 - ^= Operator Example, Value of c = %d\n", c);
+    
+        c |= 2;
+        printf("Line 11 - |= Operator Example, Value of c = %d\n", c);
+    }
+    void opMisc(void)
+    {
+        int a = 4;
+        short b;
+        double c;
+        int *ptr;
+    
+        /* example of sizeof operator */
+        printf("Line 1 - Size of variable a = %ld\n", sizeof(a));
+        printf("Line 2 - Size of variable b = %ld\n", sizeof(b));
+        printf("Line 3 - Size of variable c= %ld\n", sizeof(c));
+    
+        /* example of & and * operators */
+        ptr = &a; /* 'ptr' now contains the address of 'a'*/
+        printf("value of a is  %d\n", a);
+        printf("*ptr is %d.\n", *ptr);
+    
+        /* example of ternary operator */
+        a = 10;
+        b = (a == 1) ? 20 : 30;
+        printf("Value of b is %d\n", b);
+    
+        b = (a == 10) ? 20 : 30;
+        printf("Value of b is %d\n", b);
+    
+        return;
+    }
+    
+    void opPrecedence(void)
+    {
+        int a = 20;
+        int b = 10;
+        int c = 15;
+        int d = 5;
+        int e;
+    
+        e = (a + b) * c / d; // ( 30 * 15 ) / 5
+        printf("Value of (a + b) * c / d is : %d\n", e);
+    
+        e = ((a + b) * c) / d; // (30 * 15 ) / 5
+        printf("Value of ((a + b) * c) / d is  : %d\n", e);
+    
+        e = (a + b) * (c / d); // (30) * (15/5)
+        printf("Value of (a + b) * (c / d) is  : %d\n", e);
+    
+        e = a + (b * c) / d; //  20 + (150/5)
+        printf("Value of a + (b * c) / d is  : %d\n", e);
+    
+        return;
+    }
+
+Lectura 7: Instrucciones de control de flujo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lee sobre las instrucciones de control flujo `aquí <https://www.tutorialspoint.com/cprogramming/c_decision_making.htm>`__ 
 y `aquí <https://www.tutorialspoint.com/cprogramming/c_loops.htm>`__.
 
-Lectura 9: Punteros
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Lectura 8: Punteros
+^^^^^^^^^^^^^^^^^^^^^^^
 
+Los punteros son ``VARIABLES`` que almacenan la dirección de otra variable. 
+
+Ejecuta el siguiente programa:
+
+.. code-block:: c
+    :linenos:
+
+
+    #include <stdio.h>
+    #include <stdint.h>
+    
+    int main(void){
+    
+        char a;
+        int b;
+        float c;
+        void (*d)(void); 
+    
+        printf("a'address: %p\n", &a);
+        printf("b'address: %p\n", &b);
+        printf("c'address: %p\n", &c);
+        printf("d'address: %p\n", &d);
+    
+        return 0;
+    }
+
+En mi caso la salida se ve así:
+
+.. code-block:: bash
+    :linenos:
+
+    ./p1
+    a'address: 0x7ffd249a93d7
+    b'address: 0x7ffd249a93d8
+    c'address: 0x7ffd249a93dc
+    d'address: 0x7ffd249a93e0
+
+¿Qué significan esos números que se ven en la pantalla?
+
+Pues no son más que las direcciones de memoria virtual de las variables ``a``, ``b``, ``c`` y ``d``.
+
+Nota el tipo de cada varible. Mira que no importa el tipo de variable,
+el tamaño de la dirección es la misma.
+
+Ahora mira la dirección de ``b`` y la dirección de ``a``. La diferencia entre ellas es de 1; sin embargo, 
+entre ``b`` y ``c`` la diferencia de sus direcciones es de 4. ¿Por qué? ``PRESTA MUCHA ATENCIÓN``, aunque 
+las direcciones tienen el mismo tamaño, lo que hay guardado en la dirección de memoria es de diferente 
+tamaño. Mira, en la dirección de ``a`` tienes guardado un ``char``. Ya sabes que los ``char`` ocupan un byte. En la 
+dirección de ``b`` tienes almancenado un ``int``, en mi computador los ``int`` son de 4 bytes o 32 bits. 
+
+Te dejo esta pregunta a ti. Considerando lo anterior, analiza la diferencia entre las direcciones de ``c`` y ``d``.
+¿Cuántos bytes necesita un float para ser representado en mi computador? 
+
+En el ejercicio anterior usamos el operador ``&`` antes de la variable a. Con este operador le estás diciendo 
+al compilador que NO QUIERES el contenido de la variable ``a``, sino la dirección de memoria de la variable 
+``a``.
+
+Ejecuta el siguiente ejemplo:
+
+.. code-block:: c
+    :linenos:
+
+    #include <stdio.h>
+    #include <stdint.h>
+
+    int main(void){
+
+        uint32_t var;
+        uint32_t *pvar = &var;
+
+        printf("var'address: %p\n", &var);
+        printf("pvar'address: %p\n", &pvar);
+        printf("pvar content: %p\n", pvar);
+        return 0;
+    }
+
+La salida, en mi computador es:
+
+.. code-block:: bash 
+
+    ./p2
+    var'address: 0x7ffdcf216fec
+    pvar'address: 0x7ffdcf216ff0
+    pvar content: 0x7ffdcf216fec
+
+Observa que la dirección de ``a`` concuerda con el contenido de pvar. ¿Por qué? porque le has 
+dicho al compilador que en pvar vas a guadar la dirección de una VARIABLE DE TIPO uint32_t ( uint32_t * ) y adicionalmente, 
+con el operador ``&`` antes de ``var``, estás indicando que quieres la dirección de ``var`` y además la estás 
+asignado ( ``=`` ) a la variable ``pvar``.   
+
+Finalmente, nota que la dirección de ``pvar`` y el contenido de ``pvar`` son diferentes. ¿Viste cómo 
+conseguimos la dirección de ``pvar``? 
+
+Para terminar esta lectura, te voy a mostrar en el siguiente video cómo puedes utilizar 
+un puntero para leer y escribir la variable que este apunta.
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/8vQ_x1EICrQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+Reto 1: argumentos, punteros y funciones
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Analiza detenidamente el problema que se presenta con el siguiente programa:
+
+.. image:: ../_static/swapChallenge.png
+    :alt: pass by value
+
+#. ¿Qué significa pasar un dato a una función por valor?
+
+#. ¿Qué significa pasar un dato a una función por referencia?
+
+#. ¿Qué es el stack?
+
+Tómate un tiempo para pensar en el reto. Luego observa este video donde 
+te muestro qué está pasando.
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/K-Rg4tygS4Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+Ten en cuenta que en la explicación aterior, estás pasando los datos a la función por valor, es decir, 
+estás copiando los valores de las variables.
+
+¿Cómo podemos solucionar el problema anterior? Te dejo un video para que lo veas.
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Dxa5mCzoErg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+En la solución estás pasando los datos a la función por referencia, es decir, en realidad no pasas 
+los datos directamente, sino las posiciones de memoria donde están los datos.
+
+Lectura 9: Arreglos y su relación con los punteros
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+¿Qué es el nombre de arreglo?
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/aT8x_njflkY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+¿Qué es la dirección de un arreglo? 
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/GglLr-uVWhE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+¿Cómo accedo a los elementos de un arreglo con un puntero?
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/iRXHvW0Q6kc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    
+Reto 2: arreglos, funciones, punteros
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Realiza una función que calcule el promedio de un arreglo de enteros de 32 bits de tamaño arbitrario. 
+Deberías pasarle a la función la dirección en memoria del arreglo y el tamaño.
+
+Lectura 10: cadenas de caracteres
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En este video te muestro cómo se pueden crear cadenas inmutables en C:
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/jxdrB9-aXjU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+Si deseas modificar algún carácter de la cadena en necesario que la crees como un arreglo de caracteres:
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Sjp43zwRjRU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+Ten presente que todas las cadenas en C deben terminar por convención en 0:
+
+.. raw:: html
+    
+    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/tFh7FU5Y36o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+
+Lectura 11: arreglos multidimensionales
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 

@@ -117,7 +117,7 @@ módulo comprenderás en detalle los pasos necesarios para transformar un progra
 lenguaje de máquina; finalmente, en el módulo3 aprenderás acerca de las máquinas virtuales.  
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 3
 
     Introducción a C <./introC>
     Herramientas <./tools>
