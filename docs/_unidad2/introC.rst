@@ -874,8 +874,78 @@ Ten presente que todas las cadenas en C deben terminar por convención en 0:
     </div>
 
 
-Lectura 11: arreglos multidimensionales
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Reto 3: arreglos, cadenas, punteros
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Ejecuta y analiza el siguiente código. No olvides correrlo utilizando el depurador. Te recomiendo 
+que antes de ver la salida del programa trates de predicir cuál será.
+
+.. code-block:: c 
+    :linenos:
+
+    #include <stdio.h>
+    #include <stdint.h>
+    
+    char nombres[3][20] = {"fulano", "mengano", "perano"};
+    
+    int main(void){
+    
+        char *a;
+        char (*b)[20];
+        char (*c)[3][20];
+    
+        a = nombres[0];
+        printf("Imprime el contenido de la dirección almacenada en a: %s\n",a);
+        printf("Imprime el contenido de la dirección almacenada en a+1: %s\n",a+1);
+    
+        b = nombres;
+        uint8_t sizeOfNombresElement = sizeof(nombres)/sizeof(nombres[0]);
+    
+        for(uint8_t i = 0; i < sizeOfNombresElement; i++){
+            printf("Imprime el contenido de la dirección almacenada en b+%d: %s\n",i, (char *)(b+i));
+        }
+    
+        c = &nombres;
+        printf("Imprime el contenido de la dirección almacenada en c: %s\n", (char *) c);
+        printf("Imprime el contenido de la dirección almacenada en c+1: %20s\n", (char *) (c+1) );
+    
+        printf("a  : %p\n",a);
+        printf("a+1: %p\n",a+1);
+        printf("b  : %p\n",b);
+        printf("b+1: %p\n",b+1);
+        printf("c  : %p\n",c);
+        printf("c+1: %p\n",c+1);
+    
+        return 0;
+    }
+
+#. Explica qué hace la línea ``uint8_t sizeOfNombresElement = sizeof(nombres)/sizeof(nombres[0]);``
+#. Observa el ciclo ``for``. ¿Cuál es la función de ``(char *)`` en ``(char *)(b+i)``?
+#. ¿Cómo quedan almacenada en memoria la matriz ``nombres``?
+
+
+Lectura 11: memoria dinámica
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En lenguaje C las variables se puede asignar en memoria de tres formas: estáticamente, automáticamente (en el
+stack), dinámicamente (en el heap).
+
+La memoria dinámica tu la puedes solicitar en tiempo de ejecucación. Piensa por ejemplo en esto: necesitas 
+crear un arreglo de enteros, pero antes de ejecutar el programa no sabes cuántos items tendrá ese arreglo 
+de enteros porque la información del tamaño será ingresada por el usuario al interactuar con tu programa. 
+En este caso, por ejemplo, podrías en tiempo de ejecución SOLICITAR la cantidad de espacio en memoria 
+que será requerida. 
+
+
+.. warning::
+    LA MEMORIA DINÁMICA LA DEBES GESTIONAR DE MANERA MANUAL.
+
+    Mientras tu programa se ejecuta tu puedes reservar memoria en el heap, pero cuando no la necesites 
+    más DEBES liberarla. Ten presente que esto NO es necesario en lenguajes como python, java, C#, entre otros. 
+    Por ejemplo, en C#, para crear variables en el heap usas la palabra reservada ``NEW``; sin embargo,
+    no tienes que liberar manualmente la memoria. Lo anterior es posible gracias a un código que se ejecuta 
+    con el tuyo llamado GARBAGE COLLECTOR (GC). El GC se encargar de liberar la memoria que ya no se está 
+    usando. C no cuenta con con este mecanismo. 
 
 
 
