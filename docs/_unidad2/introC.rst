@@ -930,11 +930,11 @@ Lectura 11: memoria dinámica
 En lenguaje C las variables se puede asignar en memoria de tres formas: estáticamente, automáticamente (en el
 stack), dinámicamente (en el heap).
 
-La memoria dinámica tu la puedes solicitar en tiempo de ejecucación. Piensa por ejemplo en esto: necesitas 
+La memoria dinámica tu la puedes solicitar en tiempo de ejecución. Piensa por ejemplo en esto: necesitas 
 crear un arreglo de enteros, pero antes de ejecutar el programa no sabes cuántos items tendrá ese arreglo 
 de enteros porque la información del tamaño será ingresada por el usuario al interactuar con tu programa. 
-En este caso, por ejemplo, podrías en tiempo de ejecución SOLICITAR la cantidad de espacio en memoria 
-que será requerida. 
+En este caso, por ejemplo, podrías, en tiempo de ejecución, SOLICITAR la cantidad de espacio en memoria 
+que será requerida.
 
 
 .. warning::
@@ -947,7 +947,68 @@ que será requerida.
     con el tuyo llamado GARBAGE COLLECTOR (GC). El GC se encargar de liberar la memoria que ya no se está 
     usando. C no cuenta con con este mecanismo. 
 
+    Pero entonces ¿C no es un bueno lenguaje comparado con java, C#, python, entre otros? La verdad no es así.
+    C es un lenguaje que te permite escribir código muy eficiente y da un GRAN CONTROL sobre la ejecución 
+    del programa. Simplemente ten en cuenta que hay lenguajes de programación apropiados para cada tipo de problema.
 
+En C cuentas con funciones declaradas en el archivo ``#include <stdlib.h>`` que te permiten hacer la gestión de la 
+memoria:
+
+.. code-block:: c
+
+    void *malloc(size_t size);
+    void free(void *ptr);
+    void *calloc(size_t nmemb, size_t size);
+    void *realloc(void *ptr, size_t size);
+    void *reallocarray(void *ptr, size_t nmemb, size_t size);
+
+Con ``malloc`` puedes reservar un número ``size`` de bytes. ``malloc`` te devuleve la dirección de memoria 
+donde comenzará la cantidad de bytes solicitados o NULL en caso de error. Por su parte ``free`` te permite 
+liberar la memoria reservada. Solo debes pasar la dirección que te retornó ``malloc``.   
+
+Observa el siguiente ejemplo:
+
+.. code-block:: c
+    :linenos:
+
+    #include <stdio.h>
+    #include <stdint.h>
+    #include <stdlib.h>
+    
+    uint32_t *create_array(uint8_t);
+    void destroy_array(uint32_t *);
+    
+    int main(void){
+    
+        uint32_t *buffer = create_array(30);
+        if(buffer == NULL) return EXIT_FAILURE;
+    
+        for(uint8_t i = 0; i < 30; i++){
+            buffer[i] = i+1;
+        }
+        
+        for(uint8_t i = 0; i < 30; i++){
+            printf("buffer[%d]: %d\n",i, buffer[i]);
+        }
+    
+        destroy_array(buffer);
+    
+        return EXIT_SUCCESS;
+    }
+    
+    uint32_t *create_array(uint8_t size){
+        return (uint32_t * ) malloc(sizeof(uint32_t)* size );
+    }
+
+    void destroy_array(uint32_t *this){
+        free(this);
+    }
+
+La función ``create_array`` te permitirá reservar la cantidad de enteros que le pases 
+como argumento. Te devolverá la dirección en memoria donde inicia el bloque 
+de enteros reservados. Nota que en ``create_array`` se usa  ``sizeof(uint32_t)* size``. 
+Esto es necesario porque se debe determinar cuántos bytes ocupa un entero y luego multiplicar 
+por la cantidad de enteros para poder obtener la cantidad total de bytes necesarios.
 
 ..
     Ejercicio 7: entrada/salida
