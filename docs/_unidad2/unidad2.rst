@@ -108,20 +108,37 @@ Para ello te propongo realizar la siguiente
 Ten presente que en los comentarios de la guía podrás consultar la solución a las preguntas; 
 sin embargo, trata de pensar primero en la respuesta y luego compara con la explicación.
 
-Ejercicio 5: lenguaje de programación C, herramientas, máquinas virtuales
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ejercicio 5: lenguaje de programación C
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Este será uno de los ejercicios más largos de la unidad. Está dividido en tres módulos.
-En el primer módulo vas a aprender un nuevo lenguaje de programación: ``C``;en el segundo 
-módulo comprenderás en detalle los pasos necesarios para transformar un programa en C a 
-lenguaje de máquina; finalmente, en el módulo3 aprenderás acerca de las máquinas virtuales.  
+Este será uno de los ejercicios más largos de la unidad porque vamos a introducir 
+el lenguaje de programación con el cual estudiaremos todos los conceptos del curso: ``C``.
 
 .. toctree::
     :maxdepth: 3
 
     Introducción a C <./introC>
-    Herramientas <./tools>
-    Máquinas virtuales <./VM>
+
+Ejercicio 6: herramientas
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En este ejercicio comprenderás en detalle los pasos necesarios para transformar un programa en C a 
+lenguaje de máquina.
+
+.. toctree::
+  :maxdepth: 3
+
+  Herramientas <./tools>
+
+Ejercicio 7: máquinas virtuales
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En este ejercicio aprenderás acerca de las máquinas virtuales.  
+
+.. toctree::
+  :maxdepth: 3
+
+  Máquinas virtuales <./VM>
 
 
 PROYECTO 

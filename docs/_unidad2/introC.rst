@@ -940,16 +940,18 @@ que será requerida.
 .. warning::
     LA MEMORIA DINÁMICA LA DEBES GESTIONAR DE MANERA MANUAL.
 
-    Mientras tu programa se ejecuta tu puedes reservar memoria en el heap, pero cuando no la necesites 
+    Mientras tu programa se ejecuta, puedes reservar memoria en el heap, pero cuando no la necesites 
     más DEBES liberarla. Ten presente que esto NO es necesario en lenguajes como python, java, C#, entre otros. 
     Por ejemplo, en C#, para crear variables en el heap usas la palabra reservada ``NEW``; sin embargo,
     no tienes que liberar manualmente la memoria. Lo anterior es posible gracias a un código que se ejecuta 
     con el tuyo llamado GARBAGE COLLECTOR (GC). El GC se encargar de liberar la memoria que ya no se está 
-    usando. C no cuenta con con este mecanismo. 
+    usando. C no cuenta con con este mecanismo. NO LO OLVIDES POR FAVOR. 
 
     Pero entonces ¿C no es un bueno lenguaje comparado con java, C#, python, entre otros? La verdad no es así.
     C es un lenguaje que te permite escribir código muy eficiente y da un GRAN CONTROL sobre la ejecución 
     del programa. Simplemente ten en cuenta que hay lenguajes de programación apropiados para cada tipo de problema.
+    C es el lenguje que se utiliza para escribir el código de Linux, python y una gran parte de los sistemas 
+    embebidos que nos rodean.
 
 En C cuentas con funciones declaradas en el archivo ``#include <stdlib.h>`` que te permiten hacer la gestión de la 
 memoria:
@@ -1010,240 +1012,359 @@ de enteros reservados. Nota que en ``create_array`` se usa  ``sizeof(uint32_t)* 
 Esto es necesario porque se debe determinar cuántos bytes ocupa un entero y luego multiplicar 
 por la cantidad de enteros para poder obtener la cantidad total de bytes necesarios.
 
+En C no tienes excepciones, por tanto, debes verificar siempre que puedas (si quieres 
+que tu código sea robusto), posibles errores. En este caso nota ``create_array`` te devolverá 
+``NULL`` si ``malloc`` no pudo reservar la cantidad de memoria que pediste.
+
+Finalmente, observa que al terminar de usar la memoria, ``destroy_array`` la libera. Tu dirás, 
+¿Si es necesario? La respuesta es SI, aunque el programa termine en este punto y el sistema 
+operativo libere automáticamente la memoria, yo te recomiendo que adquieras el hábito de 
+liberar la memoria. NO OLVIDES es un proceso manual que siempre tendrás que realizar.
+
+Lectura 12: estructuras de datos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En C existe la palabra reservada ``struct`` con la cual puedes crear tus propios tipos de datos.
+Estas ``struct`` de C serán colecciones de una o más variables que pueden ser de tipos diferentes, 
+pero agrupadas bajo un mismo nombre.
+
+Por ejemplo, considera que quieres crear un punto ``(x,y)`` donde la x y la y son enteros. Tienes 
+dos opciones. La primera es manejar cada coordinada de manera independite. La segunda crear un 
+nuevo tipo de dato que incluya las dos coordenadas a la vez:
+
+.. code-block:: c 
+
+    struct point{
+        int x;
+        int y;
+    };
+
+Nota que cada varible la separas por ``;`` y luego de las llaves colocas otro ``;``.
+
+Ahora vamos a explorar un poco más las estructuras con unas preguntas básicas:
+
+* ¿La declaración de point en el ejemplo anterior ocupa MEMORIA? No ocupa memoria. Puedes 
+  pensarlo como la declaración de una clase.
+* ¿Cuándo ocupa memoria una ``struct``? cuando declaras variables del tipo de la ``struct``.
+* ¿Cómo se declara una variable struct? ``struct point p1``. En este caso p1 si ocupa memoria, 
+  aunque aún no has inicializado sus miembros ``x`` y ``y``. 
+* ¿Cómo puedo inicializar un variable tipo ``struct``? ``struct point p1 = {1,2};``. En este 
+  caso estás creando un memoria la varibale ``p1`` e inicializando la x en 1 y la y en 2.
+* ¿Cómo puedes acceder a los miembros de una ``struct``? Para acceder a ``x`` utilizas ``p1.x`` 
+  y para acceder a ``y`` ``p2.y``. 
+* ¿Puedo tener ``struct`` y arreglos dentro de un ``struct``? Lo puedes hacer. Considera por ejemplo, 
+  que quiere definir un nuevo tipo de dato que represente un rectángulo. Para definir un rectángulo 
+  vas a necesitar dos puntos. 
+  
+.. image:: ../_static/rect.png
+    :scale: 100%
+    :alt: rectángulo 
+
+.. code-block:: c 
+
+    struct point{
+        int x;
+        int y;
+    };
+
+    struct rectangle{
+        struct point pt1;
+        struct point pt2; 
+    };
+
+* ¿Puedes asignar una struct en otras struct compatibles? SI lo puedes hacer:
+
+.. code-block:: c 
+
+    #include <stdio.h>
+    
+    struct Point {
+        int x;
+        int y;
+    };
+    
+    int main()
+    {
+        struct Point p1 = {10, 20};
+        struct Point p2 = p1; 
+        printf(" p2.x = %d, p2.y = %d\n", p2.x, p2.y);
+        return 0;
+    }
+
+Ten en cuenta que el contenido de ``p1`` SE COPIA en ``p2``. 
+
+* ¿Puedo comparar dos ``struct``? NO lo puedes hacer. Intenta con el siguiente 
+  programa. Observarás un error del compilador
+
+.. code-block:: c 
+
+    #include <stdio.h>
+    
+    struct Point {
+        int x;
+        int y;
+    };
+    
+    int main()
+    {
+        struct Point p1 = {10, 20};
+        struct Point p2 = p1; 
+        printf(" p2.x = %d, p2.y = %d\n", p2.x, p2.y);
+
+        if(p1 == p2){
+            printf("p1 is equal to p2\n");
+        }
+
+        return 0;
+    }
+
+Reto 4: comparación de estructuras
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En la lectura anterior viste que no es posible comparar dos struct usando 
+el operador ``==``. En este reto te propongo que hagas un programa que 
+permita determinar si dos struct son iguales.
+
+Lectura 13: estructuras y punteros
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+¿Es posible guardar la dirección en memoria de una variable tipo ``struct`` en un 
+puntero? Si es posible:
+
+.. code-block:: c
+
+    #include <stdio.h>
+    
+    struct Point {
+        int x;
+        int y;
+    };
+    
+    int main()
+    {
+        struct Point p1 = {10, 20};
+        struct Point *pp1 = &p1;
+        printf(" p1.x = %d, p1.y = %d\n", pp1->x, pp1->y);
+        return 0;
+    }
+
+``pp1`` es una variable que almacena la dirección de ``p1``; sin embargo, 
+para acceder a los miembros de p1 a través de pp1 debes usuar el operador ``->``.
+
+Lectura 14: entrada - salida
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En esta lectura aprenderás a solicitarle información al usuario por medio del 
+teclado. Profundizarás un poco más en el funcionamiento de la salida por pantalla 
+formateada y finalmente aprenderás a leer y almacenar información persistente.
+
+¿Cómo puedes hacer para leer información por medio del teclado?
+
+Tu programa no puede leer directamente la información que el usuario ingresa desde 
+el teclaro. Esta tarea la debes hacer por medio del sistema operativo, es decir, debes 
+``pedirle el favor`` al sistema operativo (un llamado al sistema operativo). 
+¿Cómo? Te voy a proponer una de muchas maneras usando esta función 
+``char *fgets(char *str, int n, FILE *stream)``. A ``fgets`` 
+le debes pasar la dirección del buffer (arreglo en memoria) donde quieres colocar los 
+caracteres introducidos por el usuario, la cantidad de caracteres y la fuente (el flujo) 
+de donde estos vienen. La función con esta información se encarga de hacer el llamado o la 
+solicitud al sistema operativo. Mientras el sistema operativo hace lo que pediste, tu programa
+se BLOQUEA. Esto significa que le entregas el control al sistema operativo. Una vez presiones 
+la tecla ``ENTER`` el sistema operativo copiará la información ingresada por el usuario al 
+buffer que definiste y tu programa podrá continuar. 
+
+Analicemos juntos este código:
+
+.. code-block:: c
+    :linenos:
+
+    #include <stdio.h>
+    int main(void)
+    {
+        char name[40];
+        printf("What is your name? ");
+        if (fgets(name, 40, stdin) != NULL)
+        {
+            printf("Hello %s!\n", name);
+        }
+    }
+
+¿Recuerdas qué es el nombre de un arreglo? Es la dirección del primer elemento del arreglo. Por 
+tanto le estás diciendo a ``fgets`` dónde debe iniciar a colocar los caracteres introducidos 
+por el usuario y hasta cuántos, en este caso 40. Nota además que le dices de dónde vienen 
+los datos: ``stdin`` o el flujo de entrada estándar, que en este caso es el teclado. Finalmente, 
+observa que si hay algún error en la operación ``fgets`` devuelve ``NULL`` y es por eso 
+que en este programa se verifica que el resultado sea diferente a ese valor.     
+
+Al ejecutarlo verás esto:
+
+.. code-block:: bash 
+
+    ./stdinRead                       
+    What is your name? juan franco
+    Hello juan franco
+    !
+
+¿Te lo esperabas? observa que luego de la cadena ``juan franco`` también se está imprimiendo 
+el ENTER que el usuario ingresó.
+
+¿Y si no quieres ese ENTER? El carácter ENTER estará al final de la cadena ``juan franco``. 
+Vamos a comprobarlo. Ejecuta de nuevo el programa con la siguiente modificación. Ten presente que no verás 
+la cadena ``What is your name?``, no importa, igual escribe tu nombre y presiona ENTER
+
+.. code-block:: bash 
+
+    ./stdinRead > out.txt
+    juan franco
+    hexdump -C out.txt 
+    00000000  57 68 61 74 20 69 73 20  79 6f 75 72 20 6e 61 6d  |What is your nam|
+    00000010  65 3f 20 48 65 6c 6c 6f  20 6a 75 61 6e 20 66 72  |e? Hello juan fr|
+    00000020  61 6e 63 6f 0a 21 0a                              |anco.!.|
+    00000027
+
+Con esta línea ``./stdinRead > out.txt`` estás redireccionando el flujo de salida a un archivo, 
+``out.txt``. Es por eso que no verás ``What is your name?`` en la pantalla sino en ``out.txt``.
+Lo interesante viene con ``hexdump -C out.txt`` que te permite observar realmente los caracteres 
+escritos por ``printf("Hello %s!\n", name);``. Nota la secuencia de caracteres 
+``6a 75 61 6e 20 66 72 61 6e 63 6f 0a 21 0a`` los primeros ``6a 75 61 6e 20 66 72 61 6e 63 6f`` 
+corresponden a ``juan franco``, luego ``0a`` al ENTER ingresado por el usuario y ``21 0a`` a ``!\n``. Por tanto, 
+para eliminar el ENTER debes buscarlo en el buffer el ENTER y cambiarlo por ``0``.  
+
+Esto se puede hacer de muchas maneras. Te propongo la siguiente:
+
+.. code-block:: c
+    :linenos:
+
+    #include <stdio.h>
+    #include <string.h>
+
+    int main(void)
+    {
+        char name[40];
+        printf("What is your name? ");
+        if (fgets(name, 40, stdin) != NULL)
+        {
+            name[strlen(name) -1 ] = 0;
+            printf("Hello %s!\n", name);
+        }
+    }
+
+La función ``strlen`` encuentra el tamaño de la cadena de caracteres. ¿Cómo? simplemente 
+contando caracteres hasta encontrar un 0. Es por eso que las cadenas de caracteres en 
+C deben terminar simpre con 0. Sabemos que en este caso el ENTER es el último 
+carácter y por tanto está ubicado en la última posición del buffer dada por la longitud 
+de la cadena menos uno. 
+
+Ejercicio 5: ingresar números por teclado 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Escribe el siguiente programa:
+
+.. code-block:: c
+    :linenos:
+
+    #include <stdio.h>
+    #include <string.h>
+    #include <stdint.h>
+    
+    int main(void)
+    {
+        char age[4];
+        printf("How old are you? ");
+        if (fgets(age, 4, stdin) != NULL)
+        {
+            age[strlen(age) -1 ] = 0;
+            printf("I am %s years old\n", age);
+        }
+        for(uint8_t i = 0; i < strlen(age);i++){
+            printf("age[%d]: %c\n",i,age[i]);
+        }
+    }
+    
+
+Al ejecutarlo:
+
+.. code-block:: bash
+
+    gcc -Wall numbers.c -o num
+    ./num 
+    How old are you? 42
+    I am 42 years old
+    age[0]: 4
+    age[1]: 2
+
+Si ejecutas el programa con el depurador notarás que la secuencia de caracteres ``42`` no se almancea 
+en ``age`` como un número sino como el código ASCII del ``4`` (52) y el código ASCII del ``42`` (50). 
+NO OLVIDES ESTO POR FAVOR: si luego quieres hacer operaciones con el número ingresado, lo primero que debes 
+hacer es convertir la secuencia de caracteres '4' '2' en el número ``42``.
+
+.. image:: ../_static/consoleNumbers.png
+    :scale: 100%
+    :alt: lectura de números
+
+Ejercicio 6: convertir caracteres a números
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+No creiste que te dejaría sin saber cómo hacer la conversión de caracteres a números ¿Cierto?
+En C se puede hacer de muchas maneras. Algunas formas son muy simples, pero poco robustas, es decir, 
+no verifican errores o son lentas. Te voy a proponer una forma un tanto más complicada pero más 
+robusta tomada del manual de Linux.
+
+Aquí viene:
+
+.. code-block:: c
+    :linenos:
+
+    #include <stdlib.h>
+    #include <limits.h>
+    #include <stdio.h>
+    #include <errno.h>
+    #include <string.h>
+
+    int main(void)
+    {
+        char *endptr;
+        long val;    
+        char number[40];
+
+        printf("Enter an integer number: ");
+        if (fgets(number, 40, stdin) != NULL)
+        {
+            number[strlen(number) -1 ] = 0;
+            printf("The string to convert is %s\n", number);
+        }
+
+        val = strtol(number, &endptr, 10);    
+        /* Check for various possible errors */    
+        if (errno != 0) 
+        {
+            perror("strtol");
+            exit(EXIT_FAILURE);
+        }    
+        
+        if (endptr == number) {
+            fprintf(stderr, "No digits were found\n");
+            exit(EXIT_FAILURE);
+        }
+
+        /* If we got here, strtol() successfully parsed a number */
+
+        printf("strtol() returned %ld\n", val);
+
+        if (*endptr != '\0')        /* Not necessarily an error... */
+            printf("Further characters after number: \"%s\"\n", endptr);
+
+        exit(EXIT_SUCCESS);
+    }
+
+
+
 ..
-    Ejercicio 7: entrada/salida
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    En la guía introductoria del lenguaje C se discutió la
-    función **scanf** para realizar operaciones de entrada en
-    C. Al realizar el ejercicios final, la calculadora,
-    ¿Notaste algún comportamiento extraño del
-    programa al leer caracteres? Específicamente ``scanf("%c",&var)``.
-
-    Ten presente que al introducir texto en la terminal,
-    además de los caracteres visibles, se introduce un ENTER.
-    Así, por ejemplo, al introducir el número 325 y luego presionar
-    ENTER, se están ingresando 4 bytes: 0x33 0x32 0x35 0x0A. los
-    tres primeros bytes corresponden a los códigos ASCII de cada dígito
-    del número 325 y el 0x0A corresponde al código ASCII del ENTER
-    o nueva línea (NEW LINE).
-
-    Considere el siguiente código:
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-        int main()
-        {
-            int num;
-            char key;
-            printf("Prueba a scanf. Ingrese el numero 325 y presione ENTER:\n");
-            scanf("%d",&num);
-            printf("Ingrese cualquier tecla para terminar y presione ENTER:\n");
-            scanf("%c",&key);
-            
-            return 0;
-        }  
-
-    Ejecuta el código anterior. ¿Cuál es el resultado? ¿Por qué?
-
-    El primer scanf (``scanf("%d",&num);``) buscará en el flujo de entrada una
-    secuencia de bytes que comience con un carácter numérico y parará de leer
-    una vez detecte un carácter no numérico, el cual, dejará intacto en el flujo
-    de entrada. En este caso, ``scanf("%d",&num);`` sacará del flujo
-    los bytes 0x33 0x32 0x35, correspondientes a ``'3'`` ``'2'`` ``'5'``,
-    y dejará en el flujo el byte 0x0A (correspondiente al ENTER). Luego
-    convertirá la cadena de 3 bytes en ASCII al número que representan, es decir,
-    al 325 que en base 16 sería 0x0145 (comprueba esto con la calculadora del
-    sistema operativo)
-
-    El segundo scanf ``scanf("%c",&key);`` leerá un carácter del flujo de entrada.
-    En este caso dicho carácter está disponible y corresponde al ENTER dejado
-    por el scanf anterior.
-
-    ¿Cómo solucionar este problema? Una posible solución será (aunque hay otras
-    más):
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-            int main()
-            {
-                int num;
-                char key;
-                printf("Prueba a scanf. Ingrese el numero 325 y presione ENTER:\n");
-                scanf("%d",&num);
-                scanf("%c",&key); // Saco del flujo el ENTER
-                printf("Ingrese cualquier tecla para terminar y presione ENTER:\n");
-                scanf("%c",&key);
-                return 0;
-            }  
-
-    Ejercicio 8: entrada/salida
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    Para complementar el ejercicio anterior, se propone analizar otros ejemplos
-    (Tomados de este `enlace <http://sekrit.de/webdocs/c/beginners-guide-away-from-scanf.html>`__).
-
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-        int main(void)
-        {
-            int a = 10;
-            printf("enter a number: ");
-            scanf("%d", &a);
-            printf("You entered %d.\n", a);
-        }  
-
-    Ingresa un número y ENTER. ¿Qué ocurre? Ahora ingresa una palabra y ENTER.
-    ¿Qué ocurre? ¿Por qué?
-
-    Ejercicio 9: scanf return
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-    scanf devuelve la cantidad de conversiones realizadas. Analiza
-    este ejemplo (ingresa CRTL+C si algo sale mal):
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-        int main(void)
-        {
-            int a;
-            printf("enter a number: ");
-            while (scanf("%d", &a) != 1)
-            {
-                // input was not a number, ask again:
-                printf("enter a number: ");
-            }
-            printf("You entered %d.\n", a);
-        }
-
-    ¿Por qué funciona así el programa? Recuerda el ejercicio 1.
-
-    Ejercicio 10: cadenas
-    ^^^^^^^^^^^^^^^^^^^^^^
-
-    Compila el código que se muestra a continuación así:
-    ``gcc -Wall -fno-stack-protector tmp.c -o tmp``
-
-    Ejecuta el programa con estos vectores de prueba cuando se pregunte
-    por el nombre:
-
-    * juan
-    * juan-fernan
-    * juan-fernando-franco
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-        int main(void)
-        {
-            char name[12];
-            printf("What's your name? ");
-            scanf("%s", name);
-            printf("Hello %s!\n", name);
-        }
-
-    Explique cómo funciona el programa en cada caso.
-
-    Ejercicio 11
-    ^^^^^^^^^^^^^^^^
-
-    Repite el ejercicio anterior pero esta vez compilando
-    sin ``-fno-stack-protector``.
-
-    Ejercicio 12
-    ^^^^^^^^^^^^^^
-
-    Finalmente repita el ejercicio anterior, pero esta vez
-    usando el siguiente código y compilando sin ``-fno-stack-protector``
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-        int main(void)
-        {
-            char name[40];
-            printf("What's your name? ");
-            scanf("%39s", name);
-            printf("Hello %s!\n", name);
-        }
-
-    Explica por qué en scanf especificamos un 39 sabiendo que name puede almacenar 
-    40 caracteres. Recuerda, de la primera guía, que todas las cadenas en C deben terminar
-    con un 0.
-
-    Ejercicio 13
-    ^^^^^^^^^^^^^^^^
-
-    Usando el código anterior ingresa:  juan fernado franco.
-    ¿Cuál es el resultado?
-
-    Ejercicio 14
-    ^^^^^^^^^^^^^^^^
-
-    Escribe el siguiente código:
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-        int main(void)
-        {
-            char name[40];
-            printf("What's your name? ");
-            scanf("%39[^\n]", name);
-            printf("Hello %s!\n", name);
-        }
-
-    Nota la línea:``scanf("%39[^\n]", name);``. En este caso le estamos diciendo a
-    scanf que lea hasta 39 caracteres y hasta que encuentre un ENTER (``\n``). También
-    es posible indicarle a scanf que lea mientras que los caracteres estén en una
-    lista, por ejemplo: ``scanf("%39[a-z]", name);``.
-
     Ejercicio 15
     ^^^^^^^^^^^^^
+    A esta
+    función 
 
-    ¿Entonces qué usamos para leer la entrada?
-
-    Ahora que conocemos mejor los punteros y los arreglos podemos explorar la
-    función fgets: ``char *fgets(char *str, int n, FILE *stream)``. A esta
-    función le debemos pasar la dirección del buffer donde queremos colocar
-    los caracteres, la cantidad de caracteres y el flujo. fgets termina de leer
-    el flujo cuando encuentre un ENTER. Dicho ENTER se saca del flujo
-
-    Analiza el funcionamiento de fgets:
-
-    .. code-block:: c
-        :linenos:
-
-        #include <stdio.h>
-
-        int main(void)
-        {
-            char name[40];
-            printf("What's your name? ");
-            if (fgets(name, 40, stdin))
-            {
-                printf("Hello %s!\n", name);
-            }
-        }
 
     NOTA que en **name** quedará también el ENTER. Entonces para eliminarlo
     simplemente hacemos: 
