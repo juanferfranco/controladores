@@ -17,7 +17,16 @@ int main(void)
         printf("The string to convert is %s\n", number);
     }
 
+    errno = 0;
     val = strtol(number, &endptr, 10);    
+    printf("strtol return: %ld\n", val);
+    printf("errno: %d\n", errno);
+    printf("number: %p\n", number);
+    printf("endptr: %p\n", endptr);
+    printf("*number: %d\n", *number);
+    printf("*endptr: %d\n", *endptr);
+
+
     /* Check for various possible errors */    
     if (errno != 0) 
     {

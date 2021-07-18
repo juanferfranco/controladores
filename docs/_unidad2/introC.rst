@@ -1302,15 +1302,19 @@ hacer es convertir la secuencia de caracteres '4' '2' en el número ``42``.
     :scale: 100%
     :alt: lectura de números
 
-Ejercicio 6: convertir caracteres a números
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ejercicio 6: convertir caracteres a números forma 1
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 No creiste que te dejaría sin saber cómo hacer la conversión de caracteres a números ¿Cierto?
 En C se puede hacer de muchas maneras. Algunas formas son muy simples, pero poco robustas, es decir, 
 no verifican errores o son lentas. Te voy a proponer una forma un tanto más complicada pero más 
 robusta tomada del manual de Linux.
 
-Aquí viene:
+Aquí viene. Copia el código, ejecutálo. Ingresa números, números con letras. Experimenta. En principio 
+se puede ver complicado, pero la verdad no lo es tanto. En otros lenguajes de programación recuerda que 
+usualmente tienes bloques ``try catch``, esto que vas a ver es algo similar, solo que en C debes 
+hacer esta gestión de manera manual. De nuevo, es porque C te da todo el control a ti para que hagas 
+lo que quieras.
 
 .. code-block:: c
     :linenos:
@@ -1334,6 +1338,7 @@ Aquí viene:
             printf("The string to convert is %s\n", number);
         }
 
+        errno = 0;
         val = strtol(number, &endptr, 10);    
         /* Check for various possible errors */    
         if (errno != 0) 
@@ -1357,7 +1362,213 @@ Aquí viene:
         exit(EXIT_SUCCESS);
     }
 
+En este código hay varias cosas interesantes para analizar. 
 
+La función ``strtol`` se define así: 
+
+.. code-block:: c 
+
+    #include <stdlib.h>
+
+    long strtol(const char *nptr, char **endptr, int base);
+
+Para usuar la función debes incluir un archivo de cabezera (stdlib.h). Observa los parámetros de la función.
+nptr te permite almacenar una dirección. Será la dirección del primer carácter de la secuencias de caracteres 
+que vas a convertir. No ta la palabra reservada ``const``. Esta palabra no es obligatoria, pero si la usas la 
+estás diciendo al compilador que por medio de ``nptr`` no piensas modificar el contenido apuntado, por tanto, 
+si llegaras a olvidarlo en tu código o si cometes un error, el compilador te dirá. ``endptr`` se ve complicado, 
+pero realmente no lo es tanto. Esa variable tiene dos ``*`` que quiere decir que es una variable que almacena 
+la dirección de otra variable que almancena direcciones, es decir, es una variable que almancena la dirección 
+de un puntero. Finalmente, ``base`` indica la base numérica que se debe utilizar para interpretar la secuencia 
+de caracteres, es decir, considera que puedes estar representado un número en base 10, en base 2, en base 16, 
+etc.
+
+``strtol`` te devolverá el entero convertido o ``0`` si hay un error. Y te estarás preguntando, ¿Cómo hago para 
+saber si tengo un error o el valor ingresado es CERO? Lo que debes verificar es si la función detectó algún error. 
+En el archivo ``errno.h`` está definida la variable entera ``errno``. Esta variable la asigna un llamado al sistema 
+(cuando le pides al sistema operativo que haga algo por ti) y algunas funciones de bibliotecas para indicar 
+un error. TEN PRESENTE que ningún llamado al sistema o función de biblioteca asignará ``errno`` con cero. Por tanto, 
+antes de llamar ``strtol`` se coloca ``errno`` en 0.
+
+En la secuencia de caracteres no tienes que tener solo caracteres que representen números, sino también, letras, 
+signos artiméticos, etc. Si la secuencia comienza con espacios ``strtol`` los ignora. Puedes tener inicialmente 
+los signos ``+`` o ``-`` y ``strtol`` los tendrá en cuenta para la conversión. Asume que tienes la seguiente secuencia:
+``"  -2367hola "``. ``strtol`` ignorará los primeros espacios, luego se dará cuenta que el número es negativo y leerá 
+todos los caracteres que representan números; sin embargo, se detendrá cuando encuentre el carácter ``h``. En este 
+punto realizará la conversión. En la variable ``endptr`` quedará la dirección en memoria de ``h``.
+
+Otra de las virtudes de ``strtol`` es que puedes saber si resultado de la conversión está fuera de rango tanto 
+al máximo como al mínimo. Puedes ver un poco más en la documentación de ``strtol`` escribiendo en la terminal 
+``man strtol``.
+
+Se ve complicado usar ``strtol``, cierto? Tienes razón. Intentemos una ``recete`` en este punto, PERO lo importante 
+es que ya comprendes. 
+
+.. code-block::c 
+
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <errno.h>
+
+    int main(void)
+    {
+        char *endptr;
+        long val;    
+        char *number = " -2892 test";
+
+        errno = 0;
+        val = strtol(number, &endptr, 10);    
+        if(errno == 0 && *number != 0 && number != endptr){
+            printf("strtol return: %ld\n",val);
+        }
+        else{
+            printf("strtol fails\n");
+        }
+
+        exit(EXIT_SUCCESS);
+    }
+
+
+Ejercicio 7: convertir caracteres a números forma 2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Puedes utilizar esta segunda manera que te voy a mostrar, pero tiene un defecto. No tienes manera de saber 
+si la conversión desbordó. Si requieres este varificación te debes quedar strtol.
+
+La función será ``sscanf`` definida así (puedes leer más con ``man sscanf``):
+
+.. code-block:: c 
+
+    #include <stdio.h>
+
+    int sscanf(const char *str, const char *format, ...);
+
+¿Ves que uno de los parámetros de la función es ``...``? En C a esto se le conoce como funciones de parámetros 
+variables. Ya verás con los ejemplos cómo se usa. ``sscanf`` convertirá la cadena de caracteres apuntada por ``str`` 
+de la manera como le indiques con la cadena apuntada por ``format``. ¿Y los ``...``? esos serán parámetros 
+adicionales que le darás a ``sscanf`` con las direcciones de las variables donde se almancenará la conversión. 
+Entonces ¿Se pueden hacer varias conversiones a la vez? Si!
+
+.. code-block:: c 
+
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <errno.h>
+    #include <string.h>
+
+    int main(void)
+    {
+        int val;    
+        char number[40];
+
+        printf("Enter an integer number: ");
+        if (fgets(number, 40, stdin) != NULL)
+        {
+            number[strlen(number) -1 ] = 0;
+            printf("The string to convert is %s\n", number);
+        }
+
+        errno = 0;
+        int successItems = sscanf(number,"%d",&val);
+        if(successItems == 1){
+            printf("val: %d\n", val);
+        }
+        else{
+            printf("sscanf fails\n");
+        }
+
+        exit(EXIT_SUCCESS);
+    }
+
+Observa que la cadena ``format`` es ``"%d"`` que indica convertir la seecuencia de caracteres apuntada 
+por ``number`` a un entero. Luego ``&val`` informa la dirección de memoria donde quieres que queda la conversión.
+Si todo sale bien (aunque recuerda que no hay verificación de desbordamiento), ``sscanf`` te devolverá la cantidad 
+de conversiones exitosamente realizadas. Es por ello que en este ejemplo verificamos si ``successItems == 1``.
+
+En ``format`` cada espcificación de conversión comienza con ``%`` seguido de: 
+
+* Un ``*`` opcional para decirle que haga la conversión, pero que no la guarde.
+* Un ``'`` opcional si la secuencia a convertir incluye el símbolo de miles.
+* Una ``m`` opcional para las conversiones de cadenas (no números). Esto libera al programador de reservar previamente 
+  un buffer para almancear la conversión. En este caso ``sscanf`` reserva la memoria y devuelve en el parámetros 
+  la dirección. LUEGO debes hacer ``FREE``, claro, cuando no uses más la memoria.
+* Un entero opcional que indica la cantidad máxima de caracteres a leer.
+* Un modificador de TIPO opcional. Mira que en algunos ejemplos hemos usado ``%d`` para leer un ``int`` o 
+  por ``%ld`` para leer un ``long``.
+* Finalmente, se colca el espcificador de conversión, por ejemplo ``%d`` indica que queremos convertir la cadena de 
+  caracteres a un ``int``. Este especificador de conversión también tiene varias opciones. :) 
+
+Puedes leer más sobre los modificadores de tipo y el especificador de conversión en la terminal con ``man sscanf``. 
+
+En este ejemplo te estoy mostrando la forma rápida, tipo receta. Esto es porque ``sscanf`` es una 
+función compleja dadas todas las posibilidades que tienes para decirle con ``format`` cómo quieres hacer 
+la conversión. Si eres muy curiosa puedes explorar, recuerda, con ``man sscanf``.
+
+Ejercicio 7: leer una cadena de caracteres desde la terminal con scanf
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Para complementar el ejercicio anterio. Vamos a leer una cadena de carteres 
+desde la terminal utilizando ``scanf``.
+
+.. code-block:: c 
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+
+    int main(void){
+
+        char *strPtr;
+        int n = scanf("%ms",&strPtr);
+        if(n == 1){
+            printf("String length: %ld\n", strlen(strPtr));
+            free(strPtr);
+        }
+        else{
+            printf("scanf fails\n");
+        }
+        return(EXIT_SUCCESS);
+    }
+
+Ejecuta el código así:
+
+.. code-block:: bash 
+
+    ./ts                            
+    hola mundo
+    String length: 4
+
+Observa que la cadena se almacenó hasta hola. ¿Y si quieres leer toda la cadena? 
+Debes decirle a ``scanf`` que lea caracteres mientras este no sea el ``ENTER`` (``\n``):
+
+.. code-block:: c
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+
+    int main(void){
+
+        char *strPtr;
+        // [^\n]: lee mientras no encuentres el enter
+        int n = scanf("%m[^\n]",&strPtr);
+        if(n == 1){
+            printf("String length: %ld\n", strlen(strPtr));
+            free(strPtr);
+        }
+        else{
+            printf("scanf fails\n");
+        }
+        return(EXIT_SUCCESS);
+    }
+
+Al ejeecutarlo:
+
+.. code-block:: bash 
+
+    ./ts                            
+    hola mundo
+    String length: 10 
 
 ..
     Ejercicio 15
