@@ -1151,8 +1151,8 @@ puntero? Si es posible:
 ``pp1`` es una variable que almacena la dirección de ``p1``; sin embargo, 
 para acceder a los miembros de p1 a través de pp1 debes usuar el operador ``->``.
 
-Lectura 14: entrada - salida
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Lectura 14: entrada/salida (teclado-pantalla)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En esta lectura aprenderás a solicitarle información al usuario por medio del 
 teclado. Profundizarás un poco más en el funcionamiento de la salida por pantalla 
@@ -1570,37 +1570,168 @@ Al ejeecutarlo:
     hola mundo
     String length: 10 
 
-..
-    Ejercicio 15
-    ^^^^^^^^^^^^^
-    A esta
-    función 
+Ejercicio 9: imprimir con printf
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Durante todo el curso hemos usando la función ``printf``. Llegó el momento 
+de profundizar un poco más en ella. Está definida así:
 
-    NOTA que en **name** quedará también el ENTER. Entonces para eliminarlo
-    simplemente hacemos: 
+.. code-block:: c 
 
-    .. code-block:: c
-        :linenos:
+    #include <stdio.h>
 
-        #include <stdio.h>
-        #include <string.h>
+    int printf(const char *format, ...);
 
-        int main(void)
-        {
-            char name[40];
-            printf("What's your name? ");
-            if (fgets(name, 40, stdin))
-            {
-                name[strcspn(name, "\n")] = 0;
-                printf("Hello %s!\n", name);
-            }
+Similar a ``sscanf``, ``format`` especifica cómo se desea imprimir en pantalla. Todos los caracteres 
+que se colocan entre comillas serán enviados a la pantalla menos ``%`` que indicará una epecificación 
+de conversión. Por tanto, cuando ``printf`` encuentre ``%`` realizará la conversión indicada y 
+enviará a la pantalla los caracteres respectivos. Cada espcificador de conversión:
+
+* Inicia con ``%``.
+* Cero o más ``FLAGS``.
+* Luego un entero que espcifica el ancho mínimo del campo a imprimir.
+* Una precisión opcional.
+* Un modificador de longitud opcional.
+
+Puedes leer más acerca de ``printf`` con escribiendo en la terminal ``man 3 printf``.
+
+Por ejemplo, mira un especificador de conversión para imprimir solo los 5 primeros decimales 
+del número pi:
+
+.. code-block:: c 
+
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <math.h>
+
+    int main(void){
+        printf("pi = %.5f\n",4 * atan(1.0));
+        return(EXIT_SUCCESS);
+    }
+
+En este caso el espcificador de conversión es ``%.5f``. ``.5`` corresponde a la precisión, es decir, 
+5 dígitos.
+
+Lectura 15: entrada/salida (archivos)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En esta lectura vas a aprender las nociones básicas de la entrada-salida por medio de archivos. Más adelante 
+en el curso vas profundizar un poco más.
+
+Ten presentes siempre los siguientes pasos cuando trabajes con archivos:
+
+* Abrirlo.
+* Realizar operaciones de lectura y/o escritura.
+* Cerralo.
+
+.. warning:: TEN PRESENTE ESTO
+    Cuando escribes en un archivo realmente NO estás escribiendo directamente el disco. Realmente 
+    estás escribiendo un buffer en memoria que luego el sistema operativo se encargará de escribir 
+    en el disco. Si lo requieres, DEBES solicitarle al sistema operativo que realice la operación 
+    de salida. NO ASUMAS que los información está en al archivo hasta que no te asegures 
+    mediante el llamado correspondiente al sistema operativo.
+
+¿Cómo abrir y/o crear un archivo en caso de que no exista?
+
+Para crear un archivo utilizas la función ``fopen`` definida así:
+
+.. code-block:: c
+
+    #include <stdio.h>
+
+    FILE *fopen(const char *pathname, const char *mode);
+
+``pathname`` es un puntero a una cadena de caracteres que indican el nombre del archivo con su 
+ruta, ya sea absoluta o relativa en el sistema de archivos. ``mode`` será un puntero a una cadena 
+que indica cómo quieres abrir el archivo: ``"r"`` para abrir un archivo solo para leerlo desde el comienzo;
+``"r+"`` para leer y escribir el archivo desde el comienzo; ``"w"`` crea el archivo o lo trunca, 
+es decir borra lo que ya tengas si este ya existe; ``"w+"`` abren el archivo para lectura y escritura y crea 
+el archivo en caso de que no exista, pero si ya existe lo trunca; ``"a"`` Abre el archivo en la última posición 
+para que puedas añadir información sin truncar la que ya tiene o lo crea si no existe; ``"a+"`` abre el archivo 
+para lectura y para adicionar información al final del mismo o crearlo si no existe. La siguiente tabla resume 
+todo lo anterior, pero ten en cuenta que más adelante profundizaras al respecto:
+
+.. image:: ../_static/fopen.png
+    :scale: 75%
+    :alt: fopen mode resumen.
+
+Nota que fopen te devuelve un puntero a ``FILE`` que será utilizado para las operaciones posteriores de lectura 
+escritura en el archivo. No olvides verificar ``SIEMPRE`` que la operación fue exitosa comprobando si fopen 
+devuelve un valor diferente a ``NULL``.
+
+.. warning::
+    SIEMPRE VERIFICA que el archivo si se puede abrir o crear. SIEMPRE!
+
+La receta para abrir o crar un archivo y añadir información al final es:
+
+.. code-block:: c 
+
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(void){
+
+        FILE *inFile = fopen("./test.txt","a+");   
+        if (inFile == NULL){
+            perror("open file fails: ");
+            return(EXIT_FAILURE);
         }
+        return(EXIT_SUCCESS);
+    }
 
-    **strcspn** buscará en la cadena **name** el primer *match* con
-    ``\n`` y devolverá la posición en **name** en la cual fue encontrado
-    el *match*. 
+Te recomiendo mucho la función ``perror``: 
 
+.. code-block:: c 
+
+    #include <stdio.h>
+
+    void perror(const char *s);
+
+``perror`` es una función muy útil y te permite describir el último error producido al realizar un llamado al sistema o 
+usar una función de biblioteca. Adicionalmente, puedes apunter con ``s`` a una cadena personalizada que verás antes del 
+mensaje. 
+
+¿Cómo leer y escribir un archivo?
+
+Puedes usar las técnicas que ya vimos, pero con funciones como estas: fscanf, fgets, fgetc, fprintf, fputc, entre otras. Las que 
+te muestro aquí serán las que más usaremos en el curso. 
+
+.. code-block:: c
+
+    #include <stdio.h>
+
+    int fscanf(FILE *stream, const char *format, ...);
+    int fgetc(FILE *stream);
+    char *fgets(char *s, int size, FILE *stream);
+    int fprintf(FILE *stream, const char *format, ...);
+
+Observa que con respecto a lo que ya sabes, estas funciones añaden el parámetro ``stream`` para hacer referencia 
+al archivo específico que previamente deberás abrir o crear.
+
+¿Cómo cierras un archivo?
+
+.. code-block:: c
+
+    #include <stdio.h>
+
+    int fclose(FILE *stream);
+
+Y si quieres vacíar la información del buffer de escritura al disco:
+
+.. code-block:: c
+
+    #include <stdio.h>
+
+    int fflush(FILE *stream);
+
+Ejercicio 10: leer un archivo hasta el final 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+En este ejercicio
+
+
+
+..
     Ejercicio 16
     ^^^^^^^^^^^^^^
 
