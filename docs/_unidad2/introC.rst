@@ -1504,7 +1504,7 @@ En este ejemplo te estoy mostrando la forma rápida, tipo receta. Esto es porque
 función compleja dadas todas las posibilidades que tienes para decirle con ``format`` cómo quieres hacer 
 la conversión. Si eres muy curiosa puedes explorar, recuerda, con ``man sscanf``.
 
-Ejercicio 7: leer una cadena de caracteres desde la terminal con scanf
+Ejercicio 8: leer una cadena de caracteres desde la terminal con scanf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Para complementar el ejercicio anterio. Vamos a leer una cadena de carteres 
