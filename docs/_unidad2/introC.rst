@@ -1959,7 +1959,6 @@ Escribe una función que te permita encontrar los elementos comunes de
 dos arreglos de enteros. El encabezado de la función es:
 
 .. code-block:: c
-     
 
     uint8_t arrayCommon(int32_t* arr1, int32_t arr1Size,int32_t* arr2, int32_t arr2Size, int32_t* arrRes, int32_t arrResSize)
 
