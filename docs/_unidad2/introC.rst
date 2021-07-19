@@ -104,7 +104,7 @@ Ejercicio 2: compilación de un programa en C
 Compila el programa anterior así:
 
 .. code-block:: bash
-    
+
     gcc -Wall Lab1-1.c -o Lab1-1
 
 Recuerda:
@@ -117,7 +117,7 @@ Recuerda:
 Para ejecutar el programa:
 
 .. code-block:: bash
-    
+
     ./Lab1-1
 
 Lectura 3: El preprocesador
@@ -137,7 +137,6 @@ Ten en cuenta que las directivas comenzarán por el símbolo #.
 Ahora te voy a mostrar algunos ejemplos de directiva que puedes usar:
 
 .. code-block:: c
-    :linenos:
 
     #define M 5
     #define C 5
@@ -154,7 +153,6 @@ Para responder esta pregunta recuerda que antes de compilador el programa, el ar
 El resultado del preprocesador será algo similar a esto:
 
 .. code-block:: c
-    :linenos:
 
     int main(int argc, char* argv[]) {
         int x = 2;
@@ -168,7 +166,6 @@ La respuesta a la pregunta será 15.
 Mira este otro ejemplo:
 
 .. code-block:: c
-   :linenos:
 
 	#define M 5
 	#define C 5
@@ -186,7 +183,7 @@ Mira este otro ejemplo:
     ¡Alerta de Spoiler!
 
     .. code-block:: c
-        :linenos:
+         
 
         int main(int argc, char* argv[]) {
             int x = 2;
@@ -201,7 +198,7 @@ Otra forma de saber, ANTES de compilar, la salida del preprocesador es así:
 Por último prueba el comando anterior con este programa:
 
 .. code-block:: c
-   :linenos:
+    
 
 	#include <stdio.h>
     
@@ -223,7 +220,7 @@ Otro uso interesante del preprocesador son las DIRECTIVAS de compilación condic
 Esta directivas te permiten incluir un código u otro, dependiendo de una condición:
 
 .. code-block:: c
-   :linenos:
+    
 
     #include <stdio.h>
 
@@ -249,7 +246,7 @@ Esta directivas te permiten incluir un código u otro, dependiendo de una condic
     y con el comando ``gcc -E codigo.c`` el resultado es:
 
     .. code-block:: c
-        :linenos:
+         
 
         int main(int argc, char* argv[]) {
            printf("CODIGO IF\n");
@@ -262,7 +259,7 @@ Esta directivas te permiten incluir un código u otro, dependiendo de una condic
 Volvamos al ejemplo anterior pero esta vez sin el ``#define CONDITION``
 
 .. code-block:: c
-   :linenos:
+    
 
     #include <stdio.h>
 
@@ -373,7 +370,7 @@ En el siguiente video te muestro cómo puedes iniciar a usarlo.
 El código del ejemplo que está en el video es este:
 
 .. code-block:: c 
-        :linenos:
+         
     
         #include <stdio.h>
         #include <stdint.h>
@@ -407,7 +404,7 @@ controles.
 Usa el siguiente código, tomado de `aquí <https://www.tutorialspoint.com/cprogramming/c_operators.htm>`__
 
 .. code-block:: c 
-    :linenos:
+     
 
     #include <stdio.h>
     #include <stdint.h>
@@ -613,6 +610,7 @@ Usa el siguiente código, tomado de `aquí <https://www.tutorialspoint.com/cprog
         c |= 2;
         printf("Line 11 - |= Operator Example, Value of c = %d\n", c);
     }
+
     void opMisc(void)
     {
         int a = 4;
@@ -678,7 +676,7 @@ Los punteros son ``VARIABLES`` que almacenan la dirección de otra variable.
 Ejecuta el siguiente programa:
 
 .. code-block:: c
-    :linenos:
+     
 
 
     #include <stdio.h>
@@ -702,7 +700,7 @@ Ejecuta el siguiente programa:
 En mi caso la salida se ve así:
 
 .. code-block:: bash
-    :linenos:
+     
 
     ./p1
     a'address: 0x7ffd249a93d7
@@ -733,7 +731,7 @@ al compilador que NO QUIERES el contenido de la variable ``a``, sino la direcci�
 Ejecuta el siguiente ejemplo:
 
 .. code-block:: c
-    :linenos:
+     
 
     #include <stdio.h>
     #include <stdint.h>
@@ -881,7 +879,7 @@ Ejecuta y analiza el siguiente código. No olvides correrlo utilizando el depura
 que antes de ver la salida del programa trates de predicir cuál será.
 
 .. code-block:: c 
-    :linenos:
+     
 
     #include <stdio.h>
     #include <stdint.h>
@@ -971,7 +969,7 @@ liberar la memoria reservada. Solo debes pasar la dirección que te retornó ``m
 Observa el siguiente ejemplo:
 
 .. code-block:: c
-    :linenos:
+     
 
     #include <stdio.h>
     #include <stdint.h>
@@ -1176,7 +1174,7 @@ buffer que definiste y tu programa podrá continuar.
 Analicemos juntos este código:
 
 .. code-block:: c
-    :linenos:
+     
 
     #include <stdio.h>
     int main(void)
@@ -1233,7 +1231,7 @@ para eliminar el ENTER debes buscarlo en el buffer el ENTER y cambiarlo por ``0`
 Esto se puede hacer de muchas maneras. Te propongo la siguiente:
 
 .. code-block:: c
-    :linenos:
+     
 
     #include <stdio.h>
     #include <string.h>
@@ -1261,7 +1259,7 @@ Ejercicio 5: ingresar números por teclado
 Escribe el siguiente programa:
 
 .. code-block:: c
-    :linenos:
+     
 
     #include <stdio.h>
     #include <string.h>
@@ -1317,7 +1315,7 @@ hacer esta gestión de manera manual. De nuevo, es porque C te da todo el contro
 lo que quieras.
 
 .. code-block:: c
-    :linenos:
+     
 
     #include <stdlib.h>
     #include <limits.h>
@@ -1727,328 +1725,320 @@ Y si quieres vacíar la información del buffer de escritura al disco:
 Ejercicio 10: leer un archivo hasta el final 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-En este ejercicio
+En este ejercicio te voy a mostrar cómo puedes leer hasta el final un archivo 
+de texto que tiene X líneas. Ten en cuenta que cada línea termina con un ``ENTER``.
 
+Para poder ejecutar este programa necesitarás crear el archivo ``test.txt`` con X líneas 
+de texto.
 
+.. code-block:: c 
+     
 
-..
-    Ejercicio 16
-    ^^^^^^^^^^^^^^
+    #include <stdio.h>
+    #include <stdlib.h>
 
-    (Este ejercicio es tomado de `aquí <https://www.geeksforgeeks.org/pointer-array-array-pointer/>`__)
+    int main(void){
 
-    Relación arreglos y punteros
-
-    .. code-block:: c
-        :linenos:
-
-        #include<stdio.h> 
-
-        int main() 
-        { 
-            int *p;  
-            int (*ptr)[5];  
-            int arr[5]; 
-            
-            p = arr; 
-            ptr = &arr;  
-            printf("p = %p, ptr = %p\n", p, ptr); 
-            p++;  
-            ptr++; 
-            printf("p = %p, ptr = %p\n", p, ptr); 
-            return 0; 
+        FILE *inFile = fopen("./test.txt","r");   
+        if (inFile == NULL){
+            perror("open file fails: ");
+            return(EXIT_FAILURE);
         }
 
-    Ejecuta el programa anterior. El resultados es:
+        char buffer[64];
+        char *status =  NULL;
 
-    .. code-block:: c
-        :linenos:
+        do{
+            status = fgets(buffer, sizeof(buffer),inFile);
+            if(status != NULL){
+                printf("%s",buffer);
+            }
+        }while (status !=NULL);
+        printf("\n");
+
+        fclose(inFile);
+
+        return(EXIT_SUCCESS);
+    }
+
+Ten en cuenta varios aspectos importantes:
+
+* Verifica siempre que puedas abrir el archivo antes de procesarlo, de los contrario 
+  tendrás errores tipo ``segmentation fault`` al intentar procesar el archivo.
+* Antes de procesar la cadena en ``buffer`` verifica que fgets no es ``NULL``. 
+
+Reto 5: leer y escribir en un archivo 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Modifica el programa del ejemplo anterior para copiar el contenido de ``text.txt`` en 
+otro archivo.
+
+Ejercicio 11: repaso de punteros
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Este ejercicio es tomado de `aquí <https://www.geeksforgeeks.org/pointer-array-array-pointer/>`__)
+
+Relación arreglos y punteros
+
+.. code-block:: c
+     
+
+    #include<stdio.h> 
+
+    int main() 
+    { 
+        int *p;  
+        int (*ptr)[5];  
+        int arr[5]; 
         
-        p = 0x7fff4f32fd50, ptr = 0x7fff4f32fd50
-        p = 0x7fff4f32fd54, ptr = 0x7fff4f32fd64
+        p = arr; 
+        ptr = &arr;  
+        printf("p = %p, ptr = %p\n", p, ptr); 
+        p++;  
+        ptr++; 
+        printf("p = %p, ptr = %p\n", p, ptr); 
+        return 0; 
+    }
+
+Ejecuta el programa anterior. El resultados es:
+
+.. code-block:: c
+     
+    
+    p = 0x7fff4f32fd50, ptr = 0x7fff4f32fd50
+    p = 0x7fff4f32fd54, ptr = 0x7fff4f32fd64
 
 
-    En la expresión ``int * p;`` p es una variable de tipo
-    ``int *``. En este tipo de variables se almacenan las
-    ``direcciones`` de variables de tipo ``int``. Por tanto, ``*p``
-    (sin colocar int antes del ``*``) es de tipo ``int`` porque 
-    p es de tipo ``int *``.
+En la expresión ``int * p;`` p es una variable de tipo
+``int *``. En este tipo de variables se almacenan las
+``direcciones`` de variables de tipo ``int``. Por tanto, ``*p``
+(sin colocar int antes del ``*``) es de tipo ``int`` porque 
+p es de tipo ``int *``.
 
-    En la expresión ``int (*ptr)[5];`` ptr es una variable de tipo
-    ``int (*)[5]``. En este tipo de variables se almacenan direcciones
-    de variables de tipo ``int [5]``, es decir, variables de tipo
-    arreglo de cinco posiciones. Por tanto, ``*ptr`` es de tipo 
-    ``int [5]`` porque ptr es de tipo ``int (*)[5]``.
+En la expresión ``int (*ptr)[5];`` ptr es una variable de tipo
+``int (*)[5]``. En este tipo de variables se almacenan direcciones
+de variables de tipo ``int [5]``, es decir, variables de tipo
+arreglo de cinco posiciones. Por tanto, ``*ptr`` es de tipo 
+``int [5]`` porque ptr es de tipo ``int (*)[5]``.
 
-    En la expresión ``p = arr;`` arr es el nombre del arreglo y un puntero
-    al primer elemento del arreglo.
-    En este caso `arr` es de tipo ``int *`` porque el primer elemento
-    del arreglo es de tipo ``int``. Por tanto, ``*arr`` 
-    será tipo ``int``.
+En la expresión ``p = arr;`` arr es el nombre del arreglo y un puntero
+al primer elemento del arreglo.
+En este caso `arr` es de tipo ``int *`` porque el primer elemento
+del arreglo es de tipo ``int``. Por tanto, ``*arr`` 
+será tipo ``int``.
 
-    En la expresión ``ptr = &arr;`` ``&arr`` es la dirección del arreglo.
-    ``&arr`` es tipo ``int (*)[5]``.
+En la expresión ``ptr = &arr;`` ``&arr`` es la dirección del arreglo.
+``&arr`` es tipo ``int (*)[5]``.
 
-    La expresión ``printf("p = %p, ptr = %p\n", p, ptr);`` imprime el
-    contenido de p y ptr. Según el resultado
-    ``(p = 0x7fff4f32fd50, ptr = 0x7fff4f32fd50`)``, la dirección del
-    arreglo y del primer elemento del arreglo es la misma; sin embargo,
-    como p es tipo ``int *``, la expresión ``p++`` hará que p apunte
-    (almacene la dirección) al siguiente entero. En cambio, en la
-    expresión ``ptr++;`` ptr apuntará al siguiente arreglo de 5
-    enteros (5 enteros ocupan 20 bytes en memoria considerando
-    que cada entero ocupa 4 bytes), ya que ptr es de tipo
-    ``int (*)[5]``.
+La expresión ``printf("p = %p, ptr = %p\n", p, ptr);`` imprime el
+contenido de p y ptr. Según el resultado
+``(p = 0x7fff4f32fd50, ptr = 0x7fff4f32fd50`)``, la dirección del
+arreglo y del primer elemento del arreglo es la misma; sin embargo,
+como p es tipo ``int *``, la expresión ``p++`` hará que p apunte
+(almacene la dirección) al siguiente entero. En cambio, en la
+expresión ``ptr++;`` ptr apuntará al siguiente arreglo de 5
+enteros (5 enteros ocupan 20 bytes en memoria considerando
+que cada entero ocupa 4 bytes), ya que ptr es de tipo
+``int (*)[5]``.
 
-    Ejercicio 17: análisis de una expresión más compleja
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Ejercicio 12: arreglos de arreglos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    El siguiente ejercicio es más complejo que el anterior, sin embargo,
-    se analiza de igual manera. Considera el siguiente código:
+El siguiente ejercicio es más complejo que el anterior, sin embargo,
+se analiza de igual manera. Considera el siguiente código:
 
-    .. code-block:: c
-        :linenos:
+.. code-block:: c
+     
 
-        #include <stdio.h>
+    #include <stdio.h>
 
-        int arr[3][4] = { {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
+    int arr[3][4] = { {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
 
-        int main(void) {
-            int (*p)[3][4] = &arr;
-            printf("%d\n", ( (*p)[2] )[3] );
-            printf("%d\n", *( *(*p + 2) + 3 ) );
-            return 0;
+    int main(void) {
+        int (*p)[3][4] = &arr;
+        printf("%d\n", ( (*p)[2] )[3] );
+        printf("%d\n", *( *(*p + 2) + 3 ) );
+        return 0;
+    }
+
+
+``arr`` es un arreglo de arreglos, es decir, es una arreglo de 3 arreglos
+de 4 enteros cada uno.
+
+``arr`` es el nombre del arreglo de arreglos y un puntero al primer elemento
+del arreglo. Por tanto, ``arr`` es de tipo ``int (*)[4]`` ya que el primer elemento
+de arr es un arreglo de tipo ``int [4]``.
+
+``p`` es un puntero que almacena la dirección de un arreglo de arreglos.
+Por tanto, p es de tipo ``int (*)[3][4]``.
+
+Si ``p`` es de tipo ``int (*)[3][4]`` entonces ``*p`` será de tipo ``int [3][4]`` o
+``int (*)[4]`` (un puntero al primer elemento del arreglo de arreglos).
+
+El operador ``[]`` en la expresión ``(*p)[2]`` es equivalente a ``*( *p + 2)``.
+Como el tipo de ``(*p + 2)`` es ``int (*)[4]`` el tipo de ``*( *p + 2)``
+será ``int [4]``. la expresión ``(*p)[2]`` accede al tercer elemento de arr, es
+decir, a ``{9,10,11,12}`` que es de tipo ``int [4]``.
+
+Por último, como ``(*p)[2]`` es tipo ``int [4]``, entonces ``( (*p)[2] )[3] )`` es
+tipo int y corresponderá al cuarto elemento del tercer arreglo de arr.
+
+Nota que ``( (*p)[2] )[3] )`` es equivalente a ``*( (*p)[2] + 3)`` que a su
+vez es equivalente a  ``*( * ( *p + 2)+ 3)``
+
+El programa imprimirá el número ``12``.
+
+La expresión ``printf("%d\n", *( * ( *p + 2)+ 3));`` al ser equivalente a
+``printf("%d\n", ( (*p)[2] )[3] );`` también mostrará un ``12``.
+
+Ejercicio 13: repaso de arreglos, punteros y funciones
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Te propongo que realices un programa que:
+
+* Solicite el tamaño de un arreglo.
+* Solicite uno por uno sus elementos.
+* Realiza una función para imprimir el contenido del arreglo. A esta 
+  función deberás pasar la dirección del arreglo y el tamaño.
+* Solicite insertar un nuevo elemento en el 
+  arreglo mediante la selección de la posición deseada. La posición
+  se debe espcificar desde el número 1 hasta el tamaño del arreglo.
+
+Trata de PENSARLE UNOS MINUTOS. Más abajo está la solución.
+
+.. note::
+    ¡Alerta de Spoiler!
+
+El siguiente código muestra una posible solución:
+
+.. code-block:: c
+     
+
+    #include <stdio.h>
+    #define MAX 100
+
+    void printArray(int *pdata,int n){
+
+        printf("\n The array is: \n");
+
+        for(int i = 0; i< n ;i++) {
+            printf("data[%d]: %d\n",i,  *(pdata+i) );
         }
+    }
 
+    int main(){
+        int n;
+        int data[MAX];
+        int position;
 
-    ``arr`` es un arreglo de arreglos, es decir, es una arreglo de 3 arreglos
-    de 4 enteros cada uno.
+        printf("Enter the length of the array: ");
+        scanf("%d", &n);
+        printf("Enter %d elements of the array \n",n);
 
-    ``arr`` es el nombre del arreglo de arreglos y un puntero al primer elemento
-    del arreglo. Por tanto, ``arr`` es de tipo ``int (*)[4]`` ya que el primer elemento
-    de arr es un arreglo de tipo ``int [4]``.
-
-    ``p`` es un puntero que almacena la dirección de un arreglo de arreglos.
-    Por tanto, p es de tipo ``int (*)[3][4]``.
-
-    Si ``p`` es de tipo ``int (*)[3][4]`` entonces ``*p`` será de tipo ``int [3][4]`` o
-    ``int (*)[4]`` (un puntero al primer elemento del arreglo de arreglos).
-
-    El operador ``[]`` en la expresión ``(*p)[2]`` es equivalente a ``*( *p + 2)``.
-    Como el tipo de ``(*p + 2)`` es ``int (*)[4]`` el tipo de ``*( *p + 2)``
-    será ``int [4]``. la expresión ``(*p)[2]`` accede al tercer elemento de arr, es
-    decir, a ``{9,10,11,12}`` que es de tipo ``int [4]``.
-
-    Por último, como ``(*p)[2]`` es tipo ``int [4]``, entonces ``( (*p)[2] )[3] )`` es
-    tipo int y corresponderá al cuarto elemento del tercer arreglo de arr.
-
-    Nota que ``( (*p)[2] )[3] )`` es equivalente a ``*( (*p)[2] + 3)`` que a su
-    vez es equivalente a  ``*( * ( *p + 2)+ 3)``
-
-    El programa imprimirá el número ``12``.
-
-    La expresión ``printf("%d\n", *( * ( *p + 2)+ 3));`` al ser equivalente a
-    ``printf("%d\n", ( (*p)[2] )[3] );`` también mostrará un ``12``.
-
-    Ejercicio 18
-    ^^^^^^^^^^^^^
-
-    Te propongo que realices un programa que:
-
-    * Solicite el tamaño de un arreglo.
-    * Solicite uno por uno sus elementos.
-    * Realiza una función para imprimir el contenido del arreglo. A esta
-    función deberás pasar la dirección del arreglo y el tamaño.
-    * Solicite insertar un nuevo elemento en el
-    arreglo mediante la selección de la posición deseada. La posición
-    será un número de 1 hasta en el tamaño del arreglo.
-
-    Trata de PENSARLE UNOS MINUTOS. Más abajo está la solución.
-
-    .. note::
-        ¡Alerta de Spoiler!
-
-    El siguiente código muestra una posible solución:
-
-    .. code-block:: c
-    :linenos:
-
-        #include <stdio.h>
-        #define MAX 100
-
-        void printArray(int *pdata,int n){
-
-            printf("\n The array is: \n");
-
-            for(int i = 0; i< n ;i++) {
-                printf("data[%d]: %d\n",i,  *(pdata+i) );
-            }
+        for(int i = 0; i < n; i++){
+            scanf("%d", &data[i]);
         }
+        printArray(data, n);
 
-        int main(){
-            int n;
-            int data[MAX];
-            int position;
-
-            printf("Enter the length of the array: ");
-            scanf("%d", &n);
-            printf("Enter %d elements of the array \n",n);
-
-            for(int i = 0; i < n; i++){
-                scanf("%d", &data[i]);
-            }
-            printArray(data, n);
-
-            printf("\n Enter a position where you want to insert: ");
-            scanf("%d", &position);
-            position--;
-            for(int i = n-1;i >= position; i--){
-                data[i+1] = data[i];
-            }
-            printf("\nEnter the value: ");
-            scanf("%d", &data[position]);
-
-            printArray(data,n+1);
-            return 0;
+        printf("\n Enter a position where you want to insert: ");
+        scanf("%d", &position);
+        position--;
+        for(int i = n-1;i >= position; i--){
+            data[i+1] = data[i];
         }
+        printf("\nEnter the value: ");
+        scanf("%d", &data[position]);
 
-    Ejercicio 19
-    ^^^^^^^^^^^^^^^^
+        printArray(data,n+1);
+        return 0;
+    }
 
-    Repasa el manejo de archivos y la gestión de errores. 
-    Lee esta información:
+Reto 6: funciones, arreglos y punteros
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    * `Manejo básico <https://www.geeksforgeeks.org/basics-file-handling-c/>`__
-    * `¿Fin de un archivo o un error? <https://www.geeksforgeeks.org/eof-and-feof-in-c/>`__
-    * `¿Cómo vamos a gestionar los errores en C? <https://www.geeksforgeeks.org/error-handling-c-programs/>`__
+Escribe una función que te permita encontrar los elementos comunes de
+dos arreglos de enteros. El encabezado de la función es:
 
-    Ejercicio 20
-    ^^^^^^^^^^^^^^^
+.. code-block:: c
+     
 
-    Analiza con detenimiento el siguiente ejemplo:
+    uint8_t arrayCommon(int32_t* arr1, int32_t arr1Size,int32_t* arr2, int32_t arr2Size, int32_t* arrRes, int32_t arrResSize)
 
-    * Utiliza el *debugger* de eclipse.
-    * Mira cómo se guardan las cadenas en memoria.
+* La función debe recibir las direcciones de memoria de los dos arreglos 
+  a comparar y del arreglo resultado. También debe recibir el tamaño de cada arreglo.
+* Debe devolver la cantidad de elementos comunes encontrados o 0 si no
+  encuentra.
+* Crea un programa que solicite el tamaño de los arreglos y sus
+  elementos.
+* El programa debe mostrar el resultado de la función.
+* Antes de insertar un elemento en el arreglo resultado debe verificar
+  que este no exista en el arreglo, es decir, el arreglo resultado
+  no debe tener elementos repetidos.
 
-    .. code-block:: c
-    :linenos:
+El flujo del programa será:
 
-        #include <stdio.h>
+* Solicite el tamaño del primer arreglo.
+* Ingrese los elementos del primer arreglo.
+* Solicite el tamaño del segundo arreglo.
+* Ingrese los elementos del segundo arreglo.
+* Indicar cuántos elementos comunes se encontraron y un arreglo
+  con dichos elementos.
 
-        char nombres[3][20] = {"fulano","mengano","perano"};
+Ejercicio 14: repaso de archivos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        int main (void){
+En este ejercicio te propongo encriptar y desencriptar un archivo.
 
-            char *a;
-            char (*b)[20];
-            char *c;
-            char (*d)[3][20];
+Se busca realizar dos programas, uno que permitan encriptar otro 
+y desencriptar un archivo.
 
-            a = &nombres[0][0];
-            printf("el nombre es %s \n", a);
-            b = nombres;
-            c = &nombres[0][0];
-            d = &nombres;
+El programa que encripta:
 
-            for(int i = 0; i < 3; i++ ){
-                printf("char (*)[] el nombre[%d] es %s \n", i , (char * ) (b+i));
-                printf("char *: el nombre[%d] es %s \n", i , (char * ) ( c + (i*2) ));
-                printf("char (*)[][]: el nombre[%d] es %s \n", i , (char * ) (d+i));
-            }
-            return 0;
-        }
-
-    Ejercicio 21
-    ^^^^^^^^^^^^^^
-
-    Escribe una función que te permita encontrar los elementos comunes de
-    dos arreglos de enteros. El encabezado de la función es:
-
-    .. code-block:: c
-    :linenos:
+* Debe solicitar al usuario el nombre de la función para encriptar
+  la información y el nombre del archivo de entrada y
+  el de salida. El archivo de entrada tendrá la
+  información y el de salida la información encriptada.
+* La función debe modificar cada uno de los bytes que
+  componen el archivo de entrada. Tenga presente que también se
+  encriptará el byte de nueva línea.
 
 
-        uint8_t arrayCommon(int32_t* arr1, int32_t arr1Size,int32_t* arr2, int32_t arr2Size, int32_t* arrRes, int32_t arrResSize)
+El programa que desencripta:
 
-    * La función debe recibir las direcciones de memoria de los dos arreglos
-    a comparar y del arreglo resultado. También debe recibir el tamaño de
-    cada arreglo.
-    * Debe devolver la cantidad de elementos comunes encontrados o 0 si no
-    encuentra.
-    * Incluye el archivo de cabeceras ``#include <stdint.h>`` para que el
-    compilador encuentra la definición de ``uint8_t``.
-    * Crea un programa que solicite el tamaño de los arreglos y sus
-    elementos.
-    * El programa debe mostrar el resultado de la función.
-    * Antes de insertar un elemento en el arreglo resultado debe verificar
-    que este no exista en el arreglo, es decir, el arreglo resultado
-    no debe tener elementos repetidos.
+* Debe solicitar al usuario la función para encriptar
+  la información y el nombre del archivo de entrada y
+  el de salida. En este caso el archivo de entrada
+  tendrá la información encriptada y el archivo de salida
+  la información desencriptada.
+* Tenga presente que el usuario ingresa la función
+  con la cual se encripta y usted debe encontrar la
+  función inversa para desencriptar.
 
-    El flujo del programa será:
-
-    * Solicite el tamaño del primer arreglo.
-    * Ingrese los elementos del primer arreglo.
-    * Solicite el tamaño del segundo arreglo.
-    * Ingrese los elementos del segundo arreglo.
-    * Indicar cuántos elementos comunes se encontraron y el arreglo
-    con dichos elementos.
-
-    Ejercicio 22
-    ^^^^^^^^^^^^^^
-
-    En este ejercicio te propongo encriptar y desencriptar un archivo
-
-    Se busca realizar dos programas que permitan encriptar
-    y desencriptar un archivo.
-
-    El programa que encripta:
-
-    * Debe solicitar al usuario la función para encriptar
-    la información y el nombre del archivo de entrada y
-    el de salida. El archivo de entrada tendrá la
-    información y el de salida la información encriptada.
-    * La función debe modificar cada uno de los bytes que
-    componen el archivo. Tenga presente que también se
-    encriptará el byte de nueva línea.
-
-    El programa que desencripta:
-
-    * Debe solicitar al usuario la función para encriptar
-    la información y el nombre del archivo de entrada y
-    el de salida. En este caso el archivo de entrada
-    tendrá la información encriptada y el archivo de salida
-    la información desencriptada.
-    * Tenga presente que el usuario ingresa la función
-    con la cual se encripta y usted debe encontrar la
-    función inversa para desencriptar.
-
-    .. note::
-        ¡Alerta de Spoiler!
-
+.. note::
+    ¡Alerta de Spoiler!
     Te dejo una posible solución al ejercicio. Ten en cuenta, que voy
     a obviar todas las verificaciones de error para mantener
     el código compacto y te puedas concentrar justo en la
     funcionalidad solicitada.
 
-    .. warning:: Este código asumen que la información ingresada está
-                bien formateada y libre de errores. Por tanto, se omiten
-                algunas verificaciones.
 
-    .. note:: Para probar los siguientes programas (es el mismo para encriptar
-            y desencriptar) es necesario que crees el archivo de texto que
-            será encriptado.
+.. warning:: Este código asumen que la información ingresada está
+            bien formateada y libre de errores. Por tanto, se omiten
+            algunas verificaciones.
 
-    .. code-block:: c
-        :linenos:
+.. note:: Para probar los siguientes programas (es el mismo para encriptar
+        y desencriptar) es necesario que 
 
-        #include <stdint.h>
-        #include <stdio.h>
-        #include <stdlib.h>
-        #include <string.h>
 
-        uint8_t encXorFunction(uint8_t data) { return data ^ 0xFF; }
+.. code-block:: c
 
-        int main(int argc, char *argv[]) {
+    #include <stdint.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+
+    uint8_t encXorFunction(uint8_t data) { return data ^ 0xFF; }
+    
+    int main(int argc, char *argv[]) {
         char input[50];
         char inFile[20];
         char outFile[20];
@@ -2058,46 +2048,38 @@ En este ejercicio
         printf("Enter in_file out_file function\n");
         fgets(input, sizeof(input), stdin);
         sscanf(input, "%s %s %s", inFile, outFile, function);
-
         FILE *fin = fopen(inFile, "r");
+        
         if (fin == NULL) {
             perror("Error: ");
             return EXIT_FAILURE;
         }
-
+        
         if (strncmp("xor", function, 3) == 0) {
             encFuntion = &encXorFunction;
         }
-
+    
         FILE *fout = fopen(outFile, "w");
+    
         if (fout == NULL) {
             perror("Error: ");
             return EXIT_FAILURE;
         }
-
-        while ( fgets(input, sizeof(input), fin) != NULL) {
-
-            int n = strlen(input);
-
+    
+        int n;
+        while ( fgets(input, sizeof(input), fin) != NULL) 
+        {
+            n = strlen(input);
             for (int i = 0; i < n; i++) {
-            input[i] = (*encFuntion)(input[i]);
+                input[i] = (*encFuntion)(input[i]);
             }
+
             fputs(input, fout);
         }
-
+    
         fclose(fin);
         fclose(fout);
+
         return EXIT_SUCCESS;
-        }
-
-    Ejercicio 23
-    ^^^^^^^^^^^^^^
-
-    Modifica el código anterior para que reciba
-    la información como argumentos de la función main,
-    al ejecutar el programa. NO DEBES SOLICITAR información
-    al usuario, todas la información será pasada cuando
-    se invoque el ejecutable en línea de comandos.
-
-
+    }
 
