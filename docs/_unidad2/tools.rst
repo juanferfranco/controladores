@@ -1,8 +1,11 @@
 Herramientas
 ===========================
 
-Ejercicio 28
-^^^^^^^^^^^^^^
+En esta guía te mostraré cómo se transforma un programa desde código C hasta 
+lenguaje de máquina.
+
+Lectura 1: del código fuente al binario
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Cómo llegamos del código fuente al binario (el ejecutable)?
 
@@ -21,7 +24,6 @@ en el mismo directorio.
 min.h
 
 .. code-block:: c
-   :linenos:
 
     #ifndef MIN_H
     #define MIN_H
@@ -31,7 +33,6 @@ min.h
 min.c
 
 .. code-block:: c
-   :linenos:
 
     #include "min.h"
 
@@ -40,12 +41,9 @@ min.c
         else return b;
     }
 
-
-
 main.c
 
 .. code-block:: c
-   :linenos:
 
     #include "min.h"
     #include <stdio.h>
@@ -63,10 +61,10 @@ archivos .h no se compilan, solo los archivos ``.c``.
 Compilamos primero ``min.c``:
 
 * Preprocesamiento:  ``gcc -E min.c``. Al ejecutar este comando nota como
-   el preprocesador incluye la información de min.h a min.c
-* Compilación: ejecuta el comando ``gcc -S min.c``. La opción ``-S`` le indica 
-  al comando ``gcc`` que debe hacer el proceso anterior (preprocesador) y con la
-  salida de este paso alimentar al compilador y detenerse en ese punto. El archivo
+  el preprocesador incluye la información de min.h a min.c
+* Compilación: ejecuta el comando ``gcc -S min.c``. La opción ``-S`` indica 
+  que ``gcc`` debe hacer el proceso de preprocesador y con la
+  salida de este paso se alimenta al compilador y detenerse en ese punto. El archivo
   de salida generado será ``min.s`` que contendrá el código ensamblador.
 
 .. code-block:: bash
@@ -154,8 +152,8 @@ Una forma fácil de generar el ejecutable es utilizar de nuevo ``gcc``. Este com
 se encargará de suministrarle a ``ld`` todo los archivos con código máquina necesarios para
 generar nuestro ejecutable: ``gcc min.o main.o -o main``.
 
-Ejercicio 29
-^^^^^^^^^^^^^^
+Lectura 2: ¿Cómo funciona un compilador?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora que ya sabemos cómo se transforma un programa del código fuente al lenguaje de máquina,
 podemos indagar un poco más en las fases. ¿Cómo funciona un compilador?
@@ -207,8 +205,8 @@ cuando estés estudiando el nuevo framework de Unity conocido como ``DOTs`` te d
 están utilizando clang como frontend. Estudiar en detalle estos asuntos desborda las posibilidades
 de este curso; sin embargo, al menos tendrás los conceptos básicos para no estar perdido.
 
-Ejercicio 30
-^^^^^^^^^^^^^
+Lectura 3: fase de ensamblado
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En cuanto a la fase de ensamblado, ya te comenté que el archivo de salida contiene lenguaje de máquina
 de la CPU específica. Cada sistema operativo maneja su propio formato de archivo de salida del ensamblador
@@ -219,8 +217,8 @@ de la CPU, sino que también estará organizado según la conveniencia de cada s
 Y es por esto, entre otras cosas, que Windows no podrá ejecutar tal cual los programas compilados
 para Linux, así estés corriendo los sistemas operativos en el mismo computador.
 
-Ejercicio 31
-^^^^^^^^^^^^^^
+Lectura 4: un compilador no solo genera ejecutables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 No te lo dije, pero cuando compilas un programa en C la única salida del programa no tiene que ser
 un ejecutable. Te cuento que tienes más posibilidades:
@@ -235,8 +233,8 @@ Recuerda que se denominan relocatable object files. Para poder tener un ejecutab
 una fase más: el enlazado. La fase de enlazado te permite combinar varios relocatable object files y
 bibliotecas para generar ejecutables o bibliotecas.
 
-Ejercicio 32
-^^^^^^^^^^^^^^
+Lectura 5: introducción al concepto de proceso
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Qué necesitas para correr el archivo ejecutable en un sistema operativo? pues necesitas que el sistema
 operativo cree una abstracción denominada PROCESO. Por medio de esta abstracción el sistema operativo
@@ -251,8 +249,8 @@ parte del ejecutable; sin embargo, el archivo ejecutable si tendrá que indicar 
 bibliotecas dinámicas tiene. De esta manera cuando quieras ejecutar el archivo, el sistema operativo tendrá
 que cargar EN TIEMPO DE EJECUCIÓN el código de la biblioteca necesaria.
 
-Ejercicio 33
-^^^^^^^^^^^^^^
+Lectura 6: el concepto de biblioteca estática
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Qué es un biblioteca estática? es un archivo contenedor de múltiples relocatable object files. Este
 archivo no es producido por el enlazador. En sistemas como Linux será el programa ``ar`` quien
@@ -260,8 +258,8 @@ lo generará. Como las bibliotecas estáticas son colecciones de relocatable obj
 pueden ser enlazadas con otros object files para producir ejecutables. De esta manera, la biblioteca
 estática HARÁ PARTE DEL EJECUTABLE.
 
-Ejercicio 34
-^^^^^^^^^^^^^^
+Lectura 7: el concepto de biblioteca dinámica
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Y qué es una biblioteca dinámica? es un archivo creado directamente por el enlazador. Es 
 similar en estructura a los archivos ejecutables, pero NO LO PUEDES EJECUTAR directamente. Una
@@ -273,8 +271,8 @@ de una biblioteca estática, las bibliotecas dinámicas no hacen parte del archi
 de un programa, sino que son cargadas en la memoria del computador en tiempo de ejecución y
 son compartidas por múltiples procesos. ¡QUE BELLEZA!
 
-Ejercicio 35
-^^^^^^^^^^^^^^
+Lectura 8: fase de ensamblado
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Y cómo funciona un enlazador? ya sabes que un enlazador toma varios relocatable object files
 y los combina para generar un ejecutable. pero ¿Cómo los combina? para responder esta pregunta
@@ -598,16 +596,12 @@ por curiosidad, ¿En dónde está la biblioteca? ejecuta ``whereis libc.so.6``
 
     libc.so: /usr/lib/x86_64-linux-gnu/libc.so.6 /usr/lib/x86_64-linux-gnu/libc.so
 
-Ejercicio 36
-^^^^^^^^^^^^^^
-
-El ejercicio anterior va muy largo, pero podemos seguir experimentando:
 
 Prueba ahora haciendo esto ``gcc -Wall file2.o main.o``
 
 Obtendrás esto:
 
-.. code-block:: c
+.. code-block:: bash
 
     /usr/bin/ld: main.o: in function main:
     main.c:(.text+0x30): undefined reference to multiplicacion
@@ -619,7 +613,7 @@ definido en ninguna parte y por tanto no es posible generar el ejecutable.
 Los símbolos suma y multiplicacion los tenemos definidos. Entonces que tal
 si hacemos esto: ``gcc -Wall file2.o file3.o`` ¿Obtenemos un ejecutable?
 
-.. code-block:: c
+.. code-block:: bash
 
     /usr/bin/ld: /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o: in function _start:
     (.text+0x24): undefined reference to main
@@ -632,8 +626,8 @@ es que esa función está llamando a la función main. ¿Pero dónde está la fu
 nota que al generar el ejecutable no le entregamos al enlazador ningún archivo con
 la definición de main. Por tanto, el enlazador no puede generar el ejecutable.
 
-Ejercicio 37
-^^^^^^^^^^^^^^
+Lectura 9: ensamblado 
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 En el ejercicio anterior vimos que nuestro programa está llamando a la función _start quien
 luego llama a la función main. Vimos que la función _start el enlazador la toma del
@@ -645,7 +639,7 @@ Ejecuta estos comandos:
 
 Este comando te permitirá ver la dirección en la cuál iniciará la ejecución de nuestro programa:
 
-.. code-block:: c
+.. code-block:: bash
 
     exe:     file format elf64-x86-64
     architecture: i386:x86-64, flags 0x00000150:
@@ -866,8 +860,8 @@ y podrás ver que en esa dirección efectivamente está la función ``_start``
         1254:	c3                   	retq 
 
 
-Ejercicio 38
-^^^^^^^^^^^^^^
+Lectura 10: el concepto de ABI 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ya viste que en C es posible incluir en el proceso de enlazado bibliotecas estáticas
 y dinámicas. Ahora la idea es ver cómo las puedes incluir. Antes de ver esto, debemos
@@ -901,8 +895,8 @@ y el formato de los ejecutable `ELF <https://www.packtpub.com/product/learning-l
 En Windows el formato de los ejecutables es `PE <https://docs.microsoft.com/en-us/windows/win32/debug/pe-format>`__
 
 
-Ejercicio 40
-^^^^^^^^^^^^^^
+Lectura 11: relocatable object files 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En este ejercicio vamos a analizar un poco más los relocatable object files. Recuerda que
 este es el tipo de archivo que obtendrás como salida del proceso de ensamblado.
@@ -1138,8 +1132,8 @@ los que ya están resueltos y los que vienen de las bibliotecas dinámicas.
 
     0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
 
-Ejercicio 41
-^^^^^^^^^^^^^^
+Lectura 12: enlazado de un programa con un biblioteca estática
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora si vamos a probar como enlazar un programa con una bilioteca estática
 
@@ -1230,8 +1224,8 @@ ejecuta el programa. En este caso:
   estática porque está hará parte del ejecutable. Recuerda que en el caso de las
   bibliotecas dinámicas es diferente.
 
-Ejercicio 42
-^^^^^^^^^^^^^^^^^
+Lectura 13: fase de enlazado
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finalmente, vamos a probar como enlazar un programa con una bilioteca dinámica.
 Recuerda que la biblioteca dinámica no hace parte del ejecutable, por tanto

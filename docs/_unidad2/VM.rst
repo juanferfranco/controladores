@@ -1,8 +1,11 @@
 Máquinas virtuales
 ===================
 
-Ejercicio 43
-^^^^^^^^^^^^^^^^^
+En esta guía vas a aprender sobre el concepto de máquinas virtuales
+
+
+Lectura 1: compilador vs intérprete
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ya sabemos cuáles son los pasos necesarios para ir desde
 un lenguaje como C y C++ a código de máquina; sin embargo, nos falta
@@ -57,8 +60,8 @@ En el caso de los compiladores tenemos tres tipos:
   una transformación de un tipo de AST a otro, para generar, por ejemplo, de un
   lenguaje de programación a otro.
 
-Ejercicio 44
-^^^^^^^^^^^^^^
+Lectura 2: intérprete tipo AST
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Profundicemos un poco más en los intérpretes.
 
@@ -83,8 +86,8 @@ Realiza el siguiente ejercicio utilizando la herramienta `AST-explorer <https://
 ¿Puedes pintar árboles para los dos expresiones anteriores?
 
 
-Ejercicio 45
-^^^^^^^^^^^^^^
+Lectura 3: intérprete tipo bytecode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Profundicemos un poco más en los intérpretes.
 
@@ -166,6 +169,7 @@ Realiza el siguiente ejercicio:
         00000180  00 02 00 0d                                       |....|
         00000184
 
+
 * Para ver una representación simbólica de este bytecode escribe ``javap -c Test.class``:
 
 .. code-block:: bash 
@@ -198,8 +202,8 @@ Realiza el siguiente ejercicio:
   la suma ``iadd`` dejando el resultado en el stack. Luego se coloca en el stack el 1 con ``iconst_1``
   y finalmente se realiza la resta ``isub``.
 
-Ejercicio 46
-^^^^^^^^^^^^^^
+Ejercicio 1: ejemplo de un intérprete
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Continuado con el tema del ejercicio anterior.
 
@@ -216,8 +220,8 @@ Continuado con el tema del ejercicio anterior.
 
 * Observa la salida al lado derecho:
 
-    .. code-block:: python
-       :linenos:
+.. code-block:: python
+    :linenos:
 
             1           0 LOAD_CONST               0 (<code object main at 0x5653b7cb2980, file "example.py", line 1>)
                         2 LOAD_CONST               1 ('main')
@@ -241,11 +245,11 @@ Continuado con el tema del ejercicio anterior.
                         20 LOAD_CONST               0 (None)
                         22 RETURN_VALUE
 
-* ¿Qué tipo de VM será el intérprete de python?
+¿Qué tipo de VM será el intérprete de python?
 
 
-Ejercicio 47
-^^^^^^^^^^^^^^
+Lectura 4: compiladores
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora profundicemos un poco más en los compiladores.
 
@@ -424,8 +428,8 @@ cálculo de la expresión ``return x+5-2``. Desde esta representación se puede 
 código para múltiples set de instrucciones como te comenté antes.
 
 
-Ejercicio 48
-^^^^^^^^^^^^^^
+Lectura 5: compiladores Just-In-Time (JIT)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora hablemos un poco más de los Just-In-Time (JIT) compilers. Los AOT traducen
 el programa a código de máquina en tiempo de compilación. Los JIT lo hacen en
@@ -445,8 +449,8 @@ toma un tiempo; sin embargo, la interpretación posterior de estos bytecodes com
 será muy rápido puesto que la ejecución no será efectuada por el intérprete sino
 directamente por la CPU.
 
-Ejercicio 49
-^^^^^^^^^^^^^^
+Lectura 6: transpilers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finalmente, analicemos un poco más los transpilers o AST transformers.
 
@@ -463,8 +467,8 @@ Los pasos que sigue el transpiler, en tiempo de compilación, son:
 
 La salida de todo este proceso puede pasarse ahora a un AOT o un JIT compiler.
 
-Ejercicio 50
-^^^^^^^^^^^^^^^
+Ejercicio 2: ¿C# es un lenguaje interpretado o compilado?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Los lenguajes javascript, python, C, C#, c++ son lenguajes interpretados o compilados?
 
@@ -474,10 +478,8 @@ La verdad es que esta pregunta es incorrecta. Lo que es interpretado o compilado
 es la implementación específica. ¿Cómo así? Creo que con lo que aprendiste tu mismo
 puedes explicar que significa esto. ¿Te animas?
 
-Ejercicio 51
-^^^^^^^^^^^^^^^
-
-¿Cómo es la implementación de C#?
+Ejercicio 3: ¿Cómo es la implementación de C#?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Te voy a dejar `aquí <https://codeasy.net/lesson/c_sharp_compilation_process>`__
 un enlace para que leas.
@@ -492,31 +494,22 @@ Te dejo algunas preguntas adicionales:
   para interpretar código IL?
 * ¿Qué es el .NET framework?
 
-Ejercicio 52
-^^^^^^^^^^^^^^^
+Ejercicio 4: proyecto MONO
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿En qué consiste el proyecto MONO? ¿Qué relación tiene con el ejercicio anterior?
 
-Ejercicio 53
-^^^^^^^^^^^^^
+Ejercicio 5: ¿Qué es IL2CPP?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Busca en la documentación de Unity ¿Qué es IL2CPP? Con lo que aprendiste 
 explica ¿Cuáles serían los pasos, en la implementación de Unity, para pasar de
 C# a lenguaje de máquina utilizado IL2CPP?
 
-Ejercicio 54
-^^^^^^^^^^^^^^^
+Ejercicio 6: ¿Cómo funciona IL2CPP
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Cómo funciona IL2CPP en Unity?
 
 Te dejo `este <https://docs.unity3d.com/Manual/IL2CPP-HowItWorks.html>`__
 enlace para que leas al respecto.
-
-Ejercicio 55
-^^^^^^^^^^^^^^^
-
-* Crea un proyecto en Unity.
-* Abre los project settings .
-* En el menú Player busca Configuration.
-* ¿Qué es el `Scripting Backend <https://docs.unity3d.com/Manual/scripting-backends.html>`__?
-* ¿A qué se refiere el `API Compatibility level <https://docs.unity3d.com/Manual/dotnetProfileSupport.html>`__?
