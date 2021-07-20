@@ -29,7 +29,6 @@ Temas
 * Arquitectura del computador
 * Lenguaje ensamblador
 
-
 Actividades
 ------------------------
 
@@ -39,7 +38,7 @@ Lectura 1
 Todos tenemos una imagen clara de lo que es un computador. De hecho somos usuarios 
 de ellos en nuestro día a día. En últimas un computador es una máquina 
 que lee datos, los procesa y los almacena y/o los presenta de alguna manera. 
-La manera cómo serán procesados los datos es codificada como un conjunto de instrucciones 
+La manera como serán procesados los datos es codificada como un conjunto de instrucciones 
 que denominamos programas. 
 
 Una de la partes fundamentales de un computador es la unidad de procesamiento central 
@@ -85,11 +84,13 @@ Pues se parte de un diseño que se describe mediante algún lenguaje de descripc
 de hardware, como por ejemplo, el que puedes observar en la imagen:
 
 .. image:: ../_static/gateHDL.png
+    :alt: gateHDL
 
 Luego este diseño debe descomponerse en partes más simples. Esas partes se denominan 
 `transistores <https://en.wikipedia.org/wiki/Transistor>`__:
 
 .. image:: ../_static/transistor.png
+    :alt: transistor
 
 Finalmente, los transistores y sus conexiones se deben transferir
 a un medio físico. Esto se hace mediante un proceso conocido como
@@ -177,6 +178,7 @@ Ingresa a la carpeta tools u ejecuta el archivo HardwareSimulator.bat. Si todo e
 deberías ver una ventana similar a esta:
 
 .. image:: ../_static/hardwareSimulator.png
+    :alt: simulador
 
 Lectura 6
 ^^^^^^^^^^^^
@@ -184,14 +186,12 @@ Lectura 6
 Lee las `instrucciones <https://b1391bd6-da3d-477d-8c01-38cdf774495a.filesusr.com/ugd/44046b_bfd91435260748439493a60a8044ade6.pdf>`__ 
 de uso del software.
 
-PROYECTO 1
-^^^^^^^^^^^^
+PROYECTO FORMATIVO 1
+^^^^^^^^^^^^^^^^^^^^^
+
 Realiza el primer proyecto de esta unidad que puedes encontrar `aquí <https://www.nand2tetris.org/project01>`__
 
-Tu bitácora debe tener lo siguiente:
-
-#. Un video que muestre el proyecto pasando todos los vectores de prueba.
-#. El diagrama de compuertas de cada circuito.
+En tu bitácora puedes documentar el diagrama de compuertas de cada circuito.
 
 .. warning::
     CONTROL DE VERSIÓN
@@ -202,7 +202,7 @@ Tu bitácora debe tener lo siguiente:
 Lectura 7
 ^^^^^^^^^^^^
 
-Con esta lectura vas a responder una preguntas fundamentales. ¿Cómo se almacenan los número 
+Con esta lectura vas a responder unas preguntas fundamentales. ¿Cómo se almacenan los número 
 enteros en un computador? ¿Y si son negativos? ¿Cómo hace un computador para realizar 
 operaciones aritméticas?
 
@@ -223,15 +223,12 @@ En tu bitácora de trabajo responde las siguientes preguntas:
 #. Con n bits ¿Cuál es el rango de número positivos y negativos que puedes representar?
 #. Si tienes 4 bits que representan números en complemento a dos. ¿Qué pasa si sumas 7 + 1?  
 
-PROYECTO 2
-^^^^^^^^^^^^
+PROYECTO FORMATIVO 2
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Realiza el proyecto 2 que encuentras `aquí <https://www.nand2tetris.org/project02>`__.
 
-Tu bitácora debe tener lo siguiente:
-
-#. Un video que muestre el proyecto pasando todos los vectores de prueba.
-#. El diagrama de compuertas de cada circuito.
+En tu bitácora puedes incluir el diagrama de compuertas de cada circuito.
 
 .. warning::
     CONTROL DE VERSIÓN
@@ -251,15 +248,12 @@ En tu bitácora de trabajo responde las siguientes preguntas:
 #. ¿Cómo funciona un flip-flop tipo D o data?
 #. Dibuja el diagrama general de un circuito lógica secuencial. Explica cómo funciona.
 
-PROYECTO 3
-^^^^^^^^^^^^
+PROYECTO FORMATIVO 3
+^^^^^^^^^^^^^^^^^^^^^
 
 Realiza el proyecto 3 que encuentras `aquí <https://www.nand2tetris.org/project03>`__
 
-Tu bitácora debe tener lo siguiente:
-
-#. Un video que muestre el proyecto pasando todos los vectores de prueba.
-#. El diagrama de compuertas de cada circuito.
+En tu bitácora puedes incluir el diagrama de compuertas de cada circuito.
 
 .. warning::
     CONTROL DE VERSIÓN
@@ -290,15 +284,12 @@ de uso del software.
 
 Analiza los 3 ejemplos de programación de hack (sección 4.3 edición 2, habla con el profe). Simula cada programa.
 
-PROYECTO 4
-^^^^^^^^^^^^
+PROYECTO FORMATIVO 4
+^^^^^^^^^^^^^^^^^^^^^^
 
 Realiza el proyecto 4 que encuentras `aquí <https://www.nand2tetris.org/project04>`__
 
-Tu bitácora debe tener lo siguiente:
-
-#. Un video que muestre el proyecto pasando todos los vectores de prueba.
-#. Realiza diagramas de flujo para cada programa.
+En tu bitácora puedes incluir el diagramas de flujo para cada programa.
 
 .. warning::
     CONTROL DE VERSIÓN
@@ -322,18 +313,36 @@ En tu bitácora de trabajo responde las siguientes preguntas:
 #. ¿Cuáles son los elementos básicos de una CPU? ¿Qué función cumple cada uno?
 #. Explica con tus propias palabras en qué cosiste el concepto de dispositivos de entrada salida mapeados a memoria.
 
-PROYECTO 5
-^^^^^^^^^^^^
 
-Realiza el proyecto 5 que encuentras `aquí <https://www.nand2tetris.org/project05>`__
+PROYECTO EVALUATIVO DE LA UNIDAD 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Tu bitácora debe tener lo siguiente:
+El proyecto se publicará en la semana de evaluación. Por tanto, te recomiendo que termines la mayor 
+cantidad de ejercicios que puedas, ojalá todos, antes de la semana de evaluación.
 
-#. Un video que muestre el proyecto pasando todos los vectores de prueba.
-#. El diagrama de compuertas de cada circuito.
+..
+    Realiza el proyecto 5 que encuentras `aquí <https://www.nand2tetris.org/project05>`__
 
-.. warning::
-    CONTROL DE VERSIÓN
+    Escribe un documento en formato .PDF con la siguiente información:
 
-    Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
-    debe mostrar el proceso de trabajo.
+    #. Tu nombre y ID.
+    #. El enlace al github del proyecto.
+    #. (20%) El enlace al video que muestre el proyecto pasando todos los vectores de prueba. Debes asegurarte 
+    que el video funciona: audio y video (mínimo 720 de resolución), de lo contrario será contado como 0% en la 
+    calificación final. Para la captura puedes usar `OBS Studio <https://obsproject.com/download>`__. 
+    #. (30%) El diagrama de compuertas de cada circuito. Puedes usar draw.io.
+    #. (40%) Utiliza el segundo programa del proyecto formativo 4. Escribe un texto donde expliques detalladamente el 
+    funcionamiento de cada parte del computador para poder ejecutar este programa.
+
+    Consideraciones para la entrega:
+
+    * Sube tu archivo .``pdf`` a `este <https://upbeduco-my.sharepoint.com/:f:/g/personal/juanf_franco_upb_edu_co/Ep6NfMCIRwxBpZpBWcC0I2kBvakItRWE7PXcpZzvWhfV-g>`__ 
+    enlace.
+    * Solo se tendrá en cuenta el último archivo que subas.
+    * Luego del plazo máximo NO SE RECIBEN trabajos y la nota será 0.
+
+    .. warning::
+        CONTROL DE VERSIÓN
+
+        (10%) Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
+        debe mostrar el proceso de trabajo.

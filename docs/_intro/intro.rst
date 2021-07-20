@@ -56,31 +56,17 @@ Cronograma
 ------------
 
 * Unidad 1: semanas 1 a 5
-* Unidad 2: semanas 6 a 11
-* Unidad 3: semanas 12 a 14
-* Unidad 4: semanas 15 a 16
+* Unidad 2: semanas 6 a 9
+* Unidad 3: semanas 10 a 13
+* Unidad 4: semanas 14 a 16
 
 Evaluación
 -----------
 
-Cada unidad tiene un peso del 25% en la nota final. Notarás que algunas
-unidades tienen un proyecto, pero otras tiene más de uno.
-
-La Unidad solo se considera terminada cuando termines todos 
-los ejercicio y todos los proyectos que están en ella al 100%. 
-Por tanto, la nota de cada unidad, una vez la termines, 
-será 5.
-
-Puedes entregar cada unidad cuando quieras, pero considera lo siguiente:
-
-En el cronograma se han establecido las fechas sugeridas para la entrega de cada unidad.
-En esas fechas se realizarán cortes, es decir, si no has entregado para esa fecha, 
-en el sistema se reportará un 0. Una vez realices la entrega la nota se cambiará.
-
-En la semana 16 se reportarán al sistema todas las unidades terminadas. ES MUY
-IMPORTANTE que tengas en cuenta que una unidad se considera terminada SI y SOLO
-si todos los ejercicios y proyectos están al 100% y realizaste
-el proceso de evaluación con el docente.
+* Evaluación unidad 1: 25%. 1 proyectos del 25%. Semana de agosto 16. Plazo máximo agosto 20 de 2021. 
+* Evaluación unidad 2: 25%. 1 proyecto del 25%. Semana de septiembre 13. Plazo máximo septiembre 17 de 2021.
+* Evaluación unidad 3: 25%. 1 proyecto del 25%. Semana de octubre 11. Plazo máximo octubre 15 de 2021.
+* Evaluación unidad 4: 25%. 1 proyecto del 25%. Semana de noviembre 1. Plazo máximo noviembre 6 de 2021. 
 
 Dedicación
 -----------
@@ -97,36 +83,17 @@ Computer from First Principles. The MIT Press (1 de junio de 2005)
 Actividades de cada unidad
 ----------------------------
 
-Actividad 1: encuentros sincrónicos
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+En la primera sesión de la semana discutiremos algunos conceptos y ejercicios.
+La segunda sesión la dedicaremos a asesorías para resolver tus dudas y dificultades 
+puntuales.
 
-* Fechas: todos los jueves de 10 a.m. a 11:40 a.m.
-* Descripción: asesorías en tiempo real y evaluación.
-* Recursos: ingresa a `Teams <https://teams.microsoft.com/l/team/19%3a2120a8ab2394491a8b8a9bfe4d209156%40thread.tacv2/conversations?groupId=790121bd-4b34-49b3-b4f2-a29c7a9eee9d&tenantId=618bab0f-20a4-4de3-a10c-e20cee96bb35>`__
-* Duración de la actividad: sesiones de 1:40. 
-* Forma de trabajo: individual-colaborativo/sincrónico
-
-Actividad 2: fundamentación
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* Descripción: realiza los ejercicios, retos y preguntas
-  propuestas.
-* Recursos: trayecto de actividades en cada unidad.
-* Duración de la actividad: depende de ti, pero deberás dedicar 
-  semanalmente 10 horas.
-* Forma de trabajo: individual-colaborativo
-
-Actividad 3: proyecto y sustentación
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* Descripción: realiza el proyecto, usa las herramientas
-  de control de versión y productividad y actualiza
-  tu portafolio.
-* Duración de la actividad: depende de ti.
-* Forma de trabajo: individual.
 
 Evidencias de evaluación
 -------------------------
+
+En cada unidad verás el enunciado de un proyecto y las consideraciones para 
+entregarlo solucionado. Ten en cuenta SIEMPRE el siguiente código honor:
+
 
 Código de honor
 ^^^^^^^^^^^^^^^^
@@ -144,21 +111,17 @@ Para realizar el trabajo de cada unidad se espera que hagas lo siguiente:
 * NO OLVIDES, este curso se trata de pensar y experimentar NO de
   BUSCAR soluciones en Internet.
 
-Detalle de las evidencias  
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Bitácora  
+------------------------------
 
-Vamos a utilizar dos herramientas para la presentación de evidencias, tanto
-para los ejercicios de fundamentación como para el proyecto.
+Vamos a utilizar dos herramientas para documentes y organices tu trabajo:
 
 * GitHub
 * `Notion <https://www.notion.so>`__
 
-En GitHub mantendrás todo tu código bajo control de versión y
-debe reflejar un flujo de trabajo. Debes evidenciar el flujo
-de trabajo.
+En GitHub mantendrás todo tu código bajo control de versión.
 
-En Notion vas a presentar la documentación de la fundamentación y del proyecto 
-de cada unidad. El formato de tu portafolio es libre.
+En Notion llevarás tu bitácora electrónica.
 
 Control de versión
 --------------------
@@ -166,3 +129,4 @@ Control de versión
 * Crea una cuenta en GitHub con tu correo institucional de la UPB. Si
   tienes la cuenta, tanto mejor.
 * Explora los tutoriales de `este <https://www.gitkraken.com/learn/git/tutorials>`__.
+
