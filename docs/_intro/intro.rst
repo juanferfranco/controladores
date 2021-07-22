@@ -116,7 +116,7 @@ Bitácora
 
 Vamos a utilizar dos herramientas para documentes y organices tu trabajo:
 
-* GitHub
+* GitHub (obligatorio).
 * `Notion <https://www.notion.so>`__
 
 En GitHub mantendrás todo tu código bajo control de versión.
