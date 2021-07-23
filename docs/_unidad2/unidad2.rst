@@ -188,3 +188,6 @@ Cada registro es así:
         char nombre[30];
         int semestre;
     };
+
+
+hola código unidad 2
