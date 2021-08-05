@@ -63,10 +63,10 @@ Cronograma
 Evaluación
 -----------
 
-* Evaluación unidad 1: 25%. 1 proyectos del 25%. Semana de agosto 16. Plazo máximo agosto 20 de 2021. 
-* Evaluación unidad 2: 25%. 1 proyecto del 25%. Semana de septiembre 13. Plazo máximo septiembre 17 de 2021.
-* Evaluación unidad 3: 25%. 1 proyecto del 25%. Semana de octubre 11. Plazo máximo octubre 15 de 2021.
-* Evaluación unidad 4: 25%. 1 proyecto del 25%. Semana de noviembre 1. Plazo máximo noviembre 6 de 2021. 
+* Evaluación unidad 1: 25%. 1 proyectos del 25%. Semana de agosto 16. Plazo máximo agosto 22 de 2021. 
+* Evaluación unidad 2: 25%. 1 proyecto del 25%. Semana de septiembre 13. Plazo máximo septiembre 19 de 2021.
+* Evaluación unidad 3: 25%. 1 proyecto del 25%. Semana de octubre 11. Plazo máximo octubre 17 de 2021.
+* Evaluación unidad 4: 25%. 1 proyecto del 25%. Semana de noviembre 1. Plazo máximo noviembre 7 de 2021. 
 
 Dedicación
 -----------
