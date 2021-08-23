@@ -317,32 +317,170 @@ En tu bitácora de trabajo responde las siguientes preguntas:
 PROYECTO EVALUATIVO DE LA UNIDAD 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-El proyecto se publicará en la semana de evaluación. Por tanto, te recomiendo que termines la mayor 
-cantidad de ejercicios que puedas, ojalá todos, antes de la semana de evaluación.
+Enunciado de la evaluación
+############################
 
-..
-    Realiza el proyecto 5 que encuentras `aquí <https://www.nand2tetris.org/project05>`__
+Analiza detenidamente y responde las siguientes preguntas:
 
-    Escribe un documento en formato .PDF con la siguiente información:
+Pregunta 1
+************
 
-    #. Tu nombre y ID.
-    #. El enlace al github del proyecto.
-    #. (20%) El enlace al video que muestre el proyecto pasando todos los vectores de prueba. Debes asegurarte 
-    que el video funciona: audio y video (mínimo 720 de resolución), de lo contrario será contado como 0% en la 
-    calificación final. Para la captura puedes usar `OBS Studio <https://obsproject.com/download>`__. 
-    #. (30%) El diagrama de compuertas de cada circuito. Puedes usar draw.io.
-    #. (40%) Utiliza el segundo programa del proyecto formativo 4. Escribe un texto donde expliques detalladamente el 
-    funcionamiento de cada parte del computador para poder ejecutar este programa.
+Considerando esta implementación de la CPU:
 
-    Consideraciones para la entrega:
+.. code-block:: c
 
-    * Sube tu archivo .``pdf`` a `este <https://upbeduco-my.sharepoint.com/:f:/g/personal/juanf_franco_upb_edu_co/Ep6NfMCIRwxBpZpBWcC0I2kBvakItRWE7PXcpZzvWhfV-g>`__ 
-    enlace.
-    * Solo se tendrá en cuenta el último archivo que subas.
-    * Luego del plazo máximo NO SE RECIBEN trabajos y la nota será 0.
+    CHIP CPU {
 
-    .. warning::
-        CONTROL DE VERSIÓN
+        IN  inM[16],         // M value input  (M = contents of RAM[A])
+            instruction[16], // Instruction for execution
+            reset;           // Signals whether to re-start the current
+                            // program (reset=1) or continue executing
+                            // the current program (reset=0).
 
-        (10%) Desde el inicio del proyecto debes crear un repositorio y realizar commits periódicamente. Tu repositorio 
-        debe mostrar el proceso de trabajo.
+        OUT outM[16],        // M value output
+            writeM,          // Write into M? 
+            addressM[15],    // Address in data memory (of M)
+            pc[15];          // address of next instruction
+
+        PARTS:
+        // Implementation by Mark Armbrust.
+
+        // Instruction decode
+        Not (in=instruction[15], out=aInst);
+        And (a=instruction[14], b=instruction[13], out=ones);
+        And (a=ones,  b=instruction[15], out=cInst);
+        And (a=cInst, b=instruction[12], out=srcM);
+        And (a=cInst, b=instruction[11], out=aluZx);
+        And (a=cInst, b=instruction[10], out=aluNx);
+        And (a=cInst, b=instruction[9],  out=aluZy);
+        And (a=cInst, b=instruction[8],  out=aluNy);
+        And (a=cInst, b=instruction[7],  out=aluF);
+        And (a=cInst, b=instruction[6],  out=aluNo);
+        And (a=cInst, b=instruction[5],  out=destA);
+        And (a=cInst, b=instruction[4],  out=destD);
+        And (a=cInst, b=instruction[3],  out=writeM);   // destM
+        And (a=cInst, b=instruction[2],  out=jmpLt);
+        And (a=cInst, b=instruction[1],  out=jmpEq);
+        And (a=cInst, b=instruction[0],  out=jmpGt);
+
+        // A register and input mux
+        Mux16 (sel=aInst, a=aluOut, b=instruction, out=aIn);
+        Or (a=aInst, b=destA, out=loadA);
+        ARegister (in=aIn, load=loadA, out=aReg, out[0..14]=addressM);
+        
+        // D register
+        DRegister(in=aluOut, load=destD, out=dReg);
+
+        // ALU and input mux
+        Mux16 (sel=srcM, a=aReg, b=inM, out=aluY); 
+        ALU (x=dReg, y=aluY, out=aluOut, out=outM, zr=aluZr, ng=aluNg,
+                zx=aluZx, nx=aluNx, zy=aluZy, ny=aluNy, f=aluF, no=aluNo);
+
+        // PC with jump test
+        Or (a=aluZr, b=aluNg, out=zrng);
+        Not (in=zrng, out=aluPos);
+        And (a=aluNg, b=jmpLt, out=jlt);
+        And (a=aluZr, b=jmpEq, out=jeq);
+        And (a=aluPos, b=jmpGt, out=jgt);
+        Or (a=jlt, b=jeq, out=jle);
+        Or (a=jle, b=jgt, out=jmp);
+        PC (in=aReg, reset=reset, inc=true, load=jmp, out[0..14]=pc);
+    }
+
+Dibuja el diagrama en bloques de la CPU. Recuerda marcar detalladamente cada chip con su nombre, 
+puertos y el tamaño en bits de cada puerto. COLOCA EL NOMBRE DE LOS PUERTOS Y DEL CHIP 
+adentro del rectángulo que identifica el circuito. 
+Esto con el fin de poder distinguir el nombre de los cables del nombre de los puertos.     
+
+Pregunta 2
+************
+
+Considerando esta implementación del computador:
+
+.. code-block:: c
+
+    CHIP Computer {
+
+        IN reset;
+
+        PARTS:
+
+        // CPU
+        CPU (inM=RAMout, instruction=ROMout, reset=reset, writeM=loadRAM,
+            outM=RAMin, addressM=RAMaddress, pc=ROMaddress);
+
+        // RAM
+        Memory (in=RAMin, load=loadRAM, address=RAMaddress, out=RAMout);
+
+        // ROM
+        ROM32K (address=ROMaddress, out=ROMout);
+    }
+
+Dibuja el diagrama en bloques del computador. Recuerda marcar detalladamente cada chip con su nombre, 
+puertos y el tamaño en bits de cada puerto. COLOCA EL NOMBRE DE LOS PUERTOS Y DEL CHIP 
+adentro del rectángulo que identifica el circuito. 
+Esto con el fin de poder distinguir el nombre de los cables del nombre de los puertos. 
+
+Pregunta 3
+************
+
+Explica qué hace el siguiente programa:
+
+.. image:: ../_static/asmProg.png
+  :alt: programa en ensamblador
+
+Muestra gráficamente qué pasa con la CPU, la memoria y los buses del computador al ejecutar cada 
+una de las siguientes instrucciones: ``@16384``, ``D;JLE``, ``A=M``, ``MD = M-1``. Estas instrucciones hacen parte 
+del programa que te muestré en la figura anterior y como puedes notar están ubicada en diferentes 
+partes del programa. Debes tener en cuenta el estado de la CPU y la memoria como consecuencia de las 
+instrucciones anteriores a la que te pido que analices.
+
+Pregunta 4
+************
+
+Inventa una nueva instrucción para el computador de tal manera que al ejecutarla se reinicie el programa.
+
+* Define cuál sería la sintaxis simbólica. 
+* Define la sintaxis binaria.
+* Realice un nuevo diagrama de la CPU donde muestre la modificación necesaria para implementar la nueva instrucción.
+
+Pregunta 5
+*************
+
+En una implementación de la CPU (no sabemos si está correcta o no), al ejecutar esta instrucción 
+``0111 1100 1001 0000`` el contenido del registro D se modifica. ¿Es esto correcto?
+
+Muestre en el diagrama de la CPU lo que podría estar pasando en dicha implementación.
+
+Entregables
+############################
+
+* Sube a `este <https://upbeduco-my.sharepoint.com/:f:/g/personal/juanf_franco_upb_edu_co/EmFnLXvy3hFKhw7L_auxzqcBtBHaF-EPbA2eHR_K0QR4pw>`__ 
+  enlace un archivo pdf nombrado con los nueve dígitos que componen tu ID. Por ejemplo: 000008716.pdf. El archivo 
+  debe tener lo siguiente:
+
+  * Tu nombre completo.
+  * Evaluación de la unidad 1 y la fecha en la cual vas subir el archivo.
+  * Define una sección en el documento para solucionar cada pregunta.
+
+.. warning:: USA DRAW.IO
+
+    Te recomiendo usar la aplicación draw.io para realizar los diagramas solicitados.
+
+
+Criterios de evaluación
+############################
+
+Estos son los puntos que te dará la solución a cada pregunta.
+
+* Pregunta 1: 0.5
+* Pregunta 2: 0.5
+* Pregunta 3: 2
+* Pregunta 4: 1
+* Pregunta 5: 1
+
+.. warning:: ASIGNACIÓN DE PUNTAJE
+
+    La asignación de los puntos a la respuesta de cada pregunta se otorga 
+    solo si la respuesta está completa. No se asignarán calificaciones intermedias. Por tanto,
+    revisa cuidadosamente la respuesta a cada una de tus preguntas.

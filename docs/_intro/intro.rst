@@ -55,18 +55,18 @@ Cada unidad estará constituida por tres fases:
 Cronograma
 ------------
 
-* Unidad 1: semanas 1 a 5
-* Unidad 2: semanas 6 a 9
-* Unidad 3: semanas 10 a 13
+* Unidad 1: semanas 1 a 6
+* Unidad 2: semanas 7 a 10
+* Unidad 3: semanas 11 a 13
 * Unidad 4: semanas 14 a 16
 
 Evaluación
 -----------
 
-* Evaluación unidad 1: 25%. 1 proyectos del 25%. Semana de agosto 16. Plazo máximo agosto 22 de 2021. 
-* Evaluación unidad 2: 25%. 1 proyecto del 25%. Semana de septiembre 13. Plazo máximo septiembre 19 de 2021.
-* Evaluación unidad 3: 25%. 1 proyecto del 25%. Semana de octubre 11. Plazo máximo octubre 17 de 2021.
-* Evaluación unidad 4: 25%. 1 proyecto del 25%. Semana de noviembre 1. Plazo máximo noviembre 7 de 2021. 
+* Evaluación unidad 1: 25%. Semana de agosto 23. Plazo máximo agosto 29 de 2021. 
+* Evaluación unidad 2: 25%. Semana de septiembre 20. Plazo máximo septiembre 26 de 2021.
+* Evaluación unidad 3: 25%. Semana de octubre 11. Plazo máximo octubre 17 de 2021.
+* Evaluación unidad 4: 25%. Semana de noviembre 1. Plazo máximo noviembre 7 de 2021.  
 
 Dedicación
 -----------
