@@ -455,7 +455,7 @@ Muestre en el diagrama de la CPU lo que podría estar pasando en dicha implement
 Entregables
 ############################
 
-* Sube a `este <https://upbeduco-my.sharepoint.com/:f:/g/personal/juanf_franco_upb_edu_co/EmFnLXvy3hFKhw7L_auxzqcBtBHaF-EPbA2eHR_K0QR4pw>`__ 
+* Sube a `este <https://www.dropbox.com/request/yuejWTLm3UsZ5mdnAVVM>`__ 
   enlace un archivo pdf nombrado con los nueve dígitos que componen tu ID. Por ejemplo: 000008716.pdf. El archivo 
   debe tener lo siguiente:
 
