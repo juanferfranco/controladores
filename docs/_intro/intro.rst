@@ -39,10 +39,9 @@ Estructura y metodología del curso
 El curso está divido en 4 unidades:
 
 #. Unidad 1: Arquitectura del computador.
-#. Unidad 2: Del código fuente al ejecutable: compiladores, máquinas virtuales, C, C++, C#.
+#. Unidad 2: De lenguaje de alto nivel a código ejecutable.
 #. Unidad 3: Programación orientada a objetos.
-#. Unidad 4: Sistema operativo: procesos, hilos, memoria virtual, sincronización, comunicación,
-   entrada salida.
+#. Unidad 4: Sistema operativo.
 
 Cada unidad estará constituida por tres fases:
 

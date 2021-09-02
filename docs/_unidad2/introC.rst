@@ -3,14 +3,14 @@ Introducción al lenguaje C
 
 Con esta guía aprenderás a programar en lenguaje C. Vas a aprender 
 las características del lenguaje que te permitirán realizar 
-los ejercicios y proyectos propuestos.
+los ejercicios propuestos.
 
 Prerrequisitos
 -----------------
 
 Esta introducción a C asumen que tu ya conoces y has trabajado con otros 
-lenguajes de programas como C#, python, java. Notarás cierta familiaridad 
-con la sintaxis de C# o de java.
+lenguajes de programación tales como C#, por lo que notarás cierta familiaridad 
+con su sintaxis.
 
 Temas
 -------
@@ -163,34 +163,6 @@ El resultado del preprocesador será algo similar a esto:
 Ahora si, este archivo, será pasado al compilador para que lo convierta en código ensamblador. 
 La respuesta a la pregunta será 15.
 
-Mira este otro ejemplo:
-
-.. code-block:: c
-
-	#define M 5
-	#define C 5
-	#define MAP(val,m,c) val*m+c
-
-    int main(int argc, char* argv[]) {
-        int x = 2;
-        int y = MAP(x,M,C);
-        return 0;
-    }
-
-¿Qué crees que genere el preprocesador luego de procesar este archivo? 
-
-.. note::
-    ¡Alerta de Spoiler!
-
-    .. code-block:: c
-         
-
-        int main(int argc, char* argv[]) {
-            int x = 2;
-            int y = x*5+5;
-            return 0;
-        }
-
 Otra forma de saber, ANTES de compilar, la salida del preprocesador es así:
 
 ``gcc -E codigo.c``
@@ -203,91 +175,15 @@ Por último prueba el comando anterior con este programa:
 	#include <stdio.h>
     
     #define M 5
-	#define C 5
-	#define MAP(val,m,c) x*m+c
+    #define C 5
 
     int main(int argc, char* argv[]) {
         int x = 2;
-        int y = MAP(x,M,C);
-        printf("y: %d", y);
+        int y = x*M + C;
         return 0;
     }
 
 ¿Qué puedes concluir de la directiva ``#include``? 
-
-Otro uso interesante del preprocesador son las DIRECTIVAS de compilación condicional. 
-
-Esta directivas te permiten incluir un código u otro, dependiendo de una condición:
-
-.. code-block:: c
-    
-
-    #include <stdio.h>
-
-    #define CONDITION
-    
-    int main(int argc, char* argv[]) {
-    
-        #ifdef CONDITION
-        printf("CODIGO IF\n");
-        #else
-        printf("CODIGO ELSE\n");
-        #endif
-        return 0;
-    }
-
-¿Cómo crees que quede el programa luego de ser preprocesado?
-
-.. note::
-    ¡Alerta de Spoiler!
-
-
-    Al definir ``CONDITION`` con la directiva ``#define CONDITION``
-    y con el comando ``gcc -E codigo.c`` el resultado es:
-
-    .. code-block:: c
-         
-
-        int main(int argc, char* argv[]) {
-           printf("CODIGO IF\n");
-            return 0;
-        }
-
-
-¿Será posible definir una directiva para el preprocesador desde la línea de comandos?
-
-Volvamos al ejemplo anterior pero esta vez sin el ``#define CONDITION``
-
-.. code-block:: c
-    
-
-    #include <stdio.h>
-
-    int main(int argc, char* argv[]) {
-    
-        #ifdef CONDITION
-        printf("CODIGO IF\n");
-        #else
-        printf("CODIGO ELSE\n");
-        #endif
-        return 0;
-    }
-
-¿Cuál será el resultado de compilar y ejecutar este programa?
-
-Compara el resultado obtenido con la salida del comando ``gcc -E codigo.c``.
-
-Ahora prueba este comando:
-
-``gcc -DCONDITION -E codigo.c``
-
-¿Cuál es el resultado?
-
-Y si compilas así:
-
-``gcc -DCONDITION -Wall codigo.c -o codigo``
-
-¿Qué conclusiones puedes sacar?
 
 Lectura 4: Tipos de datos, tamaños y rangos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -320,8 +216,11 @@ El tipo char puede ser con signo, ``signed char`` o sin signo ``unsigned char``.
 :math:`-128` a :math:`127` y si signo desde :math:`0` a :math:`255`. También es común observar el tipo ``char`` sin 
 especificar el signo. En este caso, por defecto el rango será desde :math:`-128` hasta :math:`127`.
 
-El lenguaje el operador de tiempo de compilación ``sizeof`` QUE SOLO FUNCIONA EN TIEMPO DE COMPILACIÓN. 
-Te repito, SOLO FUNCIONA EN TIEMPO DE COMPILACIÓN. ``sizeof`` devuelve la cantidad de bytes que ocupa un tipo de dato.
+.. warning:: OPERADOR SIZEOF 
+
+    El lenguaje tiene el operador de tiempo de compilación ``sizeof`` QUE SOLO FUNCIONA EN TIEMPO DE COMPILACIÓN. 
+    Te repito, SOLO FUNCIONA EN TIEMPO DE COMPILACIÓN. ``sizeof`` devuelve la cantidad de bytes que ocupa un 
+    tipo de dato.
 
 Lectura 5: Variables
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -358,54 +257,12 @@ Escribe, compila y ejecuta el programa anterior. Analiza detenidamente el result
 Ejercicio 4: Operadores
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Para que puedas practicar con este ejercicio te voy a recomendar que uses el depurar de C.
-En el siguiente video te muestro cómo puedes iniciar a usarlo.
-
-.. raw:: html
-    
-    <div style="position: relative; padding-bottom: 5%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ArJWgY680bo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-El código del ejemplo que está en el video es este:
-
-.. code-block:: c 
-         
-    
-        #include <stdio.h>
-        #include <stdint.h>
-        
-        int main(void)
-        {
-            int32_t a = 10;
-            int32_t b = 20;
-            int32_t c = 0;
-        
-            c = a + b;
-            c = a - b;
-            c = a * b;
-            c = a / b;
-            c = a % b;
-            c = a++;
-            c = a--;
-            return 0;
-        }
-    
-Ahora, usa el depurador para depurar el siguiente programa y ver cómo funcionan 
-los distintos operadores. En la siguiente imagen podrás ver los controles básicos para el depurador.
-
-.. image:: ../_static/debugIcons.png
-    :alt: debugger controls
-
-Los controles 2,3 y 4 de izqueirda a derecha te permitirán ejecutar respectivamente, una función completa, sin 
-entrar en ella; ingreasar a una función y salir de la función una vez ingreses en ella. Prueba estos 
-controles.
-
-Usa el siguiente código, tomado de `aquí <https://www.tutorialspoint.com/cprogramming/c_operators.htm>`__
+Escribe, analiza y ejecuta el siguiente programa para que observes el funcionamiento 
+de los operadores que te ofrece el lenguaje ( tomado de 
+`aquí <https://www.tutorialspoint.com/cprogramming/c_operators.htm>`__)
 
 .. code-block:: c 
      
-
     #include <stdio.h>
     #include <stdint.h>
     
@@ -676,8 +533,6 @@ Los punteros son ``VARIABLES`` que almacenan la dirección de otra variable.
 Ejecuta el siguiente programa:
 
 .. code-block:: c
-     
-
 
     #include <stdio.h>
     #include <stdint.h>
@@ -701,7 +556,6 @@ En mi caso la salida se ve así:
 
 .. code-block:: bash
      
-
     ./p1
     a'address: 0x7ffd249a93d7
     b'address: 0x7ffd249a93d8
@@ -731,7 +585,6 @@ al compilador que NO QUIERES el contenido de la variable ``a``, sino la direcci�
 Ejecuta el siguiente ejemplo:
 
 .. code-block:: c
-     
 
     #include <stdio.h>
     #include <stdint.h>
@@ -871,57 +724,6 @@ Ten presente que todas las cadenas en C deben terminar por convención en 0:
         <iframe width="560" height="315" src="https://www.youtube.com/embed/tFh7FU5Y36o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-
-Reto 3: arreglos, cadenas, punteros
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Ejecuta y analiza el siguiente código. No olvides correrlo utilizando el depurador. Te recomiendo 
-que antes de ver la salida del programa trates de predicir cuál será.
-
-.. code-block:: c 
-     
-
-    #include <stdio.h>
-    #include <stdint.h>
-    
-    char nombres[3][20] = {"fulano", "mengano", "perano"};
-    
-    int main(void){
-    
-        char *a;
-        char (*b)[20];
-        char (*c)[3][20];
-    
-        a = nombres[0];
-        printf("Imprime el contenido de la dirección almacenada en a: %s\n",a);
-        printf("Imprime el contenido de la dirección almacenada en a+1: %s\n",a+1);
-    
-        b = nombres;
-        uint8_t sizeOfNombresElement = sizeof(nombres)/sizeof(nombres[0]);
-    
-        for(uint8_t i = 0; i < sizeOfNombresElement; i++){
-            printf("Imprime el contenido de la dirección almacenada en b+%d: %s\n",i, (char *)(b+i));
-        }
-    
-        c = &nombres;
-        printf("Imprime el contenido de la dirección almacenada en c: %s\n", (char *) c);
-        printf("Imprime el contenido de la dirección almacenada en c+1: %20s\n", (char *) (c+1) );
-    
-        printf("a  : %p\n",a);
-        printf("a+1: %p\n",a+1);
-        printf("b  : %p\n",b);
-        printf("b+1: %p\n",b+1);
-        printf("c  : %p\n",c);
-        printf("c+1: %p\n",c+1);
-    
-        return 0;
-    }
-
-#. Explica qué hace la línea ``uint8_t sizeOfNombresElement = sizeof(nombres)/sizeof(nombres[0]);``
-#. Observa el ciclo ``for``. ¿Cuál es la función de ``(char *)`` en ``(char *)(b+i)``?
-#. ¿Cómo quedan almacenada en memoria la matriz ``nombres``?
-
-
 Lectura 11: memoria dinámica
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -970,7 +772,6 @@ Observa el siguiente ejemplo:
 
 .. code-block:: c
      
-
     #include <stdio.h>
     #include <stdint.h>
     #include <stdlib.h>
@@ -1070,7 +871,7 @@ Ahora vamos a explorar un poco más las estructuras con unas preguntas básicas:
         struct point pt2; 
     };
 
-* ¿Puedes asignar una struct en otras struct compatibles? SI lo puedes hacer:
+* ¿Puedes asignar una struct en otras struct compatibles? SI, lo puedes hacer. Observa:
 
 .. code-block:: c 
 
@@ -1116,7 +917,7 @@ Ten en cuenta que el contenido de ``p1`` SE COPIA en ``p2``.
         return 0;
     }
 
-Reto 4: comparación de estructuras
+Reto 3: comparación de estructuras
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En la lectura anterior viste que no es posible comparar dos struct usando 
@@ -1127,7 +928,7 @@ Lectura 13: estructuras y punteros
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Es posible guardar la dirección en memoria de una variable tipo ``struct`` en un 
-puntero? Si es posible:
+puntero? Si, es posible. Observa:
 
 .. code-block:: c
 
@@ -1159,8 +960,8 @@ formateada y finalmente aprenderás a leer y almacenar información persistente.
 ¿Cómo puedes hacer para leer información por medio del teclado?
 
 Tu programa no puede leer directamente la información que el usuario ingresa desde 
-el teclaro. Esta tarea la debes hacer por medio del sistema operativo, es decir, debes 
-``pedirle el favor`` al sistema operativo (un llamado al sistema operativo). 
+el teclado. Esta tarea la debes hacer por medio del sistema operativo, es decir, debes 
+``pedirle el favor`` al sistema operativo, mediante un llamado. 
 ¿Cómo? Te voy a proponer una de muchas maneras usando esta función 
 ``char *fgets(char *str, int n, FILE *stream)``. A ``fgets`` 
 le debes pasar la dirección del buffer (arreglo en memoria) donde quieres colocar los 
@@ -1174,7 +975,6 @@ buffer que definiste y tu programa podrá continuar.
 Analicemos juntos este código:
 
 .. code-block:: c
-     
 
     #include <stdio.h>
     int main(void)
@@ -1300,140 +1100,10 @@ hacer es convertir la secuencia de caracteres '4' '2' en el número ``42``.
     :scale: 100%
     :alt: lectura de números
 
-Ejercicio 6: convertir caracteres a números forma 1
+Ejercicio 6: convertir caracteres a números
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-No creiste que te dejaría sin saber cómo hacer la conversión de caracteres a números ¿Cierto?
-En C se puede hacer de muchas maneras. Algunas formas son muy simples, pero poco robustas, es decir, 
-no verifican errores o son lentas. Te voy a proponer una forma un tanto más complicada pero más 
-robusta tomada del manual de Linux.
-
-Aquí viene. Copia el código, ejecutálo. Ingresa números, números con letras. Experimenta. En principio 
-se puede ver complicado, pero la verdad no lo es tanto. En otros lenguajes de programación recuerda que 
-usualmente tienes bloques ``try catch``, esto que vas a ver es algo similar, solo que en C debes 
-hacer esta gestión de manera manual. De nuevo, es porque C te da todo el control a ti para que hagas 
-lo que quieras.
-
-.. code-block:: c
-     
-
-    #include <stdlib.h>
-    #include <limits.h>
-    #include <stdio.h>
-    #include <errno.h>
-    #include <string.h>
-
-    int main(void)
-    {
-        char *endptr;
-        long val;    
-        char number[40];
-
-        printf("Enter an integer number: ");
-        if (fgets(number, 40, stdin) != NULL)
-        {
-            number[strlen(number) -1 ] = 0;
-            printf("The string to convert is %s\n", number);
-        }
-
-        errno = 0;
-        val = strtol(number, &endptr, 10);    
-        /* Check for various possible errors */    
-        if (errno != 0) 
-        {
-            perror("strtol");
-            exit(EXIT_FAILURE);
-        }    
-        
-        if (endptr == number) {
-            fprintf(stderr, "No digits were found\n");
-            exit(EXIT_FAILURE);
-        }
-
-        /* If we got here, strtol() successfully parsed a number */
-
-        printf("strtol() returned %ld\n", val);
-
-        if (*endptr != '\0')        /* Not necessarily an error... */
-            printf("Further characters after number: \"%s\"\n", endptr);
-
-        exit(EXIT_SUCCESS);
-    }
-
-En este código hay varias cosas interesantes para analizar. 
-
-La función ``strtol`` se define así: 
-
-.. code-block:: c 
-
-    #include <stdlib.h>
-
-    long strtol(const char *nptr, char **endptr, int base);
-
-Para usuar la función debes incluir un archivo de cabezera (stdlib.h). Observa los parámetros de la función.
-nptr te permite almacenar una dirección. Será la dirección del primer carácter de la secuencias de caracteres 
-que vas a convertir. No ta la palabra reservada ``const``. Esta palabra no es obligatoria, pero si la usas la 
-estás diciendo al compilador que por medio de ``nptr`` no piensas modificar el contenido apuntado, por tanto, 
-si llegaras a olvidarlo en tu código o si cometes un error, el compilador te dirá. ``endptr`` se ve complicado, 
-pero realmente no lo es tanto. Esa variable tiene dos ``*`` que quiere decir que es una variable que almacena 
-la dirección de otra variable que almancena direcciones, es decir, es una variable que almancena la dirección 
-de un puntero. Finalmente, ``base`` indica la base numérica que se debe utilizar para interpretar la secuencia 
-de caracteres, es decir, considera que puedes estar representado un número en base 10, en base 2, en base 16, 
-etc.
-
-``strtol`` te devolverá el entero convertido o ``0`` si hay un error. Y te estarás preguntando, ¿Cómo hago para 
-saber si tengo un error o el valor ingresado es CERO? Lo que debes verificar es si la función detectó algún error. 
-En el archivo ``errno.h`` está definida la variable entera ``errno``. Esta variable la asigna un llamado al sistema 
-(cuando le pides al sistema operativo que haga algo por ti) y algunas funciones de bibliotecas para indicar 
-un error. TEN PRESENTE que ningún llamado al sistema o función de biblioteca asignará ``errno`` con cero. Por tanto, 
-antes de llamar ``strtol`` se coloca ``errno`` en 0.
-
-En la secuencia de caracteres no tienes que tener solo caracteres que representen números, sino también, letras, 
-signos artiméticos, etc. Si la secuencia comienza con espacios ``strtol`` los ignora. Puedes tener inicialmente 
-los signos ``+`` o ``-`` y ``strtol`` los tendrá en cuenta para la conversión. Asume que tienes la seguiente secuencia:
-``"  -2367hola "``. ``strtol`` ignorará los primeros espacios, luego se dará cuenta que el número es negativo y leerá 
-todos los caracteres que representan números; sin embargo, se detendrá cuando encuentre el carácter ``h``. En este 
-punto realizará la conversión. En la variable ``endptr`` quedará la dirección en memoria de ``h``.
-
-Otra de las virtudes de ``strtol`` es que puedes saber si resultado de la conversión está fuera de rango tanto 
-al máximo como al mínimo. Puedes ver un poco más en la documentación de ``strtol`` escribiendo en la terminal 
-``man strtol``.
-
-Se ve complicado usar ``strtol``, cierto? Tienes razón. Intentemos una ``recete`` en este punto, PERO lo importante 
-es que ya comprendes. 
-
-.. code-block::c 
-
-    #include <stdlib.h>
-    #include <stdio.h>
-    #include <errno.h>
-
-    int main(void)
-    {
-        char *endptr;
-        long val;    
-        char *number = " -2892 test";
-
-        errno = 0;
-        val = strtol(number, &endptr, 10);    
-        if(errno == 0 && *number != 0 && number != endptr){
-            printf("strtol return: %ld\n",val);
-        }
-        else{
-            printf("strtol fails\n");
-        }
-
-        exit(EXIT_SUCCESS);
-    }
-
-
-Ejercicio 7: convertir caracteres a números forma 2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Puedes utilizar esta segunda manera que te voy a mostrar, pero tiene un defecto. No tienes manera de saber 
-si la conversión desbordó. Si requieres este varificación te debes quedar strtol.
-
-La función será ``sscanf`` definida así (puedes leer más con ``man sscanf``):
+Lo puedes hacer con la función ``sscanf`` definida así (puedes leer más con ``man sscanf``):
 
 .. code-block:: c 
 
@@ -1480,10 +1150,10 @@ Entonces ¿Se pueden hacer varias conversiones a la vez? Si!
 
 Observa que la cadena ``format`` es ``"%d"`` que indica convertir la seecuencia de caracteres apuntada 
 por ``number`` a un entero. Luego ``&val`` informa la dirección de memoria donde quieres que queda la conversión.
-Si todo sale bien (aunque recuerda que no hay verificación de desbordamiento), ``sscanf`` te devolverá la cantidad 
+Si todo sale bien (la función no hace verificación de desbordamiento), ``sscanf`` te devolverá la cantidad 
 de conversiones exitosamente realizadas. Es por ello que en este ejemplo verificamos si ``successItems == 1``.
 
-En ``format`` cada espcificación de conversión comienza con ``%`` seguido de: 
+En ``format`` cada especificación de conversión comienza con ``%`` seguido de: 
 
 * Un ``*`` opcional para decirle que haga la conversión, pero que no la guarde.
 * Un ``'`` opcional si la secuencia a convertir incluye el símbolo de miles.
@@ -1502,76 +1172,10 @@ En este ejemplo te estoy mostrando la forma rápida, tipo receta. Esto es porque
 función compleja dadas todas las posibilidades que tienes para decirle con ``format`` cómo quieres hacer 
 la conversión. Si eres muy curiosa puedes explorar, recuerda, con ``man sscanf``.
 
-Ejercicio 8: leer una cadena de caracteres desde la terminal con scanf
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Para complementar el ejercicio anterio. Vamos a leer una cadena de carteres 
-desde la terminal utilizando ``scanf``.
-
-.. code-block:: c 
-
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <string.h>
-
-    int main(void){
-
-        char *strPtr;
-        int n = scanf("%ms",&strPtr);
-        if(n == 1){
-            printf("String length: %ld\n", strlen(strPtr));
-            free(strPtr);
-        }
-        else{
-            printf("scanf fails\n");
-        }
-        return(EXIT_SUCCESS);
-    }
-
-Ejecuta el código así:
-
-.. code-block:: bash 
-
-    ./ts                            
-    hola mundo
-    String length: 4
-
-Observa que la cadena se almacenó hasta hola. ¿Y si quieres leer toda la cadena? 
-Debes decirle a ``scanf`` que lea caracteres mientras este no sea el ``ENTER`` (``\n``):
-
-.. code-block:: c
-
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <string.h>
-
-    int main(void){
-
-        char *strPtr;
-        // [^\n]: lee mientras no encuentres el enter
-        int n = scanf("%m[^\n]",&strPtr);
-        if(n == 1){
-            printf("String length: %ld\n", strlen(strPtr));
-            free(strPtr);
-        }
-        else{
-            printf("scanf fails\n");
-        }
-        return(EXIT_SUCCESS);
-    }
-
-Al ejeecutarlo:
-
-.. code-block:: bash 
-
-    ./ts                            
-    hola mundo
-    String length: 10 
-
-Ejercicio 9: imprimir con printf
+Ejercicio 7: imprimir con printf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Durante todo el curso hemos usando la función ``printf``. Llegó el momento 
+En varios ejercicios y lecturas has utilizado la función ``printf``. Llegó el momento 
 de profundizar un poco más en ella. Está definida así:
 
 .. code-block:: c 
@@ -1613,8 +1217,7 @@ En este caso el espcificador de conversión es ``%.5f``. ``.5`` corresponde a la
 Lectura 15: entrada/salida (archivos)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-En esta lectura vas a aprender las nociones básicas de la entrada-salida por medio de archivos. Más adelante 
-en el curso vas profundizar un poco más.
+En esta lectura vas a aprender las nociones básicas de la entrada-salida por medio de archivos.
 
 Ten presentes siempre los siguientes pasos cuando trabajes con archivos:
 
@@ -1623,11 +1226,13 @@ Ten presentes siempre los siguientes pasos cuando trabajes con archivos:
 * Cerralo.
 
 .. warning:: TEN PRESENTE ESTO
-    Cuando escribes en un archivo realmente NO estás escribiendo directamente el disco. Realmente 
-    estás escribiendo un buffer en memoria que luego el sistema operativo se encargará de escribir 
-    en el disco. Si lo requieres, DEBES solicitarle al sistema operativo que realice la operación 
-    de salida. NO ASUMAS que los información está en al archivo hasta que no te asegures 
-    mediante el llamado correspondiente al sistema operativo.
+    
+    Cuando escribes en un archivo realmente NO estás escribiendo directamente el disco o SSD. Realmente 
+    estás escribiendo un buffer en memoria que luego el sistema operativo se encargará de escribir. 
+    Si lo requieres, DEBES solicitarle al sistema operativo que realice la operación 
+    de salida. NO ASUMAS que los información está en al archivo porque es responsabilidad del sistema 
+    operativo. Ten en cuenta que hay llamados al sistema para pedirle que escriba la información 
+    del buffer de memoria al archivo.
 
 ¿Cómo abrir y/o crear un archivo en caso de que no exista?
 
@@ -1658,6 +1263,7 @@ escritura en el archivo. No olvides verificar ``SIEMPRE`` que la operación fue 
 devuelve un valor diferente a ``NULL``.
 
 .. warning::
+
     SIEMPRE VERIFICA que el archivo si se puede abrir o crear. SIEMPRE!
 
 La receta para abrir o crar un archivo y añadir información al final es:
@@ -1691,8 +1297,7 @@ mensaje.
 
 ¿Cómo leer y escribir un archivo?
 
-Puedes usar las técnicas que ya vimos, pero con funciones como estas: fscanf, fgets, fgetc, fprintf, fputc, entre otras. Las que 
-te muestro aquí serán las que más usaremos en el curso. 
+Hay varias maneras, pero te voy a proponer solo algunas para que las uses en el curso: 
 
 .. code-block:: c
 
@@ -1703,7 +1308,7 @@ te muestro aquí serán las que más usaremos en el curso.
     char *fgets(char *s, int size, FILE *stream);
     int fprintf(FILE *stream, const char *format, ...);
 
-Observa que con respecto a lo que ya sabes, estas funciones añaden el parámetro ``stream`` para hacer referencia 
+Estas funciones añaden el parámetro ``stream`` para hacer referencia 
 al archivo específico que previamente deberás abrir o crear.
 
 ¿Cómo cierras un archivo?
@@ -1714,7 +1319,7 @@ al archivo específico que previamente deberás abrir o crear.
 
     int fclose(FILE *stream);
 
-Y si quieres vacíar la información del buffer de escritura al disco:
+Y si quieres vacíar la información del buffer de escritura al disco o SSD:
 
 .. code-block:: c
 
@@ -1722,7 +1327,7 @@ Y si quieres vacíar la información del buffer de escritura al disco:
 
     int fflush(FILE *stream);
 
-Ejercicio 10: leer un archivo hasta el final 
+Ejercicio 8: leer un archivo hasta el final 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En este ejercicio te voy a mostrar cómo puedes leer hasta el final un archivo 
@@ -1767,130 +1372,13 @@ Ten en cuenta varios aspectos importantes:
   tendrás errores tipo ``segmentation fault`` al intentar procesar el archivo.
 * Antes de procesar la cadena en ``buffer`` verifica que fgets no es ``NULL``. 
 
-Reto 5: leer y escribir en un archivo 
+Reto 4: leer y escribir en un archivo 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Modifica el programa del ejemplo anterior para copiar el contenido de ``text.txt`` en 
 otro archivo.
 
-Ejercicio 11: repaso de punteros
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(Este ejercicio es tomado de `aquí <https://www.geeksforgeeks.org/pointer-array-array-pointer/>`__)
-
-Relación arreglos y punteros
-
-.. code-block:: c
-     
-
-    #include<stdio.h> 
-
-    int main() 
-    { 
-        int *p;  
-        int (*ptr)[5];  
-        int arr[5]; 
-        
-        p = arr; 
-        ptr = &arr;  
-        printf("p = %p, ptr = %p\n", p, ptr); 
-        p++;  
-        ptr++; 
-        printf("p = %p, ptr = %p\n", p, ptr); 
-        return 0; 
-    }
-
-Ejecuta el programa anterior. El resultados es:
-
-.. code-block:: c
-     
-    
-    p = 0x7fff4f32fd50, ptr = 0x7fff4f32fd50
-    p = 0x7fff4f32fd54, ptr = 0x7fff4f32fd64
-
-
-En la expresión ``int * p;`` p es una variable de tipo
-``int *``. En este tipo de variables se almacenan las
-``direcciones`` de variables de tipo ``int``. Por tanto, ``*p``
-(sin colocar int antes del ``*``) es de tipo ``int`` porque 
-p es de tipo ``int *``.
-
-En la expresión ``int (*ptr)[5];`` ptr es una variable de tipo
-``int (*)[5]``. En este tipo de variables se almacenan direcciones
-de variables de tipo ``int [5]``, es decir, variables de tipo
-arreglo de cinco posiciones. Por tanto, ``*ptr`` es de tipo 
-``int [5]`` porque ptr es de tipo ``int (*)[5]``.
-
-En la expresión ``p = arr;`` arr es el nombre del arreglo y un puntero
-al primer elemento del arreglo.
-En este caso `arr` es de tipo ``int *`` porque el primer elemento
-del arreglo es de tipo ``int``. Por tanto, ``*arr`` 
-será tipo ``int``.
-
-En la expresión ``ptr = &arr;`` ``&arr`` es la dirección del arreglo.
-``&arr`` es tipo ``int (*)[5]``.
-
-La expresión ``printf("p = %p, ptr = %p\n", p, ptr);`` imprime el
-contenido de p y ptr. Según el resultado
-``(p = 0x7fff4f32fd50, ptr = 0x7fff4f32fd50`)``, la dirección del
-arreglo y del primer elemento del arreglo es la misma; sin embargo,
-como p es tipo ``int *``, la expresión ``p++`` hará que p apunte
-(almacene la dirección) al siguiente entero. En cambio, en la
-expresión ``ptr++;`` ptr apuntará al siguiente arreglo de 5
-enteros (5 enteros ocupan 20 bytes en memoria considerando
-que cada entero ocupa 4 bytes), ya que ptr es de tipo
-``int (*)[5]``.
-
-Ejercicio 12: arreglos de arreglos
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-El siguiente ejercicio es más complejo que el anterior, sin embargo,
-se analiza de igual manera. Considera el siguiente código:
-
-.. code-block:: c
-     
-
-    #include <stdio.h>
-
-    int arr[3][4] = { {1,2,3,4}, {5,6,7,8}, {9,10,11,12} };
-
-    int main(void) {
-        int (*p)[3][4] = &arr;
-        printf("%d\n", ( (*p)[2] )[3] );
-        printf("%d\n", *( *(*p + 2) + 3 ) );
-        return 0;
-    }
-
-
-``arr`` es un arreglo de arreglos, es decir, es una arreglo de 3 arreglos
-de 4 enteros cada uno.
-
-``arr`` es el nombre del arreglo de arreglos y un puntero al primer elemento
-del arreglo. Por tanto, ``arr`` es de tipo ``int (*)[4]`` ya que el primer elemento
-de arr es un arreglo de tipo ``int [4]``.
-
-``p`` es un puntero que almacena la dirección de un arreglo de arreglos.
-Por tanto, p es de tipo ``int (*)[3][4]``.
-
-Si ``p`` es de tipo ``int (*)[3][4]`` entonces ``*p`` será de tipo ``int [3][4]`` o
-``int (*)[4]`` (un puntero al primer elemento del arreglo de arreglos).
-
-El operador ``[]`` en la expresión ``(*p)[2]`` es equivalente a ``*( *p + 2)``.
-Como el tipo de ``(*p + 2)`` es ``int (*)[4]`` el tipo de ``*( *p + 2)``
-será ``int [4]``. la expresión ``(*p)[2]`` accede al tercer elemento de arr, es
-decir, a ``{9,10,11,12}`` que es de tipo ``int [4]``.
-
-Por último, como ``(*p)[2]`` es tipo ``int [4]``, entonces ``( (*p)[2] )[3] )`` es
-tipo int y corresponderá al cuarto elemento del tercer arreglo de arr.
-
-Nota que ``( (*p)[2] )[3] )`` es equivalente a ``*( (*p)[2] + 3)`` que a su
-vez es equivalente a  ``*( * ( *p + 2)+ 3)``
-
-El programa imprimirá el número ``12``.
-
-La expresión ``printf("%d\n", *( * ( *p + 2)+ 3));`` al ser equivalente a
-``printf("%d\n", ( (*p)[2] )[3] );`` también mostrará un ``12``.
-
-Ejercicio 13: repaso de arreglos, punteros y funciones
+Ejercicio 9: repaso de arreglos, punteros y funciones
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Te propongo que realices un programa que:
@@ -1911,7 +1399,6 @@ Trata de PENSARLE UNOS MINUTOS. Más abajo está la solución.
 El siguiente código muestra una posible solución:
 
 .. code-block:: c
-     
 
     #include <stdio.h>
     #define MAX 100
@@ -1951,134 +1438,3 @@ El siguiente código muestra una posible solución:
         printArray(data,n+1);
         return 0;
     }
-
-Reto 6: funciones, arreglos y punteros
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Escribe una función que te permita encontrar los elementos comunes de
-dos arreglos de enteros. El encabezado de la función es:
-
-.. code-block:: c
-
-    uint8_t arrayCommon(int32_t* arr1, int32_t arr1Size,int32_t* arr2, int32_t arr2Size, int32_t* arrRes, int32_t arrResSize)
-
-* La función debe recibir las direcciones de memoria de los dos arreglos 
-  a comparar y del arreglo resultado. También debe recibir el tamaño de cada arreglo.
-* Debe devolver la cantidad de elementos comunes encontrados o 0 si no
-  encuentra.
-* Crea un programa que solicite el tamaño de los arreglos y sus
-  elementos.
-* El programa debe mostrar el resultado de la función.
-* Antes de insertar un elemento en el arreglo resultado debe verificar
-  que este no exista en el arreglo, es decir, el arreglo resultado
-  no debe tener elementos repetidos.
-
-El flujo del programa será:
-
-* Solicite el tamaño del primer arreglo.
-* Ingrese los elementos del primer arreglo.
-* Solicite el tamaño del segundo arreglo.
-* Ingrese los elementos del segundo arreglo.
-* Indicar cuántos elementos comunes se encontraron y un arreglo
-  con dichos elementos.
-
-Ejercicio 14: repaso de archivos
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-En este ejercicio te propongo encriptar y desencriptar un archivo.
-
-Se busca realizar dos programas, uno que permitan encriptar otro 
-y desencriptar un archivo.
-
-El programa que encripta:
-
-* Debe solicitar al usuario el nombre de la función para encriptar
-  la información y el nombre del archivo de entrada y
-  el de salida. El archivo de entrada tendrá la
-  información y el de salida la información encriptada.
-* La función debe modificar cada uno de los bytes que
-  componen el archivo de entrada. Tenga presente que también se
-  encriptará el byte de nueva línea.
-
-
-El programa que desencripta:
-
-* Debe solicitar al usuario la función para encriptar
-  la información y el nombre del archivo de entrada y
-  el de salida. En este caso el archivo de entrada
-  tendrá la información encriptada y el archivo de salida
-  la información desencriptada.
-* Tenga presente que el usuario ingresa la función
-  con la cual se encripta y usted debe encontrar la
-  función inversa para desencriptar.
-
-.. note::
-    ¡Alerta de Spoiler!
-    Te dejo una posible solución al ejercicio. Ten en cuenta, que voy
-    a obviar todas las verificaciones de error para mantener
-    el código compacto y te puedas concentrar justo en la
-    funcionalidad solicitada.
-
-
-.. warning:: Este código asumen que la información ingresada está
-            bien formateada y libre de errores. Por tanto, se omiten
-            algunas verificaciones.
-
-.. note:: Para probar los siguientes programas (es el mismo para encriptar
-        y desencriptar) es necesario que 
-
-
-.. code-block:: c
-
-    #include <stdint.h>
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <string.h>
-
-    uint8_t encXorFunction(uint8_t data) { return data ^ 0xFF; }
-    
-    int main(int argc, char *argv[]) {
-        char input[50];
-        char inFile[20];
-        char outFile[20];
-        char function[10];
-        uint8_t (*encFuntion)(uint8_t) = NULL;
-
-        printf("Enter in_file out_file function\n");
-        fgets(input, sizeof(input), stdin);
-        sscanf(input, "%s %s %s", inFile, outFile, function);
-        FILE *fin = fopen(inFile, "r");
-        
-        if (fin == NULL) {
-            perror("Error: ");
-            return EXIT_FAILURE;
-        }
-        
-        if (strncmp("xor", function, 3) == 0) {
-            encFuntion = &encXorFunction;
-        }
-    
-        FILE *fout = fopen(outFile, "w");
-    
-        if (fout == NULL) {
-            perror("Error: ");
-            return EXIT_FAILURE;
-        }
-    
-        int n;
-        while ( fgets(input, sizeof(input), fin) != NULL) 
-        {
-            n = strlen(input);
-            for (int i = 0; i < n; i++) {
-                input[i] = (*encFuntion)(input[i]);
-            }
-
-            fputs(input, fout);
-        }
-    
-        fclose(fin);
-        fclose(fout);
-
-        return EXIT_SUCCESS;
-    }
-
