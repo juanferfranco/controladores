@@ -24,8 +24,6 @@ Temas
 ^^^^^^
 
 * Introducción al lenguaje C
-* Herramientas
-* Máquinas virtuales
 
 Trayecto de actividades
 ------------------------
@@ -88,12 +86,13 @@ el lenguaje de programación con el cual estudiaremos los conceptos que nos qued
 
     Introducción a C <./introC>
 
-Ejercicio 6: herramientas
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+..
+    Ejercicio 6: herramientas
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: EN CONSTRUCCIÓN
+    .. note:: EN CONSTRUCCIÓN
 
-    En los próximos días te estaré publicando este contenido
+        En los próximos días te estaré publicando este contenido
 
 ..
   En este ejercicio comprenderás en detalle los pasos necesarios para transformar un programa en C a 
@@ -104,12 +103,13 @@ Ejercicio 6: herramientas
 
     Herramientas <./tools>
 
-Ejercicio 7: máquinas virtuales
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..
+    Ejercicio 7: máquinas virtuales
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: EN CONSTRUCCIÓN
+    .. note:: EN CONSTRUCCIÓN
 
-    En los próximos días te estaré publicando este contenido
+        En los próximos días te estaré publicando este contenido
 
 
 ..
