@@ -252,7 +252,7 @@ Vas a crear un programa en C que haga lo siguiente:
   capítulos a tu video.
 
 Criterios de evaluación
-****************************
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Cada problema se evalua completo, es decir, no se reciben problemas 
 con solución incompleta. Un problema se soluciona completamente si tiene TODO lo 
