@@ -121,8 +121,151 @@ el lenguaje de programación con el cual estudiaremos los conceptos que nos qued
     Máquinas virtuales <./VM>
 
 Evaluación
-^^^^^^^^^^^^^
+-----------------
+(Tiempo total estimado 12 horas)
 
-.. note:: Se publicará en la semana de evaluación.
+Enunciado
+^^^^^^^^^^^
+
+Te voy a proponer una serie de problemas para que evidencies 
+en su solución lo que aprendiste en esta unidad.
+
+Para darle variedad a las formas de evaluar te voy a proponer que 
+``armes un equipo de trabajo de 2 o 3 persona incluyéndote``. La idea es 
+que entre todos construyan la solución a cada uno de los problemas.
+
+Problema 1: analisis y relación 
+**************************************
+Lo que has aprendido en este curso está relacionado con otras áreas 
+del conocimiento de tu carrera. En este problema te voy pedir que analices 
+y luego relaciones. 
+
+Considera el siguiente programa:
+
+.. code-block:: c 
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+
+    typedef struct IntArray{
+        int *parr;
+        int length;
+    }IntArray;
+
+
+    IntArray *createIntArray(int size);
+    void initIntArray(IntArray *);
+    void destroyIntArray(IntArray *);
+    void printArray(IntArray *);
+
+    int main(){
+        IntArray * pIntArray = createIntArray(100);
+        initIntArray(pIntArray);
+        printArray(pIntArray);
+        destroyIntArray(pIntArray);
+    }
+
+    IntArray *createIntArray(int size){
+            IntArray *pIntArray = malloc(sizeof(IntArray));
+            pIntArray->parr =   malloc( sizeof(int) * size);      
+            pIntArray->length = size;
+            return pIntArray;
+    }
+
+    void initIntArray(IntArray *this){
+        for(int i = 0; i < 100; i++){
+            this->parr[i] = i;
+        }
+    }
+
+    void printArray(IntArray *this){
+        for(int i = 0; i < this->length; i++){
+            printf("parr[%d]: %d\n", i, this->parr[i]);
+        }
+    }
+
+    void destroyIntArray(IntArray *this){
+        free(this->parr);
+        free(this);
+    }
+
+* Explica cómo funciona el programa.
+* Explica en que parte del MAPA DE MEMORIA del proceso se 
+  almacena CADA variable usada.
+* Construye una programa similar a este usando C#. 
+* Explica en qué parte de la memoria se almacena cada 
+  variable de tu programa.
+* Compara ambos programas e indica qué conceptos del programa 
+  propuesto se ven reflejados en tu programa.
+
+Problema 2: del código fuente al código de máquina 
+******************************************************
+
+Explica cómo se transforma el programa anterior (el que está en C) 
+desde el código fuente hasta el código de máquina, es decir, qué pasos son 
+necesarios para lograr lo anterior. En el proceso responde en el 
+contexto del PROGRAMA:
+
+* ¿Qué hace el preprocesador?
+* ¿Qué hace el compilador?
+* ¿Qué hace el ensamblador?
+* ¿Quién o que parte del proceso de transformación se encarga de mezclar 
+  tu código con el código de ``printf`` 
+
+Problema 3: programación en lenguaje C 
+****************************************
+
+Vas a crear un programa en C que haga lo siguiente:
+
+* Crea un archivo de texto con la información de un arreglo de caracteres
+* Tu programa debe leer ese archivo y almacenar la información en un arreglo 
+  de enteros en memoria dinámica.
+* Realiza tres funciones que permitan encontrar el máximo, el mínimo y el promedio.
+* A cada función le debes pasar la dirección de memoria del primer elemento del 
+  arreglo y el tamaño de este.
+* Vas a crear un archivo de salida donde almacenarás el máximo, mínimo y el promedio 
+  encontrados.
+
+¿Qué debes entregar?
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Subir a `este <https://www.dropbox.com/request/IlFVvm1HltrxnTlb4gjb>`__ 
+  enlace un ``.pdf`` con:
+
+  #. Los nombres y IDs.
+  #. Enlace al repositorio GitHub con la solución a los problemas 
+  #. La URL del video en youtube.
+  #. Reportar si algún compañero del equipo no trabajó. 
+
+* El video DEBE TENER una duración ``MÁXIMA`` de 15 minutos.
+* El video debe tener los siguientes capítulos en este mismo orden:
+
+  * Integrantes y las tareas que realizó cada uno.
+  * Problema 1: explicación.
+  * Problema 2: explicación.
+  * Problema 3: demostración de la solución.
+  * Problema 3: explicación de la solución.
+  * Problema 3: explicación de la implementación en código de la solución.
+
+* En `este video <https://youtu.be/6-0cERIVsFg>`__ puedes aprender a adicionar 
+  capítulos a tu video.
+
+Criterios de evaluación
+****************************
+
+Cada problema se evalua completo, es decir, no se reciben problemas 
+con solución incompleta. Un problema se soluciona completamente si tiene TODO lo 
+solicitado incluyendo el video con la demostración y la explicación de su solución.
+
+* Calidad y duración máxima del video y repositorio en Github: 0.5
+* Problema 1: 1.5 unidad.
+* Problema 2: 1 unidades
+* Problema 3: 2 unidades.
+
+.. note:: Sobre las personas reportadas en el pdf
+
+    Las personas que aparezcan reportadas en el pdf obtendrán automáticamente 
+    una calificación de 0.
 
 
