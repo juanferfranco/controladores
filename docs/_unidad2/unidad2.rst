@@ -218,7 +218,7 @@ Problema 3: programación en lenguaje C
 
 Vas a crear un programa en C que haga lo siguiente:
 
-* Crea un archivo de texto con la información de un arreglo de caracteres
+* Crea un archivo de texto con la información de un arreglo de enteros.
 * Tu programa debe leer ese archivo y almacenar la información en un arreglo 
   de enteros en memoria dinámica.
 * Realiza tres funciones que permitan encontrar el máximo, el mínimo y el promedio.
@@ -226,6 +226,30 @@ Vas a crear un programa en C que haga lo siguiente:
   arreglo y el tamaño de este.
 * Vas a crear un archivo de salida donde almacenarás el máximo, mínimo y el promedio 
   encontrados.
+
+Para este problema, considera el siguiente código:
+
+.. code-block:: c 
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+
+    int main(){
+
+        char arr[] = "1 10 24 46 89\n";
+
+        char *token = strtok(arr, " ");
+        int i = 0;
+        while(token != NULL ){
+            printf("token[%d]: %s\n",i,token);
+            token = strtok(NULL, " ");
+            i++;
+        }
+
+
+        exit(EXIT_SUCCESS);
+    }
 
 ¿Qué debes entregar?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
