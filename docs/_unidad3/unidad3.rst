@@ -1,47 +1,47 @@
-Unidad 3. Programación  
-========================
+Unidad 3. Programación orientada a objetos 
+================================================
 
 Introducción
 --------------
 
-Ya sabes cómo se genera el código de máquina desde varios
-lenguajes de programación de alto nivel. También aprendiste sobre el lenguaje de
-programación C y C++ y cómo funciona la implementación de C#. Ahora vamos a
-explorar cómo funciona un modelo de programación conocido como la programación 
-orientada a objetos.
-
-En esta unidad también vas a aprender el concepto de memoria virtual.
+En esta unidad vas a repasar y analizar cómo funcionan algunas 
+de las abstracciones usadas en la programación orientada a objetos.
 
 Propósito de aprendizaje
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+**************************
 
-Comprender cómo están implementados los conceptos fundamentales de la 
-programación orientada a objetos 
-
-Comprender el modelo de memoria de un proceso.
+Comprender cómo funcionan algunas abstracciones de la programación 
+orientada a objetos mediante la implementación de ellas en 
+lenguaje C y la comparación en C#.
 
 Temas
-^^^^^^
+******
 
-* Abstracción, encapsulamiento, herencia, polimorfismo
-* Memoria virtual
+* Memoria, encapsulamiento, herencia, polimorfismo.
 
 Trayecto de actividades
 ------------------------
 
-Ejercicio 1
-^^^^^^^^^^^^
+Sesión 1: memoria 
+*******************************
+
+Antes de analizar la implementación de algunas abstracciones de la 
+programación orientada a objetos, vas a aprender un poco más acerca 
+del modelo de memoria de un programación en ejecución o proceso.
+
+Ejercicio 1: memoria de un proceso
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En la unidad anterior hablamos del concepto de proceso ¿Recuerdas? Pues
 un proceso no es más que una abstracción que emplea el sistema operativo para
 ejecutar y administrar un programa en ejecución. Los programas están almacenados
 en archivos conocidos como object files. Para ejecutar un programa el sistema
 operativo crea un proceso que ejecuta el object file, es decir, la CPU (o un
-core) consumirá (fetch) y ejecutará las instrucciones del object file que estarán
+``core``) consumirá (fetch) y ejecutará las instrucciones del object file que estarán
 almacenadas en alguna región de la memoria principal. Tu sabes también que los
 programas en ejecución necesitarán memoria para almacenar las variables. Entonces
-surge la siguiente pregunta ¿Cómo es la memoria de un proceso
-y cuál es su estructura?
+surge la siguiente pregunta ``¿Cómo es la memoria de un proceso
+y cuál es su estructura?``
 
 Cuando el sistema operativo crea un proceso para ejecutar un programa, también
 es necesario asignarle memoria y aplicarle una estructura particular. En casi todos
@@ -57,8 +57,8 @@ La memoria de un proceso está dividida en múltiples partes conocidas como segm
 Algunos de estos segmentos se crean con la información almacenada en el
 object file mientras que otros segmentos aparecen al momento de ejecutar el programa.
 
-Ejercicio 2
-^^^^^^^^^^^^
+Ejercicio 2: observar los segmentos del object file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Cómo hacemos para ver el contenido de los segmentos de memoria provenientes del
 object file?
@@ -66,7 +66,6 @@ object file?
 Escribe el siguiente programa llamado main.c:
 
 .. code-block:: c
-   :linenos:
 
     int main(int argc, char* argv[]) {
 
@@ -78,15 +77,16 @@ algunos segmentos:
 
 ``size main`` 
 
-.. code-block:: c
+.. code-block:: bash
 
-   text	   data	    bss	    dec	    hex	filename
-   1418	    544	      8	   1970	    7b2	main
+    text	   data	    bss	    dec	    hex	filename
+    1418	    544	      8	   1970	    7b2	main
 
 Puedes observar tres segmentos: text, data y bss.
 
-Ejercicio 3
-^^^^^^^^^^^^
+Ejercicio 3: ¿Qué se almacena en los segmentos?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Te estarás preguntado ¿Para qué sirve cada uno de los segmentos
 que acabas de ver?
 
@@ -96,7 +96,6 @@ que no se inicializaron o que se inicializan a 0.
 Modifica el programa anterior así:
 
 .. code-block:: c
-   :linenos:
 
     int var1;
     int var2;
@@ -109,37 +108,19 @@ Modifica el programa anterior así:
 
 De nuevo, compila y ejecuta ``size main``:
 
-.. code-block:: c
+.. code-block:: bash
 
-   text	   data	    bss	    dec	    hex	filename
-   1418	    544	     16	   1978	    7ba	main
+    text	   data	    bss	    dec	    hex	filename
+    1418	    544	     16	   1978	    7ba	main
 
 Compara esta salida con la anterior. ¿Notas un cambio en BSS?
 
-Ejercicio 4
-^^^^^^^^^^^^
-
-Tal vez alguna vez has escuchado decir que declarar variables globales
-no es buena práctica. ¿Por qué?
-
-* Si defines muchas variables globales incrementas el tamaño
-  del binario (como puedes ver con size)
-* Puede introducir problemas de seguridad
-* Pueden introducir problemas de concurrencia como las condiciones
-  de carrera.
-* Polucionan el espacio de nombres del programa.
-
-Estas respuestas seguro te generan más preguntas. Algunas de estas
-preguntas seguro las responderemos en las próximas semanas, otras
-de ellas quedan para tu curiosidad o en una nueva temporada de esta seria :)
-
-Ejercicio 5
-^^^^^^^^^^^^
+Ejercicio 4: segmento data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Para analizar el segmento data te propongo modificar de nuevo nuestro programa:
 
 .. code-block:: c
-   :linenos:
 
     int var1;
     int var2;
@@ -154,21 +135,20 @@ Para analizar el segmento data te propongo modificar de nuevo nuestro programa:
 
 Compila y ejecuta ``size main``:
 
-.. code-block:: c
-   
-   text	   data	    bss	    dec	    hex	filename
-   1418	    552	     16	   1986	    7c2	main
+.. code-block:: bash
+
+    text	   data	    bss	    dec	    hex	filename
+    1418	    552	     16	   1986	    7c2	main
 
 Compara, ¿El segmento data cambió? El segmento ``data`` entonces te sirve para almacenar
 las variables inicializadas con valores diferentes de 0.
 
-Ejercicio 6
-^^^^^^^^^^^^
+Ejercicio 5: variables estáticas 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Modifica de nuevo el archivo:
 
 .. code-block:: c
-   :linenos:
 
     int var1;
     int var2;
@@ -177,8 +157,8 @@ Modifica de nuevo el archivo:
     int var5 = 666;
 
     void func(){
-      static int i = 10;
-      i++;
+        static int i = 10;
+        i++;
     }
 
     int main(int argc, char* argv[]) {
@@ -188,15 +168,16 @@ Modifica de nuevo el archivo:
 
 Compila y ejecuta ``size main``:
 
-.. code-block:: c
+.. code-block:: bash
 
-   text	   data	    bss	    dec	    hex	filename
-   1506	    556	     20	   2082	    822	main
+    text	   data	    bss	    dec	    hex	filename
+    1506	    556	     20	   2082	    822	main
 
-Observa entonces que los segmentos data y bss se incrementan.
+Nota que los segmentos cambiaron de nuevo al incluir una nueva variable.
 
-Ejercicio 7
-^^^^^^^^^^^^
+
+Ejercicio 7: ver el contenido del segmento .data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Cómo hago para ver el contenido del segmento data?
 
@@ -214,8 +195,8 @@ Toma como referencia el programa anterior y escribe el comando ``objdump -s -j .
 el programa. Ten presente que ``4000`` y ``4010`` son direcciones. El resto de información
 es datos, cada file muestra 16 bytes (máximo) y luego se ve la representación de cada byte en ASCII.
 
-Ejercicio 8
-^^^^^^^^^^^^
+Ejercicio 8: ver el contenido del segmento de texto
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En el segmento de texto está contenido todo el código de máquina del programa producido por
 el compilador.
@@ -226,8 +207,8 @@ Ejecuta ``objdump -S main``
 
 Podrás observar el código de máquina y la representación simbólica en lenguaje ensamblador.
 
-Ejercicio 9
-^^^^^^^^^^^^
+Ejercicio 9: contenido del stack y del heap
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Cómo hacemos para ver el contenido de los segmentos stack y heap?
 
@@ -240,7 +221,6 @@ del segmento text es leído por parte de la CPU.
 Veamos un ejemplo:
 
 .. code-block:: c
-   :linenos:
 
     #include <unistd.h> 
     int main(int argc, char* argv[]) {
@@ -263,7 +243,7 @@ identificador del proceso en el sistema operativo:
     juanfranco@pop-os:/tmp/linker$ ./main &
     [1] 295236
 
-NO LO HAGAS AHORA, pero si después quieres matar el proceso escribe en la terminal 
+Más tarde cuando quieras matar el proceso escribe en la terminal 
 ``kill -9 295236``.
 
 En Linux puedes consultar información del proceso en el directorio ``/proc`` allí tendrás
@@ -272,7 +252,6 @@ una entrada para el proceso identificada con el pid del mismo.
 Ejecuta el comando ``ls -al /proc/295236``:
 
 .. code-block:: c 
-   :linenos:
 
     total 0
     dr-xr-xr-x   9 juanfranco juanfranco 0 Sep 21 14:17 .
@@ -335,7 +314,6 @@ Cada una de estas entradas corresponde a una característica del proceso.
 Para preguntar por el mapa de memoria del proceso ejecuta: ``cat /proc/295236/maps``:
 
 .. code-block:: c
-   :linenos:
 
     563fa1aeb000-563fa1aec000 r--p 00000000 08:03 8393449                    /tmp/linker/main
     563fa1aec000-563fa1aed000 r-xp 00001000 08:03 8393449                    /tmp/linker/main
@@ -374,12 +352,8 @@ el inode (lo vemos luego). Y finalmente el path del archivo que está mapeado a 
 puedes ver un espacio en blanco o el propósito de la región, por ejemplo [stack] para indicar
 que es una región utilizada para implementar el segmento de stack.
 
-¿Puedes identificar el tamaño del stack? Mira que no es muy grande, es por ello que no DEBES
-usar el stack para guardar variables grandes. Si necesitas arreglos o estructuras de datos grandes
-debes usar el HEAP.
-
-Ejercicio 10
-^^^^^^^^^^^^
+Ejercicio 10: stack
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Profundicemos un poco más en el stack.
 
@@ -407,15 +381,14 @@ MUY MUY IMPORTANTE:
 
 ¿Cómo puedes ver el contenido del stack? Necesitas un depurador (un debugger).
 
-Ejercicio 11
-^^^^^^^^^^^^^^
+Ejercicio 11: el heap
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Profundicemos un poco más en el heap.
 
 Considera el siguiente código:
 
 .. code-block:: c
-   :linenos:
 
     #include <unistd.h>
     #include <stdlib.h> 
@@ -424,7 +397,7 @@ Considera el siguiente código:
     int main(int argc, char* argv[]) {
         void* ptr = malloc(1024); 
         printf("Address: %p\n", ptr);
-     
+    
         while (1) {
             sleep(1); 
         };
@@ -469,14 +442,8 @@ proceso):
     7fffc1def000-7fffc1df0000 r-xp 00000000 00:00 0                          [vdso]
     ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
 
-¿Ves el segmento heap? ¿Qué tamaño tiene? Nota que en el programa reservamos 1 KiB pero realmente se
-reservar 4 KiB.
-
 Mira el rango de direcciones del heap: ``55f05576b000-55f05578c000``, ahora observa la dirección
 de ``ptr``: ``0x55f05576b2a0`` Ah! está en el rango, está en el heap.
-
-IMPORTANTE: el tamaño del heap puede crecer hasta varias gigas, solo que en este caso se reservaron
-de entrada 4 KiB.
 
 Volvamos al programa. Considera esta línea: ``void* ptr = malloc(1024)`` ¿La variable ptr
 en qué segmento está?
@@ -490,9 +457,9 @@ nos comienza a ocurrir mucho en nuestro programa?
 ¿Recuerdas cómo evitamos este desperdicio de memoria? (¿Cuál es la función que libera la reserva?)
 
 No olvides que reservar y devolver la reserva de la memoria es tu responsabilidad cuando
-trabajas en con lenguajes como C y C++. Otros implementaciones de lenguajes cuentan con un componente que se ejecuta
-concurrente a tu código y se denomina el garbage collector (por ejemplo C#). El garbage collector se encarga
-de liberar o devolver la reserva de memoria por nosotros.
+trabajas en con lenguajes como C y C++. Otros implementaciones de lenguajes cuentan con un componente que 
+se ejecuta concurrente a tu código y se denomina el garbage collector (por ejemplo C#). 
+El garbage collector se encarga de liberar o devolver la reserva de memoria por nosotros.
 
 Y ¿Cómo puedes hacer para detectar errores en la gestión de memoria? Puedes utilizar una herramienta
 llamada valgrind.
@@ -500,7 +467,6 @@ llamada valgrind.
 Considera este programa:
 
 .. code-block:: c
-   :linenos:
 
     #include <stdio.h>
     #include <stdlib.h>
@@ -570,14 +536,14 @@ Ejecuta ``valgrind --leak-check=full  ./main``
 
 Puedes ver que el error ocurrió en la línea 5 del programa ``main.c``. ¡Genial!
 
-Ejercicio 12
-^^^^^^^^^^^^^^^
+Ejercicio 12: corrección del memory leak
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Te animas a corregir el error del ejercicio anterior y verificar con valgrind que
 todo esté bien?
 
-Ejercicio 13
-^^^^^^^^^^^^^^^^
+Ejercicio 13: el debugger
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Recuerdas que para poder ver el contenido del stack necesitas un debugger? Pues
 vamos a probar uno. En este caso usaremos GDB. Escribe gdb en la terminal. Si el comando
@@ -586,7 +552,6 @@ no es reconocido, lo puedes instalar con ``sudo apt-get install build-essentials
 Considera este programa:
 
 .. code-block:: c
-   :linenos:
 
     #include <stdio.h>
 
@@ -619,7 +584,7 @@ en la tabla de símbolos. Esta información será usada posteriormente por GDB
 
 Ejecuta el programa con GDB: ``gdb main``:
 
-.. code-block:: c
+.. code-block:: bash
 
     GNU gdb (Ubuntu 9.1-0ubuntu1) 9.1
     Copyright (C) 2020 Free Software Foundation, Inc.
@@ -655,7 +620,7 @@ La variable arr está en el stack. Puedes ver el contenido del stack con ``x/16x
 El comando es ``x`` pero además puedas indicar la cantidad de bytes (16) y el formato
 (x para hexadecimal):
 
-.. code-block:: c
+.. code-block:: bash
 
     (gdb) x/16x arr
     0x7fffffffdb8a:	0x43	0x6f	0x6e	0x74	0x72	0x6f	0x6c	0x61
@@ -664,12 +629,12 @@ El comando es ``x`` pero además puedas indicar la cantidad de bytes (16) y el f
 
 Puedes ver el interpretados en ASCII de los valores:
 
-.. code-block:: c
+.. code-block:: bash
 
-(gdb) x/16c arr
-0x7fffffffdb8a:	67 'C'	111 'o'	110 'n'	116 't'	114 'r'	111 'o'	108 'l'	97 'a'
-0x7fffffffdb92:	100 'd'	111 'o'	114 'r'	101 'e'	115 's'	0 '\000'	0 '\000'	-51 '\315'
-(gdb) 
+    (gdb) x/16c arr
+    0x7fffffffdb8a:	67 'C'	111 'o'	110 'n'	116 't'	114 'r'	111 'o'	108 'l'	97 'a'
+    0x7fffffffdb92:	100 'd'	111 'o'	114 'r'	101 'e'	115 's'	0 '\000'	0 '\000'	-51 '\315'
+    (gdb) 
 
 Cambia el contenido del stack:
 
@@ -686,20 +651,29 @@ Cambia el contenido del stack:
     0x7fffffffdb92:	100 'd'	111 'o'	114 'r'	97 'a'	115 's'	0 '\000'	0 '\000'	-51 '\315'
     (gdb)
 
-Ejercicio 14
-^^^^^^^^^^^^^^^^^
+Trabajo autónomo 1: memoria
+********************************
+(Tiempo estimado: 1 hora 20 minutos)
 
+Construye un programa que te permite visualizar cada uno de los segmentos 
+de memoria de un proceso. Experimenta, adiciona más variables. NO OLVIDES 
+usar GDB y valgrind.
+
+Sesión 2: encapsulamiento
+****************************
+
+Ejercicio 14: el concepto de clase en C
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 El siguiente ejemplo te mostrará una técnica para el manejo de la memoria dinámica
 que le entrega la responsabilidad de reservar y liberar la memoria dinámica al
 código definido en el archivo queue.c. Si analizas detenidamente podrás ver
-que el código en queue.h y queue.c trata de implementar el concepto de clase que
+que el código en queue.h y queue.c trata de implementar el concepto de ``CLASE`` que
 ya conoces de otros lenguajes de programación.
 
 queue.h:
 
 .. code-block:: c 
-   :linenos:
 
     #ifndef _QUEUE_H
     #define _QUEUE_H
@@ -721,7 +695,6 @@ queue.h:
 queue.c:
 
 .. code-block:: c 
-   :linenos:
 
     #include "queue.h"
     #include <stdlib.h> 
@@ -761,7 +734,6 @@ queue.c:
 main.c:
 
 .. code-block:: c 
-   :linenos:
 
     #include <stdio.h> 
     #include "queue.h"
@@ -797,8 +769,8 @@ valgrind ./exe
 ¿En qué parte de la memoria está almacenada la variable q?
 ¿Explica cuánta memoria y dónde se está creando con la función create(10)?
 
-Ejercicio 15
-^^^^^^^^^^^^^
+Ejercicio 15: el concepto de objeto
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora que conocemos más detalles de la memoria de un proceso y luego
 del ejercicio anterior, ya tenemos buenas herramientas para hablar del
@@ -807,8 +779,8 @@ modelo de programación orientado a objetos.
 Como te has dado cuenta hasta ahora, C no es un lenguaje de programación
 orientado a objetos; sin embargo, te preguntarás ¿Es posible escribir 
 programas orientados a objetos con C? La respuesta es si. El punto es que
-en su sintaxis C no soporta los conceptos de clases, herencia, y funciones
-virtuales. Aún así, es posible implementar estos conceptos de manera indirecta.
+en su sintaxis C no soporta los conceptos de clases, herencia y polimorfismo.
+Aún así, es posible implementar estos conceptos de manera indirecta.
 
 ¿Y en últimas qué son los objetos?
 
@@ -834,8 +806,8 @@ cuando DISEÑAS un programa orientado a objetos te tienes qué imaginar cómo se
 OBJETOS, cuándo se crearán y cuáles serán las relaciones entre ellos cuando 
 ejecutes el programa.
 
-Ejercicio 16
-^^^^^^^^^^^^^^^
+Ejercicio 16: concepto de mutabilidad e inmutabilidad
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Profe, si yo pudiera ir a ver un objeto en memoria ¿Cómo se vería?
 
@@ -848,8 +820,8 @@ corre se dice que el objeto es MUTABLE. Pero también el objeto puede ser INMUTA
 es decir, que una vez creado el objeto e inicializados sus atributos, no podrás cambiar
 sus valores o su estado.
 
-Ejercicio 17
-^^^^^^^^^^^^^^
+Ejercicio 17: concepto de relación entre objetos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ya te comenté que los objetos (colecciones de bytes) pueden estar relacionados entre
 ellos. ¿Qué significa eso?
@@ -859,8 +831,8 @@ el estado de uno de ellos se afecte el estado del otro. Ya en términos más con
 decir que un objeto está relacionado con otro cuando uno de sus atributos contiene la dirección
 de memoria del otro objeto.
 
-Ejercicio 18
-^^^^^^^^^^^^^
+Ejercicio 18: el concepto de método
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 No lo olvides, un objeto son bytes en memoria. Pero entonces, ¿Qué pasa con el código?
 
@@ -870,8 +842,8 @@ OPERACIONES vas a realizar para crear los objetos (asignarles memoria), iniciar 
 no lo olvides, cuando estás escribiendo el programa estás MODELANDO tu solución,
 tu programa es un PLAN que DESCRIBE lo que ocurrirá cuando sea ejecutado.
 
-Ejercicio 19
-^^^^^^^^^^^^^
+Ejercicio 19: relación estado-comportamiento
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Cómo puedes definir la construcción de un objeto?
 
@@ -896,8 +868,8 @@ en el conceptos de CLASE los DATOS y el CÓDIGO. Ten en cuenta que al código ta
 se le conoce cómo el COMPORTAMIENTO de los objetos, es decir, las acciones que se realizarán
 sobre los datos.  
 
-Ejercicio 20
-^^^^^^^^^^^^^
+Ejercicio 20: implementación del concepto de clase
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Cómo hacemos para implementar las ideas anteriores en C? Ya sabes que C no soporta 
 de manera explícita el concepto de clase, pero podemos implementar dicho concepto de manera
@@ -913,7 +885,6 @@ Analiza de nuevo este código:
 queue.h:
 
 .. code-block:: c 
-   :linenos:
 
     #ifndef _QUEUE_H
     #define _QUEUE_H
@@ -935,7 +906,6 @@ queue.h:
 queue.c:
 
 .. code-block:: c 
-   :linenos:
 
     #include "queue.h"
     #include <stdlib.h> 
@@ -975,7 +945,6 @@ queue.c:
 Nota que en queue.h declaras qué atributos tendrá el objeto:
 
 .. code-block:: c 
-   :linenos:
 
     #ifndef _QUEUE_H
     #define _QUEUE_H
@@ -990,7 +959,6 @@ Y qué funciones podrás invocar para leer o escribir dichos atributos, es decir
 del objeto:
 
 .. code-block:: c 
-   :linenos:
 
     queue_t* create(int size);
     void destroy(queue_t* this);
@@ -1006,7 +974,6 @@ sobre el cual actuará el código definido en la función.
 Por último, observa de nuevo la función main.c:
 
 .. code-block:: c 
-   :linenos:
 
     #include <stdio.h> 
     #include "queue.h"
@@ -1029,11 +996,10 @@ tipo de dato ``queue_t``. Observa que la función ``create(10)`` nos permite
 crear un cola (un objeto) de 10 enteros en el heap. La dirección de la cola la almacenamos
 en la variable ``q`` que estará en el stack.
 
-Si analizas un poco más el archivo ``queue.c`` varás que create reserva el espacio
+Si analizas un poco más el archivo ``queue.c`` varás que ``create`` reserva el espacio
 en heap para el objeto y adicionalmente inicializa sus atributos:
 
 .. code-block:: c 
-   :linenos:
 
     static void init(queue_t* this, int size) {
         this->front = 0;
@@ -1047,13 +1013,12 @@ en heap para el objeto y adicionalmente inicializa sus atributos:
         return(q);
     }
 
-Ejercicio 21
-^^^^^^^^^^^^^
+Ejercicio 21: comparación con C#
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora compara el programa anterior con una implementación en C#:
 
 .. code-block:: csharp
-   :linenos:
 
     using System;
 
@@ -1103,7 +1068,6 @@ Mira los atributos:
 En C:
 
 .. code-block:: c 
-   :linenos:
 
     #ifndef _QUEUE_H
     #define _QUEUE_H
@@ -1117,7 +1081,6 @@ En C:
 En C#:
 
 .. code-block:: csharp
-   :linenos:
 
     using System;
 
@@ -1132,25 +1095,21 @@ Mira cómo se crea el objeto y se llaman los métodos:
 En C:
 
 .. code-block:: c
-   :linenos:
 
     queue_t* q = create(10);
     enqueue(q, 6.5);
 
 .. code-block:: csharp
-   :linenos:
 
-   Queue q = new Queue(10);
-   q.enqueue(6.5);
+Queue q = new Queue(10);
+q.enqueue(6.5);
 
 En la comparación anterior, notas que la implementación en C# no tiene
 código para ``destroy``. ¿Recuerdas por qué es esto?
 
 El programa en C# también podríamos escribirlo así:
 
-
 .. code-block:: csharp
-   :linenos:
 
     using System;
 
@@ -1186,15 +1145,15 @@ El programa en C# también podríamos escribirlo así:
     
     class Program {
         
-      static void Main() {
-        Queue q = new Queue(10);
-        q.enqueue(6.5);
-        q.enqueue(1.3);
-        q.enqueue(2.4);
-        Console.WriteLine(q.dequeue());
-        Console.WriteLine(q.dequeue());
-        Console.WriteLine(q.dequeue());
-      }
+        static void Main() {
+            Queue q = new Queue(10);
+            q.enqueue(6.5);
+            q.enqueue(1.3);
+            q.enqueue(2.4);
+            Console.WriteLine(q.dequeue());
+            Console.WriteLine(q.dequeue());
+            Console.WriteLine(q.dequeue());
+        }
     }
 
 Nota qué cambió con respecto a la primera implementación que te mostré.
@@ -1203,8 +1162,18 @@ reservada ``this``. Esta variable contiene la dirección en memoria del
 objecto a través del cual llamamos el método. Observa de nuevo el código
 en C. Notas ¿Cómo están relacionados los conceptos?
 
-Ejercicio 22
-^^^^^^^^^^^^^^
+Trabajo autónomo 2: encapsulamiento
+***************************************
+(Tiempo estimado: 1 hora 20 minutos)
+
+Vuelve a leer el material de esta sección y asegúrate de analizar con 
+detenimiento los ejercicios 20 y 21.
+
+Sesión 3: relaciones entre objetos
+**************************************
+
+Ejercicio 22: relación de composición entre objetos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Cuando DISEÑAS un programa orientado a objetos
 también debes considerar las relaciones entre esos objetos. Pues bien, en general
@@ -1227,7 +1196,6 @@ contenedor se va destruir, primero tendrá que hacerse con el objeto contenido.
 Mira de nuevo este código:
 
 .. code-block:: c 
-   :linenos:
 
     #include "queue.h"
     #include <stdlib.h> 
@@ -1245,12 +1213,10 @@ Mira de nuevo este código:
     }
 
 
-
 Observa la función ``create``. Dicha función crear una ``queue``.
 ¿Qué datos componen la cola?
 
 .. code-block:: c 
-   :linenos:
 
     typedef struct {
         int front;
@@ -1268,15 +1234,14 @@ Ahora nota que al momento de destruir el objeto contenedor, primero se
 destruye el objeto contenido:
 
 .. code-block:: c 
-   :linenos:
 
     void destroy(queue_t* this){
         free(this->arr);
         free(this);
     }
 
-Ejercicio 23
-^^^^^^^^^^^^^^^^
+Ejercicio 23: relación de agregación
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Qué es la agregación?
 
@@ -1305,222 +1270,217 @@ y luego la tira..."
 gun.h:
 
 .. code-block:: c 
-   :linenos:
 
-	#ifndef GUN_H_
-	#define GUN_H_
-	
-	typedef int bool_t;
-	
-	// Type forward declarations
-	struct gun_t;
-	
-	// Memory allocator
-	struct gun_t* gun_new();
-	
-	// Constructor
-	void gun_ctor(struct gun_t*, int);
-	
-	// Destructor
-	void gun_dtor(struct gun_t*);
-	
-	// Behavior functions
-	bool_t gun_has_bullets(struct gun_t*);
-	void gun_trigger(struct gun_t*);
-	void gun_refill(struct gun_t*);
-	
-	
-	#endif /* GUN_H_ */
+    #ifndef GUN_H_
+    #define GUN_H_
+    
+    typedef int bool_t;
+    
+    // Type forward declarations
+    struct gun_t;
+    
+    // Memory allocator
+    struct gun_t* gun_new();
+    
+    // Constructor
+    void gun_ctor(struct gun_t*, int);
+    
+    // Destructor
+    void gun_dtor(struct gun_t*);
+    
+    // Behavior functions
+    bool_t gun_has_bullets(struct gun_t*);
+    void gun_trigger(struct gun_t*);
+    void gun_refill(struct gun_t*);
+    
+    
+    #endif /* GUN_H_ */
 
 gun.c:
 
 .. code-block:: c 
-   :linenos:
 
-	#include <stdlib.h>
-	#include <stdio.h>
-	
-	typedef int bool_t;
-	
-	// Attribute structure
-	typedef struct {
-	  int bullets;
-	} gun_t;
-	
-	// Memory allocator
-	gun_t* gun_new() {
-	  return (gun_t*)malloc(sizeof(gun_t));
-	}
-	
-	// Constructor
-	void gun_ctor(gun_t* gun, int initial_bullets) {
-	  gun->bullets = 0;
-	  if (initial_bullets > 0) {
-		gun->bullets = initial_bullets;
-	  }
-	}
-	
-	// Destructor
-	void gun_dtor(gun_t* gun) {
-	  // Nothing to do
-	}
-	
-	// Behavior functions
-	bool_t gun_has_bullets(gun_t* gun) {
-	  return (gun->bullets > 0);
-	}
-	
-	void gun_trigger(gun_t* gun) {
-	  gun->bullets--;
-	  printf("gun triggered\n");
-	}
-	
-	void gun_refill(gun_t* gun) {
-	  gun->bullets = 7;
-	}
-	
+    #include <stdlib.h>
+    #include <stdio.h>
+    
+    typedef int bool_t;
+    
+    // Attribute structure
+    typedef struct {
+    int bullets;
+    } gun_t;
+    
+    // Memory allocator
+    gun_t* gun_new() {
+    return (gun_t*)malloc(sizeof(gun_t));
+    }
+    
+    // Constructor
+    void gun_ctor(gun_t* gun, int initial_bullets) {
+    gun->bullets = 0;
+    if (initial_bullets > 0) {
+        gun->bullets = initial_bullets;
+    }
+    }
+    
+    // Destructor
+    void gun_dtor(gun_t* gun) {
+    // Nothing to do
+    }
+    
+    // Behavior functions
+    bool_t gun_has_bullets(gun_t* gun) {
+    return (gun->bullets > 0);
+    }
+    
+    void gun_trigger(gun_t* gun) {
+    gun->bullets--;
+    printf("gun triggered\n");
+    }
+    
+    void gun_refill(gun_t* gun) {
+    gun->bullets = 7;
+    }
+    
 player.h:
 
 .. code-block:: c 
-   :linenos:
 
-	#ifndef PLAYER_H_
-	#define PLAYER_H_
-	
-	// Type forward declarations
-	struct player_t;
-	struct gun_t;
-	
-	// Memory allocator
-	struct player_t* player_new();
-	
-	// Constructor
-	void player_ctor(struct player_t*, const char*);
-	
-	// Destructor
-	void player_dtor(struct player_t*);
-	
-	// Behavior functions
-	void player_pickup_gun(struct player_t*, struct gun_t*);
-	void player_shoot(struct player_t*);
-	void player_drop_gun(struct player_t*);
-	
-	#endif /* PLAYER_H_ */
+    #ifndef PLAYER_H_
+    #define PLAYER_H_
+    
+    // Type forward declarations
+    struct player_t;
+    struct gun_t;
+    
+    // Memory allocator
+    struct player_t* player_new();
+    
+    // Constructor
+    void player_ctor(struct player_t*, const char*);
+    
+    // Destructor
+    void player_dtor(struct player_t*);
+    
+    // Behavior functions
+    void player_pickup_gun(struct player_t*, struct gun_t*);
+    void player_shoot(struct player_t*);
+    void player_drop_gun(struct player_t*);
+    
+    #endif /* PLAYER_H_ */
 
 player.c:
 
 .. code-block:: c 
-   :linenos:
 
-	#include <stdlib.h>
-	#include <string.h>
-	#include <stdio.h>
-	
-	#include "gun.h"
-	
-	// Attribute structure
-	typedef struct {
-	  char* name;
-	  struct gun_t* gun;
-	} player_t;
-	
-	// Memory allocator
-	player_t* player_new() {
-	  return (player_t*)malloc(sizeof(player_t));
-	}
-	
-	// Constructor
-	void player_ctor(player_t* player, const char* name) {
-	  player->name = (char*)malloc((strlen(name) + 1) * sizeof(char));
-	  strcpy(player->name, name);
-	  // This is important. We need to nullify aggregation pointers
-	  // if they are not meant to be set in constructor.
-	  player->gun = NULL;
-	}
-	
-	// Destructor
-	void player_dtor(player_t* player) {
-	  free(player->name);
-	}
-	
-	// Behavior functions
-	void player_pickup_gun(player_t* player, struct gun_t* gun) {
-	  // After the following line the aggregation relation begins.
-	  player->gun = gun;
-	}
-	
-	void player_shoot(player_t* player) {
-	  // We need to check if the player has picked up th gun
-	  // otherwise, shooting is meaningless
-	  if (player->gun) {
-		gun_trigger(player->gun);
-	  } else {
-		printf("Player wants to shoot but he doesn't have a gun!\n");
-		exit(1);
-	  }
-	}
-	
-	void player_drop_gun(player_t* player) {
-	  // After the following line the aggregation relation
-	  // ends between two objects. Note that the object gun
-	  // should not be freed since this object is not its
-	  // owner like composition.
-	  player->gun = NULL;
-	}
+    #include <stdlib.h>
+    #include <string.h>
+    #include <stdio.h>
+    
+    #include "gun.h"
+    
+    // Attribute structure
+    typedef struct {
+    char* name;
+    struct gun_t* gun;
+    } player_t;
+    
+    // Memory allocator
+    player_t* player_new() {
+    return (player_t*)malloc(sizeof(player_t));
+    }
+    
+    // Constructor
+    void player_ctor(player_t* player, const char* name) {
+    player->name = (char*)malloc((strlen(name) + 1) * sizeof(char));
+    strcpy(player->name, name);
+    // This is important. We need to nullify aggregation pointers
+    // if they are not meant to be set in constructor.
+    player->gun = NULL;
+    }
+    
+    // Destructor
+    void player_dtor(player_t* player) {
+    free(player->name);
+    }
+    
+    // Behavior functions
+    void player_pickup_gun(player_t* player, struct gun_t* gun) {
+    // After the following line the aggregation relation begins.
+    player->gun = gun;
+    }
+    
+    void player_shoot(player_t* player) {
+    // We need to check if the player has picked up th gun
+    // otherwise, shooting is meaningless
+    if (player->gun) {
+        gun_trigger(player->gun);
+    } else {
+        printf("Player wants to shoot but he doesn't have a gun!\n");
+        exit(1);
+    }
+    }
+    
+    void player_drop_gun(player_t* player) {
+    // After the following line the aggregation relation
+    // ends between two objects. Note that the object gun
+    // should not be freed since this object is not its
+    // owner like composition.
+    player->gun = NULL;
+    }
 
 main.c:
 
 .. code-block:: c 
-   :linenos:
 
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include "gun.h"
-	#include "player.h"
-	
-	int main(int argc, char* argv[]) {
-	
-		  // Create and constructor the gun object
-		  struct gun_t* gun = gun_new();
-		  gun_ctor(gun, 3);
-	
-		  // Create and construct the player object
-		  struct player_t* player = player_new();
-		  player_ctor(player, "Billy");
-	
-		  // Begin the aggregation relation.
-		  player_pickup_gun(player, gun);
-	
-		  // Shoot until no bullet is left.
-		  while (gun_has_bullets(gun)) {
-			player_shoot(player);
-		  }
-	
-		  // Refill the gun
-		  gun_refill(gun);
-	
-		  // Shoot until no bullet is left.
-		  while (gun_has_bullets(gun)) {
-			player_shoot(player);
-		  }
-	
-		  // End the aggregation relation.
-		  player_drop_gun(player);
-	
-		  // Destruct and free the player object
-		  player_dtor(player);
-		  free(player);
-	
-		  // Destruct and free the gun object
-		  gun_dtor(gun);
-		  free(gun);
-	
-		  return 0;
-	
-	}
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include "gun.h"
+    #include "player.h"
+    
+    int main(int argc, char* argv[]) {
+    
+        // Create and constructor the gun object
+        struct gun_t* gun = gun_new();
+        gun_ctor(gun, 3);
+    
+        // Create and construct the player object
+        struct player_t* player = player_new();
+        player_ctor(player, "Billy");
+    
+        // Begin the aggregation relation.
+        player_pickup_gun(player, gun);
+    
+        // Shoot until no bullet is left.
+        while (gun_has_bullets(gun)) {
+            player_shoot(player);
+        }
+    
+        // Refill the gun
+        gun_refill(gun);
+    
+        // Shoot until no bullet is left.
+        while (gun_has_bullets(gun)) {
+            player_shoot(player);
+        }
+    
+        // End the aggregation relation.
+        player_drop_gun(player);
+    
+        // Destruct and free the player object
+        player_dtor(player);
+        free(player);
+    
+        // Destruct and free the gun object
+        gun_dtor(gun);
+        free(gun);
+    
+        return 0;
+    
+    }
 
-Ejercicio 25
-^^^^^^^^^^^^^
+Ejercicio 25: representación UML de las relaciones
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Recuerdas que en tu curso de programación y diseño orientado a objetos
 vistes las relaciones anteriores?
@@ -1534,15 +1494,16 @@ lenguaje de modelado conocido como `UML <http://uml.org/>`__. Te dejo aquí
 una imagen:
 
 .. image:: ../_static/UMLasoc.png
+    :alt: relaciones en UML
 
-Ejercicio 26
-^^^^^^^^^^^^^
+Ejercicio 26: ejericio de modelado UML
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Te animas a realizar un modelo UML para nuestros dos ejemplos de composición
 y agregación?
 
-Ejercicio 27
-^^^^^^^^^^^^^
+Ejercicio 27: relación de herencia
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 El otro tipo de relación que podemos tener entre dos objetos es la relación TO-BE, 
 mejor conocida como herencia. 
@@ -1553,44 +1514,42 @@ En términos simples, la herencia permite añadirle a un objeto atributos de otr
 objeto. 
 
 .. code-block:: c
-   :linenos:
 
-	typedef struct {
-		char first_name[32];
-		char last_name[32];
-		unsigned int birth_year;
-	} person_t;
+    typedef struct {
+        char first_name[32];
+        char last_name[32];
+        unsigned int birth_year;
+    } person_t;
 
-	typedef struct {
-		char first_name[32];
-		char last_name[32];
-		unsigned int birth_year;
-		char student_number[16]; // Extra attribute
-		unsigned int passed_credits; // Extra attribute
-	} student_t;
+    typedef struct {
+        char first_name[32];
+        char last_name[32];
+        unsigned int birth_year;
+        char student_number[16]; // Extra attribute
+        unsigned int passed_credits; // Extra attribute
+    } student_t;
 
 En el ejemplo anterior (tomado del de `aquí <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__
 nota los atributos de la estructura person_t y student_t. ¿Ves alguna relación entre ellos?
 
 student_t ``extiende`` los atributos de person_t. Por tanto, podemos decir que student_t también
-ES UN (IS-A) person_t.
+ES UNA (IS-A) person_t.
 
 Observa entonces que podemos escribir de nuevo el código anterior así:
 
 .. code-block:: c
-   :linenos:
 
-	typedef struct {
-		char first_name[32];
-		char last_name[32];
-		unsigned int birth_year;
-	} person_t;
-	
-	typedef struct {
-		person_t person;
-		char student_number[16]; // Extra attribute
-		unsigned int passed_credits; // Extra attribute
-	}student_t;
+    typedef struct {
+        char first_name[32];
+        char last_name[32];
+        unsigned int birth_year;
+    } person_t;
+    
+    typedef struct {
+        person_t person;
+        char student_number[16]; // Extra attribute
+        unsigned int passed_credits; // Extra attribute
+    }student_t;
 
 ¿Ves lo que pasó? estamos anidando una estructura en otra estructura. Por tanto student_t hereda
 de person_t. Observa que un puntero a student_t estará apuntando al primer atributo que es
@@ -1598,7 +1557,6 @@ un person_t. ¿Lo ves? Por eso decimos que un student_t también ES UN person_t.
 aquí:
 
 .. code-block:: c
-   :linenos:
 
     #include <stdio.h>
 
@@ -1623,9 +1581,8 @@ aquí:
         return 0;
     }
 
-Ejercicio 28
-^^^^^^^^^^^^^^^^^^
-
+Ejercicio 28: para reflexionar
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En este punto te pido que te pongas cómodo. Lo que viene será alucinante...
 
@@ -1635,8 +1592,8 @@ person_t también le puedes pasar un puntero a un student_t (para manipular
 sus atributos correspondiente a person_t). SEÑORES y SEÑORAS, estamos
 reutilizando código.
 
-Ejercicio 29
-^^^^^^^^^^^^^^^^^^
+Ejercicio 29: implementación de herencia simple
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora te voy a mostrar una técnica para implementar herencia simple en C.
 Analiza con detenimiento este código por favor 
@@ -1645,231 +1602,234 @@ Analiza con detenimiento este código por favor
 person.h:
 
 .. code-block:: c
-   :linenos:
 
-	#ifndef PERSON_H_
-	#define PERSON_H_
-	
-	// Forward declaration
-	struct person_t;
-	
-	// Memory allocator
-	struct person_t* person_new();
-	
-	// Constructor
-	void person_ctor(struct person_t*,
-	const char* /* first name */,
-	const char* /* last name */,
-	unsigned int /* birth year */);
-	
-	// Destructor
-	void person_dtor(struct person_t*);
-	
-	// Behavior functions
-	void person_get_first_name(struct person_t*, char*);
-	void person_get_last_name(struct person_t*, char*);
-	unsigned int person_get_birth_year(struct person_t*);
-	
-	#endif /* PERSON_H_ */
+    #ifndef PERSON_H_
+    #define PERSON_H_
+    
+    // Forward declaration
+    struct person_t;
+    
+    // Memory allocator
+    struct person_t* person_new();
+    
+    // Constructor
+    void person_ctor(struct person_t*,
+    const char* /* first name */,
+    const char* /* last name */,
+    unsigned int /* birth year */);
+    
+    // Destructor
+    void person_dtor(struct person_t*);
+    
+    // Behavior functions
+    void person_get_first_name(struct person_t*, char*);
+    void person_get_last_name(struct person_t*, char*);
+    unsigned int person_get_birth_year(struct person_t*);
+    
+    #endif /* PERSON_H_ */
 
 person.c:
 
 .. code-block:: c
-   :linenos:
 
-	#include <stdlib.h>
-	#include <string.h>
-	#include <stdlib.h>
-	#include "personPrivate.h"
-	
-	// Memory allocator
-	person_t* person_new() {
-		return malloc(sizeof(person_t));
-	}
-	
-	// Constructor
-	void person_ctor(person_t* person,
-			const char* first_name,
-			const char* last_name,
-			unsigned int birth_year) {
-	
-				strcpy(person->first_name, first_name);
-				strcpy(person->last_name, last_name);
-				person->birth_year = birth_year;
-	}
-	
-	// Destructor
-	void person_dtor(person_t* person) {
-		// Nothing to do
-	}
-	
-	// Behavior functions
-	void person_get_first_name(person_t* person, char* buffer) {
-		strcpy(buffer, person->first_name);
-	}
-	
-	void person_get_last_name(person_t* person, char* buffer) {
-		strcpy(buffer, person->last_name);
-	}
-	
-	unsigned int person_get_birth_year(person_t* person) {
-		return person->birth_year;
-	}
+    #include <stdlib.h>
+    #include <string.h>
+    #include <stdlib.h>
+    #include "personPrivate.h"
+    
+    // Memory allocator
+    person_t* person_new() {
+        return malloc(sizeof(person_t));
+    }
+    
+    // Constructor
+    void person_ctor(person_t* person,
+            const char* first_name,
+            const char* last_name,
+            unsigned int birth_year) {
+    
+                strcpy(person->first_name, first_name);
+                strcpy(person->last_name, last_name);
+                person->birth_year = birth_year;
+    }
+    
+    // Destructor
+    void person_dtor(person_t* person) {
+        // Nothing to do
+    }
+    
+    // Behavior functions
+    void person_get_first_name(person_t* person, char* buffer) {
+        strcpy(buffer, person->first_name);
+    }
+    
+    void person_get_last_name(person_t* person, char* buffer) {
+        strcpy(buffer, person->last_name);
+    }
+    
+    unsigned int person_get_birth_year(person_t* person) {
+        return person->birth_year;
+    }
 
 personPrivate.h:
 
 .. code-block:: c
-   :linenos:
 
-	#ifndef PERSONPRIVATE_H_
-	#define PERSONPRIVATE_H_
-	
-	// Private definition
-	typedef struct {
-		char first_name[32];
-		char last_name[32];
-		unsigned int birth_year;
-	} person_t;
-	
-	
-	#endif /* PERSONPRIVATE_H_ */
+    #ifndef PERSONPRIVATE_H_
+    #define PERSONPRIVATE_H_
+    
+    // Private definition
+    typedef struct {
+        char first_name[32];
+        char last_name[32];
+        unsigned int birth_year;
+    } person_t;
+    
+    
+    #endif /* PERSONPRIVATE_H_ */
 
 student.h:
 
 .. code-block:: c
-   :linenos:
 
-	#ifndef STUDENT_H_
-	#define STUDENT_H_
-	
-	//Forward declaration
-	struct student_t;
-	
-	// Memory allocator
-	struct student_t* student_new();
-	
-	// Constructor
-	void student_ctor(struct student_t*,
-					const char* /* first name */,
-					const char* /* last name */,
-					unsigned int /* birth year */,
-					const char* /* student number */,
-					unsigned int /* passed credits */);
-	
-	// Destructor
-	void student_dtor(struct student_t*);
-	
-	// Behavior functions
-	void student_get_student_number(struct student_t*, char*);
-	unsigned int student_get_passed_credits(struct student_t*);
-	
-	#endif /* STUDENT_H_ */
+    #ifndef STUDENT_H_
+    #define STUDENT_H_
+    
+    //Forward declaration
+    struct student_t;
+    
+    // Memory allocator
+    struct student_t* student_new();
+    
+    // Constructor
+    void student_ctor(struct student_t*,
+                    const char* /* first name */,
+                    const char* /* last name */,
+                    unsigned int /* birth year */,
+                    const char* /* student number */,
+                    unsigned int /* passed credits */);
+    
+    // Destructor
+    void student_dtor(struct student_t*);
+    
+    // Behavior functions
+    void student_get_student_number(struct student_t*, char*);
+    unsigned int student_get_passed_credits(struct student_t*);
+    
+    #endif /* STUDENT_H_ */
 
 student.c:
 
 .. code-block:: c
-   :linenos:
 
-	#include <stdlib.h>
-	#include <stdio.h>
-	#include <string.h>
-	
-	
-	#include "person.h"
-	#include "personPrivate.h"
-	
-	
-	//Forward declaration
-	typedef struct {
-	// Here, we inherit all attributes from the person class and
-	// also we can use all of its behavior functions because of
-	// this nesting.
-		person_t person;
-		char* student_number;
-		unsigned int passed_credits;
-	} student_t;
-	
-	// Memory allocator
-	student_t* student_new() {
-		return (student_t*)malloc(sizeof(student_t));
-	}
-	
-	// Constructor
-	void student_ctor(student_t* student,
-					const char* first_name,
-					const char* last_name,
-					unsigned int birth_year,
-					const char* student_number,
-					unsigned int passed_credits) {
-	
-		// Call the constructor of the parent class
-		person_ctor((struct person_t*)student,
-		first_name, last_name, birth_year);
-		student->student_number = (char*)malloc(16 * sizeof(char));
-		strcpy(student->student_number, student_number);
-		student->passed_credits = passed_credits;
-	}
-	
-	// Destructor
-	void student_dtor(student_t* student) {
-		// We need to destruct the child object first.
-		free(student->student_number);
-		// Then, we need to call the destructor function
-		// of the parent class
-		person_dtor((struct person_t*)student);
-	}
-	
-	// Behavior functions
-	void student_get_student_number(student_t* student,
-			char* buffer) {
-			strcpy(buffer, student->student_number);
-	}
-	
-	unsigned int student_get_passed_credits(student_t* student) {
-		return student->passed_credits;
-	}
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
+    
+    
+    #include "person.h"
+    #include "personPrivate.h"
+    
+    
+    //Forward declaration
+    typedef struct {
+    // Here, we inherit all attributes from the person class and
+    // also we can use all of its behavior functions because of
+    // this nesting.
+        person_t person;
+        char* student_number;
+        unsigned int passed_credits;
+    } student_t;
+    
+    // Memory allocator
+    student_t* student_new() {
+        return (student_t*)malloc(sizeof(student_t));
+    }
+    
+    // Constructor
+    void student_ctor(student_t* student,
+                    const char* first_name,
+                    const char* last_name,
+                    unsigned int birth_year,
+                    const char* student_number,
+                    unsigned int passed_credits) {
+    
+        // Call the constructor of the parent class
+        person_ctor((struct person_t*)student,
+        first_name, last_name, birth_year);
+        student->student_number = (char*)malloc(16 * sizeof(char));
+        strcpy(student->student_number, student_number);
+        student->passed_credits = passed_credits;
+    }
+    
+    // Destructor
+    void student_dtor(student_t* student) {
+        // We need to destruct the child object first.
+        free(student->student_number);
+        // Then, we need to call the destructor function
+        // of the parent class
+        person_dtor((struct person_t*)student);
+    }
+    
+    // Behavior functions
+    void student_get_student_number(student_t* student,
+            char* buffer) {
+            strcpy(buffer, student->student_number);
+    }
+    
+    unsigned int student_get_passed_credits(student_t* student) {
+        return student->passed_credits;
+    }
 
 main.c:
 
 .. code-block:: c
-   :linenos:
 
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include "person.h"
-	#include "student.h"
-	
-	int main(int argc, char* argv[]) {
-		// Create and construct the student object
-		struct student_t* student = student_new();
-		student_ctor(student, "John", "Doe", 1987, "TA5667", 134);
-	
-		// Now, we use person's behavior functions to
-		// read person's attributes from the student object
-		char buffer[32];
-	
-		// Upcasting to a pointer of parent type
-		struct person_t* person_ptr = (struct person_t*)student;
-		person_get_first_name(person_ptr, buffer);
-		printf("First name: %s\n", buffer);
-		person_get_last_name(person_ptr, buffer);
-		printf("Last name: %s\n", buffer);
-		printf("Birth year: %d\n", person_get_birth_year(person_ptr));
-	
-		// Now, we read the attributes specific to the student object.
-		student_get_student_number(student, buffer);
-		printf("Student number: %s\n", buffer);
-		printf("Passed credits: %d\n",
-		student_get_passed_credits(student));
-	
-		// Destruct and free the student object
-		student_dtor(student);
-		free(student);
-		return 0;
-	}
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include "person.h"
+    #include "student.h"
+    
+    int main(int argc, char* argv[]) {
+        // Create and construct the student object
+        struct student_t* student = student_new();
+        student_ctor(student, "John", "Doe", 1987, "TA5667", 134);
+    
+        // Now, we use person's behavior functions to
+        // read person's attributes from the student object
+        char buffer[32];
+    
+        // Upcasting to a pointer of parent type
+        struct person_t* person_ptr = (struct person_t*)student;
+        person_get_first_name(person_ptr, buffer);
+        printf("First name: %s\n", buffer);
+        person_get_last_name(person_ptr, buffer);
+        printf("Last name: %s\n", buffer);
+        printf("Birth year: %d\n", person_get_birth_year(person_ptr));
+    
+        // Now, we read the attributes specific to the student object.
+        student_get_student_number(student, buffer);
+        printf("Student number: %s\n", buffer);
+        printf("Passed credits: %d\n",
+        student_get_passed_credits(student));
+    
+        // Destruct and free the student object
+        student_dtor(student);
+        free(student);
+        return 0;
+    }
 
-Ejercicio 30
-^^^^^^^^^^^^^^^^^^
+Trabajo autónomo 3: herencia
+*******************************
+(Tiempo estimado: 1 hora 20 minutos)
+
+Revisa de nuevo todo el material de esta sesión en particular el ejercicio 29.
+
+Sesión 4: polimorfismo
+**************************
+
+Ejercicio 30: POLIMORFISMO en tiempo de ejecución
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ahora te voy a mostrar una técnica para implementar polimorfismo en tiempo de 
 ejecución en C (`tomado de aquí <https://www.packtpub.com/free-ebook/extreme-c/9781789343625>`__).
@@ -1878,36 +1838,33 @@ Pero antes ¿Qué es el polimorfismo en tiempo de ejecución? Antes mira qué te
 el polimorfismo. Considera que tienes estos tres objetos:
 
 .. code-block:: c
-   :linenos:
 
-	struct animal_t* animal = animal_new();
-	animal_ctor(animal);
+    struct animal_t* animal = animal_new();
+    animal_ctor(animal);
 
-	struct cat_t* cat = cat_new();
-	cat_ctor(cat);
+    struct cat_t* cat = cat_new();
+    cat_ctor(cat);
 
-	struct duck_t* duck = duck_new();
-	duck_ctor(duck);
+    struct duck_t* duck = duck_new();
+    duck_ctor(duck);
 
 cat y duck heredan de animal. Por tanto, como cat y duck son animal también,
 entonces al hacer esto:
 
 .. code-block:: c
-   :linenos:
 
-	// This is a polymorphism
-	animal_sound(animal);
-	animal_sound((struct animal_t*)cat);
-	animal_sound((struct animal_t*)duck);
+    // This is a polymorphism
+    animal_sound(animal);
+    animal_sound((struct animal_t*)cat);
+    animal_sound((struct animal_t*)duck);
 
 Consigues esta salida:
 
 .. code-block:: c
-   :linenos:
 
-	Animal: Beeeep
-	Cat: Meow
-	Duck: Quack
+    Animal: Beeeep
+    Cat: Meow
+    Duck: Quack
 
 Entonces puedes ver que la función animal_sound exhibe un comportamiento polimórfico
 dependiendo del tipo de referencia que le pasemos.
@@ -1921,269 +1878,260 @@ Ahora, si. Mira cómo se puede implementar:
 animal.h:
 
 .. code-block:: c
-   :linenos:
 
-	#ifndef ANIMAL_H_
-	#define ANIMAL_H_
-	
-	// Forward declaration
-	struct animal_t;
-	
-	// Memory allocator
-	struct animal_t* animal_new();
-	
-	// Constructor
-	void animal_ctor(struct animal_t*);
-	
-	// Destructor
-	void animal_dtor(struct animal_t*);
-	
-	// Behavior functions
-	void animal_get_name(struct animal_t*, char*);
-	void animal_sound(struct animal_t*);
-	
-	
-	#endif /* ANIMAL_H_ */
+    #ifndef ANIMAL_H_
+    #define ANIMAL_H_
+    
+    // Forward declaration
+    struct animal_t;
+    
+    // Memory allocator
+    struct animal_t* animal_new();
+    
+    // Constructor
+    void animal_ctor(struct animal_t*);
+    
+    // Destructor
+    void animal_dtor(struct animal_t*);
+    
+    // Behavior functions
+    void animal_get_name(struct animal_t*, char*);
+    void animal_sound(struct animal_t*);
+    
+    
+    #endif /* ANIMAL_H_ */
 
 animal.c:
 
 .. code-block:: c
-   :linenos:
 
-	#include <stdlib.h>
-	#include <string.h>
-	#include <stdio.h>
-	
-	#include "animalPrivate.h"
-	
-	// Default definition of the animal_sound at the parent level
-	void __animal_sound(void* this_ptr) {
-		animal_t* animal = (animal_t*)this_ptr;
-		printf("%s: Beeeep\n", animal->name);
-	}
-	
-	// Memory allocator
-	animal_t* animal_new() {
-		return (animal_t*)malloc(sizeof(animal_t));
-	}
-	
-	// Constructor
-	void animal_ctor(animal_t* animal) {
-		animal->name = (char*)malloc(10 * sizeof(char));
-		strcpy(animal->name, "Animal");
-		// Set the function pointer to point to the default definition
-		animal->sound_func = __animal_sound;
-	}
-	
-	// Destructor
-	void animal_dtor(animal_t* animal) {
-		free(animal->name);
-	}
-	// Behavior functions
-	void animal_get_name(animal_t* animal, char* buffer) {
-		strcpy(buffer, animal->name);
-	}
-	
-	void animal_sound(animal_t* animal) {
-		// Call the function which is pointed by the function pointer.
-		animal->sound_func(animal);
-	}
+    #include <stdlib.h>
+    #include <string.h>
+    #include <stdio.h>
+    
+    #include "animalPrivate.h"
+    
+    // Default definition of the animal_sound at the parent level
+    void __animal_sound(void* this_ptr) {
+        animal_t* animal = (animal_t*)this_ptr;
+        printf("%s: Beeeep\n", animal->name);
+    }
+    
+    // Memory allocator
+    animal_t* animal_new() {
+        return (animal_t*)malloc(sizeof(animal_t));
+    }
+    
+    // Constructor
+    void animal_ctor(animal_t* animal) {
+        animal->name = (char*)malloc(10 * sizeof(char));
+        strcpy(animal->name, "Animal");
+        // Set the function pointer to point to the default definition
+        animal->sound_func = __animal_sound;
+    }
+    
+    // Destructor
+    void animal_dtor(animal_t* animal) {
+        free(animal->name);
+    }
+    // Behavior functions
+    void animal_get_name(animal_t* animal, char* buffer) {
+        strcpy(buffer, animal->name);
+    }
+    
+    void animal_sound(animal_t* animal) {
+        // Call the function which is pointed by the function pointer.
+        animal->sound_func(animal);
+    }
 
 
 animalPrivate.h:
 
 .. code-block:: c
-   :linenos:
 
-	#ifndef ANIMALPRIVATE_H_
-	#define ANIMALPRIVATE_H_
-	
-	// The function pointer type needed to point to
-	// different morphs of animal_sound
-	typedef void (*sound_func_t)(void*);
-	
-	// Forward declaration
-	typedef struct {
-		char* name;
-		// This member is a pointer to the function which
-		// performs the actual sound behavior
-		sound_func_t sound_func;
-	} animal_t;
-	
-	#endif /* ANIMALPRIVATE_H_ */
+    #ifndef ANIMALPRIVATE_H_
+    #define ANIMALPRIVATE_H_
+    
+    // The function pointer type needed to point to
+    // different morphs of animal_sound
+    typedef void (*sound_func_t)(void*);
+    
+    // Forward declaration
+    typedef struct {
+        char* name;
+        // This member is a pointer to the function which
+        // performs the actual sound behavior
+        sound_func_t sound_func;
+    } animal_t;
+    
+    #endif /* ANIMALPRIVATE_H_ */
 
 
 cat.h:
 
 .. code-block:: c
-   :linenos:
 
-	#ifndef CAT_H_
-	#define CAT_H_
-	
-	// Forward declaration
-	struct cat_t;
-	
-	// Memory allocator
-	struct cat_t* cat_new();
-	
-	// Constructor
-	void cat_ctor(struct cat_t*);
-	
-	// Destructor
-	void cat_dtor(struct cat_t*);
-	// All behavior functions are inherited from the animal class.
-	
-	#endif /* CAT_H_ */
+    #ifndef CAT_H_
+    #define CAT_H_
+    
+    // Forward declaration
+    struct cat_t;
+    
+    // Memory allocator
+    struct cat_t* cat_new();
+    
+    // Constructor
+    void cat_ctor(struct cat_t*);
+    
+    // Destructor
+    void cat_dtor(struct cat_t*);
+    // All behavior functions are inherited from the animal class.
+    
+    #endif /* CAT_H_ */
 
 cat.c:
 
 .. code-block:: c
-   :linenos:
 
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include <string.h>
-	
-	#include "animal.h"
-	#include "animalPrivate.h"
-	
-	typedef struct {
-		animal_t animal;
-	} cat_t;
-	
-	// Define a new behavior for the cat's sound
-	void __cat_sound(void* ptr) {
-		animal_t* animal = (animal_t*)ptr;
-		printf("%s: Meow\n", animal->name);
-	}
-	
-	// Memory allocator
-	cat_t* cat_new() {
-		return (cat_t*)malloc(sizeof(cat_t));
-	}
-	// Constructor
-	void cat_ctor(cat_t* cat) {
-		animal_ctor((struct animal_t*)cat);
-		strcpy(cat->animal.name, "Cat");
-		// Point to the new behavior function. Overriding
-		// is actually happening here.
-		cat->animal.sound_func = __cat_sound;
-	}
-	
-	// Destructor
-	void cat_dtor(cat_t* cat) {
-		animal_dtor((struct animal_t*)cat);
-	}
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    #include "animal.h"
+    #include "animalPrivate.h"
+    
+    typedef struct {
+        animal_t animal;
+    } cat_t;
+    
+    // Define a new behavior for the cat's sound
+    void __cat_sound(void* ptr) {
+        animal_t* animal = (animal_t*)ptr;
+        printf("%s: Meow\n", animal->name);
+    }
+    
+    // Memory allocator
+    cat_t* cat_new() {
+        return (cat_t*)malloc(sizeof(cat_t));
+    }
+    // Constructor
+    void cat_ctor(cat_t* cat) {
+        animal_ctor((struct animal_t*)cat);
+        strcpy(cat->animal.name, "Cat");
+        // Point to the new behavior function. Overriding
+        // is actually happening here.
+        cat->animal.sound_func = __cat_sound;
+    }
+    
+    // Destructor
+    void cat_dtor(cat_t* cat) {
+        animal_dtor((struct animal_t*)cat);
+    }
 
 duck.h:
 
 .. code-block:: c
-   :linenos:
-
-	
-	#ifndef DUCK_H_
-	#define DUCK_H_
-	
-	// Forward declaration
-	struct duck_t;
-	
-	// Memory allocator
-	struct duck_t* duck_new();
-	
-	// Constructor
-	void duck_ctor(struct duck_t*);
-	
-	// Destructor
-	void duck_dtor(struct duck_t*);
-	
-	// All behavior functions are inherited from the animal class.
-	
-	
-	#endif /* DUCK_H_ */
+    
+    #ifndef DUCK_H_
+    #define DUCK_H_
+    
+    // Forward declaration
+    struct duck_t;
+    
+    // Memory allocator
+    struct duck_t* duck_new();
+    
+    // Constructor
+    void duck_ctor(struct duck_t*);
+    
+    // Destructor
+    void duck_dtor(struct duck_t*);
+    
+    // All behavior functions are inherited from the animal class.
+    
+    
+    #endif /* DUCK_H_ */
 
 duck.c:
 
 .. code-block:: c
-   :linenos:
 
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include <string.h>
-	
-	#include "animal.h"
-	#include "animalPrivate.h"
-	
-	typedef struct {
-		animal_t animal;
-	} duck_t;
-	
-	// Define a new behavior for the duck's sound
-	void __duck_sound(void* ptr) {
-		animal_t* animal = (animal_t*)ptr;
-		printf("%s: Quacks\n", animal->name);
-	}
-	
-	// Memory allocator
-	duck_t* duck_new() {
-		return (duck_t*)malloc(sizeof(duck_t));
-	}
-	
-	// Constructor
-	void duck_ctor(duck_t* duck) {
-		animal_ctor((struct animal_t*)duck);
-		strcpy(duck->animal.name, "Duck");
-		// Point to the new behavior function. Overriding
-		// is actually happening here.
-		duck->animal.sound_func = __duck_sound;
-	}
-	
-	// Destructor
-	void duck_dtor(duck_t* duck) {
-		animal_dtor((struct animal_t*)duck);
-	}
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    #include "animal.h"
+    #include "animalPrivate.h"
+    
+    typedef struct {
+        animal_t animal;
+    } duck_t;
+    
+    // Define a new behavior for the duck's sound
+    void __duck_sound(void* ptr) {
+        animal_t* animal = (animal_t*)ptr;
+        printf("%s: Quacks\n", animal->name);
+    }
+    
+    // Memory allocator
+    duck_t* duck_new() {
+        return (duck_t*)malloc(sizeof(duck_t));
+    }
+    
+    // Constructor
+    void duck_ctor(duck_t* duck) {
+        animal_ctor((struct animal_t*)duck);
+        strcpy(duck->animal.name, "Duck");
+        // Point to the new behavior function. Overriding
+        // is actually happening here.
+        duck->animal.sound_func = __duck_sound;
+    }
+    
+    // Destructor
+    void duck_dtor(duck_t* duck) {
+        animal_dtor((struct animal_t*)duck);
+    }
 
 
 main.c:
 
 .. code-block:: c
-   :linenos:
 
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include <string.h>
-	
-	// Only public interfaces
-	#include "animal.h"
-	#include "cat.h"
-	#include "duck.h"
-	
-	
-	int main(int argc, char** argv) {
-		struct animal_t* animal = animal_new();
-		struct cat_t* cat = cat_new();
-		struct duck_t* duck = duck_new();
-	
-		animal_ctor(animal);
-		cat_ctor(cat);
-		duck_ctor(duck);
-	
-		animal_sound(animal);
-		animal_sound((struct animal_t*)cat);
-		animal_sound((struct animal_t*)duck);
-	
-		animal_dtor(animal);
-		cat_dtor(cat);
-		duck_dtor(duck);
-	
-		free(duck);
-		free(cat);
-		free(animal);
-		return 0;
-	}
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    
+    // Only public interfaces
+    #include "animal.h"
+    #include "cat.h"
+    #include "duck.h"
+    
+    
+    int main(int argc, char** argv) {
+        struct animal_t* animal = animal_new();
+        struct cat_t* cat = cat_new();
+        struct duck_t* duck = duck_new();
+    
+        animal_ctor(animal);
+        cat_ctor(cat);
+        duck_ctor(duck);
+    
+        animal_sound(animal);
+        animal_sound((struct animal_t*)cat);
+        animal_sound((struct animal_t*)duck);
+    
+        animal_dtor(animal);
+        cat_dtor(cat);
+        duck_dtor(duck);
+    
+        free(duck);
+        free(cat);
+        free(animal);
+        return 0;
+    }
 
-Ejercicio 31
-^^^^^^^^^^^^^^^^
+Ejercicio 31: clases abstractas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Qué son las clases abstractas? Son un tipo de clases de las cuales no puedes
 crear OBJETOS. Entonces ¿Para qué sirven? Sirven para crear programas
@@ -2217,54 +2165,21 @@ Ten presente que en la medida que llevas al extremo este concepto de abstracció
 llegar a clases que no tengan atributos sino SOLO métodos virtuales. En este punto habrás
 llegado a las INTERFACES, de las cuales tampoco podrás crear objetos.
 
-PROYECTO
-^^^^^^^^^^^^^^^^^
+Ejercicio 32: caso de estudio sobre interfaces
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Realiza un programa y su modelo de clases UML. Para una aplicación
-que permita crear bases de datos de estudiantes.
+`Estudia <https://chris-wood.github.io/2016/02/12/Polymorphism-in-C.html>`__ con detenimiento 
+esta implementación de interfaces.
 
-Cada registro de la base de datos estará dado por:
-número de cédula, nombre y semestre. Cada registro corresponde a un 
-estudiante.
 
-Implementa los siguientes comandos:
+Trabajo autónomo 4: polimorfismo
+**********************************
+(Tiempo estimado: 1 hora 20 minutos)
 
-**exit** : salir del programa. Antes de terminar debe mostrar el nombre
-de la base de datos activa y solicitar si desea guardarla.
+Analiza de nuevo el ejercicio 30 y el caso de estudio, ejercicio 32. Trata de 
+realizar diagramas donde visualices la relación entre las diferentes variables.
 
-**mdb nombre tamaño** : crea EN MEMORIA una base de datos especificando el nombre
-y la cantidad de registros.
-
-**ldb nombre** : carga TODA la base de datos en MEMORIA desde el archivo
-especificado. El comando debe indicar si la base de datos se cargó
-correctamente o no existe.
-
-Una vez la base de datos esté cargada en memoria desde el archivo o con ``mdb``
-puedes aplicar los siguientes comandos:
-
-**lsdbs** : este comando mostrará todas las bases de datos que tengas cargadas
-en la memoria indicando su nombre, tamaño y cantidad de registros almacenados.
-
-**gdb**: muestra el nombre de la base de datos activa, qué tamaño tiene
-y cuántos registros le quedan disponibles.
-
-**sdb nombre**: este comando selecciona la base de datos activa para aplicar
-los siguientes comandos:
-
-**svdb** : este comando salva la base de datos activa en un archivo
-con el mismo nombre de la base de datos.
-
-**radb** : lee todos los registros de la base de datos.
-
-**rsdb** : lee la cantidad de registros de la base datos.
-
-**mreg cedula nombre semestre** : crea un nuevo registro en la base
-de datos.
-
-**rr cédula** : busca en la base de datos por número de cédula.
-En caso de encontrar la cédula imprime el registro completo.
-
-No olvides:
-
-* Cada comando deberá implementarse como una función.
-* En un momento dado puedes tener ``varias`` bases de datos en memoria.
+Evaluación Unidad 3
+---------------------
+Regresa aquí en la semana de evaluación y presiona F5 para 
+cargar el enunciado.
