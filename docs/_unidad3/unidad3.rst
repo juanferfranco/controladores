@@ -1273,28 +1273,22 @@ gun.h:
 
     #ifndef GUN_H_
     #define GUN_H_
-    
-    typedef int bool_t;
-    
-    // Type forward declarations
-    struct gun_t;
-    
-    // Memory allocator
-    struct gun_t* gun_new();
-    
-    // Constructor
-    void gun_ctor(struct gun_t*, int);
-    
-    // Destructor
-    void gun_dtor(struct gun_t*);
-    
-    // Behavior functions
-    bool_t gun_has_bullets(struct gun_t*);
-    void gun_trigger(struct gun_t*);
-    void gun_refill(struct gun_t*);
-    
-    
+
+    typedef struct
+    {
+        int bullets;
+    } gun_t;
+
+    gun_t *gun_new();
+    void gun_ctor(gun_t *, int);
+    void gun_dtor(gun_t *);
+
+    int gun_has_bullets(gun_t *);
+    void gun_trigger(gun_t *);
+    void gun_refill(gun_t *);
+
     #endif /* GUN_H_ */
+
 
 gun.c:
 
@@ -1302,45 +1296,43 @@ gun.c:
 
     #include <stdlib.h>
     #include <stdio.h>
-    
-    typedef int bool_t;
-    
-    // Attribute structure
-    typedef struct {
-    int bullets;
-    } gun_t;
-    
-    // Memory allocator
-    gun_t* gun_new() {
-    return (gun_t*)malloc(sizeof(gun_t));
+    #include "gun.h"
+
+    gun_t *gun_new()
+    {
+        return (gun_t *)malloc(sizeof(gun_t));
     }
-    
-    // Constructor
-    void gun_ctor(gun_t* gun, int initial_bullets) {
-    gun->bullets = 0;
-    if (initial_bullets > 0) {
-        gun->bullets = initial_bullets;
+
+    void gun_ctor(gun_t *this, int initial_bullets)
+    {
+        this->bullets = 0;
+        if (initial_bullets > 0)
+        {
+            this->bullets = initial_bullets;
+        }
     }
+
+    void gun_dtor(gun_t *this)
+    {
+
     }
-    
-    // Destructor
-    void gun_dtor(gun_t* gun) {
-    // Nothing to do
+
+    int gun_has_bullets(gun_t *this)
+    {
+        return (this->bullets > 0);
     }
-    
-    // Behavior functions
-    bool_t gun_has_bullets(gun_t* gun) {
-    return (gun->bullets > 0);
+
+    void gun_trigger(gun_t *this)
+    {
+        this->bullets--;
+        printf("gun triggered\n");
     }
-    
-    void gun_trigger(gun_t* gun) {
-    gun->bullets--;
-    printf("gun triggered\n");
+
+    void gun_refill(gun_t *this)
+    {
+        this->bullets = 7;
     }
-    
-    void gun_refill(gun_t* gun) {
-    gun->bullets = 7;
-    }
+
     
 player.h:
 
@@ -1348,26 +1340,25 @@ player.h:
 
     #ifndef PLAYER_H_
     #define PLAYER_H_
-    
-    // Type forward declarations
-    struct player_t;
-    struct gun_t;
-    
-    // Memory allocator
-    struct player_t* player_new();
-    
-    // Constructor
-    void player_ctor(struct player_t*, const char*);
-    
-    // Destructor
-    void player_dtor(struct player_t*);
-    
-    // Behavior functions
-    void player_pickup_gun(struct player_t*, struct gun_t*);
-    void player_shoot(struct player_t*);
-    void player_drop_gun(struct player_t*);
-    
+
+    #include "gun.h"
+
+    typedef struct
+    {
+        char *name;
+        gun_t *gun;
+    } player_t;
+
+    player_t *player_new();
+    void player_ctor(player_t *, const char *);
+    void player_dtor(player_t *);
+
+    void player_pickup_gun(player_t *, gun_t *);
+    void player_shoot(player_t *);
+    void player_drop_gun(player_t *);
+
     #endif /* PLAYER_H_ */
+
 
 player.c:
 
@@ -1376,58 +1367,49 @@ player.c:
     #include <stdlib.h>
     #include <string.h>
     #include <stdio.h>
-    
     #include "gun.h"
-    
-    // Attribute structure
-    typedef struct {
-    char* name;
-    struct gun_t* gun;
-    } player_t;
-    
-    // Memory allocator
-    player_t* player_new() {
-    return (player_t*)malloc(sizeof(player_t));
+    #include "player.h"
+
+    player_t *player_new()
+    {
+        return (player_t *)malloc(sizeof(player_t));
     }
-    
-    // Constructor
-    void player_ctor(player_t* player, const char* name) {
-    player->name = (char*)malloc((strlen(name) + 1) * sizeof(char));
-    strcpy(player->name, name);
-    // This is important. We need to nullify aggregation pointers
-    // if they are not meant to be set in constructor.
-    player->gun = NULL;
+
+    void player_ctor(player_t *this, const char *name)
+    {
+        this->name = (char *)malloc((strlen(name) + 1) * sizeof(char));
+        strcpy(this->name, name);
+        this->gun = NULL;
     }
-    
-    // Destructor
-    void player_dtor(player_t* player) {
-    free(player->name);
+
+    void player_dtor(player_t *this)
+    {
+        free(this->name);
     }
-    
-    // Behavior functions
-    void player_pickup_gun(player_t* player, struct gun_t* gun) {
-    // After the following line the aggregation relation begins.
-    player->gun = gun;
+
+    void player_pickup_gun(player_t *this, gun_t *gun)
+    {
+        this->gun = gun;
     }
-    
-    void player_shoot(player_t* player) {
-    // We need to check if the player has picked up th gun
-    // otherwise, shooting is meaningless
-    if (player->gun) {
-        gun_trigger(player->gun);
-    } else {
-        printf("Player wants to shoot but he doesn't have a gun!\n");
-        exit(1);
+
+    void player_shoot(player_t *this)
+    {
+        if (this->gun)
+        {
+            gun_trigger(this->gun);
+        }
+        else
+        {
+            printf("Player wants to shoot but he doesn't have a gun!\n");
+            exit(1);
+        }
     }
+
+    void player_drop_gun(player_t *this)
+    {
+        this->gun = NULL;
     }
-    
-    void player_drop_gun(player_t* player) {
-    // After the following line the aggregation relation
-    // ends between two objects. Note that the object gun
-    // should not be freed since this object is not its
-    // owner like composition.
-    player->gun = NULL;
-    }
+
 
 main.c:
 
@@ -1437,47 +1419,42 @@ main.c:
     #include <stdlib.h>
     #include "gun.h"
     #include "player.h"
-    
-    int main(int argc, char* argv[]) {
-    
-        // Create and constructor the gun object
-        struct gun_t* gun = gun_new();
+
+    int main(int argc, char *argv[])
+    {
+        gun_t *gun = gun_new();
         gun_ctor(gun, 3);
-    
-        // Create and construct the player object
-        struct player_t* player = player_new();
+
+        player_t *player = player_new();
         player_ctor(player, "Billy");
-    
-        // Begin the aggregation relation.
+
         player_pickup_gun(player, gun);
-    
-        // Shoot until no bullet is left.
-        while (gun_has_bullets(gun)) {
+
+        while (gun_has_bullets(gun))
+        {
             player_shoot(player);
         }
-    
-        // Refill the gun
+
         gun_refill(gun);
-    
-        // Shoot until no bullet is left.
-        while (gun_has_bullets(gun)) {
+
+        while (gun_has_bullets(gun))
+        {
             player_shoot(player);
         }
-    
-        // End the aggregation relation.
+
         player_drop_gun(player);
-    
-        // Destruct and free the player object
+
         player_dtor(player);
         free(player);
-    
-        // Destruct and free the gun object
-        gun_dtor(gun);
-        free(gun);
-    
-        return 0;
-    
-    }
+    gcc -Wall -c person.c -o person.o                             
+    gcc -Wall -c student.c -o student.o                           
+    gcc -Wall -c main.c -o main.o      
+    gcc -Wall main.o person.o student.o -o app
+
+    gcc -Wall -c  player.c -o player.o    
+    gcc -Wall -c  gun.c -o gun.o          
+    gcc -Wall -c  main.c -o main.o        
+    gcc -Wall main.o player.o gun.o -o app
 
 Ejercicio 25: representación UML de las relaciones
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1549,7 +1526,7 @@ Observa entonces que podemos escribir de nuevo el código anterior así:
         person_t person;
         char student_number[16]; // Extra attribute
         unsigned int passed_credits; // Extra attribute
-    }student_t;
+    }student_t;personPrivate
 
 ¿Ves lo que pasó? estamos anidando una estructura en otra estructura. Por tanto student_t hereda
 de person_t. Observa que un puntero a student_t estará apuntando al primer atributo que es
@@ -1605,88 +1582,69 @@ person.h:
 
     #ifndef PERSON_H_
     #define PERSON_H_
-    
-    // Forward declaration
-    struct person_t;
-    
-    // Memory allocator
-    struct person_t* person_new();
-    
-    // Constructor
-    void person_ctor(struct person_t*,
-    const char* /* first name */,
-    const char* /* last name */,
-    unsigned int /* birth year */);
-    
-    // Destructor
-    void person_dtor(struct person_t*);
-    
-    // Behavior functions
-    void person_get_first_name(struct person_t*, char*);
-    void person_get_last_name(struct person_t*, char*);
-    unsigned int person_get_birth_year(struct person_t*);
-    
+
+    typedef struct {
+        char first_name[32];
+        char last_name[32];
+        unsigned int birth_year;
+    } person_t;
+
+    person_t *person_new();
+    void person_ctor( person_t *, const char *, const char *, unsigned int);
+    void person_dtor(person_t *);
+
+    void person_get_first_name(person_t *, char *);
+    void person_get_last_name(person_t *, char *);
+    unsigned int person_get_birth_year(person_t *);
+
     #endif /* PERSON_H_ */
 
-person.c:
+Código para person.c:
 
 .. code-block:: c
 
     #include <stdlib.h>
     #include <string.h>
     #include <stdlib.h>
-    #include "personPrivate.h"
-    
-    // Memory allocator
-    person_t* person_new() {
+    #include "person.h"
+
+    person_t *person_new() {
         return malloc(sizeof(person_t));
     }
-    
-    // Constructor
-    void person_ctor(person_t* person,
-            const char* first_name,
-            const char* last_name,
+
+    void person_ctor(person_t *this,
+            const char *first_name,
+            const char *last_name,
             unsigned int birth_year) {
-    
-                strcpy(person->first_name, first_name);
-                strcpy(person->last_name, last_name);
-                person->birth_year = birth_year;
-    }
-    
-    // Destructor
-    void person_dtor(person_t* person) {
-        // Nothing to do
-    }
-    
-    // Behavior functions
-    void person_get_first_name(person_t* person, char* buffer) {
-        strcpy(buffer, person->first_name);
-    }
-    
-    void person_get_last_name(person_t* person, char* buffer) {
-        strcpy(buffer, person->last_name);
-    }
-    
-    unsigned int person_get_birth_year(person_t* person) {
-        return person->birth_year;
+
+                strcpy(this->first_name, first_name);
+                strcpy(this->last_name, last_name);
+                this->birth_year = birth_year;
     }
 
-personPrivate.h:
+    void person_dtor(person_t *this) {
 
-.. code-block:: c
+    }
 
-    #ifndef PERSONPRIVATE_H_
-    #define PERSONPRIVATE_H_
-    
-    // Private definition
-    typedef struct {
-        char first_name[32];
-        char last_name[32];
-        unsigned int birth_year;
-    } person_t;
-    
-    
-    #endif /* PERSONPRIVATE_H_ */
+    void person_get_first_name(person_t *this, char *buffer) {
+        strcpy(buffer, this->first_name);
+    }
+
+    void person_get_last_name(person_t *this, char *buffer) {
+        strcpy(buffer, this->last_name);
+    }
+
+    unsigned int person_get_birth_year(person_t *this) {
+        return this->birth_year;
+    }
+
+    void person_get_last_name(person_t *this, char *buffer) {
+        strcpy(buffer, this->last_name);
+    }
+
+    unsigned int person_get_birth_year(person_t *this) {
+        return this->birth_year;
+    }
 
 student.h:
 
@@ -1694,29 +1652,29 @@ student.h:
 
     #ifndef STUDENT_H_
     #define STUDENT_H_
-    
-    //Forward declaration
-    struct student_t;
-    
-    // Memory allocator
-    struct student_t* student_new();
-    
-    // Constructor
-    void student_ctor(struct student_t*,
-                    const char* /* first name */,
-                    const char* /* last name */,
+
+    #include "person.h"
+
+    typedef struct {
+        person_t person;
+        char *student_number;
+        unsigned int passed_credits;
+    } student_t;
+
+    student_t *student_new();
+    void student_ctor(student_t *,
+                    const char * /* first name */,
+                    const char * /* last name */,
                     unsigned int /* birth year */,
-                    const char* /* student number */,
+                    const char * /* student number */,
                     unsigned int /* passed credits */);
-    
-    // Destructor
-    void student_dtor(struct student_t*);
-    
-    // Behavior functions
-    void student_get_student_number(struct student_t*, char*);
-    unsigned int student_get_passed_credits(struct student_t*);
-    
+    void student_dtor(student_t *);
+
+    void student_get_student_number(student_t *, char *);
+    unsigned int student_get_passed_credits(student_t *);
+
     #endif /* STUDENT_H_ */
+
 
 student.c:
 
@@ -1725,60 +1683,34 @@ student.c:
     #include <stdlib.h>
     #include <stdio.h>
     #include <string.h>
-    
-    
     #include "person.h"
-    #include "personPrivate.h"
-    
-    
-    //Forward declaration
-    typedef struct {
-    // Here, we inherit all attributes from the person class and
-    // also we can use all of its behavior functions because of
-    // this nesting.
-        person_t person;
-        char* student_number;
-        unsigned int passed_credits;
-    } student_t;
-    
-    // Memory allocator
-    student_t* student_new() {
-        return (student_t*)malloc(sizeof(student_t));
+    #include "student.h"
+
+    student_t *student_new() {
+        return (student_t *)malloc(sizeof(student_t));
     }
-    
-    // Constructor
-    void student_ctor(student_t* student,
-                    const char* first_name,
-                    const char* last_name,
+
+    void student_ctor(student_t *this,
+                    const char * first_name,
+                    const char * last_name,
                     unsigned int birth_year,
-                    const char* student_number,
+                    const char * student_number,
                     unsigned int passed_credits) {
-    
-        // Call the constructor of the parent class
-        person_ctor((struct person_t*)student,
+
+        person_ctor((person_t *)this,
         first_name, last_name, birth_year);
-        student->student_number = (char*)malloc(16 * sizeof(char));
-        strcpy(student->student_number, student_number);
-        student->passed_credits = passed_credits;
+        this->student_number = (char *)malloc(16 * sizeof(char));
+        strcpy(this->st´ent_number);
+        person_dtor((person_t *)this);
     }
-    
-    // Destructor
-    void student_dtor(student_t* student) {
-        // We need to destruct the child object first.
-        free(student->student_number);
-        // Then, we need to call the destructor function
-        // of the parent class
-        person_dtor((struct person_t*)student);
+
+    void student_get_student_number(student_t *this,
+            char *buffer) {
+            strcpy(buffer, this->student_number);
     }
-    
-    // Behavior functions
-    void student_get_student_number(student_t* student,
-            char* buffer) {
-            strcpy(buffer, student->student_number);
-    }
-    
-    unsigned int student_get_passed_credits(student_t* student) {
-        return student->passed_credits;
+
+    unsigned int student_get_passed_credits(student_t *this) {
+        return this->passed_credits;
     }
 
 main.c:
@@ -1789,41 +1721,38 @@ main.c:
     #include <stdlib.h>
     #include "person.h"
     #include "student.h"
-    
+
     int main(int argc, char* argv[]) {
-        // Create and construct the student object
-        struct student_t* student = student_new();
-        student_ctor(student, "John", "Doe", 1987, "TA5667", 134);
-    
-        // Now, we use person's behavior functions to
-        // read person's attributes from the student object
         char buffer[32];
-    
-        // Upcasting to a pointer of parent type
-        struct person_t* person_ptr = (struct person_t*)student;
+
+        student_t *student = student_new();
+        student_ctor(student, "John", "Doe", 1987, "TA5667", 134);
+        
+        person_t *person_ptr = (person_t *)student;
         person_get_first_name(person_ptr, buffer);
         printf("First name: %s\n", buffer);
         person_get_last_name(person_ptr, buffer);
         printf("Last name: %s\n", buffer);
         printf("Birth year: %d\n", person_get_birth_year(person_ptr));
-    
-        // Now, we read the attributes specific to the student object.
+
         student_get_student_number(student, buffer);
         printf("Student number: %s\n", buffer);
         printf("Passed credits: %d\n",
         student_get_passed_credits(student));
-    
-        // Destruct and free the student object
+
         student_dtor(student);
         free(student);
         return 0;
     }
 
-Trabajo autónomo 3: herencia
-*******************************
-(Tiempo estimado: 1 hora 20 minutos)
+Para compilar y generar la aplicación:
 
-Revisa de nuevo todo el material de esta sesión en particular el ejercicio 29.
+.. code-block:: bash
+
+    gcc -Wall -c person.c -o person.o                             
+    gcc -Wall -c student.c -o student.o                           
+    gcc -Wall -c main.c -o main.o      
+    gcc -Wall main.o person.o student.o -o app
 
 Sesión 4: polimorfismo
 **************************
@@ -2171,15 +2100,17 @@ Ejercicio 32: caso de estudio sobre interfaces
 `Estudia <https://chris-wood.github.io/2016/02/12/Polymorphism-in-C.html>`__ con detenimiento 
 esta implementación de interfaces.
 
+Trabajo autónomo 3,4: relaciones entre objetos y polimorfismo
+***************************************************************
+(Tiempo estimado: 10 horas 20 minutos)
 
-Trabajo autónomo 4: polimorfismo
-**********************************
-(Tiempo estimado: 1 hora 20 minutos)
+Revisa de nuevo la sección 3 y en especial los ejercicios 24 y 29.
 
-Analiza de nuevo el ejercicio 30 y el caso de estudio, ejercicio 32. Trata de 
+Analiza de nuevo el ejercicio 30 y el ejercicio 32. Trata de 
 realizar diagramas donde visualices la relación entre las diferentes variables.
 
 Evaluación Unidad 3
 ---------------------
 Regresa aquí en la semana de evaluación y presiona F5 para 
 cargar el enunciado.
+
