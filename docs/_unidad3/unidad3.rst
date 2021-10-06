@@ -2063,7 +2063,8 @@ Ejercicio 31: clases abstractas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Qué son las clases abstractas? Son un tipo de clases de las cuales no puedes
-crear OBJETOS. Entonces ¿Para qué sirven? Sirven para crear programas
+crear OBJETOS porque les falta o tienen incompleta una parte. 
+Entonces ¿Para qué sirven? Sirven para crear programas
 orientados a objetos que puedan extenderse al máximo y con la menor cantidad
 de dependencias entre sus componentes. ¿Te suena que vale la pena?
 
