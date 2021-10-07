@@ -1446,10 +1446,16 @@ main.c:
 
         player_dtor(player);
         free(player);
-    gcc -Wall -c person.c -o person.o                             
-    gcc -Wall -c student.c -o student.o                           
-    gcc -Wall -c main.c -o main.o      
-    gcc -Wall main.o person.o student.o -o app
+
+        gun_dtor(gun);
+        free(gun);
+
+        return 0;
+    }
+
+Para compilar:
+
+.. code-block:: bash
 
     gcc -Wall -c  player.c -o player.o    
     gcc -Wall -c  gun.c -o gun.o          
@@ -1700,6 +1706,12 @@ student.c:
         first_name, last_name, birth_year);
         this->student_number = (char *)malloc(16 * sizeof(char));
         strcpy(this->student_number);
+        person_dtor((person_t *)this);
+    }
+
+
+    void student_dtor(student_t *this) {
+        free(this->student_number);
         person_dtor((person_t *)this);
     }
 
