@@ -2052,12 +2052,6 @@ Ten presente que en la medida que llevas al extremo este concepto de abstracció
 llegar a clases que no tengan atributos sino SOLO métodos virtuales. En este punto habrás
 llegado a las INTERFACES, de las cuales tampoco podrás crear objetos.
 
-Ejercicio 32: caso de estudio sobre interfaces
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-`Estudia <https://chris-wood.github.io/2016/02/12/Polymorphism-in-C.html>`__ con detenimiento 
-esta implementación de interfaces.
-
 Trabajo autónomo 3,4: relaciones entre objetos y polimorfismo
 ***************************************************************
 (Tiempo estimado: 10 horas 20 minutos)
