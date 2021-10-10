@@ -2075,6 +2075,84 @@ realizar diagramas donde visualices la relación entre las diferentes variables.
 
 Evaluación Unidad 3
 ---------------------
-Regresa aquí en la semana de evaluación y presiona F5 para 
-cargar el enunciado.
+(Tiempo total estimado: 12 horas)
+
+Enunciado
+*************
+
+Este reto lo puedes resolver en equipo máximo de 3 personas.
+
+* Vas a descargar el proyecto que se encuentra en `este <https://github.com/juanferfranco/SC-U3-2021-20>`__ 
+  repositorio. El código es una modificación del proyecto Ciro Costa cuyo enlace se encuentra en el 
+  archivo README.md
+* Puedes compilar el proyecto escribiendo en la terminal el comando ``make``.
+* Ejecuta la aplicación ``app`` luego de compilar.
+
+Problema 1: analiza
+**********************
+Vas a analizar detalladamente el código hasta entender cómo funciona. Responde estas 
+preguntas:
+
+* Explica en general qué hace el programa
+* ¿Cuál es la función de subject?
+* ¿Cuál es la relación entre subject y observer?
+* Explica la relación entre cat, dog, subject y observer 
+* ¿Para qué sirve la función registerObserver?
+* ¿Qué hace la función notifyObservers?
+* ¿Qué tienes que hacer si deseas crear otro observer similar a dog?
+* Identifica y explica qué relaciones entre clases encuentras en 
+  el programa.
+
+Problema 2: aplicación
+************************
+
+Vas a adicionar al proyecto un par de archivos llamados: canary.c y canary.h. 
+Para construir estos archivos te basarás en dog.c y dog.h. Mira el archivo main.c.
+Nota que Alfred primero huele a Hopkins. Esto le permite suscribirse al evento SPEAK 
+de Hopkins. Luego cuando Hopkins ``habla``, Alfred será automáticamente notificado. Una 
+vez crees a canary modificarás la función main.c para definir un objeto tipo canary 
+llamado Tweety que se suscribirá al evento SPEAK con la función ``see`` tal como Alfred 
+lo hace con smell. Observa que luego de hacer esto, al disparar el evento SPEAK en Hopkins, 
+tanto Alfred como Tweety serán notificados. No olvides destruir a Tweety una vez termines 
+el programa.
+
+Problema 3: compara y aplica
+*******************************
+Ahora que ya entiendes mejor cómo funciona la aplicación. Vas a reproducirla usando 
+conceptos similares en C#. Debes incluir a Hopkins, Alfred y Tweety.
+
+¿Qué debes entregar?
+***************************
+
+Diligencia y entrega en este `enlace <https://forms.office.com/r/9d8Zuvnu7e>`__.
+
+Te pediré que subas a Github el código del problema 2 y el problema 3
+
+También tendrás que subir un video donde sustentarás cada problema.
+
+Consideraciones para el video:
+
+#. El video DEBE TENER una duración ``MÁXIMA`` de 10 minutos.
+#. El video debe tener los siguientes capítulos en este mismo orden:
+   
+   * Demostrostración y explicación del problema 1.
+   * Demostrostración y explicación del problema 2.
+   * Demostrostración y explicación del problema 3.
+
+#. En `este video <https://youtu.be/6-0cERIVsFg>`__ puedes aprender a adicionar 
+   capítulos a tu video.
+
+Criterios de evaluación
+****************************
+
+* Cumplimiento de todos los requisitos de forma solicitados: 0.5
+* Solución al problema 1: 1.5
+* Solución al problema 2: 1.5
+* Solución al problema 3: 1.5
+
+
+.. note:: Sobre las personas reportadas
+
+    Las personas que aparezcan reportadas indicando que no trabajaron obtendrán automáticamente 
+    una calificación de 0.
 
