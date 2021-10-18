@@ -5,26 +5,26 @@ Introducción
 --------------
 
 Hemos llegado a la última estación de este recorrido a través
-de la diferentes capas que componen un sistema de cómputo.
+de las diferentes capas que componen un sistema de cómputo.
 Partimos del hardware, desde una compuerta nand, y estamos
 por fin en la capa de sistema operativo.
 
 Propósito de aprendizaje
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+**************************
 
 Comprender algunos conceptos básicos de los servicios que ofrece
 el sistema operativo a las aplicaciones de usuario y utilizar
 algunos de esos servicios en la construcción de aplicaciones
 simples.
 
-Temas
-^^^^^^
-
-Trayecto de actividades
+Lecturas y ejercicios
 ------------------------
+ 
+Sesión 1: concepto de proceso e hilos
+***************************************
 
-Ejercicio 1
-^^^^^^^^^^^^^
+Ejercicio 1: concepto de sistema operativo
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ¿Qué es un sistema operativo?
 
@@ -35,216 +35,476 @@ los cuales los programas de usuario pueden hacer uso de esos recursos.
 Los siguientes ejercicios explorarán algunos servicios que ofrece el sistema
 operativo. La exploración la realizaremos de manera práctica para que luego,
 puedas profundizar leyendo uno de los tantos excelentes libros de sistemas
-operativos. En particular te recomiendo un par:
-
-`Operating System Concepts <https://codex.cs.yale.edu/avi/os-book/OS10/index.html>`__:
+operativos. En particular te recomiendo este:
 
 `Operating Systems: Three Easy Pieces <http://pages.cs.wisc.edu/~remzi/OSTEP/>`__
 
 De todos los posibles servicios que ofrece el sistema operativo, Linux en nuestro
 caso, vamos a seleccionar solo algunos que te permitirán resolver posteriormente
-el proyecto de esta Unidad.
+la evaluación de esta Unidad.
 
-Ejercicio 2
-^^^^^^^^^^^^^
+Ejercicio 2: preguntas sobre los conceptos básicos de los procesos 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-¿Cómo hacemos para poder realizar varias tareas de manera concurrente
-en un programa?
+Vamos a discutir juntos estas preguntas:
 
-Lo haremos utilizando hilos. En `este <https://drive.google.com/open?id=1I5G4rRNEzmAuOgpEtgDra8TPUTpIPHTXCTwzHF93wHE>`__
-enlace encontrarás 4 ejercicios que te mostrarán cómo crear hilos en C, cómo compilar
-un programa que tiene hilos, esperar a qué los hilos terminen, cómo lanzar varios hilos
-a la vez y esperar a que terminen.
+* ¿Cuál es la diferencia entre un programa y un proceso?
+* ¿Puedo tener múltiples procesos corriendo el mismo programa?
+* ¿Para qué sirve el stack de un proceso?
+* ¿Para qué sirve el heap de un proceso?
+* ¿Qué es la zona de texto de un proceso?
+* ¿Dónde se almacenan las variables globales inicializadas?
+* ¿Dónde se almacenan las variables globales no inicializadas?
+* ¿Cuáles son los posibles estados de un proceso en general? Ten en cuenta
+  que esto varía entre sistemas operativos.
 
-Ejercicio 3
-^^^^^^^^^^^^^
+Ejercicio 3: concepto de hilo 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Vamos al tablero para introducir el concepto general de hilo.
 
-Ahora considera que tenemos un sistema compuesto por varios hilos y/o procesos
-que interactúan entre ellos para poder lograr un fin. ¿Cómo hacemos para sincronizar
-el acceso a los recursos compartidos? ¿Cómo hacemos para sincronizar el funcionamiento
-conjunto de las partes?
+Ejercicio 4: creación de hilos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Para responder estas preguntas te invito a analizar el material en
-`este enlace <https://docs.google.com/presentation/d/1EfixM_Svf4z5tO_WYw1K7T2CH7ofUykifvB7b2LTqQk/edit?usp=sharing>`__.
-
-Ejercicio 4
-^^^^^^^^^^^^^
-
-En este momento ya sabemos cómo hacer varias tareas a la vez,
-ya sabemos sincronizar flujos de instrucciones concurrentes. ¿Cómo
-podemos hacer para comunicarlos?
-
-En el reto pudiste observar que mediante el uso de archivos pudimos
-comunicar dos procesos. Ahora veremos cómo mediante memoria compartida
-podemos lograr también comunicar dos procesos.
-
-Primero vamos a analizar con detenimiento 
-`este <https://docs.google.com/presentation/d/1kHSjuQ6GBcHGMa1AZAhdzFPdKiCBva3hSNPVwI7cUyA/edit?usp=sharing>`__
-material.
-
-Ejercicio 5
-^^^^^^^^^^^^^
-
-El siguiente ejemplo muestra como dos procesos
-pueden comunicarse utilizando memoria compartida.
-
-El primer proceso crea la memoria compartida y
-escribe información. El segundo proceso la lee
-y luego, cuando no se requiere más, la destruye.
-
-Proceso 1:
+Vamos a crear un hilo en Linux:
 
 .. code-block:: c
-   :linenos:
 
     #include <stdio.h>
     #include <stdlib.h>
-    #include <sys/mman.h>
-    #include <sys/stat.h>        /* For mode constants */
-    #include <fcntl.h>           /* For O_* constants */
-    #include <string.h>
-    #include <unistd.h>
-    #include <sys/types.h>
+    #include <pthread.h>
+
+    void* imprime_x(void *param){
+        while(1) printf("x");
+        return NULL;
+    }
 
 
-    #define SH_SIZE 16
+    int main(int argc, char *argv[]){
+        pthread_t threadID;
+        pthread_create(&threadID,NULL,&imprime_x,NULL);
+        while(1) printf("o");
+        exit(EXIT_SUCCESS);
+    }
 
-    int main(int argc, char * argv[]){
+Compila el código así:
 
-        int shm_fd = shm_open("shm0", O_CREAT | O_RDWR, 0600);
-        if (shm_fd < 0) {
-            perror("shm memory error: ");
-            exit(EXIT_FAILURE);
+.. code-block:: bash
+
+    gcc -Wall main.c -o main -lpthread
+
+Ejecuta el código como siempre, pero esta vez para terminar el programa debes enviar 
+la señal ``CRTL+C`` a la terminal.
+
+Ejecuta en la terminal: 
+
+Ejercicio 5: análisis de código con hilos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Ahora vas a escribir este código, compilarlo y ejecutarlo:
+
+.. code-block:: c
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <pthread.h>
+
+    struct threadParam_t
+    {
+        char character;
+        int counter;
+    };
+
+
+    void* imprime(void *parg){
+        struct threadParam_t *pargTmp = (struct threadParam_t *)parg;
+        for(int i = 0; i < pargTmp->counter;i++){
+            printf("%c",pargTmp->character);
         }
-        fprintf(stdout, "Shared memory is created with fd: %d\n", shm_fd);
-        
-        if (ftruncate(shm_fd, SH_SIZE * sizeof(char)) < 0) {
-            perror("Truncation failed: ");
-            exit(EXIT_FAILURE);
-        }
+        return NULL;
+    }
 
-        fprintf(stdout, "The memory region is truncated.\n");
 
-        void* map = mmap(NULL, SH_SIZE, PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    int main(int argc, char *argv[]){
+        pthread_t threadID1;
+        pthread_t threadID2;
 
-        if (map == MAP_FAILED) {
-            perror("Mapping failed: ");
-            exit(EXIT_FAILURE);
-        }
+        struct threadParam_t threadParam1 = {'a',30000};
+        struct threadParam_t threadParam2 = {'b',20000};
 
-        char* ptr = (char*)map;
-        ptr[0] = 'A';
-        ptr[1] = 'B';
-        ptr[2] = 'C';
-        ptr[3] = '\n';
-        ptr[4] = '\0';
-
-        fprintf(stdout, "Data is written to the shared memory.\n");
-
-        if (munmap(ptr, SH_SIZE) < 0) {
-            perror("Unmapping failed: ");
-            exit(EXIT_FAILURE);
-        }
-
-        
-        if (close(shm_fd) < 0) {
-            perror("Closing shm failed: ");
-            exit(EXIT_FAILURE);
-        }
+        pthread_create(&threadID1,NULL,&imprime, &threadParam1);
+        pthread_create(&threadID2,NULL,&imprime, &threadParam2);
 
         exit(EXIT_SUCCESS);
     }
 
-Proceso 2:
+* ¿Qué pasó al ejecutarlo? 
+* Notaste que el programa no hace nada, te animas a proponer un hipótesis 
+  al respecto de lo que puede estar ocurriendo?
+
+Ejercicio 6: esperar un hilo
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+El problema con el código anterior es que el proceso está terminando antes 
+que los hilos puedan comenzar incluso a funcionar. Por tanto, será necesario 
+que el hilo principal espere a que los dos hilos creados terminen antes de 
+que el pueda terminar. 
 
 .. code-block:: c
-   :linenos:
 
     #include <stdio.h>
     #include <stdlib.h>
-    #include <sys/mman.h>
-    #include <sys/stat.h>        /* For mode constants */
-    #include <fcntl.h>           /* For O_* constants */
-    #include <string.h>
-    #include <unistd.h>
-    #include <sys/types.h>
+    #include <pthread.h>
 
-    #define SH_SIZE 16
+    struct threadParam_t
+    {
+        char character;
+        int counter;
+    };
 
-    int main(int argc, char * argv[]){
 
-        int shm_fd = shm_open("shm0", O_RDONLY, 0600);
-        if (shm_fd < 0) {
-            perror("shm memory error: ");
-            exit(EXIT_FAILURE);
+    void* imprime(void *parg){
+        struct threadParam_t *pargTmp = (struct threadParam_t *)parg;
+        for(int i = 0; i < pargTmp->counter;i++){
+            printf("%c",pargTmp->character);
         }
-        fprintf(stdout, "Shared memory is created with fd: %d\n", shm_fd);    
+        return NULL;
+    }
 
-        void* map = mmap(NULL, SH_SIZE, PROT_READ, MAP_SHARED, shm_fd, 0);
 
-        if (map == MAP_FAILED) {
-            perror("Mapping failed: ");
-            exit(EXIT_FAILURE);
-        }    
+    int main(int argc, char *argv[]){
+        pthread_t threadID1;
+        pthread_t threadID2;
 
-        char* ptr = (char*)map;
-        fprintf(stdout, "The contents of shared memory object: %s\n", ptr);
+        struct threadParam_t threadParam1 = {'a',30000};
+        struct threadParam_t threadParam2 = {'b',20000};
 
-    
-        if (munmap(ptr, SH_SIZE) < 0) {
-            perror("Unmapping failed: ");
-            exit(EXIT_FAILURE);
-        }
+        pthread_create(&threadID1,NULL,&imprime, &threadParam1);
+        pthread_create(&threadID2,NULL,&imprime, &threadParam2);
 
-        
-        if (close(shm_fd) < 0) {
-            perror("Closing shm failed: ");
-            exit(EXIT_FAILURE);
-        }  
-    
-        if (shm_unlink("shm0") < 0) {
-            perror("Unlink failed: ");
-            exit(EXIT_FAILURE);
-        }
+        pthread_join(threadID1,NULL);
+        pthread_join(threadID2,NULL);
 
         exit(EXIT_SUCCESS);
     }
 
-Para ejecutar los programas sigue estos pasos:
+* ¿Qué debes hacer para esperara a que un hilo en particular termine?
+* Considera los siguientes fragmentos de código y piensa cuál puede ser la 
+  diferencia entre ambos:
 
 .. code-block:: c
-   :linenos:
 
-    gcc -Wall p1.c -o p1 -lrt
-    ./p1
+    pthread_create(&threadID1,NULL,&imprime, &threadParam1);
+    pthread_join(threadID1,NULL);
+    pthread_create(&threadID2,NULL,&imprime, &threadParam2);
+    pthread_join(threadID2,NULL);
 
-El proceso 1 terminará pero abra dejado la zona
-de memoria compartida lista y con datos. Para
-verificarlo:
 
 .. code-block:: c
-   :linenos:
 
-    ls /dev/shm
-    cat /dev/shm/shm0
+    pthread_create(&threadID1,NULL,&imprime, &threadParam1);
+    pthread_create(&threadID2,NULL,&imprime, &threadParam2);
+    pthread_join(threadID1,NULL);
+    pthread_join(threadID2,NULL);
 
-Ahora compile y ejecute el proceso 2.
+
+Trabajo autónomo 1: RETO con hilos
+***************************************
+(Tiempo estimado: 10 horas 20 minutos)
+
+Vas a revisar de nuevo todo el material de la sesión 1 y luego 
+trabaja en el siguiente reto.
+
+Se tiene un archivo de entrada que posee por línea 3 cadenas de caracteres
+separadas por espacios así:  nombre ocupación edad. 
+Nombre y ocupación son cadenas de caracteres que representan texto mientras 
+que edad representa valores numéricos. Se tendrán máximo 100 líneas y 
+20 caracteres máximo por cadena.
+
+* Crea un programa llamado prog.c que lea el archivo de entrada, luego debe organizar la información
+  en una estructura de datos, luego debe IMPRIMIR en pantalla el contenido de la estructura de datos.
+  OJO no del archivo, sino de la información cargada en la estructura de datos proveniente del archivo.
+  
+* Crea 2 hilos para procesar de diferente manera la información. Los hilos deben lanzarse para que se ejecuten
+  en paralelo, OJO, NO DE MANERA SECUENCIAL, SI EN PARALELO.
+
+* El Hilo 1 escribe en el archivo de salida1 los registros del archivo de entrada, pero en orden
+  inverso, es decir, primero el último y de último el primero.
+
+* El Hilo 2 escribe en el archivo de salida 2 los registros ordenados por ocupación en orden alfabético.
+
+* NO OLVIDES Hilo 1 e Hilo 2 deben lanzarse a la vez. Una vez Hilo 1 e Hilo 2 finalicen, el hilo 
+  principal debe abrir los archivos de salida e imprimir el resultado, primero del Hilo 1 y luego del 
+  Hilo 2
+
+* El programa se ejecutará así: ./prog In Out1 Out2
+
+* prog es el nombre del ejecutable, In especifica el nombre del archivo de entrada
+  Out1 y Out2 especifican el nombre de los los archivos de salida 1 y 2 respectivamente. RECUERDA que
+  In, Out1 y Out2 son parámetros.
+
+Sesión 2: relación de conceptos
+***********************************
+
+Ejercicio 7: veamos cómo es en C#
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Ahora vamos a familiarizarnos con el concepto de hilo en C#. Ingresa 
+a `este <http://www.albahari.com/threading/>`__ sitio y lee detalladamente
+su contenido hasta la sección Creating and Starting Threads (sin incluirla,
+claro, a menos que quieras).
+
+* ¿Qué es un hilo?
+* ¿Cuál es la diferencia entre un método y un hilo?
+* ¿La ejecución de los hilos es determinística?
+* ¿Cuál es la diferencia entre un método estático y un
+  método no estático?
+* ¿Cuál es la diferencia entre un hilo y un método estático?
+
+Ejercicio 8: comunicación de procesos mediante colas 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Existe varios mecanismos de comunicación entre procesos. En este ejercicio
+te voy a proponer que analices uno llamado System V message queues (Colas 
+de mensajes System V).
+
+* Las colas de mensajes son de tamaño fijo → Las comunicaciones ocurren por 
+  paquetes o unidades de mensaje.
+
+* Cada mensaje incluye un tipo entero. Esto permite seleccionar el mensajes a leer. Esto 
+  quiere decir que puedes enviar a una cola varios tipos de mensajes y seleccionar
+  cuál tipo quieres leer. Podrías entonces tener un proceso enviando mensajes de varios 
+  tipos y otros procesos lectores consumiendo solo el mensaje de su interés. 
+  UNA BELLEZA!!!
+
+* Las colas de mensajes existen a nivel de sistema, no son de un proceso en particular. 
+
+Ejercicio 9: creación de colas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Para crear una cola de mensajes utilizas el siguiente llamado al sistema:
 
 .. code-block:: c
-   :linenos:
 
-    gcc -Wall p2.c -o p2 -lrt
-    ./p2
+    #include <sys/types.h>
+    #include <sys/ipc.h>
+    #include <sys/msg.h>
+
+    int msgget(key_t key, int msgflg);
+
+Nota que debes definir el valor de key y msgflg. Estos dos parámetros te permitirán 
+crear un identificador para la cola, solicitar la creación y adicionar mensajes.
+
+Infortunadamente no tenemos el tiempo para profundizar en cada detalle de la función. 
+Por tanto, vamos a utilizar los siguientes pasos para crear la cola en un proceso y luego 
+conectarse a ella en otro proceso:
+
+.. code-block:: c
+
+    system("touch msgreq.txt");
+    
+    key_t key;
+    
+    if ((key = ftok("msgreq.txt", 'B')) == -1) {
+        perror("ftok");
+        exit(1);
+    }
+    
+    int reqMsgId;
+
+    if ((reqMsgId = msgget(key, PERMS | IPC_CREAT)) == -1) {
+        perror("msgreq msgget fails");
+        exit(1);
+    }
+
+Ejercicio 10: destrucción de colas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Una vez termines de utilizar la cola puedes destruirla del sistema operativo 
+con la función ``msgctl``. Ten presente que esta destrucción la debería realizar 
+el último proceso que haga uso de ella.
+
+.. code-block:: c
+
+    system("rm msgreq.txt");
+
+    if (msgctl(reqMsgId, IPC_RMID, NULL) == -1) {
+        perror("msgreq msgctl fails");
+        exit(1);
+    }
+
+Ejercicio 11: enviar mensajes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Ahora que ya sabes crear la cola, obtener el identificador de ella y destruirla, 
+vas a aprender a enviar usando el llamado al sistema ``msgsnd`` 
+
+.. code-block:: c
+
+    typedef struct _msgbuf {
+        long mtype;
+        char mtext[64];
+    }MsgBuf;
+
+    MsgBuf resBuf;
+
+    len = strlen("Hola") + 1; // por qué + 1?
+    strncpy(resBuf.mtext,"Hola",len);
+    resBuf.mtype = 1111; //
+    if (msgsnd(resMsgId, &resBuf, len, 0) == -1){
+        perror("msgsnd fails: ");  
+    }
+
+Ejercicio 12: recibir mensajes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Para recibir mensajes usas ``msgrcv``.
+
+.. code-block:: c
+
+    typedef struct _msgbuf {
+        long mtype;
+        char mtext[64];
+    }MsgBuf;
+
+    MsgBuf reqBuf;
+
+    if (msgrcv(reqMsgId, &reqBuf, sizeof(reqBuf.mtext), 0, 0) == -1) {
+        perror("msgrcv fails");
+    }
+
+Trabajo autónomo 2: repaso y ejemplo
+*****************************************
+(Tiempo estimado: 2 horas 20 minutos)
+
+Ejercicio 13: ejemplo
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Analiza la documentación y el ejemplo de 
+`este <https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_message_queues.htm>`__ 
+sitio.
+
+Evaluación de la Unidad 4
+----------------------------
+(Tiempo de la semana 15: 8 horas)
+(Tiempo de la semana 16: 12 horas)
 
 
-PROYECTO
-^^^^^^^^
+Enunciado
+*************
+Te voy a proponer un RETO interesante para esta evaluación que podrás 
+resolver en equipo máximo de 3 de personas.
 
-Crea un chat entre dos procesos utilizando memoria compartida, hilos y semáforos. 
-Cada proceso deberá esperar por la entrada de su usuario y al mismo tiempo ser
-capaz de mostrar los mensajes enviados por el otro usuario (es por ello que se 
-requieren dos hilos por proceso).
+Problema 
+^^^^^^^^^^^
 
-El intercambio de mensajes se debe realizar utilizando memoria compartida y
-semáforos para la sincronización. Se debe señalizar dos momentos: hay un mensaje y
-ya se puede escribir un nuevo mensaje.
+Vas a construir dos aplicaciones que llamaremos servidor y cliente. Solo 
+tendrás una instancia del servidor, pero una hasta 3 clientes.
+El servidor podrá publicar hasta 6 EVENTOS. Los clientes le manifestarán de manera explícita 
+al servidor su interés en algunos eventos específicos; sin embargo, en un momento dado,
+también podrán indicarle que ya no están interesados en algunos en particular. 
+Por cada evento, el servidor mantendrá una lista de interesados que irá cambiando 
+a medida que entran y salen interesados. Al generarse un evento en el servidor, 
+este publicará a todos los interesados. 
+
+Para desplegar las aplicaciones, lanzarás el servidor y cada cliente en una terminal 
+para cada uno. No olvides hacer pruebas con los 3 clientes.
+
+Estas son las características a implementar en el servidor:
+
+El servidor :
+
+* Debe recibir commandos desde la línea de comandos y al mismo tiempo debe 
+  ser capaz de escuchar las peticiones de los clientes.
+* Cada petición de un cliente será visualizada con un mensaje 
+  en la terminal.
+* Los comandos que recibirá el servidor son: 
+
+  * exit: termina el servidor y deberá publicar este evento a TODOS los clientes.
+  * add event_name: adiciona el evento event_name.
+  * remove event_name: elimina el evento event_name.
+  * trigger event_name: publica el evento event_name.
+  * list event_name: lista todos los clientes suscritos a event_name.
+  * all: muestra todos los eventos y todos los clientes.
+
+Estas son las características a implementar en el cliente:
+
+* El cliente debe visualizar en la terminal cada que sea notificado de un evento.
+* El cliente debe soportar los siguientes comandos:
+
+  * sub event_name: se suscribe al evento event_name
+  * unsub event_name: se desuscribe del evento event_name
+  * list: lista todos los eventos a los cuales está suscrito.
+  * ask: le pregunta al servidor cuáles eventos hay disponibles.
+
+¿Qué debes entregar?
+***************************
+
+Diligencia y entrega en este `enlace <https://forms.office.com/r/ks9RbJ4RQJ>`__.
+
+En el formulario anterior te voy a solicitar evidenciar el código con la solución 
+y un video con la sustentación.
+
+Con respecto al código:
+  
+#. Debe estar bajo control de versión en GitHub
+#. SOLO debes tener tres archivos: server.c, client.c, readme.txt.
+#. El archivo readme.txt debe indicar cómo compilar cada archivo y
+   cómo se debe lanzar cada programa.
+
+Con respecto al video:
+
+#. El video DEBE TENER una duración ``MÁXIMA`` de 15 minutos.
+#. En `este video <https://youtu.be/6-0cERIVsFg>`__ puedes aprender a adicionar 
+   capítulos a tu video.
+#. El video debe tener los siguientes capítulos en este mismo orden:
+
+   * Imagen con los integrantes y qué aportes realizó cada uno.
+   * Demostración de la solución.
+   * Explicación conceptual de la solución.
+   * Explicación del código con la implementación.
+
+Con respecto a la demostración:
+
+#. Demostrar add event_name: 0.25
+#. Demostrar exit: 0.25
+#. Demostrar remove event_name: 0.25
+#. Demostrar trigger event_name: 0.25
+#. Demostrar list event_name: 0.25
+#. Demostrar all: 0.25
+#. Demostrar sub event_name: 0.25
+#. Demostrar unsub event_name: 0.25
+#. Demostrar list: 0.25
+#. Demostrar ask: 0.25
+
+
+Con respecto a la explicación conceptual responde 
+estas preguntas:
+
+#. Explica en general la estructura del código con tu solución: 0.2
+#. ¿Cómo es la arquitectura de cada aplicación? : 0.2
+#. ¿Cómo resolviste el problema de escuchar comandos y a la vez estar 
+   pendiente de las comunicaciones en cada proceso? : 0.2
+#. ¿Cómo le comunicas a cada cliente interesado acerca de un evento?  : 0.2
+#. ¿Cómo solucionaste el problema de tener hasta 3 clientes : 0.2
+   que se suscriben y desuscriben a un evento? : 0.2
+#. ¿Cómo implementaste la lista de interesados? : 0.2
+#. ¿Cómo añades y remueves interesados de la lista? : 0.2
+#. Si en el servidor remueve un evento y el cliente ejecuta el comando list 
+   ¿Cómo solucionaste una posible inconsistencia? : 0.2
+#. Cuando el cliente ejecuta el comando ask ¿Cómo haces para preguntarle 
+   al server? : 0.2
+#. Cuando el server ejecuta el comando exit cómo resolviste el problema 
+   de poder también terminar a los clientes? : 0.2
+
+
+Criterios de evaluación
+****************************
+
+* Calidad y duración máxima del video, repositorio en Github: 0.5
+* Solución del problema: 2.5
+* Sustentación: 2.  
+
+.. note:: Sobre las personas reportadas
+
+    Las personas que aparezcan reportadas indicando que no trabajaron obtendrán automáticamente 
+    una calificación de 0.
